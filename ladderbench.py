@@ -76,7 +76,11 @@ def cambc(*args: str, check: bool = True, retries: int = 4) -> subprocess.Comple
         if r.returncode == 0:
             return r
         blob = (r.stderr or "") + (r.stdout or "")
-        if "429" in blob or "busy" in blob.lower():
+        transient = ("429" in blob or "busy" in blob.lower()
+                     or "invalid response" in blob.lower()
+                     or "timed out" in blob.lower()
+                     or "connection" in blob.lower())
+        if transient:
             if attempt < retries:
                 wait = 3 * (attempt + 1)
                 print(f"  rate limited; retrying in {wait}s")
@@ -216,14 +220,30 @@ def run(bot: str, tag: str, opponents: str, maps: str, sides: str,
             print(f"  queued 5 unranked against {name} (rank {rank})")
     finally:
         # Always put the ranked bot back, even on an exception or a failed queue.
-        try:
-            r = cambc("submit", f"bots/{RANKED_BOT}", "--note",
-                      f"{RANKED_BOT} restored by ladderbench")
-            print(f"  restored: {r.stdout.strip().splitlines()[-1]}")
-        except Exception as e:                                   # pragma: no cover
-            print(f"  *** RESTORE FAILED: {e}\n"
-                  f"  *** submit bots/{RANKED_BOT} by hand NOW", file=sys.stderr)
-            raise
+        # A failed restore is the one outcome that costs the rating, so it gets a
+        # bigger budget than anything else and its success is checked, not assumed.
+        # Seen in the wild: "platform returned an invalid response", which the 429
+        # retry did not cover.
+        restored = False
+        for attempt in range(8):
+            try:
+                r = cambc("submit", f"bots/{RANKED_BOT}", "--note",
+                          f"{RANKED_BOT} restored by ladderbench", retries=2)
+                line = r.stdout.strip().splitlines()[-1]
+                if "Submitted bot version" in line:
+                    print(f"  restored: {line}")
+                    restored = True
+                    break
+                print(f"  restore attempt {attempt+1} gave an odd reply: {line}")
+            except Exception as e:
+                print(f"  restore attempt {attempt + 1} failed: {e}")
+            time.sleep(5 * (attempt + 1))
+        if not restored:
+            print(f"\n  *** RESTORE FAILED after 8 attempts.\n"
+                  f"  *** The live submission may still be {bot!r}.\n"
+                  f"  *** Run this NOW:  cd {WS} && cambc submit bots/{RANKED_BOT}\n",
+                  file=sys.stderr)
+            raise RuntimeError(f"could not restore {RANKED_BOT}")
     closed = datetime.now(timezone.utc)
 
     # The groups snapshot the submission when they are QUEUED, not when they run:

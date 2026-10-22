@@ -2218,3 +2218,58 @@ opponents gives no idea how much a result moves for reasons unrelated to the cha
 next thing to run is the *same* bot twice under different tags and compare -- the ladder
 version of the dead-loop probe. Until that exists, a 24-gem difference over 15 games means
 nothing, including the one reported just above.
+
+## The ladder band is 9.2 gems over 15 games, and that settles several things
+
+The local harness needed 624 games and a decision-identical twin to reach a band of
++-13 gems. The ladder harness was being treated the same way -- 15 games assumed too
+few to resolve anything -- which was wrong, and the test that shows it should have
+been the first one run.
+
+The engine is deterministic. If the opponents have not changed their submissions
+between two runs, the *same* bot on the *same* pairings must return the same result.
+Running `greatsage` twice against identical opponents, maps and sides:
+
+| | gs_base | gs_repeat | change |
+| --- | --- | --- | --- |
+| gems submitted | 296.1 | 305.3 | +9.2 |
+| record | 3-12 | 3-12 | -- |
+| per-game gems | -- | -- | **1 better, 0 worse, 14 same** |
+
+**Fourteen of fifteen games reproduced byte-identically.** The one that moved is almost
+certainly an opponent updating their bot between runs, which is the only genuine source
+of ladder noise there is. So the band is 9.2 gems over 15 games -- against real
+opponents, for a fortieth of the games the local harness needs.
+
+Sized against it, today's ladder results:
+
+| result | change | ratio | verdict |
+| --- | --- | --- | --- |
+| champion pressure, maps we lose | +103.7 | **11.3x** | real |
+| champion pressure, maps we win | +41.5 | **4.5x** | real |
+| champion pressure, gold | +712 / +1,169 | 77x / 127x | real |
+| efficiency draft order (reverted) | -23.6 | **2.6x** | real, and really worse |
+
+Two conclusions follow, and one of them is a correction.
+
+**The champion-pressure fix is established**, not promising. It is 11.3x the band on the
+maps we lose and 4.5x on the maps we win, and it reproduces across two independent map
+sets. The per-game split I was reading as a coin flip -- 14 better, 13 worse, 3 same
+across both sets -- is nothing of the kind once the band is near zero: those small
+per-game losses are *real* losses, and the large gains are real gains. It is a genuine
+trade that nets strongly positive, not noise.
+
+**The draft-order revert was right, and for the right reason after all.** I reverted it
+saying "7 better, 7 worse establishes nothing either way". At 2.6x the band, -23.6 gems
+was a real regression. The revert stands on evidence rather than on the broken rationale
+I justified it with at the time.
+
+**And the prediction I staked the champion-pressure test on was wrong.** I wrote before
+the run: *"The mechanism metric is deaths. If deaths don't move, the fix does nothing and
+the diagnosis was wrong, whatever the gems do."* Deaths moved 1.0 and 1.5 -- about 5%.
+Gems moved 35% and 8%. So the fix works, and not by the mechanism I diagnosed: raising
+the withdrawal threshold near enemy champions does not stop us dying, it stops us
+*spending time* in fights we lose. Collected rose by almost exactly what submitted rose
+(+103.9 against +103.7), and the opponent scored 76 fewer. We farm instead of brawling.
+The diagnosis was wrong and the fix is right, which is worth recording as its own kind
+of result.
