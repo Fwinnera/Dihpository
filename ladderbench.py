@@ -400,6 +400,51 @@ def compare(a: str, b: str) -> int:
     worse = sum(1 for k in shared if db[k]["gems"] < da[k]["gems"])
     print("  per-game gems: %d better, %d worse, %d same"
           % (better, worse, len(shared) - better - worse))
+
+    # The breakdown, printed before anyone is tempted to trust the mean. A +246
+    # per-map average once turned out to be one game against one opponent, and the
+    # mean gave no hint of it. If a row's sign is not consistent across opponents,
+    # the effect belongs to the matchup and not to the map.
+    maps = sorted({k[1] for k in shared})
+    opps = sorted({k[0] for k in shared})
+    if len(maps) > 1 or len(opps) > 1:
+        print()
+        print("  gem delta per map per opponent (the mean hides outliers):")
+        head = "    %-22s" % "map" + "".join("%11s" % o[:10] for o in opps) + "%10s" % "row"
+        print(head)
+        for m in maps:
+            cells, tot, n = "", 0.0, 0
+            for o in opps:
+                ks = [k for k in shared if k[1] == m and k[0] == o]
+                if not ks:
+                    cells += "%11s" % "-"
+                    continue
+                d = sum(db[k]["gems"] - da[k]["gems"] for k in ks) / len(ks)
+                tot += d
+                n += 1
+                cells += "%+11.0f" % d
+            print("    %-22s%s%+10.0f" % (m[:21], cells, tot / n if n else 0))
+        print()
+        for m in maps:
+            ds = []
+            for o in opps:
+                ks = [k for k in shared if k[1] == m and k[0] == o]
+                if ks:
+                    ds.append(sum(db[k]["gems"] - da[k]["gems"] for k in ks) / len(ks))
+            if len(ds) < 2:
+                continue
+            pos = sum(1 for d in ds if d > 0)
+            # The rule fixed before the data: a map earns an entry only if the sign
+            # holds for at least three quarters of opponents. Anything short of that
+            # is a matchup effect wearing a map's clothes.
+            share = max(pos, len(ds) - pos) / len(ds)
+            if share >= 0.75 and len(ds) >= 4:
+                verdict = "CONSISTENT -- %s" % ("apply" if pos > len(ds) - pos
+                                                else "withhold")
+            else:
+                verdict = "split -- opponent-dependent, not a map property"
+            print("    %-22s %d of %d opponents positive   %s"
+                  % (m[:21], pos, len(ds), verdict))
     return 0
 
 
