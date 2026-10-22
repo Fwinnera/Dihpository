@@ -2273,3 +2273,57 @@ the withdrawal threshold near enemy champions does not stop us dying, it stops u
 (+103.9 against +103.7), and the opponent scored 76 fewer. We farm instead of brawling.
 The diagnosis was wrong and the fix is right, which is worth recording as its own kind
 of result.
+
+## RETRACTION: the champion-pressure fix is not established, and the per-map table was built on noise
+
+Earlier today this document recorded the champion-pressure fix as "established, not
+promising", at 11.3x the measured band. That was wrong, and the error is worth setting
+out because it is the same one the rest of the document warns about.
+
+**The ladder band of 9.2 gems was measured against one fixed opponent set, minutes
+apart.** It says how much a result moves when nothing changes. It says nothing about how
+much a result moves when the *opponents* change -- and opponents on the ladder drift
+constantly. Rank 143 was `Crimson Altar Keepers` in the afternoon and
+`Howrah River Trading` in the evening; rank 154 went from `Mu&Hoon` to `Gilded Recallers`.
+
+Re-run on a fresh opponent set, with per-map dispatch applied exactly as the table
+prescribed:
+
+| | never | selective | always |
+| --- | --- | --- | --- |
+| gems submitted | **494.3** | 380.1 | 384.3 |
+| change | -- | **-114.2** | **-109.9** |
+| per-game gems | -- | 3 better, 9 worse, 3 same | 2 better, 11 worse, 2 same |
+| record | **5-10** | 4-11 | 4-11 |
+
+Both arms are worse than doing nothing. Breaking the earlier result down by opponent
+shows why:
+
+| map | afternoon opponents | evening opponents |
+| --- | --- | --- |
+| 00swirl | Mu&Hoon **+795**, Crimson -8 | Howrah +16, Gilded **-7xx** |
+| 01elk_arena | Mu&Hoon **+504**, Crimson +216 | Howrah -72, Gilded -1xx |
+| 01islands | Crimson +109, Mu&Hoon +61 | Howrah **-161** |
+
+**The +246 on 00swirl was one game against one opponent, averaged over three.** The
+effect is opponent-dependent, not map-dependent, and the between-opponent variance
+swamps everything else measured today.
+
+What this does and does not invalidate:
+
+- **The per-map dispatch machinery stands.** It is verified byte-identical to the old bot
+  where no override applies and exact where one does. The mechanism is sound; the table
+  it was filled with is not.
+- **The champion-pressure fix must not ship.** +103.7 against one opponent set and -109.9
+  against another is not an improvement, it is a coin weighted by who we draw.
+- **The 9.2-gem band is still correct for what it measures** -- same bot, same opponents --
+  and still useless for comparing across sessions. Any comparison must use `--same-as` to
+  pin opponents, and even then it only speaks about those opponents.
+- **Three games per map is not a measurement.** A ladder group gives three games per map
+  per opponent; a single outlier dominates the mean. Per-map claims need either many more
+  opponents or a per-opponent breakdown shown alongside the mean, which the harness now
+  prints and I should have read before building a table.
+
+The honest state of the live bot is therefore unchanged from this morning: `greatsage` as
+it was, no champion pressure, no per-map overrides. Its rating slide is its own form, and
+nothing measured today has earned the right to alter it.
