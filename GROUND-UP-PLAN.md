@@ -2327,3 +2327,42 @@ What this does and does not invalidate:
 The honest state of the live bot is therefore unchanged from this morning: `greatsage` as
 it was, no champion pressure, no per-map overrides. Its rating slide is its own form, and
 nothing measured today has earned the right to alter it.
+
+## The unranked quota is 50 matches an hour, and it explains a null result
+
+`cambc match-groups quota` prints the map list rather than any quota, so the
+ceiling had to be discovered by hitting it:
+
+    Your team can start 50 unranked matches an hour. (HTTP 429)
+
+Ten groups an hour. A two-arm comparison across eight opponents is eighty matches,
+so it takes about an hour and a half of wall clock rather than one sitting. The
+harness now refuses to start a run that exceeds the limit instead of failing
+halfway with the test bot live.
+
+### A null result that was a rig fault
+
+Three arms -- early gold weight 1.2, 0.3 and 0.0 -- came back identical on every
+metric across forty games each. Different bundles (`3d8df797`, `1db13d3c`,
+`a9e594de`), different submission versions, zero shared match ids, different
+groups. The edit is real and reaches the score that picks targets:
+`score = (travel + clear + capture + risk) * 100 / value`.
+
+Identical results from different bots on a deterministic engine means the bots
+were not different *in play*: all three arms played whatever was already live. A
+submission is not necessarily active the moment the call returns, and groups
+snapshot the submission when queued. A 25-second settle wait after submitting is
+now in place, and the safety margin widened to four minutes to cover it.
+
+**The retest could not complete** -- it queued three of eight groups and hit the
+hourly limit -- so the gold-weighting question is still open. Fifteen games played
+and are stored, but their summaries cannot be downloaded until the limit clears.
+
+The rule this changes: **an identical result is now a red flag for the rig, not
+evidence of a null effect.** Every arm that came back suspiciously close to its
+baseline needs re-checking rather than believing.
+
+What is not in doubt: `gs_fix` at +103.7 and `wide_fix` at +29.3 had live
+submissions, because identical bots cannot produce different results here. The
+eight-opponent champion-pressure matrix stands, including that 00swirl is -136
+with zero of eight opponents positive where three games had read +246.

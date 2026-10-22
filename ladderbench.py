@@ -54,11 +54,22 @@ RESTORE_REFERENCE = ROOT / "greatsage.zip"
 OUR_TEAM = "Milk and Potatoes"
 RESULTS = WS / "bench" / "ladder"
 
+# The platform allows 50 unranked matches an hour per team, which the `quota`
+# subcommand does not report (it prints the map list instead). That is ten groups
+# an hour, so a two-arm comparison across eight opponents -- 80 matches -- takes
+# about an hour and a half of wall clock, not one sitting. Plan around it: fewer
+# opponents per arm, or fewer maps, or accept the wait.
+UNRANKED_PER_HOUR = 50
+
 # From 183 observed batches: min gap 8 min, median 10, max 12.
 BATCH_MIN_GAP = timedelta(minutes=8)
-SAFETY_MARGIN = timedelta(minutes=3)   # refuse to start with less than this left
+SAFETY_MARGIN = timedelta(minutes=4)   # includes the settle wait   # refuse to start with less than this left
 DEFAULT_MAPS = "01yellow_brick_road,01islands,00quadrants,00ambush,00lanes"
 DEFAULT_SIDES = "a,b,a,b,a"
+
+# Seconds to wait after submitting before queuing, so the groups snapshot the
+# bot we just uploaded rather than the previous one.
+SETTLE_SECONDS = 25
 
 
 def cambc(*args: str, check: bool = True, retries: int = 4) -> subprocess.CompletedProcess:
@@ -203,6 +214,11 @@ def run(bot: str, tag: str, opponents: str, maps: str, sides: str,
     for name, _, rank in targets:
         print(f"  opponent: rank {rank:>4}  {name}")
 
+    planned = len(targets) * 5
+    if planned > UNRANKED_PER_HOUR:
+        print(f"  {planned} matches requested but the limit is {UNRANKED_PER_HOUR} an "
+              f"hour; queue at most {UNRANKED_PER_HOUR // 5} opponents per run")
+        return 1
     print("waiting for a safe window:")
     wait_for_window(auto_wait)
     before = ranked_batches()
@@ -213,6 +229,14 @@ def run(bot: str, tag: str, opponents: str, maps: str, sides: str,
                   f"ladderbench {tag} - temporary, {RANKED_BOT} restored immediately")
         submitted_version = r.stdout.strip().splitlines()[-1]
         print(f"  submitted: {submitted_version}")
+        # A submission is not necessarily the active bot the instant the call
+        # returns. Three arms queued immediately after submitting once came back
+        # byte-identical across 40 games with different bots and different match
+        # ids -- the only reading is that all three played whatever was already
+        # live. Match groups snapshot the submission when queued, so the queue has
+        # to wait for the new one to land.
+        time.sleep(SETTLE_SECONDS)
+        print(f"  waited {SETTLE_SECONDS}s for the submission to become active")
         for name, tid, rank in targets:
             g = json.loads(cambc("match-groups", "create", tid, "--maps", maps,
                                  "--sides", sides, "--json").stdout)
