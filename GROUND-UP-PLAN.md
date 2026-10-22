@@ -2366,3 +2366,49 @@ What is not in doubt: `gs_fix` at +103.7 and `wide_fix` at +29.3 had live
 submissions, because identical bots cannot produce different results here. The
 eight-opponent champion-pressure matrix stands, including that 00swirl is -136
 with zero of eight opponents positive where three games had read +246.
+
+## Every gold-weight result today is void: the variants never compiled
+
+The three gold-weight bots were created by replacing this line in `strategy.py`:
+
+        value = objective.gems + objective.gold * (1.2 if now < 500 else 0.25)
+
+It sits eight spaces deep inside a loop. The replacement used four. All three
+variants have been syntactically broken since the moment they were created, and
+every measurement taken from them is void.
+
+**The platform rejects a submission that fails to build and keeps the previous one
+active.** That single fact explains a chain of results that looked like platform
+faults and were all this one bug:
+
+- three arms returning byte-identical metrics across forty games each, with
+  different bundles and different match ids -- all three played whatever was
+  already live;
+- the "submission propagation delay" diagnosed from it, and the 25-second settle
+  wait added to fix it, which fixed nothing;
+- the "matches resolve at execution, not queue time" conclusion drawn from eleven
+  of fifteen games being bit-identical, which reversed an earlier conclusion drawn
+  from one observation -- both were readings of the same broken-bot artefact;
+- gold 0.0 and gold 0.3 playing five of five games bit-identically.
+
+The four games that *did* differ -- the Latent Tactics group in one run -- were
+played by `gs_gold000` while it happened to be the last valid submission, which is
+the only reason any difference appeared at all. Even those are not a clean test of
+weight 0.0, because nothing verified which bot produced them.
+
+No ranked damage: 22-18 across the forty ranked matches in the window, rating
+1659, no wipeouts. The broken bots were never active, by construction.
+
+### Two guards, because this class of fault has now cost most of a session
+
+1. **`ladderbench.py` parses every Python source before it submits anything** and
+   refuses to upload a bot that does not compile. A broken submission is worse
+   than a failed one: it silently measures the previous bot.
+2. **Every bot prints an identity tag on its first turn**, `BOTTAG <name>`, which
+   lands in the replay's stdout. Verified end to end: a local game now shows
+   `BOTTAG gs_gold030` for team A. A run can be checked against the games it
+   actually played rather than the submission it believes it made.
+
+The gold-weight question is therefore completely open again, with zero valid games
+behind it, and the earlier claim that zeroing gold "looks clearly harmful" is
+withdrawn along with everything else from those runs.

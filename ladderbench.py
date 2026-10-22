@@ -204,6 +204,19 @@ def run(bot: str, tag: str, opponents: str, maps: str, sides: str,
     targets = team_ids(opponents)
 
     print("checks before anything is submitted:")
+    # Three gold-weight arms were submitted with a four-space indent where the
+    # file needed eight. Every one failed to build, the platform kept the previous
+    # submission active, and the runs reported that previous bot's games as though
+    # they were the variant's -- bit-identical results were the only clue. Parse
+    # every Python source before anything is uploaded.
+    import ast as _ast
+    for src in sorted((WS / "bots" / bot / "src").glob("*.py")):
+        try:
+            _ast.parse(src.read_text())
+        except SyntaxError as e:
+            raise SystemExit(f"  {bot} does not compile: {src.name} line {e.lineno}: "
+                             f"{e.msg}\n  Refusing to submit.")
+    print(f"  {bot}: all Python sources parse")
     verify_restore_bundle()
     probe = Path(f"/tmp/_ladderbench_{bot}.zip")
     if probe.exists():
@@ -242,6 +255,24 @@ def run(bot: str, tag: str, opponents: str, maps: str, sides: str,
                                  "--sides", sides, "--json").stdout)
             groups.append((name, rank, g["groupId"], tid))
             print(f"  queued 5 unranked against {name} (rank {rank})")
+        # Wait for every queued match to finish BEFORE restoring. An earlier
+        # version restored immediately, on the belief that groups snapshot the
+        # submission when queued. That was inferred from a single observation and
+        # is wrong: in a later run the first group played the test bot and the two
+        # queued after it played the restored one, 11 of 15 games bit-identical to
+        # the baseline. Matches resolve the submission when they execute, so the
+        # ranked bot cannot go back until they have.
+        print(f"  waiting for {len(groups) * 5} matches to finish before restoring")
+        deadline = time.time() + 300
+        while time.time() < deadline:
+            pending = 0
+            for *_, gid, _ in groups:
+                d = json.loads(cambc("match-groups", "show", gid, "--json").stdout)
+                pending += sum(1 for m in d.get("matches", [])
+                               if m.get("status") != "finished")
+            if not pending:
+                break
+            time.sleep(10)
     finally:
         # Always put the ranked bot back, even on an exception or a failed queue.
         # A failed restore is the one outcome that costs the rating, so it gets a
@@ -269,23 +300,6 @@ def run(bot: str, tag: str, opponents: str, maps: str, sides: str,
                   file=sys.stderr)
             raise RuntimeError(f"could not restore {RANKED_BOT}")
     closed = datetime.now(timezone.utc)
-
-    # The groups snapshot the submission when they are QUEUED, not when they run:
-    # a run that restored before its matches played still produced the test bot's
-    # numbers (19.4 deaths a game, against greatsage's ~6). So the ranked bot goes
-    # back immediately and the wait happens afterwards, outside the window.
-    print("  waiting for the queued matches to play (ranked bot already restored)")
-    deadline = time.time() + 300
-    while time.time() < deadline:
-        pending = 0
-        for *_, gid, _ in groups:
-            d = json.loads(cambc("match-groups", "show", gid, "--json").stdout)
-            pending += sum(1 for m in d.get("matches", [])
-                           if m.get("status") != "finished")
-        if pending == 0:
-            break
-        time.sleep(10)
-    print(f"  all {len(groups) * 5} unranked matches finished")
 
     after = ranked_batches()
     intruders = [t for t in after if t not in before and opened <= t <= closed]

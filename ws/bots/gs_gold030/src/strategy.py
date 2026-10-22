@@ -97,11 +97,8 @@ def choose_group(metadata, me, respawns, current, team, enemies):
             if gap < travel:
                 travel = gap
         clear = objective.hp / (damage * (min(objective.count, 3) if splash else 1) + helper_dps)
-        # Gold weighted 0.3 early instead of 1.2. At 1.2 the chooser is 88% ranked
-    # by gold, and on 01islands its top eight groups cost 1,920 damage per gem
-    # against 87 for the same ranking on gems alone. Gold is instrumental; gems
-    # are the win condition.
-    value = objective.gems + objective.gold * (0.3 if now < 500 else 0.25)
+        # Early gold weight 0.3 instead of 1.2.
+        value = objective.gems + objective.gold * (0.3 if now < 500 else 0.25)
         cost = (clear + capture) * 100 / max(1, value)
         bias = (20 if objective.incoming < 70 else 5) if claimed.get(handle) else 0
         if handle == current:
