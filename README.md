@@ -52,7 +52,10 @@ one match quota. Most of the ways to waste a day here come from forgetting that.
     since:     2026-10-23 16:40Z
     for:       no submissions to the website by either agent until the review
                of Seelie's bot (py-t04-gem-value) is sorted. The owner lifts it.
-    live bot:  greatsage, version 91, restored 16:35Z
+    live bot:  SEELIE'S py-t04-gem-value, submitted by the owner at about 16:41Z.
+               ladderbench.py still restores greatsage, so running it now
+               would overwrite the live bot. Don't, until its restore target
+               is switched.
 
 To take it: edit this block, commit and push *before* submitting. To release it:
 set `held by: nobody` and push. If it has been held for more than 90 minutes,
@@ -65,33 +68,39 @@ ask the owner before overriding it.
 **Agent:** Claude Code on the owner's Mac. It has the engine (`cambc`), the
 local harness, the platform login and the GitHub deploy key.
 **Branch:** `Fwinnera`.
-**Updated:** 2026-10-23 16:42Z.
+**Updated:** 2026-10-23 16:45Z.
 
 ### Doing now
 
-**The owner has frozen all website submissions** until the review below is
-sorted. The 0.50 ladder test was stopped before its candidate arm submitted;
-its baseline arm (`db_base`, 20 games) played and greatsage was restored as
-version 91. Nothing is live but greatsage.
+**Live bot: Seelie's `py-t04-gem-value`** (the owner submitted it at about
+16:41Z). Website submissions stay frozen. `ladderbench.py`'s restore target is
+still greatsage, so it must not be run until that is switched to Seelie's bot.
 
-**Review of Seelie's bot** (`py-t04-gem-value`, Seelie's latest upload before
-the ladder tests began; installed as `ws/bots/seelie_t04` with a BOTTAG). It is
-greatsage with two changes:
+Seelie's bot is greatsage plus two changes: gold weight 0.3, and a retreat
+change that locates threatening camps at their spawn tiles and adds fuel
+checkpoints. The crash that change prevents is rare: greatsage loses only 3
+champion-turns in 320 local games to it (`analysis/errors.py`). Head to head
+against greatsage, the first 68 games gave a win rate of 60.3% against 50.0%
+(paired se 8.7), inside the noise.
 
-1. Gold weight 0.3 instead of 1.2 in `strategy.choose_group` (the change LOCAL
-   tested and closed earlier: +142 in one ladder comparison, −34 held out).
-2. A robustness fix in `navigation.retreat`: fuel checkpoints inside the threat
-   loops, a dead-champion guard, and camps' fixed spawn tiles instead of live
-   positions, so a fuel suspension between a visibility check and a live query
-   can't throw.
+**Now racing:** `gs_seelie_dis050`, Seelie's bot plus disengage at 0.50
+(melee-only finishing blow), against Seelie's bot on the full local pool, paired
+game for game.
 
-LOCAL is measuring it on the full pool, auditing greatsage for other places
-with the same bug class as fix 2, and testing each change on its own.
-First 68 games against greatsage: win rate 50.0% → 60.3% (paired se 8.7), gems
-+43 (se 52), within the noise so far.
+**Local screen results**, paired against greatsage over 320 games:
 
-Also running locally: the last two disengage candidates and the ladder-like
-opponent check. B (removing `gap <= 4`) is dead: −159 gems, win rate −25.
+| bot | gems | win rate | deaths |
+|---|---|---|---|
+| `gs_dis075` (disengage 0.75) | +47.7 (se 21.6) | +4.1 | −6.4 |
+| `gs_dis050` (disengage 0.50) | +41.9 (se 18.9) | +3.8 | −5.2 |
+| `gs_dis075_avoid` (CLOUD's C) | +24.2 (se 23.7) | +0.6 | −5.6 |
+| `gs_dis075_out` (outnumbered only) | +7.2 (se 21.3) | +1.9 | −3.2 |
+| `gs_dis050_b` (0.50 plus B) | −100.7 (se 23.0) | −21.3 | +1.0 |
+| `gs_dis075_out_b` | −152.2 (se 24.9) | −26.9 | +4.2 |
+| `gs_b` (B alone) | −159.1 (se 24.4) | −25.3 | +5.5 |
+
+**B is dead.** The `gap <= 4` accept is how champions fight back when an
+enemy is adjacent. Without it they stand and take hits.
 
 ### What the bot is and what is live
 
