@@ -99,7 +99,12 @@ true level, and a change that does nothing scores −15 to −19 against it. Jud
 candidates against a decision-identical re-roll instead (`gs93_replan`, or
 `gs93_twin2`; `mkfixes.py NAME=change+reroll`).
 
-Against the twin, **Bruiser instead of Power passes** (+28.0 gems, z 2.8, win
+**Candidate v97 passes the 90% test:** v93 plus Bruiser instead of Power and a
+safe heal-recall below 60% health. Pooled over 640 distinct games (eight
+opponents) against four unselected v93 re-rolls: gems +19.4 (z 1.51), win rate
++2.5, deaths −1.03. `ws/bots/v97_submit` / `v97.zip`, not uploaded.
+
+Earlier in the round: against the twin, **Bruiser instead of Power passes** (+28.0 gems, z 2.8, win
 rate +3.8), as does #1's item build (+21.6, z 1.4). Bruiser is being confirmed out
 of sample against a fresh twin. Monolith raids, farming further out, bigger
 bank loads and the safer Willow escort all fail. Monoliths hold 35% of the gems

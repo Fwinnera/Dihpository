@@ -3524,3 +3524,27 @@ The pool only has 320 distinct games, so a 15-gem effect needs more distinct
 games, not more re-rolls of the same ones. The combination and a twin are now
 being run against four more opponents (boss_full, seelie_t04, priority_exp,
 gs_dis075) for 640 distinct games (`analysis/pooled.py`).
+
+## v97 candidate passes at 90%: Bruiser plus heal-recall at 60%
+
+Against four independent re-rolls of v93, with no arm used to select it, over
+eight opponents (the standard four plus boss_full, seelie_t04, priority_exp,
+gs_dis075):
+
+    pooled, 640 distinct games    gems +19.4 (se 12.8, z +1.51, ~93.5% one-sided)
+                                  one-sided 90% lower bound +3.0; win rate +2.5 (z 1.1)
+                                  deaths -1.03 a game (z -3.25)
+    the four new opponents alone  gems +23.6 (se 18.4, z +1.28); win +3.1; deaths -1.34
+
+It meets the acceptance test -- at least 90% one-sided confidence of more gems,
+win rate not down -- and the gain replicates on opponents never used to choose
+it. The clearest effect is deaths: about one fewer a game, at 60 rounds of
+respawn each.
+
+`ws/bots/v97_submit` (bundled as `v97.zip`, 21,381 bytes) is v93 with two
+changes: the late-game shop buys Bruiser shards instead of Power, and a
+champion below 60% health recalls to heal when recall is safe and it is not
+standing on a camp. `main.py` is byte-identical to v93's; two smoke games were
+clean. Not uploaded: the owner decides. Local results have mispredicted the
+ladder before (disengage at 0.75), so ranked results after an upload are the
+real test.
