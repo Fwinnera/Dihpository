@@ -3073,3 +3073,62 @@ bundled as `seelie_dis050_submit.zip`, and `ladderbench.py` restores exactly
 that. The ladder evidence for disengage so far is from 0.75 on greatsage --
 deaths -7.8, gems -59.8 -- so version 93's own ranked results are the real
 test.
+
+## CLOUD: gs_cpp passes parity, and two maps where greatsage can never score
+
+### Parity: gs_cpp plays as greatsage does
+
+80 games against greatsage, every map from both sides, paired against greatsage's
+own 80 self-play games (`analysis/paired.py gs_vs_gs cpp_vs_gs`):
+
+    per game            greatsage   gs_cpp   change   paired se
+    gems submitted          674.1    711.5    +37.4       44.1
+    win rate %               50.0     52.5     +2.5        8.0
+    gems collected          790.5    854.9    +64.4       48.6
+    deaths                   19.2     19.4     +0.2        1.7
+    kills                    16.4     16.8     +0.4        1.6
+
+Everything is inside its error, with a slight lean to the port, which does not
+livelock on 01yellow-brick-road. Two of the 80 games are bit-identical between
+the arms.
+
+### 00contest and 00stampede: the only gems need the whole team
+
+greatsage self-play scores 0-0 for 2,000 rounds on both maps, which §4 recorded
+as unexplained. Neither is fuel (median use 95k and 615k of 2.5M). Dumping every
+group's rewards from inside a match:
+
+- **00contest**: 14 groups, and the only gems are two **monoliths** (200 gems,
+  300 gold, 20,000 HP each). The other twelve are gold clusters. The map has two
+  altars, so `policy.kind()` is 0, and `choose_group` skips monoliths outright.
+- **00stampede**: 13 groups, and all 160 gems are in one group of 6 elks, 10 gem
+  clusters and 4 gold clusters. The elks hit for 360 a turn together, so the
+  solo `expected_damage > hp_budget` filter rejects the group for every champion.
+
+`gs_cpp_party` adds one rule: if no gem-bearing group can be cleared alone (no
+monolith, and at most one golem's strength, 120, in total), play the map with
+the party controller (`BossBot`, policy 3), gating every *heavy* objective --
+monolith or more than 120 strength -- behind its readiness test, not only
+monoliths. Across all 40 pool maps the rule fires on exactly 00contest and
+00stampede; 01boss-battle stays policy 2. On the other 37 maps gs_cpp_party is
+gs_cpp.
+
+On the two maps, both sides, against all four standard opponents (32 games):
+
+    gs_cpp          9 wins of 16,  1,120 gems in total
+    gs_cpp_party   13 wins of 16, 11,028 gems in total
+
+The one weakness: on 00contest as side B, against greatsage, base and
+boss_focus, the party scores 0 and loses the gold tiebreak. It farms small gold
+camps one at a time as a group, the five solo opponents farm in parallel and
+earn eight times the gold (19,200 to 2,380), and they run the party over (96
+deaths). Farming solo until ready and regrouping only for the heavy objective
+would fix it; not done, to avoid tuning to one side of one map.
+
+### Tracking the live bot: gs_cpp93
+
+Version 93 is Seelie's bot plus disengage at 0.50, so the C++ line now has
+`gs_cpp93` (gs_cpp plus Seelie's gold weight 0.3, Seelie's retreat guard with
+camps at their spawn tiles, and disengage at 0.50 with the melee-only finishing
+blow) and `gs_cpp93_party` (plus the party rule). Its parity sweep against
+`gs_seelie_dis050` is running.
