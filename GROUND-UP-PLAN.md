@@ -2877,3 +2877,23 @@ carrier. A fifth of all turns near an enemy are spent below 0.5. A death costs
 more than a kill earns -- 199 gold to them, plus respawn and farming time -- but
 leaving forgoes kills, so the threshold is bracketed at 0.50, 0.75 and 1.00 and
 the full pool chooses.
+
+### Full pool: 0.75 cuts deaths by a third and moves gems outside the noise
+
+320 games an arm against the tagged baseline:
+
+    threshold   deaths          kills   gold    gems           win rate
+    0.50        -5.19 (0.58)    +3.33   +750    +41.9 (19.0)   +3.8 (2.8)
+    0.75        -6.43 (0.56)    +4.17   +884    +47.7 (20.2)   +4.1 (2.8)
+    1.00        -4.91 (0.61)    +2.17   +422     +7.5 (19.9)   -8.1 (2.8)
+
+At 0.75 deaths fall from 19.5 to 13.1, eleven standard errors, and gems rise by
+2.4 -- the first change in this project to move gems clearly outside the full
+pool's noise rather than only the mechanism it targets. Kills rise with it, so it
+is not mere avoidance: a champion that leaves a lost fight is alive for a won one,
+and the finishing-blow check turns some exits into kills. Opponent gems fall 52.
+At 1.00 the rule is too timid -- champions quit fights they would have won and
+lose farming time standing off -- and win rate drops eight points.
+
+0.75 goes to the ladder, built both on greatsage (`gs_dis075`) and on the draft
+swap (`gs_vv_dis075`), so it can follow whichever base the draft test leaves.

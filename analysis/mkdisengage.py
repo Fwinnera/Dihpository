@@ -6,11 +6,13 @@ so the threshold is calibrated against exactly the number the rule acts on.
 
     mkdisengage.py gs_fightlog --log           # never disengages, logs the ratio
     mkdisengage.py gs_disengage --ratio 0.8    # the candidate
+    mkdisengage.py gs_vv_dis075 --ratio 0.75 --base gs_draft_vv
 """
 from __future__ import annotations
 
 import argparse
 import ast
+import re
 import shutil
 import sys
 from pathlib import Path
@@ -94,11 +96,11 @@ LOG = ('        if threats:\n'
        'ratio, threats, me.health() / max(1, me.max_health()), me.gem_count()), flush=True)\n')
 
 
-def build(name: str, ratio: float, log: bool) -> None:
+def build(name: str, ratio: float, log: bool, base: str = "greatsage") -> None:
     dst = WS / "bots" / name
     if dst.exists():
         shutil.rmtree(dst)
-    shutil.copytree(WS / "bots/greatsage", dst)
+    shutil.copytree(WS / "bots" / base, dst)
     src = dst / "src"
 
     combat = src / "combat.py"
@@ -124,11 +126,12 @@ def build(name: str, ratio: float, log: bool) -> None:
     bot.write_text(t)
 
     main = src / "main.py"
-    main.write_text(main.read_text().replace(
+    text = re.sub(r'\n    print\("BOTTAG [^"]+", flush=True\)', "", main.read_text())
+    main.write_text(text.replace(
         "def main():", f'def main():\n    print("BOTTAG {name}", flush=True)\n', 1))
     for p in src.glob("*.py"):
         ast.parse(p.read_text())
-    print(f"  {name}: ratio {ratio}, log {log}, parses, tagged")
+    print(f"  {name}: from {base}, ratio {ratio}, log {log}, parses, tagged")
 
 
 if __name__ == "__main__":
@@ -136,5 +139,6 @@ if __name__ == "__main__":
     ap.add_argument("name")
     ap.add_argument("--ratio", type=float, default=0.0)
     ap.add_argument("--log", action="store_true")
+    ap.add_argument("--base", default="greatsage")
     a = ap.parse_args()
-    build(a.name, a.ratio, a.log)
+    build(a.name, a.ratio, a.log, a.base)
