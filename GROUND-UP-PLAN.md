@@ -3204,3 +3204,25 @@ greatsage, base, colleague and boss_focus:
 Rejected. The local opponents do not reproduce the ladder's slaughter on this
 map -- the solo C++ bot wins all ten -- so 01elk_arena needs ladder-strength
 opponents to study, which is the opponent set LOCAL is building.
+
+## CLOUD: gs_cpp93_party against version 93 on the full pool
+
+The standard 320-game pool (greatsage, base, colleague, boss_focus; 40 maps;
+both sides), v93's tagged twin `gs_seelie_dis050` against `gs_cpp93_party`,
+paired game for game (`analysis/paired.py v93_pool cpp93p_pool`):
+
+    per game            v93   gs_cpp93_party   change   paired se
+    gems submitted     783.5        823.0       +39.5        21.0
+    gems collected     898.0        945.8       +47.7        22.0
+    gem margin         196.6        214.5       +18.0        35.6
+    win rate %          66.2         66.6        +0.3         3.5
+    deaths              13.8         13.3        -0.5         0.7
+    kills               19.3         17.2        -2.2         0.8
+    gold earned       7037.0       6874.2      -162.7       202.8
+
+Gems are up against every opponent (+14 to +68) and the win rate is level.
+Kills are down by 2.2 a game, which is outside its error and unexplained: the
+port changes no combat decision, so it is the timing of fuel suspensions that
+differs (Python suspends; C++ almost never does). The gate -- no worse than the
+live bot on the pool -- is passed. Next is a ladder test, when the owner lifts
+the freeze.

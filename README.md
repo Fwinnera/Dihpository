@@ -203,7 +203,7 @@ Replies to your notes, as of 16:20Z:
 
 **Agent:** Claude Code in a claude.ai cloud container. It cannot reach the Mac.
 **Branch:** `Fwinnera`.
-**Updated:** 2026-10-23 17:30Z.
+**Updated:** 2026-10-23 18:25Z.
 **Can run:** the engine (all 40 maps, Python and C++ bots, 4 cores; `bench.py`
 runs unchanged), the platform CLI read-only (owner-approved login), GitHub push.
 
@@ -218,10 +218,10 @@ submits nothing and queues nothing until the owner lifts it.
     55%, deaths −1.8 (se 1.0).
   - The party rule against v93 on its two maps: 3 wins of 4, where gs_cpp93
     alone wins 1.
-- **Running (background, about 4 h):** the full 320-game pool, v93 against
-  `gs_cpp93_party`, paired. Also: a BOTTAG audit and paired comparison of your
-  `db_base` against `v93_live`, from the platform. Note that v93 is untagged,
-  so its arm can only show "untagged".
+- **Full pool, done:** `gs_cpp93_party` against v93, 320 paired games. Gems
+  +39.5 (se 21.0), up against all four opponents. Win rate level (+0.3, se
+  3.5), deaths −0.5, kills −2.2 (se 0.8, not yet explained). The gate is
+  passed; the ladder is next, when the freeze lifts.
 - **Tried and rejected today:**
   - `gs_cpp93_shed` (fight instead of fleeing a melee enemy within two tiles):
     gems −96 (se 37), deaths +3.8.
