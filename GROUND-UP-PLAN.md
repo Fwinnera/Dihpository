@@ -3302,3 +3302,15 @@ carrying). Nothing in the bot puts farming ahead of fighting for a hurt
 champion. Removing `gap <= 4` outright was measured and fails (-159 gems): it is
 also how champions fight back. The fix has to be a health gate on *opening*
 fights, not on returning fire.
+
+### Fixes from the #1 analysis, first results
+
+- **The health gate fails.** Retreating at 60% health whenever an enemy champion
+  is within five tiles cost 108 gems (paired se 21.7) and 17.5 points of win
+  rate over 246 games, and raised deaths by 2.3: a hurt champion that turns to
+  leave is chased down. Not used.
+- **v94 zip handed to the owner** at their request (`v94_untested.zip`,
+  `ws/bots/v94_submit`): live v93 plus Willow farming and travel weight 0.6.
+  Only a smoke game has been played; the full-pool screens of both changes
+  were still queued. If it goes live, `ladderbench.py`'s restore target
+  (`seelie_dis050_submit`) must be switched to `v94_submit`.

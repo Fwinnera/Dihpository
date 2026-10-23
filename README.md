@@ -55,6 +55,9 @@ one match quota. Most of the ways to waste a day here come from forgetting that.
                disengage at 0.50. ladderbench.py restores exactly this
                (verified against seelie_dis050_submit.zip).
     before it: Seelie's py-t04-gem-value (about 16:41Z), greatsage before that.
+    pending:   the owner has v94_untested.zip (v93 + Willow farming + travel 0.6,
+               untested). If it goes live, switch ladderbench's restore target
+               to ws/bots/v94_submit before any ladder test.
 
 To take it: edit this block, commit and push *before* submitting. To release it:
 set `held by: nobody` and push. If it has been held for more than 90 minutes,
