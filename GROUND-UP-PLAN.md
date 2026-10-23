@@ -3314,3 +3314,24 @@ fights, not on returning fire.
   Only a smoke game has been played; the full-pool screens of both changes
   were still queued. If it goes live, `ladderbench.py`'s restore target
   (`seelie_dis050_submit`) must be switched to `v94_submit`.
+
+## The teammate's Priority Experimental, head to head; v94 withdrawn
+
+The teammate's bot is greatsage plus a stale-vision replan in `main.py`, cached
+camp design stats in `strategy.py` (cheaper camp scoring) and spawn-tile threats
+in retreat. Played 40 maps from both sides against each of ours:
+
+    teammate vs v93: maps won from both sides 9, split 13, lost from both 18;
+                     gems -92 a game (se 81); deaths 21.2 vs 14.1; gold 5,720 vs 6,879
+    teammate vs v94: maps won from both sides 11, split 21, lost from both 8;
+                     gems -42 a game (se 63); deaths 20.3 vs 15.4
+
+**v93 is the stronger bot.** Its fixes are orthogonal to disengage, though, and
+are worth folding into v93.
+
+**v94 is withdrawn.** Willow farming instead of escorting, measured on its own
+against v93 over 200 games: gems -73.9 (paired se 28.1), win rate -14.5, 124
+games worse and 63 better. Her own numbers (4% of banked gems) understate what
+her heals are worth to the champions she follows. The travel-weight changes and
+the safer escort were never screened (paused at 0/320); the health gate failed
+earlier (-108).

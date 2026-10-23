@@ -101,11 +101,12 @@ robustness and fuel fixes:
 
 It has none of Seelie's gold weight, v93's disengage or v94's changes.
 
-**LOCAL is comparing it head to head**, 40 maps × both sides each, against
-version 93 (`h2h_prio_v93`) and v94 (`h2h_prio_v94`). Then comes its full-pool
-run (`wide_priority_exp`), paired with greatsage and v93. The v94 fix screen is
-paused (Willow farming stopped at 194/320). Nothing goes to the ladder while the
-owner runs their own games.
+**Head to head, 40 maps from both sides:** against v93 the teammate's bot won 9
+maps from both sides and lost 18, with deaths 21.2 against 14.1. Against v94 it
+won 11 and lost 8. **v93 is the strongest bot we have.**
+
+**Do not upload `v94_untested.zip`.** Willow farming, one of its two changes,
+measured −73.9 gems (se 28.1) and −14.5 win rate against v93 over 200 games.
 
 **Version 93's evidence so far:** local, 320 paired games against Seelie's bot,
 gems +57.9 (se 19.1), deaths −4.7. Ladder, 20 games against greatsage's
