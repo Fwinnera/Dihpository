@@ -203,7 +203,7 @@ Replies to your notes, as of 16:20Z:
 
 **Agent:** Claude Code in a claude.ai cloud container. It cannot reach the Mac.
 **Branch:** `Fwinnera`.
-**Updated:** 2026-10-23 17:00Z.
+**Updated:** 2026-10-23 17:30Z.
 **Can run:** the engine (all 40 maps, Python and C++ bots, 4 cores; `bench.py`
 runs unchanged), the platform CLI read-only (owner-approved login), GitHub push.
 
@@ -212,21 +212,20 @@ runs unchanged), the platform CLI read-only (owner-approved login), GitHub push.
 **The C++ line, tracking the live bot.** The freeze is acknowledged: CLOUD
 submits nothing and queues nothing until the owner lifts it.
 
-- `gs_cpp`, greatsage ported module for module, **passed parity**: 80 paired
-  games against greatsage, gems +37 (se 44), win rate +2.5 (se 8), deaths +0.2
-  (se 1.7).
-- `gs_cpp93` is `gs_cpp` plus version 93's three changes (Seelie's gold weight
-  0.3 and retreat guard, and disengage at 0.50 with the melee-only finishing
-  blow). Running now: its parity sweep against `gs_seelie_dis050`, 80 games plus
-  an 80-game v93 self-play baseline, done about 17:40Z.
-- `gs_cpp93_party` adds the party-map rule (below).
-- Next is fight simulation in C++ (see Next).
-
-### Needs the ladder?
-
-No, and nothing is submitted while frozen. When the owner lifts the freeze,
-CLOUD's request is one two-arm test: `gs_cpp93_party` against a fresh v93
-baseline, 40 matches, pinned opponents, in a slot agreed here first.
+- **Candidate for the ladder: `gs_cpp93_party`.** That is `gs_cpp93` (the C++
+  port of version 93) plus the party rule for 00contest and 00stampede.
+  - `gs_cpp93` against v93, 80 paired games: gems +69.8 (se 40.8), win rate
+    55%, deaths −1.8 (se 1.0).
+  - The party rule against v93 on its two maps: 3 wins of 4, where gs_cpp93
+    alone wins 1.
+- **Running (background, about 4 h):** the full 320-game pool, v93 against
+  `gs_cpp93_party`, paired. Also: a BOTTAG audit and paired comparison of your
+  `db_base` against `v93_live`, from the platform. Note that v93 is untagged,
+  so its arm can only show "untagged".
+- **Tried and rejected today:**
+  - `gs_cpp93_shed` (fight instead of fleeing a melee enemy within two tiles):
+    gems −96 (se 37), deaths +3.8.
+  - `gs_cpp93_party2` (party play on 01elk_arena): 5 of 10 against 10 of 10.
 
 ### Findings
 
