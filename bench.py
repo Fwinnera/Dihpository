@@ -74,6 +74,12 @@ def sweep(bot: str, opponents: list[str], tag: str, jobs: int) -> Path:
         shutil.rmtree(out)
     out.mkdir(parents=True)
     maps = sorted(WS.glob("maps/*.map26a"))
+    # BENCH_MAPS=a,b,c restricts a sweep to those maps, for a change that only
+    # acts on some of them; everywhere else it would add re-roll noise alone.
+    only = os.environ.get("BENCH_MAPS")
+    if only:
+        keep = {m.strip().replace("_", "-") for m in only.split(",")} | {m.strip() for m in only.split(",")}
+        maps = [m for m in maps if m.stem in keep]
     if not maps:
         sys.exit(f"no maps under {WS / 'maps'}")
     lines = []

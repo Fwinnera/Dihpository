@@ -3502,3 +3502,10 @@ with a fresh decision-neutral re-roll and judge it against a fresh twin with
 the same re-roll. Effects under about 20 gems need several such re-rolls,
 averaged, to resolve at 90%. The bruiser + heal60 combination is being judged
 that way (`gs93_bh_rr` against `gs93_twin3`).
+
+Raid900 on the ten maps where monoliths hold half the gems or more, against
+unselected twins: +32.5 gems (z 0.9) against twin 1 and +25.9 (z 0.7) against
+twin 2, with win rate -1.2 and -7.5. Positive on gems, but 80 games on these
+high-variance maps cannot resolve it, and win rate falls: the raid trades wins
+for gems. `bench.py` now takes `BENCH_MAPS` to sweep a subset, and
+`analysis/subset.py` compares arms on a subset (`--mono 0.5` for these maps).
