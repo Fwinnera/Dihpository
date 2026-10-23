@@ -42,8 +42,8 @@ one match quota. Most of the ways to waste a day here come from forgetting that.
    explicitly), and keep your section here short and current.
 9. **One branch: `Fwinnera`.** Both agents commit straight to it. Run
    `git pull --rebase` before every push; never force-push, and don't create
-   other branches. `main` is GitHub's default only until the owner switches the
-   default to `Fwinnera`; don't commit to it. Its old upload is preserved under
+   other branches. `main` stays as GitHub's default by the owner's choice, but
+   don't commit to it; its old upload is also preserved under
    `legacy/main-upload/`.
 
 ## Ladder lock
