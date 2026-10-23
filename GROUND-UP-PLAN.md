@@ -2501,3 +2501,120 @@ each match is unconfirmed. The arms clearly differ (deaths -4.3, distinct per-ma
 values), so the candidate did play, but partial contamination cannot be excluded.
 The result is reported as a failed validation rather than a measured regression,
 and nothing was shipped on the strength of it either way.
+
+## The gold weight is closed out: the held-out test fails and the selection set never ran
+
+The held-out confirmation of gold weight 0.3 played on ranks 25 and 240, neither of
+which took part in selection. Ten games; one of the ten was bit-identical between
+the arms, so nine carry information. On those nine: gems 370 to 336, deaths +1.2,
+record 2-7 either way. Three games better, three worse, three unchanged. A 20,000
+sample bootstrap over games puts the interval at -122 to +21, which includes zero,
+and a single game -- `01yellow_brick_road` against Nanyang, 483 down to 122 --
+accounts for more than the whole mean.
+
+A sweep for bit-identical arms across every tag on disk then found something worse.
+`gold_base`, `gold_030` and `gold_000` are mutually bit-identical across all forty
+shared games, all three pairings. Those eighty matches tested nothing; they are the
+builds that failed to compile, already voided above, and this is the independent
+confirmation of it. The only real positive the parameter ever had was a cross-run
+pairing of `gw_030` against `nc_base`: +142 over seventeen diverged games, but
+assembled from two separate runs against the four opponents that selection used.
+
+So the position is: one positive measurement against the selection opponents,
+collected across runs, and one negative measurement against held-out opponents.
+Nothing is shipped. The parameter is left at 1.2 and closed, because a 20-gem
+question cannot be settled inside a 400-gem per-game variance without spending far
+more of the 50-an-hour quota than it is worth.
+
+## Where the collection gap actually is: 470 ladder games, by map and side
+
+Aggregating every ladder summary on disk by (map, side) rather than by opponent
+turns the gap from a single number into a structure:
+
+    map                     sd games ourcoll theircoll  ourdeaths  theirdeaths
+    00stampede               a    25     116       635       27.3         21.1
+    00quadrants              a     6     174      1103       18.0          3.5
+    00swirl                  b    48     252      1065       42.9         12.5
+    01elk_arena              a    82     253       986       51.2         16.0
+    ...
+    00quadrants              b    48     912       990        7.6          4.6
+    00collision              a     6     860       685        9.0         10.0
+
+The opponents collect between 685 and 1,103 on every map in the pool. Ours runs
+from 116 to 860. The maps are uniformly rich and the whole variance is ours.
+`00quadrants` settles the question on its own: 174 on side a against 912 on side b,
+same map, same bot, same opponents.
+
+Splitting the four worst map-sides from the four best, 161 games against 97:
+
+    deposits per game          3.2 against 19.8
+    camp clears per game      81.8 against 32.3
+    gem pickups per game      96.9 against 35.5
+    gems collected             231 against  818
+    deaths per game           44.8 against   7.2   (97% by champion)
+
+We clear two and a half times as many camps for three and a half times fewer gems:
+2.8 gems a clear against 25. That reads as a camp-selection failure, and it is not.
+Per champion on the failing map-sides, ours each die 9.2 to 9.8 times and theirs
+each 2.6 to 3.5 -- flat across all five on both teams, so neither side is
+specialising roles. What separates them is output: they deal 2.1 times our total
+damage and 2.9 times our damage to camps. They are simply stronger, and they clear
+the same camps faster and survive doing it.
+
+## The shop could never buy two of the seven item families
+
+Gold, over all 470 games: we earn 4,535 and spend 94% of it; they earn 9,964 and
+spend 95%. Purchase timing is indistinguishable -- median round 738 against 740.
+Our discipline is fine. We do not have the gold.
+
+Holdings tell the rest. We hold 0.00 of every Bruiser item and 0.00 of every
+Treasure item, across all six variants of each, in 470 games. They hold 2.19
+Bruiser Emblems of Health alone. `config.BUILDS` is three hardcoded shards, and
+once `purchase_index // 5` runs off the end of that tuple the shop buys
+`POWER_SHARD_OF_HEALTH` or `POWER_SHARD_OF_STRENGTH` forever. Bruiser and Treasure
+were unreachable by construction, not by judgement.
+
+Dumping the engine's own item table from inside a match -- `ItemType.info()` for
+all 210 entries, recovered from `team-a.stdout` inside the replay bundle, since
+`run-batch` does not surface bot stdout -- gives the design data, and the C++
+header documents each passive:
+
+    emblem (all 150 gold)   stats  passive
+    POWER                       6  none
+    BRUISER                     7  none            (5 primary, 1 of each other)
+    TREASURE                    5  +20% gold gained
+    JUNGLE                      5  30% less damage from camps
+    DURABILITY                  5  10% less incoming damage
+    MONSTER                     5  +10% damage to camps
+    HOME                        5  recall in 3 turn ends instead of 5
+
+Two things follow immediately. Every 150 gold the shop spent after its third emblem
+bought six stat points where Bruiser buys seven, for the same price, giving up a
+passive that Power does not have either. And Treasure, the only item in the game
+that compounds, was unreachable -- while the measured deficit was income.
+
+## Treasure first: +54% gold, and the mechanism is visible end to end
+
+Four variants, each built from pristine greatsage, parsed before use and tagged so
+a replay proves which arm ran. 24 local games each, eight maps against three
+opponents, against a tagged-but-otherwise-pristine baseline:
+
+    arm             gems  collect   gold  deaths  camp dmg   differ  delta
+    gs_shopbase      515      584   5979    24.7     73611        -      +0
+    gs_bruiser       542      637   6203    24.9     76894    16/24     +27
+    gs_treasure      675      745   9213    16.1     93323    21/24    +160
+    gs_shop          643      715   9102    15.0     87940    21/24    +128
+    gs_shop5         618      712   8961    19.7     90578    21/24    +103
+
+Treasure alone is the win, and every link of the predicted chain shows up as a
+direct count: gold +54%, camp damage +27%, deaths 24.7 to 16.1, collection +161,
+gems +160. The +54% is larger than one +20% emblem can explain, which is the
+compounding -- more gold buys more Treasure across the roster, which buys more
+gold. Gold lands at 9,213, against the 9,964 the ladder's stronger teams earn.
+
+Bruiser on its own is +27 over sixteen diverged games, inside what this harness
+swings on a neutral change, and adding it on top of Treasure costs 32 gems rather
+than gaining. Adding all five passive families costs another 25. Neither is taken.
+Only the one-line build-order change goes forward, and only to the ladder test,
+because local opponents cannot reach 1,000 gems and this harness has bought a
+local win that meant nothing before.
