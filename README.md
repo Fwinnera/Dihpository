@@ -53,9 +53,10 @@ one match quota. Most of the ways to waste a day here come from forgetting that.
     for:       no submissions to the website by either agent until the review
                of Seelie's bot (py-t04-gem-value) is sorted. The owner lifts it.
     live bot:  SEELIE'S py-t04-gem-value, submitted by the owner at about 16:41Z.
-               ladderbench.py still restores greatsage, so running it now
-               would overwrite the live bot. Don't, until its restore target
-               is switched.
+               ladderbench.py now restores ws/bots/seelie_live, a byte-exact
+               copy of it, verified against seelie_live.zip (20,126 bytes, the
+               same as the downloaded submission). Still frozen until the
+               owner lifts it.
 
 To take it: edit this block, commit and push *before* submitting. To release it:
 set `held by: nobody` and push. If it has been held for more than 90 minutes,
@@ -74,7 +75,8 @@ local harness, the platform login and the GitHub deploy key.
 
 **Live bot: Seelie's `py-t04-gem-value`** (the owner submitted it at about
 16:41Z). Website submissions stay frozen. `ladderbench.py`'s restore target is
-still greatsage, so it must not be run until that is switched to Seelie's bot.
+now Seelie's bot (`ws/bots/seelie_live`, verified byte-exact), so a ladder test
+can no longer overwrite it with greatsage.
 
 Seelie's bot is greatsage plus two changes: gold weight 0.3, and a retreat
 change that locates threatening camps at their spawn tiles and adds fuel
