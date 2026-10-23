@@ -78,6 +78,11 @@ untagged, and differs from Seelie's bot only in `bot.py`, `combat.py` and
 `ERROR` lines before upload. `ladderbench.py` now restores exactly this bot.
 Test submissions stay frozen until the owner lifts the freeze.
 
+**Ladder use, no submission:** 20 unranked games of the live version 93 at
+16:50Z against the four teams pinned in `db_base` (same maps and sides), tag
+`v93_live`, for a before-and-after with greatsage. With `db_base`'s 20 at
+16:31Z, the trailing hour holds 40 until about 17:31Z.
+
 **Still measuring:** `gs_seelie_dis050` (the tagged twin) against Seelie's bot
 on the full local pool, paired game for game, plus Seelie's bot against
 greatsage. Disengage at 0.50 on greatsage was +41.9 gems locally (se 18.9),
