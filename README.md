@@ -40,13 +40,18 @@ one match quota. Most of the ways to waste a day here come from forgetting that.
    owner's (`cambc login`, done by the owner). GitHub access is a deploy key.
 8. **Record results in `GROUND-UP-PLAN.md`** (append; state retractions
    explicitly), and keep your section here short and current.
+9. **One branch: `Fwinnera`.** Both agents commit straight to it. Run
+   `git pull --rebase` before every push; never force-push, and don't create
+   other branches. `main` is GitHub's default only until the owner switches the
+   default to `Fwinnera`; don't commit to it. Its old upload is preserved under
+   `legacy/main-upload/`.
 
 ## Ladder lock
 
-    held by:   LOCAL
-    since:     2026-10-23 15:21Z
-    for:       disengage ladder test (tags da_base, da_dis)
-    expected:  released by about 16:00Z
+    held by:   nobody
+    since:     2026-10-23 15:37Z (LOCAL released it; greatsage restored, version 89)
+    for:       -
+    expected:  -
 
 To take it: edit this block, commit and push *before* submitting. To release it:
 set `held by: nobody` and push. If it has been held for more than 90 minutes,
@@ -58,17 +63,17 @@ ask the owner before overriding it.
 
 **Agent:** Claude Code on the owner's Mac. It has the engine (`cambc`), the
 local harness, the platform login and the GitHub deploy key.
-**Branch:** `shop-economy`.
-**Updated:** 2026-10-23 15:35Z.
+**Branch:** `Fwinnera`.
+**Updated:** 2026-10-23 15:45Z.
 
 ### Doing now
 
-Ladder test of **candidate A, disengage at ratio 0.75** (`ws/bots/gs_dis075`)
-against a fresh baseline (`gs_shopbase` = greatsage + a tag), on four opponents
-pinned by id from `dv_base`, five maps. The baseline arm is done and restored;
-the candidate arm is waiting for a safe window between ranked batches. Result
-due about 16:00Z. Ship criterion: deaths down and gems not down on the ladder,
-with the fresh baseline bit-identical to `dv_base` (the contamination check).
+Nothing on the ladder. The ladder test of **candidate A, disengage at ratio
+0.75**, has just finished and was **not shipped**: deaths fell by a third (23.6
+to 15.8) and the record went from 1-19 to 3-17, but gems fell by 59.8 and gold
+by 679. Against ladder opponents the rule spends too much of the game walking
+away from camps. The next tuning of A is listed below and waits for the owner's
+go-ahead.
 
 ### What the bot is and what is live
 
@@ -90,6 +95,10 @@ with the fresh baseline bit-identical to `dv_base` (the contamination check).
 - **Candidate A**, disengage when the local strength ratio is below 0.75, on
   the full local pool: deaths −6.4 (se 0.56), kills +4.2, gems +47.7 (se 20),
   win rate +4.1. The first change today to beat the noise on gems.
+- **Candidate A on the ladder** (20 games): deaths −7.8, opponent gems −52,
+  but our gems −59.8 and gold −679. Not shipped. Locally it was +47.7 gems, so
+  the local pool doesn't capture how often ladder opponents put us below the
+  ratio.
 - **Tested and not shipped:**
   - Treasure emblem first: gold +15–22%, gems flat.
   - Willow → Vesper Vale draft swap: gold up, gems flat on the ladder.
@@ -97,13 +106,17 @@ with the fresh baseline bit-identical to `dv_base` (the contamination check).
 
 ### Next, in order
 
-1. If A holds on the ladder: candidate **B**, removing the unconditional
-   `gap <= 4` accept in `combat.choose_enemy`.
-2. Candidate **C**: scale the farming penalty by the enemy strength near a camp.
-3. Retest Treasure and the draft swap on top of A, since their extra gold may
-   convert once we stop losing fights.
-4. Banking only where it fails (bank earlier when enemy champions are visible).
-5. Longer track: a C++ port with fight simulation.
+1. Retune A, cheapest first: try ratio 0.50 (locally deaths −5.2 and gems
+   +41.9, while leaving fights far less often); then disengage only when
+   outnumbered; then stop the farming choice sending a disengaged champion
+   straight back to the camp it left.
+2. Candidate **B**: remove the unconditional `gap <= 4` accept in
+   `combat.choose_enemy`.
+3. Candidate **C**: scale the farming penalty by the enemy strength near a camp.
+4. Retest Treasure and the draft swap on top of whichever A ships, since their
+   extra gold may convert once we stop losing fights.
+5. Banking only where it fails (bank earlier when enemy champions are visible).
+6. Longer track: a C++ port with fight simulation.
 
 ### Useful files
 
