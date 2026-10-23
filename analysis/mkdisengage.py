@@ -46,6 +46,14 @@ def local_power(enemies, allies, radius):
     return allied / max(1.0, hostile), threats
 
 
+def allies_near(allies, radius):
+    """Visible living allies within `radius` of this champion, not counting it."""
+    me = bc.me()
+    position = me.position()
+    return sum(1 for ally in allies if ally != me and ally.is_alive() and ally.is_visible()
+               and distance(position, ally.position()) <= radius)
+
+
 def finishing_blow(enemies):
     """An enemy in reach that one attack or cast kills, worth 199 gold to take."""
     me = bc.me()
@@ -78,7 +86,7 @@ DISENGAGE_RADIUS = 5
 HOOK_ANCHOR = "        holding = self.by_tile.get(me.position())\n"
 HOOK = '''        ratio, threats = combat.local_power(enemies, self.team.allies, config.DISENGAGE_RADIUS)
 {log}        leave = config.DISENGAGE_RATIO + (config.DISENGAGE_HYSTERESIS if self.disengaging else 0)
-        self.disengaging = not at_spawn and threats > 0 and ratio < leave
+        self.disengaging = not at_spawn and threats > 0 and ratio < leave{outnumbered}
         if self.disengaging:
             self.status('disengage')
             self.objective = None
@@ -96,7 +104,16 @@ LOG = ('        if threats:\n'
        'ratio, threats, me.health() / max(1, me.max_health()), me.gem_count()), flush=True)\n')
 
 
-def build(name: str, ratio: float, log: bool, base: str = "greatsage") -> None:
+OUTNUMBERED = " and threats > combat.allies_near(self.team.allies, config.DISENGAGE_RADIUS) + 1"
+GAP_ACCEPT = "if not (killable or interrupt or defending or gap <= 4 or allied_power > enemy_power * 1.15):"
+GAP_REPLACED = """# Candidate B: proximity no longer overrides the power test. `gap <= 4` used to
+        # accept any enemy within four tiles whatever the odds, and fights we opened
+        # outnumbered won 1-8% of the time over 510 ladder games.
+        if not (killable or interrupt or defending or allied_power > enemy_power * 1.15):"""
+
+
+def build(name: str, ratio: float, log: bool, base: str = "greatsage",
+          outnumbered: bool = False, no_gap_accept: bool = False, b_only: bool = False) -> None:
     dst = WS / "bots" / name
     if dst.exists():
         shutil.rmtree(dst)
@@ -104,14 +121,16 @@ def build(name: str, ratio: float, log: bool, base: str = "greatsage") -> None:
     src = dst / "src"
 
     combat = src / "combat.py"
-    combat.write_text(combat.read_text().rstrip("\n") + "\n" + LOCAL_POWER)
+    if not b_only:
+        combat.write_text(combat.read_text().rstrip("\n") + "\n" + LOCAL_POWER)
 
     cfg = src / "config.py"
     t = cfg.read_text()
     anchor = "SHOP_INTERVAL = 70\n"
     if anchor not in t:
         sys.exit("config anchor missing")
-    cfg.write_text(t.replace(anchor, anchor + CONFIG.format(ratio=ratio), 1))
+    if not b_only:
+        cfg.write_text(t.replace(anchor, anchor + CONFIG.format(ratio=ratio), 1))
 
     bot = src / "bot.py"
     t = bot.read_text()
@@ -120,10 +139,18 @@ def build(name: str, ratio: float, log: bool, base: str = "greatsage") -> None:
             sys.exit(f"bot anchor missing: {anchor!r}")
     if t.count(HOOK_ANCHOR) != 1:
         sys.exit("hook anchor is not unique")
-    t = t.replace(HOOK_ANCHOR, HOOK.format(log=LOG if log else "") + HOOK_ANCHOR, 1)
-    t = t.replace("        self.banking = False\n",
-                  "        self.banking = False\n        self.disengaging = False\n", 1)
+    gate = OUTNUMBERED if outnumbered else ""
+    if not b_only:
+        t = t.replace(HOOK_ANCHOR, HOOK.format(log=LOG if log else "", outnumbered=gate)
+                      + HOOK_ANCHOR, 1)
+        t = t.replace("        self.banking = False\n",
+                      "        self.banking = False\n        self.disengaging = False\n", 1)
     bot.write_text(t)
+    if no_gap_accept or b_only:
+        c = combat.read_text()
+        if c.count(GAP_ACCEPT) != 1:
+            sys.exit("gap accept not found exactly once")
+        combat.write_text(c.replace(GAP_ACCEPT, GAP_REPLACED, 1))
 
     main = src / "main.py"
     text = re.sub(r'\n    print\("BOTTAG [^"]+", flush=True\)', "", main.read_text())
@@ -140,5 +167,11 @@ if __name__ == "__main__":
     ap.add_argument("--ratio", type=float, default=0.0)
     ap.add_argument("--log", action="store_true")
     ap.add_argument("--base", default="greatsage")
+    ap.add_argument("--outnumbered", action="store_true",
+                    help="disengage only when also outnumbered")
+    ap.add_argument("--no-gap-accept", action="store_true",
+                    help="candidate B: remove the unconditional gap <= 4 accept")
+    ap.add_argument("--b-only", action="store_true",
+                    help="candidate B alone, with no disengage hook")
     a = ap.parse_args()
-    build(a.name, a.ratio, a.log, a.base)
+    build(a.name, a.ratio, a.log, a.base, a.outnumbered, a.no_gap_accept, a.b_only)

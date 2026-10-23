@@ -65,16 +65,35 @@ ask the owner before overriding it.
 **Agent:** Claude Code on the owner's Mac. It has the engine (`cambc`), the
 local harness, the platform login and the GitHub deploy key.
 **Branch:** `Fwinnera`.
-**Updated:** 2026-10-23 15:45Z.
+**Updated:** 2026-10-23 16:15Z.
 
 ### Doing now
 
-Nothing on the ladder. The ladder test of **candidate A, disengage at ratio
-0.75**, has just finished and was **not shipped**: deaths fell by a third (23.6
-to 15.8) and the record went from 1-19 to 3-17, but gems fell by 59.8 and gold
-by 679. Against ladder opponents the rule spends too much of the game walking
-away from camps. The next tuning of A is listed below and waits for the owner's
-go-ahead.
+Two tracks run in parallel.
+
+**Ladder (lock held):** the disengage test at ratio **0.50** (`gs_dis050`)
+against a fresh baseline (`gs_shopbase`), tags `db_base` / `db_dis`, with
+opponents pinned `--same-as da_base`. The quota was full at 16:00Z (50 in the
+trailing hour, two of those batches other teams' scrims against us). Each arm
+re-counts the trailing hour and waits for room: the baseline goes out about
+16:23Z, the candidate about 16:33Z, and the result lands about 16:45Z.
+
+**Local (no ladder):** a full-pool screen of the next candidates, all aimed at
+the farming cost that sank 0.75 on the ladder (champions leaving fights they
+didn't need to leave):
+
+| bot | change |
+|---|---|
+| `gs_b` | candidate B alone: no unconditional `gap <= 4` accept |
+| `gs_dis075_out` | disengage at 0.75, but only when also outnumbered |
+| `gs_dis050_b` | disengage at 0.50 plus B |
+| `gs_dis075_out_b` | outnumbered-only disengage plus B |
+| `gs_dis075_avoid` | **CLOUD's candidate C**, measured as-is, not modified |
+
+Results about 16:45Z. The best of these, or of the 0.50 ladder result, takes
+the next ladder slot, about 17:25Z when the quota allows. All are built by
+`analysis/mkdisengage.py` (flags `--outnumbered`, `--no-gap-accept`,
+`--b-only`).
 
 ### What the bot is and what is live
 
@@ -135,6 +154,13 @@ go-ahead.
 
 ### Notes for CLOUD
 
+- **Your `gs_dis075_avoid` is in LOCAL's full-pool screen right now**,
+  unmodified. The numbers will go in `GROUND-UP-PLAN.md` and here by about
+  16:50Z. If you'd rather LOCAL measured `gs_vv_dis075_avoid` or a newer build
+  instead, say so in your section.
+- **The ladder is LOCAL's until about 16:50Z, then reserved again from about
+  17:25Z** for the next candidate. If you need a slot, write when and how many
+  matches in your section and LOCAL will fit it in.
 - **Your branches `disengage-followups` and `review/paired-se` were merged into
   `Fwinnera` on 2026-10-23 at about 15:50Z and deleted from GitHub.** Nothing
   was lost: `analysis/paired.py`, `analysis/mkavoid.py` and both `*_avoid` bots
