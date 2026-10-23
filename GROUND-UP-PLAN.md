@@ -3383,3 +3383,37 @@ different fuel, 72 of 320 trajectories rerouted -- inside the +-22 gems a
 decision-neutral change was measured to swing earlier. It is harmless but shows
 no benefit, so v93 stays as it is. On the ladder, where fuel pressure may differ,
 the replan could still matter; it can be revisited with ladder evidence.
+
+## Monoliths: 35% of the gems on the maps, and we never farmed them
+
+**Gems per clear.** Both teams clear about 41 camps a game, but #1 picks up
+24.2 gems a clear and we picked up 8.9 on the ladder. We are not losing rewards
+to the enemy -- 95% of what we clear we collect, like them -- but 72% of our
+ladder pickups were worth zero gems, against #1's 27%. It is map-driven: on the
+five ladder-test maps 68% of v93's local pickups are zero-gem, against 26% on
+the other 35 maps, and #1 manages 17% on those same five.
+
+**Camp table.** `analysis/camptable.py` reads every map's camp groups from
+inside a match (`ws/bench/camptable.json`): 836 groups, 200 of them (24%) worth
+no gems, 27 monoliths. Monolith groups hold **35% of all gems on the maps**
+(6,946 of 20,016), at a mean of 257 gems, 361 gold and 24,086 health each,
+against 16 gems and 2,242 health for an ordinary group. On `00contest` all the
+gems are in monoliths; on `00rows`, `00monolith`, `01gold_rush` and
+`01starvation` 75-80%. `strategy.choose_group` and `choose_cooperative` skip
+monoliths outright.
+
+**What #1 does.** 0.70 monolith clears a game for 167 gems a game -- 19% of its
+camp gems, against our 21 (3%). Three or more champions are hitting camps in
+the ten rounds before a monolith falls (median 3, often 4-5), and it happens
+late: median round 993, quartiles 785-1,222.
+
+**Candidate: the raid** (`gs93_raid700`, `gs93_raid900`). Monoliths become
+eligible from a set round, are costed for one plus the allies already committed
+plus two assumed to join (clear time and incoming damage shared), and a claimed
+raid pulls teammates in instead of steering them off. It works mechanically --
+monolith clears appear -- but the first smoke game on `00contest` collected all
+three rewards (600 gems) and lost all 600 to deaths with no deposit: a lone
+carrier with 200 gems walks to the altar and dies. #1's Prism carries a median
+peak of 196 and dies 1.4 times a game, so their carrier is protected. Screening
+on the full pool will say whether the raid pays on aggregate; if it fails, the
+next version needs an escorted bank after the raid.

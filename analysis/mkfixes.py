@@ -90,6 +90,51 @@ def apply(src: Path, change: str) -> None:
         edit(st, "            score = (travel + capture) * 100 / max(1, value) - 15",
              "            score = (travel * config.TRAVEL_WEIGHT + capture) * 100 / max(1, value) - 15")
         cfg.write_text(cfg.read_text() + TRAVEL_CFG.format(w=w))
+    elif re.fullmatch(r"bank(\d+)", change):
+        # The #1 team's regular bankers deposit about 45 gems at a time and peak
+        # at 44-70; ours deposit about 30 against BANK_GEMS 24. With disengage
+        # cutting deaths, carrying a bigger load costs fewer of them.
+        n = int(change[len("bank"):])
+        edit(cfg, "BANK_GEMS = 24\n", f"BANK_GEMS = {n}\n")
+    elif change in ("bruiser", "items"):
+        # Bruiser grants seven stat points for the 150 gold Power spends on six,
+        # and the #1 team stacks it after its opening; it holds almost no Power.
+        edit(src / "bot.py", "bc.ItemType.POWER_SHARD_OF_HEALTH", "bc.ItemType.BRUISER_SHARD_OF_HEALTH")
+        edit(src / "bot.py", "bc.ItemType.POWER_SHARD_OF_STRENGTH", "bc.ItemType.BRUISER_SHARD_OF_STRENGTH")
+        if change == "items":
+            # Their opening: Jungle first, Durability once, then Bruiser; Monster
+            # only on their focus caster, which we do not field.
+            edit(cfg, "DEFAULT_BUILD = (I.JUNGLE_SHARD_OF_STRENGTH, I.MONSTER_SHARD_OF_STRENGTH,\n"
+                      "                 I.DURABILITY_SHARD_OF_HEALTH)",
+                 "DEFAULT_BUILD = (I.JUNGLE_SHARD_OF_STRENGTH, I.DURABILITY_SHARD_OF_HEALTH)")
+    elif re.fullmatch(r"raid(\d+)", change):
+        # Monolith groups hold 35% of the gems on the 40 maps (mean 257 gems,
+        # 24,086 health) and choose_group skipped them outright. The #1 team
+        # clears 0.7 a game, three or more champions at once, median round 993,
+        # for 167 gems a game -- 19% of its camp gems -- against our 21.
+        st = src / "strategy.py"
+        edit(st, "        if objective.monolith or respawns.get(handle, 0) > now:\n",
+             "        if (objective.monolith and now < config.RAID_ROUND) or respawns.get(handle, 0) > now:\n")
+        edit(st, "        clear = objective.hp / (damage * (min(objective.count, 3) if splash else 1) + helper_dps)\n",
+             "        clear = objective.hp / (damage * (min(objective.count, 3) if splash else 1) + helper_dps)\n"
+             "        # A monolith is a raid: costed with the allies already committed to it\n"
+             "        # plus RAID_ASSUME expected to join, its time and its hits shared.\n"
+             "        raiders = 1 + max(claimed.get(handle, 0), config.RAID_ASSUME) if objective.monolith else 1\n"
+             "        clear /= raiders\n")
+        edit(st, "        bias = (20 if objective.incoming < 70 else 5) if claimed.get(handle) else 0\n",
+             "        bias = (20 if objective.incoming < 70 else 5) if claimed.get(handle) else 0\n"
+             "        if objective.monolith:\n"
+             "            # Pull teammates into a claimed raid instead of steering them off it.\n"
+             "            bias = -config.RAID_PULL if claimed.get(handle) else 0\n")
+        edit(st, "        risk = min(45, max(0, objective.incoming * clear * 0.55 / hp_budget - 0.7) * 12)\n",
+             "        risk = min(45, max(0, objective.incoming / raiders * clear * 0.55 / hp_budget - 0.7) * 12)\n")
+        edit(st, "        expected_damage = max(0, incoming * clear * 0.55 - heal_rate * clear)\n",
+             "        raiders = 1 + max(claimed.get(objective.handle, 0), config.RAID_ASSUME) if objective.monolith else 1\n"
+             "        expected_damage = max(0, incoming / raiders * clear * 0.55 - heal_rate * clear)\n")
+        cfg.write_text(cfg.read_text() + (
+            "# Monolith raids: eligible from RAID_ROUND, costed for 1 + RAID_ASSUME raiders\n"
+            "# (or more if more have claimed it), and a claimed raid pulls teammates in.\n"
+            f"RAID_ROUND = {int(change[len('raid'):])}\nRAID_ASSUME = 2\nRAID_PULL = 40\n"))
     else:
         sys.exit(f"unknown change {change}")
 
@@ -112,7 +157,8 @@ def build(name: str, changes: list[str] | None = None) -> None:
     print(f"  {name}: {' + '.join(changes)}; parses, tagged")
 
 
-ALL = ["gs93_hurt60", "gs93_willow_farm", "gs93_escort_safe", "gs93_travel60", "gs93_travel40"]
+ALL = ["gs93_hurt60", "gs93_willow_farm", "gs93_escort_safe", "gs93_travel60", "gs93_travel40",
+       "gs93_bank36", "gs93_bank48", "gs93_bruiser", "gs93_items"]
 if __name__ == "__main__":
     # mkfixes.py NAME=change+change ... stacks changes into one build.
     for n in sys.argv[1:] or ALL:

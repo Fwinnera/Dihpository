@@ -1,0 +1,56 @@
+"""Keep Willow in healing range of a productive front-line farmer."""
+import cambc as bc
+from cambc import game_map as gm
+from bot import Bot
+import navigation as nav
+import combat
+import turn
+
+class EscortBot(Bot):
+    def farm(self, me, enemies):
+        claims = self.team.assignments()
+        candidates = []
+        for index, ally in enumerate(self.team.allies):
+            turn.check()
+            if ally == me or not ally.is_alive() or claims[index] < 0:
+                continue
+            objective = next((o for o in self.metadata if o.handle == claims[index]), None)
+            if objective is None:
+                continue
+            priority = 0 if ally.champion_name() == bc.ChampionType.VARG else 1
+            if ally.is_visible():
+                priority += nav.distance(me.position(), ally.position()) / 12
+                # Follow a farmer, not a fight. Moving towards hurt allies took the
+                # team's lowest-health champion into the fights that hurt them:
+                # Willow died 5.5 times a game for 0.3 kills. A leader with an enemy
+                # champion near it is now the last choice instead of the first.
+                for enemy in bc.vision.champions(bc.Team.ENEMY):
+                    turn.check()
+                    if enemy.is_alive() and nav.distance(ally.position(), enemy.position()) <= 5:
+                        priority += 2
+                        break
+            candidates.append((priority, index, ally, objective))
+        if not candidates:
+            return super().farm(me, enemies)
+        _, _, leader, objective = min(candidates, key=lambda row: (row[0], row[1]))
+        self.objective = objective
+        self.current_group = objective.handle
+        self.team.claim(objective.group, support=True)
+        visible = bc.vision.visible_tiles()
+        if not (objective.spawns & visible).is_empty():
+            state = objective.group.state()
+            if isinstance(state, gm.CampGroupRespawning):
+                self.respawns[objective.handle] = bc.round_number() + state.timer
+                self.team.claim()
+                self.objective = None
+                return super().farm(me, enemies)
+        targets = combat.visible_camps(objective.camps)
+        if targets:
+            target = min(targets, key=lambda c: (not me.attack_tiles().is_set(c.position()), c.health()))
+            combat.fight(target, targets)
+            if combat.live(target) and target.health() > 0:
+                nav.move_to(nav.around(target.position(), 3 if leader.is_visible() else 1))
+        else:
+            anchor = leader.position() if leader.is_visible() else objective.positions[0]
+            nav.move_to(nav.around(anchor, 3 if leader.is_visible() else 1) & ~objective.spawns)
+        combat.heal_allies(self.team.allies)
