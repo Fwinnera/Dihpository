@@ -153,10 +153,11 @@ go-ahead.
 
 **Agent:** Claude Code in a claude.ai cloud container. It cannot reach the Mac.
 **Branch:** `Fwinnera`.
-**Updated:** 2026-10-23 16:05Z.
+**Updated:** 2026-10-23 16:30Z.
 **Can run:**
-- Engine: yes. `cambc` 3.0.5 with all 40 pool maps, Python bots only (no
-  wasi-sdk yet, so not `sage2`), 4 cores, about 35 s a game.
+- Engine: yes. `cambc` 3.0.5 with all 40 pool maps, Python and C++ bots
+  (wasi-sdk 33, CMake and Ninja installed by hand, checksums match the CLI's),
+  4 cores, about 35 s a game.
 - Platform login: yes, a CLI session the owner approved at 15:50Z (expires
   30 Oct). Used read-only (ladder, match lists, summaries, replays, maps)
   unless CLOUD holds the ladder lock. The CLI session cannot open
@@ -167,25 +168,37 @@ go-ahead.
 
 ### Doing now
 
-Candidate C, which LOCAL handed over: stop a disengaged champion walking
-straight back into the fight it left (`analysis/mkavoid.py`: remember enemy
-sightings for 8 rounds, skip any camp where the disengage rule would fire on
-arrival). It starts with the question C depends on: **where did A's 59.8 gems
-go on the ladder?** Read-only, no quota:
+**The owner has decided: CLOUD builds the C++ bot. LOCAL keeps the Python bot
+and Sprint 2.** Evidence, from the public ladder at 16:10Z:
 
-- Download the 40 `da_base` / `da_dis` summaries and compare per champion:
-  farming uptime (rounds with monster damage), camp clears, respawn downtime
-  and gold. Re-entering contested camps points to C; general retreat time
-  points to 0.50 or outnumbered-only.
-- Check `BOTTAG` on all 40 replays, so the result is known to be clean.
+- 156 teams use Python, and the best is rank 108 at 1,763. We are the fourth
+  best Python team, at #221.
+- The top 40 overall are 36 C++ and 4 Rust; the UK top 40 have no Python at
+  all. UK third place is at 1,983.
+- Your own measurements (§4.3a–c) say why: engine calls cost about the same in
+  both languages, but C++ has about 400 times the compute — 229 ten-turn fight
+  playouts a turn against 0.55 in Python. So a straight port only matches
+  greatsage. The gain comes from fight simulation, aimed at deaths: 22 a game
+  for us, about 6 for the strongest teams.
 
-Done = a short write-up in `GROUND-UP-PLAN.md` and a go/no-go for C.
+1. **Diagnose A's ladder loss** (running in the background, read-only, no
+   quota). `da_base` is the four groups at 15:22Z (`c673ab12`, `db38c8f3`,
+   `f186b046`, `b8f03a7d`); `da_dis` is the four at 15:31Z (`a61cdd2f`,
+   `7f43d8e7`, `5bf001a6`, `c695aa73`). Downloading all 40 summaries and
+   replays for a per-champion comparison and a BOTTAG audit.
+2. **Port greatsage to C++, faithfully: `ws/bots/gs_cpp`** (new directory).
+   It is a module-by-module translation, not a redesign. sage2 redesigned,
+   dropped greatsage's edge cases and scores 140 gems to greatsage's 1,001 on
+   `00ambush` (measured here today). sage2 is left untouched as a parts bin.
+   Gate: at parity with greatsage on all 40 maps, both sides, before anything
+   is added.
+3. **Then add fight simulation** to the engage/disengage decision, in place of
+   A's fixed ratio, with candidate C's camp choice built in.
 
 ### Needs the ladder?
 
-No. Read-only until further notice, using no quota. If C earns a slot, it is
-one two-arm test (about 40 matches), after LOCAL's 0.50 test, with the lock
-taken above first.
+No. Read-only, no quota. gs_cpp reaches the ladder only after it passes the
+local gate, with LOCAL's agreement and the lock taken above first.
 
 ### Findings
 
@@ -223,14 +236,14 @@ taken above first.
 
 ### Next, in order
 
-1. The A diagnosis and BOTTAG audit above.
-2. C on LOCAL's next base: build `gs_dis050_avoid` and measure it locally
-   against `gs_dis050`, paired by map and side.
-3. Find a local opponent set that reproduces A's ladder failure, so that
-   retunes can be screened without ladder quota. Candidates: `gs_chpress`,
-   `gs_nochase` and the `gs_dis*` builds themselves. The current pool's
-   opponents are too passive to put us below the ratio.
-4. Banking where it fails (LOCAL's #5), only if LOCAL hands it over.
+1. The A diagnosis and BOTTAG audit, written up in `GROUND-UP-PLAN.md`.
+2. `gs_cpp` at parity with greatsage.
+3. Fight simulation in `gs_cpp`.
+4. A local opponent set that reproduces A's ladder failure. The current pool
+   is too passive to put us below the disengage ratio, so it cannot screen
+   combat changes.
+5. Candidate C on LOCAL's Python base, if LOCAL still wants it. Otherwise it
+   moves into `gs_cpp`.
 
 ### Files touched
 
