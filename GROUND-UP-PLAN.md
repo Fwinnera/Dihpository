@@ -2690,3 +2690,86 @@ standard error of 21. The 24-game screen's +160 was the eight-map selection --
 chosen because they were our worst maps -- overstating the effect about ninefold.
 The same eight maps produced the draft swap's +170, so that number is treated as
 an upper bound until the full pool and the ladder report.
+
+## The improvement plan, sized from 510 ladder games
+
+### Where the remaining gap is
+
+A linear model of earned gold over 1,020 team-games (R^2 = 0.90) prices a kill at
+199 gold and 1,000 camp damage at 42. On that model the 5,500-gold gap splits
+almost exactly in half:
+
+    source          ours   theirs    gap
+    kills           1474     4479   +3005
+    camp damage     2462     5529   +3066
+    passive         1559     1642     +84
+
+Our 22.5 deaths a game hand the opponents about 4,480 gold: nearly half their
+income is our own champions. Kill participation is the same on both sides (2.65
+champions per kill on us, 2.84 on them), so we are not being ganged; we take and
+lose far more fights. Gems lost to deaths are equal overall (44 against 42) and
+gems per deposit are equal (34.7 against 32.8), so banking is not the general
+problem -- the scoring gap is collection, 428 against 954, and collection is
+strength and time alive.
+
+### Phase 0 -- in flight: Willow -> Vesper Vale
+
+Full local pool and a ladder test with a fresh baseline and a bit-identical
+contamination check against `tr_base`. Ship if ladder gems rise and the check is
+clean; otherwise drop it.
+
+### Phase 1 -- stop paying for their economy (about 3,000 gold a game)
+
+1. Diagnose first, free: classify each of our deaths by the local strength
+   balance when the fight began (allied versus enemy champions in range, their
+   health and stats), from replays and champion timelines. The question is
+   whether we die in fights taken at a disadvantage, or in fights that start
+   even and are lost.
+2. Then candidates, one per ladder test:
+   - `combat.choose_enemy` accepts any target within four tiles unconditionally
+     (`gap <= 4`), whatever the power ratio.
+   - Retreat pressure counts camps only; enemy champions contribute nothing.
+   - Carriers disengage on the same rule as everyone else.
+3. Primary metric: deaths and kill/death ratio on the ladder; gems secondary.
+   The no-chase test cut deaths by 4.3 and still went 4-16 to 1-19, so the fix
+   has to be power-aware, not blanket avoidance.
+
+### Phase 2 -- clear faster (the other 3,000)
+
+- Per-champion builds from growth stats, now that the design table is known
+  (Vendetta strength growth 6; Vesper Vale's build is the untuned default).
+- Emblem order: Monster (+10% camp damage) against Jungle (-30% camp damage
+  taken) as the first purchase.
+- Retest Treasure after Phases 0 and 1. Its gold (+15% ladder, +22% full pool)
+  did not convert while we were losing fights; it may once we are not.
+- The fifth draft slot: Ryth against Tavi or Issac.
+
+### Phase 3 -- banking where it actually fails
+
+Only the catastrophic subset (99 of 127 gems lost, one deposit a game) needs it.
+Make the threshold conditional on visible enemy champions rather than lowering
+`BANK_GEMS` globally. Ladder-only: local opponents do not apply the pressure.
+
+### Phase 4 -- compute, the long track
+
+Opponents exhaust their fuel 96 turns a game to our 14: they spend their budget
+and we cannot, at about 1,600 Python operations a turn. C++ has roughly 12,000
+times the arithmetic headroom, and the best use for it is exactly Phase 1's
+decision -- simulating an engagement before taking it. Start once the Python
+heuristics plateau, porting the validated greatsage decisions into sage2 first.
+
+### Measurement rules
+
+- Local gate: the full 320-game pool with standard errors. Never a hand-picked
+  map screen; the eight-map screen overstated Treasure about ninefold.
+- The ladder decides. A two-arm test of four opponents on five maps is 40 of
+  the 50 unranked matches an hour, so about one decision an hour; local work runs
+  in parallel with it.
+- Every arm parses, is tagged, gets a bit-identical sweep, and runs against a
+  fresh baseline or a contamination check.
+- Judge each change first on the count it targets, then on gems.
+
+### Closed, not to be reopened without new evidence
+
+Gold weight 0.3, Bruiser fallback, Heart of Ruin, copying the field's roster
+wholesale, a global `BANK_GEMS` cut.
