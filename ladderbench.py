@@ -90,6 +90,7 @@ def cambc(*args: str, check: bool = True, retries: int = 4) -> subprocess.Comple
         transient = ("429" in blob or "busy" in blob.lower()
                      or "invalid response" in blob.lower()
                      or "timed out" in blob.lower()
+                     or "timeout" in blob.lower()
                      or "connection" in blob.lower())
         if transient:
             if attempt < retries:
@@ -172,8 +173,19 @@ def team_ids(spec: str) -> list[tuple[str, str, int]]:
     """Accept ranks ('158,1') or team UUIDs, return (name, id, rank)."""
     page, teams = 1, []
     while True:
-        d = json.loads(cambc("ladder", "--page", str(page), "--limit", "100",
-                             "--json").stdout)
+        # The ladder endpoint sometimes answers a timeout ("timeout: global") or
+        # an empty body with a zero exit; either one once killed a run before it
+        # had submitted anything. Both are transient, so retry the page.
+        for attempt in range(4):
+            try:
+                d = json.loads(cambc("ladder", "--page", str(page), "--limit", "100",
+                                     "--json").stdout)
+                break
+            except (RuntimeError, json.JSONDecodeError):
+                if attempt == 3:
+                    raise
+                print(f"  ladder page {page} failed; retrying in {10 * (attempt + 1)}s")
+                time.sleep(10 * (attempt + 1))
         teams += d.get("teams", [])
         if len(teams) >= d.get("total", 0) or not d.get("teams"):
             break
