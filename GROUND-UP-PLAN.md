@@ -3482,3 +3482,23 @@ neutral statement per turn) against a re-roll of Bruiser (`gs93_bruiser_rr`).
 Raid900 by map type: +26.0 gems on maps where monoliths hold half or more of the
 gems, -35.0 at 25-50%, and the neutral -14.3 below 25%. A raid gated on the
 map's monolith share may be worth a later round.
+
+### Bruiser fails out of sample; the instrument's real resolution
+
+    bruiser re-roll vs fresh twin 2:   gems -3.3 (z -0.3)   win rate -0.6
+    bruiser re-roll vs twin 1:         gems +2.6 (z +0.2)
+    twin 2 vs twin 1:                  gems +5.9 (z +0.9)   (two unselected re-rolls of v93)
+    v93 vs twin 2:                     gems +12.8 (z +1.7)  (v93 vs twin 1 was +18.7)
+
+Bruiser's +28 against twin 1 was the winner's curse again: it was the best of
+ten, so its particular realisation of the pool was the luckiest. Re-rolled, its
+effect is about zero. Heal at 60% (+23.0, z 1.2 against twin 1) carries the same
+risk.
+
+So one 320-game run of a bot carries roughly 10-20 gems of trajectory luck that
+the paired standard error does not capture across selection. A candidate can
+only pass honestly on an arm that was not used to select it: build the change
+with a fresh decision-neutral re-roll and judge it against a fresh twin with
+the same re-roll. Effects under about 20 gems need several such re-rolls,
+averaged, to resolve at 90%. The bruiser + heal60 combination is being judged
+that way (`gs93_bh_rr` against `gs93_twin3`).
