@@ -2683,3 +2683,10 @@ Locally, lowering it shows nothing: 8, 12 and 16 diverge from the baseline in on
 a carrier, and 8 is worse in eight of ten. Stacked on the draft swap, 12 matches
 the swap alone (+163 against +170). This is a ladder-only question and waits its
 turn behind the draft.
+
+The full local pool (320 games an arm, four opponents, both sides) agrees with
+the ladder: gold +1,414 a game with a standard error of 235, gems +17.7 with a
+standard error of 21. The 24-game screen's +160 was the eight-map selection --
+chosen because they were our worst maps -- overstating the effect about ninefold.
+The same eight maps produced the draft swap's +170, so that number is treated as
+an upper bound until the full pool and the ladder report.

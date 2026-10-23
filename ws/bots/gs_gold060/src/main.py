@@ -5,8 +5,6 @@ import cambc as bc
 def main():
     print("BOTTAG gs_gold060", flush=True)
 
-    print("BOTTAG greatsage", flush=True)
-
     bot = None
     while True:
         try:
