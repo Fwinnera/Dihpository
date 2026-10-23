@@ -3148,3 +3148,39 @@ the same death reduction, but at twenty games it is a lean, not a result.
 
 Ranked: the first batch it played (16:50Z, against slayer) went 2-3. The
 rating is 1,644, rank 212, against 1,630 and rank 228 at 16:00Z.
+
+## CLOUD: gs_cpp93 against version 93, and "fight when you cannot shed it" fails
+
+`gs_cpp93` (the C++ port with version 93's changes) against `gs_seelie_dis050`,
+every map from both sides, paired against v93's own 80 self-play games:
+
+    per game            v93   gs_cpp93   change   paired se
+    gems submitted    690.1      759.9    +69.8        40.8
+    gem margin          0.0      107.9   +107.9        65.5
+    win rate %         50.0       55.0     +5.0         7.1
+    deaths             16.6       14.8     -1.8         1.0
+    gold earned      6131.8     6486.0   +354.3       324.9
+
+At least parity, leaning positive on every count (z 1.6 to 1.8): the Python
+fuel suspensions it no longer has are the likely source.
+
+`gs_cpp93_shed` tested the rule the ladder counts seemed to ask for: disengage
+only when walking away sheds the threat (no melee enemy within two tiles, or a
+dash ready), and otherwise fight on. Against gs_cpp93 on the same 80 games:
+
+    gems -95.9 (se 37.3), deaths +3.8 (se 1.0), kills -2.1 (se 0.9), gold -747
+
+Clearly worse. Staying in a losing melee fight kills more champions than
+walking away under fire does: chasers give up or are distracted, allies
+arrive, the walk ends at safety. The "rounds taking damage" count was not
+evidence that leaving is useless. Rejected.
+
+The party rule against v93 on its two maps, both sides:
+
+    00contest   A   gs_cpp93 0-0 L      gs_cpp93_party 200-0 W
+    00contest   B   gs_cpp93 0-0 L      gs_cpp93_party 600-400 W
+    00stampede  A   gs_cpp93 800-0 W    gs_cpp93_party 80-240 L
+    00stampede  B   gs_cpp93 0-160 L    gs_cpp93_party 946-174 W
+
+Three wins in four against one, and with the earlier 32 games a clear net
+gain. `gs_cpp93_party` is CLOUD's ladder candidate, when the freeze lifts.
