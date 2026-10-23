@@ -73,7 +73,10 @@ Recorded verbatim in substance; both agents should treat these as open defects.
    still goes into battle. Gathering resources should be the priority, and
    fighting a last resort.
 4. **Emblems of the current #1 (prism best girl)** should be recorded and
-   compared with ours (LOCAL is doing this).
+   compared with ours. Done; see `GROUND-UP-PLAN.md`, "The #1 team". In
+   short: Jungle first, Durability once, then Bruiser stacking; Monster only
+   on their focus caster (Prism); no Treasure, almost no Power. Ours: Jungle,
+   Monster, Durability, then Power forever.
 
 ---
 

@@ -3242,3 +3242,63 @@ Recorded verbatim in substance; both agents should treat these as open defects.
 4. **Emblems of the current #1 (prism best girl)** should be recorded and
    compared with ours (LOCAL is doing this).
 
+
+## The #1 team, prism best girl (rating 2,253), against us
+
+60 of their latest ranked games (38-22) against 40 of ours (version 93 and
+greatsage ladder games), from `analysis/fetch_team.py`, `study_team.py` and
+`study_space.py`. Summaries have no position track, so movement is rebuilt
+from per-round timelines and positioned events. Bases are located by where each
+team shops (its spawn), and every event is placed on the line between them: 0
+at home, 1 at the enemy base.
+
+**Draft.** Prism (first pick, every game), Vesper Vale 55/60, Marcella 52/60,
+Heart of Ruin 51/60, then Ryth or Vendetta. We field Marcella, Vendetta,
+Willow, Varg and Ryth, and never Prism.
+
+**Emblems, in true purchase order** (the summary's `itemsBought` list is in
+catalogue order, not purchase order):
+
+    Vesper Vale    Jungle:Str > Bruiser:Str > Bruiser:Hp > Durability:Hp, then Bruiser (14.3 at the end)
+    Prism          Durability:Hp > Monster:Focus > Jungle:Hp > Home or Bruiser:Hp (one of each passive, then Bruiser)
+    Marcella       Bruiser only: Str > Hp > Focus ... (11.1 at the end)
+    Heart of Ruin  Jungle:Focus > Bruiser:Hp > Durability:Hp > Bruiser:Focus
+    Ryth           Jungle:Str > Bruiser:Hp > Durability:Hp > Power:Str
+    Vendetta       Jungle:Str > Bruiser:Str > Bruiser:Hp > Durability:Hp
+    ours (all)     Jungle:Str > Monster:Str > Durability:Hp > Power:Hp, then Power forever
+
+Jungle first, Durability once, Bruiser thereafter, Monster only on the focus
+caster, Treasure never, Power almost never. Gold is concentrated: Vesper Vale
+ends with about 14 emblems.
+
+**Time budget, % of champion-rounds:** farming camps 16.5 against our 6.5;
+fighting champions 4.6 against 7.1; dead or walking back 2.1 against 6.1.
+Neither team clears many more camps (about 45 a game each), so theirs take
+longer to kill -- bigger, richer camps.
+
+**Territory.** Their camp clears sit at depth 0.33-0.44 and push outward
+through the game (0.32 early, 0.38 mid, 0.45 late). Ours stay at 0.11-0.21
+all game. They bank at the central altar (depth about 0.49); we bank at the
+home altar (0.02), which turns every deposit into a long walk home. Their
+wards are at 0.44, ours at 0.12-0.17, and we place twice as many. Their kills
+land in enemy territory (57-75% past halfway). They open on their first camp
+around round 90-100; we start at round 16-60 on the nearest small camp.
+
+**Banking in two tiers.** Vesper Vale and Marcella bank 5-6 times a game at
+about 45 gems. Prism is the finisher: it carries a median peak of 196 gems and
+makes its big deposit about one round before the game ends. Ours bank at about
+30 gems, and Willow banks almost nothing (4% of the team's gems).
+
+**Fights.** 7.1 deaths a game against our 21.3, 9.0 kills against 5.5, with
+the same kill teamwork (2.7 champions per kill against 3.0). They kill gem
+carriers about 4 times a game; we do so about 0.5 times.
+
+**Why a low-health champion fights (the owner's question).** Willow, our
+lowest-health champion at 700, runs `EscortBot`, which follows a teammate and
+moves towards any ally under 70% health -- that is, towards the fight that hurt
+them. Every champion then attacks any enemy within four tiles
+(`choose_enemy`'s `gap <= 4`), and the only retreat trigger is 30% health (43%
+carrying). Nothing in the bot puts farming ahead of fighting for a hurt
+champion. Removing `gap <= 4` outright was measured and fails (-159 gems): it is
+also how champions fight back. The fix has to be a health gate on *opening*
+fights, not on returning fire.
