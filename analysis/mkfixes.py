@@ -178,6 +178,11 @@ def apply(src: Path, change: str) -> None:
              "            return\n"
              "        ratio, threats = combat.local_power(")
         cfg.write_text(cfg.read_text() + f"# Recall to heal below HEAL_RECALL of max health when recall is safe.\nHEAL_RECALL = {int(change[len('heal'):]) / 100}\n")
+    elif change == "reroll2":
+        # A second, different decision-neutral perturbation, for an independent
+        # re-roll when "reroll" has already been used in the selection.
+        edit(src / "bot.py", "    def play_turn(self):\n        me = bc.me()\n",
+             "    def play_turn(self):\n        me = bc.me()\n        _reroll2 = (me is None, 0)\n")
     elif change == "reroll":
         # Decision-identical: one extra statement per turn changes the fuel spent
         # and so re-rolls every trajectory, without changing any choice. A fresh
