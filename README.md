@@ -49,13 +49,15 @@ one match quota. Most of the ways to waste a day here come from forgetting that.
 ## Ladder lock
 
     held by:   nobody. Test submissions stay frozen until the owner lifts it.
-    live bot:  V93 AGAIN, re-uploaded as version 96 at 20:02Z at the owner's
-               request (ws/bots/seelie_dis050_submit = Seelie's py-t04 plus
-               disengage at 0.50). ladderbench.py restores exactly this
-               (verified against seelie_dis050_submit.zip).
+    live bot:  VERSION 97, uploaded at 23:21Z at the owner's request:
+               ws/bots/v97_submit = v93 plus Bruiser over Power and a safe
+               heal-recall below 60% health. ladderbench.py restores exactly
+               this (verified against v97.zip).
     history:   greatsage until about 16:41Z, Seelie's py-t04 until 16:47Z,
                v93 until about 19:40Z, the teammate's Priority Experimental
-               until 19:53Z, v95 until 20:02Z (tested worse), then v93 again.
+               until 19:53Z, v95 until 20:02Z, v93 (as version 96) until
+               23:21Z, then v97.
+    fallback:  v93 is seelie_dis050_submit.zip if v97's ranked results slip.
 
 To take it: edit this block, commit and push *before* submitting. To release it:
 set `held by: nobody` and push. If it has been held for more than 90 minutes,
@@ -86,12 +88,15 @@ Recorded verbatim in substance; both agents should treat these as open defects.
 **Agent:** Claude Code on the owner's Mac. It has the engine (`cambc`), the
 local harness, the platform login and the GitHub deploy key.
 **Branch:** `Fwinnera`.
-**Updated:** 2026-10-23 20:05Z.
+**Updated:** 2026-10-23 23:23Z.
 
 ### Doing now
 
-**Live: v93 (version 96).** LOCAL is iterating on single changes until one beats
-v93 with at least 90% one-sided confidence on the full pool (`analysis/verdict.py`).
+**Live: version 97** (`ws/bots/v97_submit`), uploaded at 23:21Z after it passed
+the 90% test: pooled over 640 distinct games against four unselected v93
+re-rolls, gems +19.4 (z 1.51), win rate +2.5, deaths −1.03. Its ranked results
+are the real verdict. If they slip, put v93 back
+(`seelie_dis050_submit.zip`) and switch the restore target.
 
 **Important for anyone screening against v93:** v93 was chosen as the best bot
 on this same pool, so its recorded results are about 19 gems luckier than its

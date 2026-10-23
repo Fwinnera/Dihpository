@@ -61,8 +61,10 @@ CAMBC = Path.home() / "Library" / "Python" / "3.9" / "bin" / "cambc"
 # cached camp stats (ws/bots/v95_submit, bundled as v95.zip).
 # v95 tested worse than v93 on the full pool (gems -48, win rate -10.6), so at
 # 20:02Z v93 went back up as version 96.
-RANKED_BOT = "seelie_dis050_submit"
-RESTORE_REFERENCE = ROOT / "seelie_dis050_submit.zip"
+# Then, at 23:21Z, version 97: v93 plus Bruiser over Power and a safe heal-recall
+# below 60% health, after passing the 90% test over 640 unselected games.
+RANKED_BOT = "v97_submit"
+RESTORE_REFERENCE = ROOT / "v97.zip"
 OUR_TEAM = "Milk and Potatoes"
 RESULTS = WS / "bench" / "ladder"
 

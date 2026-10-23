@@ -3548,3 +3548,6 @@ standing on a camp. `main.py` is byte-identical to v93's; two smoke games were
 clean. Not uploaded: the owner decides. Local results have mispredicted the
 ladder before (disengage at 0.75), so ranked results after an upload are the
 real test.
+
+Version 97 went live at 23:21Z at the owner's request; its folder matched the
+`v97.zip` handed over, byte for byte, and `ladderbench.py` restores it.
