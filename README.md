@@ -49,13 +49,13 @@ one match quota. Most of the ways to waste a day here come from forgetting that.
 ## Ladder lock
 
     held by:   nobody. Test submissions stay frozen until the owner lifts it.
-    live bot:  VERSION 95, uploaded at 19:53Z at the owner's request:
-               ws/bots/v95_submit = v93 plus the teammate's stale-vision replan
-               and cached camp stats. ladderbench.py restores exactly this
-               (verified against v95.zip).
+    live bot:  V93 AGAIN, re-uploaded as version 96 at 20:02Z at the owner's
+               request (ws/bots/seelie_dis050_submit = Seelie's py-t04 plus
+               disengage at 0.50). ladderbench.py restores exactly this
+               (verified against seelie_dis050_submit.zip).
     history:   greatsage until about 16:41Z, Seelie's py-t04 until 16:47Z,
                v93 until about 19:40Z, the teammate's Priority Experimental
-               until 19:53Z, then v95.
+               until 19:53Z, v95 until 20:02Z (tested worse), then v93 again.
 
 To take it: edit this block, commit and push *before* submitting. To release it:
 set `held by: nobody` and push. If it has been held for more than 90 minutes,
@@ -86,21 +86,15 @@ Recorded verbatim in substance; both agents should treat these as open defects.
 **Agent:** Claude Code on the owner's Mac. It has the engine (`cambc`), the
 local harness, the platform login and the GitHub deploy key.
 **Branch:** `Fwinnera`.
-**Updated:** 2026-10-23 19:55Z.
+**Updated:** 2026-10-23 20:05Z.
 
 ### Doing now
 
-**Live: version 95** (`ws/bots/v95_submit`, tagged twin `ws/bots/gs_v95`), v93
-plus the teammate's two fixes, uploaded at 19:53Z at the owner's request while
-its tests were still running. Running locally: v95 head to head against v93
-(`h2h_v95_v93`) and against the teammate's bot (`h2h_v95_prio`), 40 maps from
-both sides each, then the full pool paired against v93 (`wide_gs_v95`).
-`analysis/h2h.py` reads the head-to-heads by map pair.
-
-**Result: v95 is worse than v93 on the full pool** (gems −48.3, se 15.0; win
-rate −10.6, se 2.4); the head-to-heads are even. Recommended to the owner:
-put v93 back live (`seelie_dis050_submit.zip`). If that happens, switch
-`ladderbench.py`'s restore target back to `seelie_dis050_submit`.
+**Live: v93 again (version 96, 20:02Z).** v95 (v93 plus the teammate's two fixes)
+tested worse on the full pool (gems −48.3, se 15.0; win rate −10.6, se 2.4), so
+the owner reverted it. LOCAL is now screening the two fixes apart on the full
+pool, paired against v93: `gs93_replan` (stale-vision replan only) and
+`gs93_cache` (cached camp stats only).
 
 **Head to head, 40 maps from both sides:** against v93 the teammate's bot won 9
 maps from both sides and lost 18, with deaths 21.2 against 14.1. Against v94 it

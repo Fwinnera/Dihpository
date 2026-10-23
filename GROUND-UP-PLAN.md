@@ -3361,3 +3361,7 @@ stats: cheaper scoring lets `choose_group` exactly score more camps before its
 950,000-fuel cut-off, which can favour camps that only look better. The two
 fixes should be tested apart before either is kept. The recommendation to the
 owner is to put v93 (`seelie_dis050_submit.zip`) back live.
+
+v93 went back live as version 96 at 20:02Z, at the owner's request; its folder
+matched the 16:47Z upload byte for byte, and `ladderbench.py` restores it again.
+The two fixes are now being screened apart (`gs93_replan`, `gs93_cache`).
