@@ -14,6 +14,7 @@ travel or wandering. Rounds from a death to the champion's next activity are
 
     study_team.py prism                 # the #1 team's 60 summaries
     study_team.py us                    # our version 93 and greatsage ladder games
+    study_team.py bench:wide_gs93_hurt60  # any local bench tag
 """
 from __future__ import annotations
 
@@ -44,6 +45,14 @@ def sources(which):
             f = WS / "bench/top1/summaries" / f"{m['matchId']}.json"
             if f.exists():
                 yield f, "teamA" if me["side"] == "a" else "teamB", me["result"] == "win"
+    elif which.startswith("bench:"):
+        # Local bench games: <opponent>__<map>__<A|B>.json, the side being ours.
+        for f in sorted((WS / "bench" / which[len("bench:"):]).glob("*__*__*.json")):
+            side = "teamA" if f.stem.endswith("__A") else "teamB"
+            d = json.loads(f.read_text())
+            g = {x["team"]: int(x["submittedGems"]) for x in d["teams"]}
+            other = "teamB" if side == "teamA" else "teamA"
+            yield f, side, g[side] > g[other]
     else:
         for tag in ("v93_live", "db_base"):
             for gf in sorted((WS / "bench/ladder" / tag).glob("group_*.json")):
