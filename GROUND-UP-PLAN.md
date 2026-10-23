@@ -3445,3 +3445,40 @@ a loop -- recall, step out of spawn, recall again -- and two carriers ended a
 altar" removed the loop, but on maps whose altars are all mid-map (no home
 altar) the carrier is still far from every altar at spawn, so recall-home cannot
 work there. #1 banks at depth about 0.5 for the same reason.
+
+## Round results, and the baseline was inflated: winner's curse
+
+Nine single changes on v93, 320 paired games each, judged first against v93 itself:
+
+    bruiser +9.3 (z 0.9)   items +2.9   bank36 -11.1   bank48 -21.8   travel60 -33.2
+    travel40 -42.3   escort_safe -31.4   raid700 -28.3   raid900 -7.3     (all fail)
+
+Two decision-neutral controls showed what was wrong. The stale-vision replan
+never fires, yet scored -18.7 (z -3.3) against v93. And on maps where monoliths
+hold under a quarter of the gems, raid700 and raid900 -- which change no
+decision there -- both scored exactly -14.3 gems and -4.7 win rate. A change that
+does nothing loses 15-19 gems against v93, because v93 was itself chosen as the
+best bot on this same pool: its recorded trajectories are luckier than its true
+strength, and any change re-rolls them back towards the mean. Measured directly,
+v93 sits +18.7 gems (z 3.3) above its own decision-identical twin.
+
+Judged against that twin (`gs93_replan`) instead:
+
+    candidate          gems     z     win rate   verdict
+    bruiser           +28.0   +2.8      +3.8      PASS
+    items             +21.6   +1.4      +1.6      PASS
+    raid900           +11.4   +0.8      -2.8      fail
+    bank36             +7.6   +0.6      -1.9      fail
+    raid700            -9.6   -0.6      -4.7      fail
+    escort_safe       -12.7   -0.9      -5.0      fail
+    travel60          -14.5   -0.8      -3.4      fail
+    travel40          -23.6   -1.3      -5.6      fail
+    cache             -45.2   -3.1      -7.2      fail
+
+Bruiser now carries the same curse, being the best of ten, so it is being
+confirmed out of sample: a fresh re-roll of v93 (`gs93_twin2`, one decision-
+neutral statement per turn) against a re-roll of Bruiser (`gs93_bruiser_rr`).
+
+Raid900 by map type: +26.0 gems on maps where monoliths hold half or more of the
+gems, -35.0 at 25-50%, and the neutral -14.3 below 25%. A raid gated on the
+map's monolith share may be worth a later round.

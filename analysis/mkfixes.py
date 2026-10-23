@@ -178,6 +178,13 @@ def apply(src: Path, change: str) -> None:
              "            return\n"
              "        ratio, threats = combat.local_power(")
         cfg.write_text(cfg.read_text() + f"# Recall to heal below HEAL_RECALL of max health when recall is safe.\nHEAL_RECALL = {int(change[len('heal'):]) / 100}\n")
+    elif change == "reroll":
+        # Decision-identical: one extra statement per turn changes the fuel spent
+        # and so re-rolls every trajectory, without changing any choice. A fresh
+        # re-roll is the honest baseline for a bot that was itself selected as the
+        # best on this pool (v93 sits about 19 gems above its own twin).
+        edit(src / "bot.py", "    def play_turn(self):\n        me = bc.me()\n",
+             "    def play_turn(self):\n        me = bc.me()\n        _reroll = me is None\n")
     else:
         sys.exit(f"unknown change {change}")
 

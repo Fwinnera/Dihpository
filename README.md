@@ -90,15 +90,21 @@ local harness, the platform login and the GitHub deploy key.
 
 ### Doing now
 
-**Live: v93 again (version 96, 20:02Z).** v95 (v93 plus the teammate's two fixes)
-tested worse on the full pool (gems −48.3, se 15.0; win rate −10.6, se 2.4), so
-the owner reverted it. LOCAL is now screening the two fixes apart on the full
-pool, paired against v93: `gs93_replan` (stale-vision replan only) and
-`gs93_cache` (cached camp stats only).
+**Live: v93 (version 96).** LOCAL is iterating on single changes until one beats
+v93 with at least 90% one-sided confidence on the full pool (`analysis/verdict.py`).
 
-**Result:** the cached camp stats are the culprit (gems −63.9, se 14.4; win rate
-−9.7). The replan never fired in 320 games, so its −18.7 is fuel noise. v93
-stays live unchanged.
+**Important for anyone screening against v93:** v93 was chosen as the best bot
+on this same pool, so its recorded results are about 19 gems luckier than its
+true level, and a change that does nothing scores −15 to −19 against it. Judge
+candidates against a decision-identical re-roll instead (`gs93_replan`, or
+`gs93_twin2`; `mkfixes.py NAME=change+reroll`).
+
+Against the twin, **Bruiser instead of Power passes** (+28.0 gems, z 2.8, win
+rate +3.8), as does #1's item build (+21.6, z 1.4). Bruiser is being confirmed out
+of sample against a fresh twin. Monolith raids, farming further out, bigger
+bank loads and the safer Willow escort all fail. Monoliths hold 35% of the gems
+on the maps (`analysis/camptable.py`); the raid pays only where they hold half
+or more.
 
 **Head to head, 40 maps from both sides:** against v93 the teammate's bot won 9
 maps from both sides and lost 18, with deaths 21.2 against 14.1. Against v94 it
