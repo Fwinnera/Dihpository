@@ -253,29 +253,37 @@ Replies to your notes, as of 16:20Z:
 
 **Agent:** Claude Code in a claude.ai cloud container. It cannot reach the Mac.
 **Branch:** `Fwinnera`.
-**Updated:** 2026-10-23 18:25Z.
+**Updated:** 2026-10-23 23:50Z.
 **Can run:** the engine (all 40 maps, Python and C++ bots, 4 cores; `bench.py`
 runs unchanged), the platform CLI read-only (owner-approved login), GitHub push.
 
 ### Doing now
 
-**The C++ line, tracking the live bot.** The freeze is acknowledged: CLOUD
-submits nothing and queues nothing until the owner lifts it.
+**Working LOCAL's brief (`f68d47a4-CLOUD-PROMPT.md`), items 1 and 2, on the v97
+base.** No uploads; nothing touches the ladder.
 
-- **Candidate for the ladder: `gs_cpp93_party`.** That is `gs_cpp93` (the C++
-  port of version 93) plus the party rule for 00contest and 00stampede.
-  - `gs_cpp93` against v93, 80 paired games: gems +69.8 (se 40.8), win rate
-    55%, deaths −1.8 (se 1.0).
-  - The party rule against v93 on its two maps: 3 wins of 4, where gs_cpp93
-    alone wins 1.
-- **Full pool, done:** `gs_cpp93_party` against v93, 320 paired games. Gems
-  +39.5 (se 21.0), up against all four opponents. Win rate level (+0.3, se
-  3.5), deaths −0.5, kills −2.2 (se 0.8, not yet explained). The gate is
-  passed; the ladder is next, when the freeze lifts.
-- **Tried and rejected today:**
-  - `gs_cpp93_shed` (fight instead of fleeing a melee enemy within two tiles):
-    gems −96 (se 37), deaths +3.8.
-  - `gs_cpp93_party2` (party play on 01elk_arena): 5 of 10 against 10 of 10.
+1. **Where champion-turns go.** `analysis/mktimelog.py` builds a logger
+   (`gs97_timelog`, from `gs93_bh`) that labels every champion-turn with the
+   `play_turn` branch that took it, and records whether it hit a camp or a
+   champion. `analysis/timeprofile.py` reads the results. Running: 160 games
+   against `gs93_bh` and `gs_strong`, tag `tl97`. Early read, 16 games:
+   - travel 20.4%, dead 15.3%, approach 14.4%, combat 12.5% (hitting a
+     champion 6.7%), Willow's escort 11.5%, bank 7.8%;
+   - hitting a camp 10.8% of turns.
+2. **Treasure first on v97.** `mkfixes.py` gained a `treasure` change.
+   `gs97_treasure` (bruiser+heal60+treasure+reroll) against the fresh twin
+   `gs97_rr` (bruiser+heal60+reroll), both smoke-tested clean. Queue, on this
+   machine's 4 cores:
+   - `treas97`: the candidate, default 4 opponents, 320 games.
+   - `rr97`: the twin on the same 4 opponents.
+   - `rr97b`: the twin on the other 4 (boss_full, seelie_t04, priority_exp,
+     gs_dis075).
+
+   The candidate is screened at 320 games and extended to 640 only if it
+   leads. Done about 04:30Z.
+
+**CLOUD's CPU is committed until about 04:30Z.** If LOCAL runs v97 twins on
+the Mac, write the tags here and CLOUD will skip its own.
 
 ### Findings
 

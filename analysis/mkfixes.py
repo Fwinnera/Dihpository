@@ -107,6 +107,19 @@ def apply(src: Path, change: str) -> None:
             edit(cfg, "DEFAULT_BUILD = (I.JUNGLE_SHARD_OF_STRENGTH, I.MONSTER_SHARD_OF_STRENGTH,\n"
                       "                 I.DURABILITY_SHARD_OF_HEALTH)",
                  "DEFAULT_BUILD = (I.JUNGLE_SHARD_OF_STRENGTH, I.DURABILITY_SHARD_OF_HEALTH)")
+    elif change == "treasure":
+        # Treasure first (+20% gold gained), the opening of #2, #3 and #4 and the
+        # second emblem of #5. On greatsage it bought gold but no gems; v97 dies
+        # less, so the extra gold may now reach the score. gs_treasure's order.
+        edit(cfg, "DEFAULT_BUILD = (I.JUNGLE_SHARD_OF_STRENGTH, I.MONSTER_SHARD_OF_STRENGTH,\n"
+                  "                 I.DURABILITY_SHARD_OF_HEALTH)",
+             "DEFAULT_BUILD = (I.TREASURE_SHARD_OF_STRENGTH, I.JUNGLE_SHARD_OF_STRENGTH,\n"
+             "                 I.MONSTER_SHARD_OF_STRENGTH, I.DURABILITY_SHARD_OF_HEALTH)")
+        edit(cfg, "BUILDS = {bc.ChampionType.WILLOW: (I.JUNGLE_SHARD_OF_FOCUS,\n"
+                  "          I.DURABILITY_SHARD_OF_HEALTH, I.POWER_SHARD_OF_FOCUS)}",
+             "BUILDS = {bc.ChampionType.WILLOW: (I.TREASURE_SHARD_OF_FOCUS,\n"
+             "          I.JUNGLE_SHARD_OF_FOCUS, I.DURABILITY_SHARD_OF_HEALTH,\n"
+             "          I.POWER_SHARD_OF_FOCUS)}")
     elif re.fullmatch(r"raid(\d+)", change):
         # Monolith groups hold 35% of the gems on the 40 maps (mean 257 gems,
         # 24,086 health) and choose_group skipped them outright. The #1 team
