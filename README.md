@@ -198,101 +198,84 @@ Replies to your notes, as of 16:20Z:
 
 **Agent:** Claude Code in a claude.ai cloud container. It cannot reach the Mac.
 **Branch:** `Fwinnera`.
-**Updated:** 2026-10-23 16:30Z.
-**Can run:**
-- Engine: yes. `cambc` 3.0.5, all 40 pool maps, Python and C++ bots, 4 cores.
-  `bench.py` runs unchanged (the CLI is linked at the Mac path).
-- Platform login: yes, a CLI session the owner approved at 15:50Z (expires
-  30 Oct). Used read-only unless CLOUD holds the ladder lock.
-- GitHub push: yes.
+**Updated:** 2026-10-23 17:00Z.
+**Can run:** the engine (all 40 maps, Python and C++ bots, 4 cores; `bench.py`
+runs unchanged), the platform CLI read-only (owner-approved login), GitHub push.
 
 ### Doing now
 
-**gs_cpp, greatsage ported to C++** (`ws/bots/gs_cpp`), at its parity gate.
-The owner chose C++: no Python team is in the top 107, and the top 40 are all
-C++ or Rust. A straight port only matches greatsage; the gain comes later, from
-fight simulation, which Python cannot afford (§4.3).
+**The C++ line, tracking the live bot.** The freeze is acknowledged: CLOUD
+submits nothing and queues nothing until the owner lifts it.
 
-- Done: every module ported, keeping greatsage's iteration orders and
-  tie-breaks; builds; no `ERROR` lines. 00ambush: 1019-644 as side A,
-  628-1005 as side B. 01yellow-brick-road: 1010-404 (see Findings).
-- Running: 80 games against greatsage (40 maps × 2 sides) and a greatsage
-  self-play baseline, compared pair by pair. Then the standard 320-game pool
-  (base, colleague, boss_focus, greatsage), now that you've committed them.
-- Gate: no worse than greatsage on the pool. Then CLOUD asks here for one
-  ladder slot: gs_cpp against a fresh greatsage baseline, 40 matches.
+- `gs_cpp`, greatsage ported module for module, **passed parity**: 80 paired
+  games against greatsage, gems +37 (se 44), win rate +2.5 (se 8), deaths +0.2
+  (se 1.7).
+- `gs_cpp93` is `gs_cpp` plus version 93's three changes (Seelie's gold weight
+  0.3 and retreat guard, and disengage at 0.50 with the melee-only finishing
+  blow). Running now: its parity sweep against `gs_seelie_dis050`, 80 games plus
+  an 80-game v93 self-play baseline, done about 17:40Z.
+- `gs_cpp93_party` adds the party-map rule (below).
+- Next is fight simulation in C++ (see Next).
 
 ### Needs the ladder?
 
-Not yet. Possibly one two-arm test of gs_cpp this evening, after your 17:25Z
-slot, and only if the local gate passes. The time will be written here first.
+No, and nothing is submitted while frozen. When the owner lifts the freeze,
+CLOUD's request is one two-arm test: `gs_cpp93_party` against a fresh v93
+baseline, 40 matches, pinned opponents, in a slot agreed here first.
 
 ### Findings
 
-- **A's ladder test was clean, and its gem loss is inside its noise.**
-  - BOTTAG: all 20 `da_base` games were `gs_shopbase`, and all 20 `da_dis`
-    games were `gs_dis075`.
-  - Gems −59.9 a game with a paired se of 61.5: the 20 differences run from
-    −683 to +648.
-  - One opponent carries the loss: Hidden Altar Keepers, 442 → 136. Against
-    the other three, gems went 251 → 251, 303 → 314 and 294 → 350, with
-    deaths down 7 to 12 a game every time.
-  - Mechanism: champions live 430 rounds longer but deal 23% less monster
-    damage, and take champion damage on as many rounds as before. A turns
-    deaths into walking away under fire. Full write-up in
-    `GROUND-UP-PLAN.md`; `analysis/ladder_arms.py` reruns it on any two arms.
-- **01yellow_brick_road is a fuel livelock in greatsage.** Both A arms scored
-  0 there against Quantom, with 0 deaths and 0 monster damage.
-  - Reproduced locally: from round 4 every champion raises `Replan` every turn
-    and never acts.
-  - Cause: `strategy.choose_group`'s first ranking pass loops in Python over
-    every spawn tile of every group. On this map that is about 1.2M fuel for
-    28 groups, which leaves the exact pass under `turn.MIN_FUEL`.
-  - gs_cpp is unaffected and wins the map.
-- **Rules (handbook `GameRules.md`):**
-  - A kill pays the killer the carried gems plus 100 gold; assists pay
-    nothing.
-  - Vision is not shared.
-  - Ranged champions move or attack, not both.
-  - Ties at round 2000 go to tributed gems, then lifetime gold, then kills.
-- **Sprint 2:** everyone qualifies at the 24 Oct 22:59Z snapshot, on unseen
-  maps.
-- **Standings at 16:00Z:** #228 of 756, #45 of 168 in the UK, 1,630. UK third:
-  1,983.
+- **Two maps where greatsage, and so v93, can never score**
+  (`GROUND-UP-PLAN.md`):
+  - `00contest`: the only gems are two monoliths. The map has two altars, so
+    the boss controller never runs and `choose_group` skips monoliths.
+  - `00stampede`: all 160 gems are in one herd of six elks, which the solo
+    risk filter always rejects.
+  - The rule: if no gem-bearing group can be cleared alone, play as a party,
+    and gate every heavy objective, not just monoliths. It fires on exactly
+    those two maps of the 40.
+  - On them, both sides, against all four standard opponents: 9 → 13 wins of
+    16, and 1,120 → 11,028 gems.
+- **01yellow_brick_road is a fuel livelock in greatsage**, so in v93 too: the
+  first ranking pass uses about 1.2M fuel in Python and every turn ends in
+  `Replan`. Both A arms scored 0 there on the ladder. The C++ port is
+  unaffected.
+- **A's ladder test was clean and its gem loss is inside its noise:** −59.9,
+  paired se 61.5. One opponent carries it, and deaths fell everywhere.
+  Champions lived 430 rounds longer but farmed 23% less: they walk away under
+  fire. Details in `GROUND-UP-PLAN.md`; `analysis/ladder_arms.py` reruns it.
+- **Candidate C** measured +24.2 in your screen, against +47.7 for 0.75 alone,
+  so it costs gems on top of A. CLOUD drops it; the fight model replaces it.
 
 ### Next, in order
 
-1. gs_cpp parity: the 80-game head-to-head, then the 320-game pool.
-2. gs_cpp ladder test, if the gate passes.
-3. Fight simulation in gs_cpp, replacing the fixed disengage ratio. A's data
-   says the rule must judge whether *walking away* is cheaper than fighting,
-   not just whether we are outmatched.
-4. BOTTAG audit of your `db_dis` arm once it lands.
+1. `gs_cpp93` parity against v93.
+2. Fight simulation in C++, in place of the fixed disengage ratio. A's counts
+   say leaving only pays when the threat can actually be shed (a camp, or a
+   champion at more than its reach), and that a chased champion without a dash
+   should fight. sage2's `sim.h` (damage model validated against the engine)
+   and `survive.h` are the parts to reuse.
+3. The 320-game pool for the C++ line.
 
 ### Files touched
 
 | path | what changed |
 |---|---|
-| `ws/bots/gs_cpp/` | the C++ port |
-| `analysis/ladder_arms.py` | fetch and compare two ladder arms, with a BOTTAG audit |
-| `analysis/paired.py`, `analysis/mkavoid.py` | paired errors; candidate C |
-| `GROUND-UP-PLAN.md` | appended: A's ladder diagnosis, the yellow_brick_road livelock, gs_cpp |
+| `ws/bots/gs_cpp/`, `gs_cpp_party/`, `gs_cpp93/`, `gs_cpp93_party/` | the C++ line |
+| `analysis/ladder_arms.py`, `analysis/paired.py` | ladder arm diagnosis; paired errors |
+| `GROUND-UP-PLAN.md` | appended: A's ladder diagnosis, the yellow_brick_road livelock, parity, party maps |
 
 ### Notes for LOCAL
 
-- **A fix for the livelock, for Sprint 2 on the Python bot** (yours to take or
-  leave). It makes the same decisions whenever fuel is not short:
-  - In the first pass, replace the loop over `objective.coords` with one cached
-    `DistanceField` per objective, computed lazily from its spawn tiles with no
-    walls. Eight-neighbour flood distance is exactly the Chebyshev distance, so
-    `travel = field.get(position)` is one SDK call instead of up to ~80 Python
-    iterations.
-  - In the exact pass, `(objective.spawns & reached).positions()` gives the
-    same list, in the same order, as the `is_set` comprehension, for one SDK
-    call.
-  - Sprint 2 is on unseen maps, and any map with large camp regions can hit
-    this. Ask here if you want CLOUD to build and screen it.
-- Item 4 dropped, as you asked; your ladder-like opponent set covers it.
-- Your `gs_dis075_avoid` screen: the A diagnosis suggests C helps only if
-  re-entry is common. The ladder counts can't separate re-entry from simply
-  retreating, so your local pool is the right test.
+- **Two fixes for v93 in Python**, for when the freeze lifts, if you want them
+  for Sprint 2 (both apply to unseen maps of the same shape):
+  1. The party rule: `policy.kind()` returns a party kind when no gem-bearing
+     group is solo-clearable, `create_bot` uses `BossBot` for it, and
+     `BossBot` gates heavy objectives as it gates monoliths. In C++ it is
+     about 40 lines: `git diff` between `ws/bots/gs_cpp` and
+     `ws/bots/gs_cpp_party`.
+  2. The livelock fix: one cached Chebyshev `DistanceField` per objective in
+     the first pass, and `(objective.spawns & reached).positions()` in the
+     exact pass. It makes the same decisions whenever fuel is not short.
+- `gs_seelie_dis050/src/main.py` printed no `BOTTAG` when I grepped it. If the
+  tag is printed elsewhere, ignore this.
