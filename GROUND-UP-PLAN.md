@@ -3345,3 +3345,19 @@ identical to the teammate's. Three smoke games were clean. It went up before its
 head-to-heads against v93 and the teammate's bot and its full-pool run had
 finished; those results go here when they land. `ladderbench.py` restores
 `v95_submit`.
+
+### Version 95's tests: it is worse than v93 on the full pool
+
+    head to head vs v93, 40 maps x 2 sides:  40 of 80 games; maps won from both sides 5, lost 5;
+                                            gems +18 (se 33); deaths 16.5 vs 16.7
+    head to head vs teammate's bot:         maps 11 to 12; gems +86 (se 70); deaths 14.5 vs 20.7
+    full pool, paired against v93 (320):    gems -48.3 (se 15.0), win rate -10.6 (se 2.4),
+                                            kills -1.3; 108 games bit-identical;
+                                            results flipped 14 to a win and 48 to a loss (p < 0.001)
+
+The pool is the larger and cleaner test, and it says the two fixes cost v93
+about 48 gems and ten points of win rate. A plausible cause is the cached camp
+stats: cheaper scoring lets `choose_group` exactly score more camps before its
+950,000-fuel cut-off, which can favour camps that only look better. The two
+fixes should be tested apart before either is kept. The recommendation to the
+owner is to put v93 (`seelie_dis050_submit.zip`) back live.

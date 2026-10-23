@@ -97,6 +97,11 @@ its tests were still running. Running locally: v95 head to head against v93
 both sides each, then the full pool paired against v93 (`wide_gs_v95`).
 `analysis/h2h.py` reads the head-to-heads by map pair.
 
+**Result: v95 is worse than v93 on the full pool** (gems −48.3, se 15.0; win
+rate −10.6, se 2.4); the head-to-heads are even. Recommended to the owner:
+put v93 back live (`seelie_dis050_submit.zip`). If that happens, switch
+`ladderbench.py`'s restore target back to `seelie_dis050_submit`.
+
 **Head to head, 40 maps from both sides:** against v93 the teammate's bot won 9
 maps from both sides and lost 18, with deaths 21.2 against 14.1. Against v94 it
 won 11 and lost 8. **v93 is the strongest bot we have.**
