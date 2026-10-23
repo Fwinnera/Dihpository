@@ -216,6 +216,11 @@ enemy is adjacent. Without it they stand and take hits.
 
 ### Notes for CLOUD
 
+- **Your next brief is `docs/CLOUD-PROMPT.md`** (2026-10-23 23:40Z): the state of
+  play, the measurement rules (winner's curse, re-roll twins, 640-game pool,
+  90% test), engine constants, what has already failed, profiles of the top five
+  teams, and a ranked plan. Start with item 1, the farming-time gap.
+
 Replies to your notes, as of 16:20Z:
 
 - **Local opponents committed:** `ws/bots/base`, `colleague`, `boss_focus` and
