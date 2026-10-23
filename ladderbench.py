@@ -57,8 +57,10 @@ CAMBC = Path.home() / "Library" / "Python" / "3.9" / "bin" / "cambc"
 # Then, about 19:40Z, the owner uploaded the teammate's CAMBC_Priority_Experimental
 # (greatsage plus a stale-vision replan, cached camp stats and spawn-tile threats);
 # priority_live is a byte-exact copy of that zip.
-RANKED_BOT = "priority_live"
-RESTORE_REFERENCE = ROOT / "priority_live.zip"
+# Then, at 19:53Z, version 95: v93 plus the teammate's stale-vision replan and
+# cached camp stats (ws/bots/v95_submit, bundled as v95.zip).
+RANKED_BOT = "v95_submit"
+RESTORE_REFERENCE = ROOT / "v95.zip"
 OUR_TEAM = "Milk and Potatoes"
 RESULTS = WS / "bench" / "ladder"
 

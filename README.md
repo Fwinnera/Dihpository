@@ -48,13 +48,14 @@ one match quota. Most of the ways to waste a day here come from forgetting that.
 
 ## Ladder lock
 
-    held by:   THE OWNER, about 19:40Z: running their own unranked games with
-               the teammate's bot live. Neither agent submits or queues games.
-    live bot:  the teammate's CAMBC_Priority_Experimental. ladderbench.py
-               restores ws/bots/priority_live, a byte-exact copy verified
-               against priority_live.zip (20,333 bytes).
-    history:   greatsage until about 16:41Z, then Seelie's py-t04 until 16:47Z,
-               then version 93 (Seelie's plus disengage at 0.50), then this.
+    held by:   nobody. Test submissions stay frozen until the owner lifts it.
+    live bot:  VERSION 95, uploaded at 19:53Z at the owner's request:
+               ws/bots/v95_submit = v93 plus the teammate's stale-vision replan
+               and cached camp stats. ladderbench.py restores exactly this
+               (verified against v95.zip).
+    history:   greatsage until about 16:41Z, Seelie's py-t04 until 16:47Z,
+               v93 until about 19:40Z, the teammate's Priority Experimental
+               until 19:53Z, then v95.
 
 To take it: edit this block, commit and push *before* submitting. To release it:
 set `held by: nobody` and push. If it has been held for more than 90 minutes,
@@ -85,21 +86,16 @@ Recorded verbatim in substance; both agents should treat these as open defects.
 **Agent:** Claude Code on the owner's Mac. It has the engine (`cambc`), the
 local harness, the platform login and the GitHub deploy key.
 **Branch:** `Fwinnera`.
-**Updated:** 2026-10-23 19:48Z.
+**Updated:** 2026-10-23 19:55Z.
 
 ### Doing now
 
-**The teammate's `CAMBC_Priority_Experimental` is live** (`ws/bots/priority_live`;
-`ws/bots/priority_exp` is the same code with a BOTTAG). It is greatsage plus three
-robustness and fuel fixes:
-
-1. `main.py`: a "not in vision" error after a fuel pause rolled the turn into a
-   new round now replans instead of losing the turn.
-2. `strategy.py`: camp design stats are cached once, so camp choice spends less
-   fuel and scores more camps exactly before its 950,000-fuel cut-off.
-3. `navigation.py`: retreat threats use camps' spawn tiles.
-
-It has none of Seelie's gold weight, v93's disengage or v94's changes.
+**Live: version 95** (`ws/bots/v95_submit`, tagged twin `ws/bots/gs_v95`), v93
+plus the teammate's two fixes, uploaded at 19:53Z at the owner's request while
+its tests were still running. Running locally: v95 head to head against v93
+(`h2h_v95_v93`) and against the teammate's bot (`h2h_v95_prio`), 40 maps from
+both sides each, then the full pool paired against v93 (`wide_gs_v95`).
+`analysis/h2h.py` reads the head-to-heads by map pair.
 
 **Head to head, 40 maps from both sides:** against v93 the teammate's bot won 9
 maps from both sides and lost 18, with deaths 21.2 against 14.1. Against v94 it

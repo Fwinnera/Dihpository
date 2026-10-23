@@ -3335,3 +3335,13 @@ games worse and 63 better. Her own numbers (4% of banked gems) understate what
 her heals are worth to the champions she follows. The travel-weight changes and
 the safer escort were never screened (paused at 0/320); the health gate failed
 earlier (-108).
+
+## Version 95 is live
+
+Uploaded at 19:53Z at the owner's request: v93 plus the teammate's stale-vision
+replan (`main.py`) and cached camp design stats (`strategy.py`), copied
+verbatim. It differs from v93 only in those two files, and `main.py` is
+identical to the teammate's. Three smoke games were clean. It went up before its
+head-to-heads against v93 and the teammate's bot and its full-pool run had
+finished; those results go here when they land. `ladderbench.py` restores
+`v95_submit`.
