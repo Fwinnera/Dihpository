@@ -2412,3 +2412,92 @@ No ranked damage: 22-18 across the forty ranked matches in the window, rating
 The gold-weight question is therefore completely open again, with zero valid games
 behind it, and the earlier claim that zeroing gold "looks clearly harmful" is
 withdrawn along with everything else from those runs.
+
+## Diagnosis from event logs, and a candidate that failed its own test
+
+### What the event logs say (390 matches, independent of any change)
+
+Match summaries carry a per-champion event log -- deaths with the killer's context
+and position, gem collections, submissions, losses, camp clears, purchases, fuel
+exhaustion. Final gem totals cannot tell a bot that farms badly from one that
+farms well and dies carrying the proceeds. The log can. `diagnose.py` reads it.
+
+| per game | |
+| --- | --- |
+| gems collected | 427 |
+| gems submitted | 367 (**86% of collected**) |
+| gems lost to deaths | 43 (10%) |
+| deaths | 25.2 -- **90% to enemy champions**, 10% to camps |
+| deaths while carrying gems | **8%** |
+| kills | about 1 |
+| `fuelExhausted` | 13.3, in 336 of 390 matches |
+
+Two long-held beliefs in this document are wrong. **Banking is finished**: 86% of
+collected gems reach an altar, against the top three's 71%. And camps are not what
+kills us -- enemy champions are, evenly across the game, and 92% of those deaths
+happen while carrying nothing, so the cost is time rather than gems.
+
+### The code defect
+
+`combat.choose_enemy` accepts a target if any of these hold:
+
+    killable or interrupt or defending or gap <= 4 or allied_power > enemy_power * 1.15
+
+`gap <= 4` is unconditional: proximity overrides the power comparison entirely, and
+the caller then *walks toward* the target to get in range. The power test only
+applies beyond four tiles. That is the 22.6-deaths-for-1-kill machine.
+
+### The candidate and its result
+
+`gs_nochase` keeps swinging at anything already in reach, which is free, but only
+closes distance when the exchange is ours -- killable this turn, interrupting a
+deposit, or power ratio above 1.15, the test the code already uses past four tiles.
+
+Ladder, 20 games each, identical opponents, maps and sides, both arms carrying an
+identical `BOTTAG` so the tag is a constant rather than a confound:
+
+| per game | baseline | no-chase | change |
+| --- | --- | --- | --- |
+| deaths to champions | 22.9 | **20.1** | **-2.8** |
+| deaths total | 26.4 | **22.1** | **-4.3** |
+| camp clears | 41.1 | 44.7 | +3.6 |
+| gem pickups | 48.0 | 50.1 | +2.1 |
+| gems collected | 442 | 449 | +7 |
+| **gems submitted** | **372** | **365** | **-7** |
+| gems lost to deaths | 57 | 64 | +7 |
+| record | 4-16 | 3-17 | |
+| per-game gems | -- | -- | 7 better, 10 worse, 3 same |
+
+**The mechanism worked and the change failed.** Deaths fell 16%, champion deaths
+12%, and the freed time did turn into farming -- camp clears and pickups both rose.
+It bought seven more gems collected and seven fewer submitted.
+
+Pre-registered rule, fixed before the data: ship only if gems improve, the sign
+holds for at least three of four opponents, and deaths do not rise. Gems did not
+improve and the sign held for one or two of four on every map. **Not shipped. The
+baseline stands.**
+
+### What the failure establishes
+
+Dividing through: 4.3 avoided deaths bought 7 gems collected, about **1.6 gems per
+death**. The wins-versus-losses comparison that motivated the work -- wins at 14
+deaths and 1,023 collected, losses at 27 and 312 -- implies 55 gems per death.
+**The causal effect is roughly thirty times smaller than the correlation.**
+
+That comparison was correlational and I treated it as causal. Winning teams die
+less *and* collect more because both follow from winning; cutting deaths does not
+run the relationship backwards. Deaths are mostly a symptom.
+
+So the real question is not why we die but why we collect 442 where the top three
+collect 1,158, and the answer is not death time: removing a sixth of our deaths
+moved collection by 1.6%.
+
+### Caveat on this run
+
+The candidate arm's polling loop exhausted its retries on HTTP 429 and restored the
+ranked bot while its matches may still have been playing. The `BOTTAG` audit could
+not run -- replay downloads were rate-limited throughout -- so which bot played
+each match is unconfirmed. The arms clearly differ (deaths -4.3, distinct per-map
+values), so the candidate did play, but partial contamination cannot be excluded.
+The result is reported as a failed validation rather than a measured regression,
+and nothing was shipped on the strength of it either way.

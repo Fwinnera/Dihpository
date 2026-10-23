@@ -3,8 +3,6 @@ import cambc as bc
 
 
 def main():
-    print("BOTTAG greatsage", flush=True)
-
     bot = None
     while True:
         try:
