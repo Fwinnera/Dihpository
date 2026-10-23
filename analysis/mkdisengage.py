@@ -92,8 +92,11 @@ HOOK = '''        ratio, threats = combat.local_power(enemies, self.team.allies,
             self.objective = None
             self.team.claim()
             # Take a kill that is already in reach before leaving: it removes a
-            # threat and pays 199 gold. Then withdraw on the same turn.
-            target = combat.finishing_blow(enemies)
+            # threat and pays gold. Only melee champions can, as in the low-health
+            # retreat: a ranged champion moves or attacks in a turn, not both, so
+            # the swing would cost it the escape step. (Builds before this change
+            # -- gs_dis050, gs_dis075, the _out and _b variants -- swung at any range.)
+            target = combat.finishing_blow(enemies) if me.base_stats().base_attack_range <= 1 else None
             if target is not None:
                 combat.fight(target, enemies)
             nav.retreat(enemies, camps)
