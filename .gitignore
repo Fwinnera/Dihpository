@@ -67,3 +67,7 @@ backup-pre-1.0.3/
 
 # Bundles
 *.zip
+
+# Python bytecode
+__pycache__/
+*.pyc

@@ -151,35 +151,105 @@ go-ahead.
 
 ## CLOUD
 
-> Template — CLOUD fills this in and keeps it current.
-
-**Agent:**  <!-- what you are and where you run -->
-**Branch:**  <!-- the branch you commit to -->
-**Updated:**  <!-- YYYY-MM-DD HH:MMZ -->
-**Can run:**  <!-- engine locally? platform login? GitHub push? -->
+**Agent:** Claude Code in a claude.ai cloud container. It cannot reach the Mac.
+**Branch:** `Fwinnera`.
+**Updated:** 2026-10-23 16:05Z.
+**Can run:**
+- Engine: yes. `cambc` 3.0.5 with all 40 pool maps, Python bots only (no
+  wasi-sdk yet, so not `sage2`), 4 cores, about 35 s a game.
+- Platform login: yes, a CLI session the owner approved at 15:50Z (expires
+  30 Oct). Used read-only (ladder, match lists, summaries, replays, maps)
+  unless CLOUD holds the ladder lock. The CLI session cannot open
+  website-only pages such as `/game/submissions`.
+- GitHub push: yes.
+- Not here: `ws/bench/`, and the standard local opponents `base`,
+  `colleague` and `boss_focus`, which are not in git.
 
 ### Doing now
 
-<!-- the one task in progress, and what done looks like -->
+Candidate C, which LOCAL handed over: stop a disengaged champion walking
+straight back into the fight it left (`analysis/mkavoid.py`: remember enemy
+sightings for 8 rounds, skip any camp where the disengage rule would fire on
+arrival). It starts with the question C depends on: **where did A's 59.8 gems
+go on the ladder?** Read-only, no quota:
+
+- Download the 40 `da_base` / `da_dis` summaries and compare per champion:
+  farming uptime (rounds with monster damage), camp clears, respawn downtime
+  and gold. Re-entering contested camps points to C; general retreat time
+  points to 0.50 or outnumbered-only.
+- Check `BOTTAG` on all 40 replays, so the result is known to be clean.
+
+Done = a short write-up in `GROUND-UP-PLAN.md` and a go/no-go for C.
 
 ### Needs the ladder?
 
-<!-- yes/no; if yes, when, how many matches, and the lock is taken above first -->
+No. Read-only until further notice, using no quota. If C earns a slot, it is
+one two-arm test (about 40 matches), after LOCAL's 0.50 test, with the lock
+taken above first.
 
 ### Findings
 
-<!-- results with numbers, and where the full write-up is -->
+- **A's local gem gain was overstated.** `bench.py --compare` prints the
+  subject arm's own standard error, not the error of the change. Unpaired,
+  +47.7 gems is about 1.7 SE rather than 2.4; the drop in deaths stays clearly
+  real. `analysis/paired.py` gives paired errors. This is consistent with A
+  failing on the ladder.
+- **Rules, from the handbook's `GameRules.md`:**
+  - A kill gives the killer all carried gems plus 100 base gold, and assists
+    give no gold, so "199 a kill" is a regression estimate, not a rule.
+  - Vision is not shared between allies.
+  - Ranged champions move or basic-attack in a turn, not both, so A's
+    finishing blow costs a ranged champion its escape step.
+  - Win: first to 1,000 tributed gems; at round 2000 compare tributed gems,
+    then lifetime gold earned, then kills.
+- **Standings at 16:00Z:** #228 of 756, #45 of 168 UK, rating 1,630. Third in
+  the UK: Mite, 1,980.
+- **Sprint 2:** every eligible team qualifies at the 2026-10-24 22:59Z
+  snapshot, and it is played on unseen maps, so per-map tuning will not carry
+  over.
+- **BOTTAG, from replays:**
+  - The `da_dis` game at 15:31Z (01islands vs Quantom) was played by
+    `gs_dis075`.
+  - The ranked game at 15:40Z and the unranked game at 15:42Z were untagged,
+    i.e. `greatsage`. The restore worked.
+- **Restore timing:** a 20-match arm takes 3–6 minutes, and the last draft-arm
+  group finished 5.6 minutes after queuing, past `ladderbench.py`'s 300 s
+  restore deadline. Queued groups show `submissionId: null` on the public API,
+  which suggests the bot is bound when a match plays. If so, the tail of an
+  arm can be played by greatsage. A BOTTAG check on every game catches it.
+- **Read-only endpoints** (public, under `/api/v1/`): `ladder?q=`,
+  `teams/<id>/performance`, `match-groups?scope=all&team=<id>`,
+  `tournaments`, `patch-notes`, `announcements`.
 
 ### Next, in order
 
-1. <!-- -->
+1. The A diagnosis and BOTTAG audit above.
+2. C on LOCAL's next base: build `gs_dis050_avoid` and measure it locally
+   against `gs_dis050`, paired by map and side.
+3. Find a local opponent set that reproduces A's ladder failure, so that
+   retunes can be screened without ladder quota. Candidates: `gs_chpress`,
+   `gs_nochase` and the `gs_dis*` builds themselves. The current pool's
+   opponents are too passive to put us below the ratio.
+4. Banking where it fails (LOCAL's #5), only if LOCAL hands it over.
 
 ### Files touched
 
 | path | what changed |
 |---|---|
-| <!-- --> | <!-- --> |
+| `README.md` | this section |
+| `ws/bots/gs_dis075_avoid/src/__pycache__/` | removed the three `.pyc` files CLOUD committed by mistake |
+| `.gitignore` | ignore `__pycache__/` and `*.pyc` |
 
 ### Notes for LOCAL
 
-<!-- requests, conflicts, questions -->
+- Please commit the standard local opponents (`ws/bots/base`, `colleague`,
+  `boss_focus`), or name another set. Until then CLOUD's local numbers are
+  against greatsage and the `gs_*` builds only, and are not comparable with
+  yours.
+- If you have the `da_base` / `da_dis` group ids, add them to
+  `GROUND-UP-PLAN.md`. Otherwise CLOUD finds them by time and the four pinned
+  team ids.
+- `ladderbench.py` restores after at most 300 s. Suggest printing the pending
+  count at restore and saving it in `meta.json`, or waiting about 10 minutes.
+  It is your harness, so CLOUD will not edit it unless asked.
+- Thanks for the merge. CLOUD is on `Fwinnera` and has no other branches.
