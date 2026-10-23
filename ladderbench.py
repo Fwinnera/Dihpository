@@ -64,6 +64,9 @@ UNRANKED_PER_HOUR = 50
 # From 183 observed batches: min gap 8 min, median 10, max 12.
 BATCH_MIN_GAP = timedelta(minutes=8)
 SAFETY_MARGIN = timedelta(minutes=4)   # includes the settle wait   # refuse to start with less than this left
+# The restore must land before the earliest possible next ranked batch; this is
+# the time a restore takes, with room to retry once.
+RESTORE_BUDGET = 60
 DEFAULT_MAPS = "01yellow_brick_road,01islands,00quadrants,00ambush,00lanes"
 DEFAULT_SIDES = "a,b,a,b,a"
 
@@ -245,10 +248,11 @@ def run(bot: str, tag: str, opponents: str, maps: str, sides: str,
               f"hour; queue at most {UNRANKED_PER_HOUR // 5} opponents per run")
         return 1
     print("waiting for a safe window:")
-    wait_for_window(auto_wait)
+    last_batch = wait_for_window(auto_wait)
     before = ranked_batches()
     opened = datetime.now(timezone.utc)
     groups, submitted_version = [], None
+    pending = None
     try:
         r = cambc("submit", f"bots/{bot}", "--note",
                   f"ladderbench {tag} - temporary, {RANKED_BOT} restored immediately")
@@ -274,8 +278,14 @@ def run(bot: str, tag: str, opponents: str, maps: str, sides: str,
         # queued after it played the restored one, 11 of 15 games bit-identical to
         # the baseline. Matches resolve the submission when they execute, so the
         # ranked bot cannot go back until they have.
+        # Wait as long as the window allows, no longer. A fixed 300 s was wrong
+        # both ways: an arm can take 3-6 minutes, so the tail could be played by
+        # the restored bot, and with only the 4-minute safety margin left the
+        # settle, the queueing and 300 s together could outlast the window and let
+        # a ranked batch play the test bot. The earliest next batch is the hard
+        # limit; whatever is still pending then is recorded so it can be audited.
         print(f"  waiting for {len(groups) * 5} matches to finish before restoring")
-        deadline = time.time() + 300
+        deadline = (last_batch + BATCH_MIN_GAP).timestamp() - RESTORE_BUDGET
         while time.time() < deadline:
             pending = 0
             for *_, gid, _ in groups:
@@ -312,6 +322,11 @@ def run(bot: str, tag: str, opponents: str, maps: str, sides: str,
                   file=sys.stderr)
             raise RuntimeError(f"could not restore {RANKED_BOT}")
     closed = datetime.now(timezone.utc)
+    if pending:
+        print(f"  *** restored with {pending} matches still pending: those may be played "
+              f"by {RANKED_BOT}, not {bot}. Check BOTTAG before trusting them.")
+    elif pending == 0:
+        print("  every queued match finished before the restore")
 
     after = ranked_batches()
     intruders = [t for t in after if t not in before and opened <= t <= closed]
@@ -328,6 +343,7 @@ def run(bot: str, tag: str, opponents: str, maps: str, sides: str,
             cambc("match-groups", "show", gid, "--json").stdout)
     meta = {"bot": bot, "tag": tag, "opened": opened.isoformat(),
             "closed": closed.isoformat(), "exposed": bool(intruders),
+            "pending_at_restore": pending,
             "groups": [{"opponent": n, "rank": r, "groupId": g, "teamId": i}
                        for n, r, g, i in groups]}
     (out / "meta.json").write_text(json.dumps(meta, indent=1))
