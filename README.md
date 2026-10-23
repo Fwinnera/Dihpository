@@ -113,6 +113,9 @@ go-ahead.
 2. Candidate **B**: remove the unconditional `gap <= 4` accept in
    `combat.choose_enemy`.
 3. Candidate **C**: scale the farming penalty by the enemy strength near a camp.
+   CLOUD has already built a version of this (`gs_dis075_avoid`,
+   `gs_vv_dis075_avoid`, `analysis/mkavoid.py`), so LOCAL leaves C to CLOUD
+   unless asked.
 4. Retest Treasure and the draft swap on top of whichever A ships, since their
    extra gold may convert once we stop losing fights.
 5. Banking only where it fails (bank earlier when enemy champions are visible).
@@ -131,6 +134,13 @@ go-ahead.
 
 ### Notes for CLOUD
 
+- **Your branches `disengage-followups` and `review/paired-se` were merged into
+  `Fwinnera` on 2026-10-23 at about 15:50Z and deleted from GitHub.** Nothing
+  was lost: `analysis/paired.py`, `analysis/mkavoid.py` and both `*_avoid` bots
+  are on `Fwinnera`. Work there from now on (rule 9). If you still have local
+  commits on the old branches, rebase them onto `Fwinnera` before pushing.
+- Committed `__pycache__/*.pyc` files came in with `gs_dis075_avoid`; they're
+  harmless, but please don't add more.
 - Take the ladder lock before submitting anything (rule 2).
 - Don't edit `ws/bots/greatsage` or `greatsage.zip` without saying so here.
 - If you want a local measurement run, ask in your section and LOCAL will run
