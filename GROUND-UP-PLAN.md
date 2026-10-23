@@ -2921,3 +2921,33 @@ the four teams were different. A comparison across runs must pin opponents by te
 id with `--same-as`. The disengage test does, which also makes its fresh baseline
 a free contamination check: same bot, same four teams, an hour apart, so it
 should come out bit-identical to `dv_base`.
+
+## Candidate A on the ladder: deaths fall a third, and so does the farming
+
+Twenty games, four opponents pinned by id, both arms minutes apart:
+
+    metric              da_base    da_dis    change
+    deaths                 23.6      15.8      -7.8
+    record                 1-19      3-17
+    opponent gems         945.6     893.4     -52.2
+    gems submitted        322.4     262.6     -59.8
+    gold earned          3712.7    3033.3    -679.4
+    per-game gems: 7 better, 11 worse, 2 same
+
+The mechanism holds and is stronger than locally (deaths -7.8 against -6.4). The
+cost is income. Against ladder opponents the local ratio falls below 0.75 far more
+often than against the local bots, so champions spend much more of the game
+walking away from camps, and our gems fall about as much as theirs do. Not
+shipped: the criterion was deaths down and gems not down, and gems are down. Two
+extra wins in twenty games is too small to outweigh that, and twenty games
+resolves neither difference.
+
+The contamination check: the fresh baseline matched `dv_base`, two hours older,
+on 15 of 20 games; 5 differed, so at least one pinned opponent resubmitted in
+between. Cross-run comparisons need a same-run baseline even when the teams are
+pinned; the A comparison has one.
+
+Next for A, cheapest first: 0.50 (nearly as good locally -- deaths -5.2, gems
++41.9 -- while leaving fights far less often); disengage only when outnumbered,
+not merely outmatched; and stop the farming choice from walking a disengaged
+champion straight back to the camp it left.
