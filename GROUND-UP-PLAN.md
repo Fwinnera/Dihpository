@@ -3022,3 +3022,44 @@ arithmetic in double. Every absolute fuel threshold is the Python one divided by
 
 No `ERROR` lines in either team's log. The 80-game parity sweep against greatsage
 (both sides, all 40 maps, against a greatsage self-play baseline) is running.
+
+## Seelie's bot, now live: what is in it and what to take
+
+The owner submitted Seelie's `py-t04-gem-value` as the live ranked bot at about
+16:41Z. Website submissions are frozen otherwise, and `ladderbench.py` now
+restores `ws/bots/seelie_live`, a byte-exact copy verified against its bundle.
+
+It is greatsage with exactly two changes:
+
+1. `strategy.choose_group`: early gold weight 0.3 instead of 1.2 -- the change
+   tested and closed earlier here (+142 in one cross-run ladder comparison,
+   -34 on the held-out one).
+2. `navigation.retreat`: `turn.check()` inside the threat loops, a guard for a
+   dead champion, and threatening camps located at their spawn tiles rather
+   than their live positions.
+
+The crash the second change prevents is real but rare. The engine pauses a bot
+that runs out of fuel mid-statement and resumes it next round inside the old
+call stack, so a comprehension can check `is_visible()` in one round and query
+the unit in the next. `analysis/errors.py` counts the `ERROR` lines `main.py`
+prints for each lost turn: greatsage loses 3 champion-turns in 320 local games,
+all at the line Seelie fixed. So that part is worth keeping because it is
+correct, not because it moves the score. The spawn-tile part does change
+behaviour: a camp that is chasing a champion is no longer where the retreat
+plan thinks it is.
+
+First 68 head-to-head games against greatsage: win rate 60.3% against 50.0%
+(paired se 8.7), gems +43 (se 52), inside the noise.
+
+The same screens settled two more things:
+
+- **Candidate B is dead.** Removing the `gap <= 4` accept costs 159 gems (se
+  24) and 25 points of win rate, and raises deaths by 5.5. That line is how a
+  champion fights back once an enemy is adjacent; the diagnosis that called
+  it a defect was wrong about it. Every B combination fails the same way.
+- **Restricting disengage to outnumbered fights** keeps half the death
+  reduction and none of the gem gain (+7, se 21).
+
+What goes forward is Seelie's bot plus disengage at 0.50
+(`gs_seelie_dis050`, untagged as `seelie_dis050_submit`), racing Seelie's bot
+on the full pool now.
