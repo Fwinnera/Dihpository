@@ -2773,3 +2773,77 @@ heuristics plateau, porting the validated greatsage decisions into sage2 first.
 
 Gold weight 0.3, Bruiser fallback, Heart of Ruin, copying the field's roster
 wholesale, a global `BANK_GEMS` cut.
+
+## Full pool on the draft swap: real gold, gems inside the noise
+
+320 games an arm: gold +1,008 a game (standard error 253), monster damage +6,791,
+gems +13.6 (standard error 21), win rate +2.8 points (standard error 2.8), healing
+done down 12,513 as Willow leaves. The eight-map +170 overstated this one as well.
+The ladder test, already queued, decides it.
+
+## Phase 1 diagnosis: what the fights we die in look like
+
+`analysis/fights.py` rebuilds the fight behind each of the 15,225 kills in 510
+ladder games from the per-round timelines (cumulative champion damage dealt and
+taken, gems carried, gold spent) and the engine's killer-and-assisters record.
+Allies engaged is an upper bound; enemies engaged is exact.
+
+The shape of the fights is the same for both teams: about 60% of victims have no
+engaged ally, about 63% are outnumbered, and each side opens roughly a third of
+the fights it dies in. What differs is items. When we die, the enemies involved
+average +548 gold a champion over us and 70% of our deaths come a full emblem or
+more behind. When they die the edge is +60.
+
+Every fight that ended in a death, put in our frame, gives the curve the engage
+decision needs (it cannot see fights that ended with nobody dead):
+
+    our item edge   fights a game   we took the kill
+    <= -450              13.3              7%
+    -450..-150            4.5             19%
+    -150..+150            7.4             32%
+    >= +150               4.7             68%
+
+    fights we opened, by item edge and numbers        won    a game
+    <= -450        outnumbered                          1%     2.6
+    <= -450        equal                                4%     1.7
+    -450..-150     outnumbered                          3%     1.0
+    -150..+150     outnumbered                          8%     1.6
+    -150..+150     equal                               43%     0.6
+    -150..+150     outnumbering                        86%     0.9
+    >= +150        equal                               94%     0.5
+
+About 6.9 fights a game are ones we open at 8% odds or worse, and another 7.7 are
+ones they open on us at those odds. Each is a death worth 199 gold to them.
+
+The code produces exactly this, in three places:
+
+1. `combat.choose_enemy` accepts any enemy within four tiles unconditionally --
+   `gap <= 4` sits beside the power test as an alternative, so proximity bypasses
+   it. The power measure itself (health times strength, so items included) is
+   sound and would decline most of these fights if it were consulted.
+2. `bot.py` sets `retreat_at` from health and awake camps only. Enemy champions
+   pressing a fight never raise it, so a champion stays in a lost fight until 30%
+   health, and with every champion moving at speed 1 it cannot get out from there.
+   The median fight that kills us lasts six rounds.
+3. `strategy.choose_group` penalises a camp near an enemy by at most +20, on a
+   cost scale in the hundreds, whatever the number of enemies. Champions farm
+   beside enemy groups and are caught.
+
+The no-chase candidate addressed one slice of the first: it stopped champions
+walking toward a target but kept the `gap <= 4` accept, so they still opened on
+anything in reach, and it left retreat and farming untouched. That is why deaths
+moved only 4.3.
+
+### Candidates, one ladder test each, in order
+
+- A. Disengage when the local fight is lost: count enemy champions in reach and
+  the power ratio into the retreat decision, so a champion leaves an outnumbered
+  fight while it still can, not at 30% health. It covers both halves -- fights
+  we open and fights opened on us -- which is why it goes first.
+- B. Remove the unconditional `gap <= 4` accept, so the existing power test
+  governs every engagement except killable, interrupting or defending targets.
+- C. Scale the farming penalty by enemy power near the camp rather than a flat
+  +20.
+
+Judged on deaths and kill/death ratio first. The threshold for A is calibrated
+locally against the in-game power ratio before it goes to the ladder.
