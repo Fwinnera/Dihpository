@@ -188,114 +188,99 @@ Replies to your notes, as of 16:20Z:
 **Branch:** `Fwinnera`.
 **Updated:** 2026-10-23 16:30Z.
 **Can run:**
-- Engine: yes. `cambc` 3.0.5 with all 40 pool maps, Python and C++ bots
-  (wasi-sdk 33, CMake and Ninja installed by hand, checksums match the CLI's),
-  4 cores, about 35 s a game.
+- Engine: yes. `cambc` 3.0.5, all 40 pool maps, Python and C++ bots, 4 cores.
+  `bench.py` runs unchanged (the CLI is linked at the Mac path).
 - Platform login: yes, a CLI session the owner approved at 15:50Z (expires
-  30 Oct). Used read-only (ladder, match lists, summaries, replays, maps)
-  unless CLOUD holds the ladder lock. The CLI session cannot open
-  website-only pages such as `/game/submissions`.
+  30 Oct). Used read-only unless CLOUD holds the ladder lock.
 - GitHub push: yes.
-- Not here: `ws/bench/`, and the standard local opponents `base`,
-  `colleague` and `boss_focus`, which are not in git.
 
 ### Doing now
 
-**The owner has decided: CLOUD builds the C++ bot. LOCAL keeps the Python bot
-and Sprint 2.** Evidence, from the public ladder at 16:10Z:
+**gs_cpp, greatsage ported to C++** (`ws/bots/gs_cpp`), at its parity gate.
+The owner chose C++: no Python team is in the top 107, and the top 40 are all
+C++ or Rust. A straight port only matches greatsage; the gain comes later, from
+fight simulation, which Python cannot afford (§4.3).
 
-- 156 teams use Python, and the best is rank 108 at 1,763. We are the fourth
-  best Python team, at #221.
-- The top 40 overall are 36 C++ and 4 Rust; the UK top 40 have no Python at
-  all. UK third place is at 1,983.
-- Your own measurements (§4.3a–c) say why: engine calls cost about the same in
-  both languages, but C++ has about 400 times the compute — 229 ten-turn fight
-  playouts a turn against 0.55 in Python. So a straight port only matches
-  greatsage. The gain comes from fight simulation, aimed at deaths: 22 a game
-  for us, about 6 for the strongest teams.
-
-1. **Diagnose A's ladder loss** (running in the background, read-only, no
-   quota). `da_base` is the four groups at 15:22Z (`c673ab12`, `db38c8f3`,
-   `f186b046`, `b8f03a7d`); `da_dis` is the four at 15:31Z (`a61cdd2f`,
-   `7f43d8e7`, `5bf001a6`, `c695aa73`). Downloading all 40 summaries and
-   replays for a per-champion comparison and a BOTTAG audit.
-2. **Port greatsage to C++, faithfully: `ws/bots/gs_cpp`** (new directory).
-   It is a module-by-module translation, not a redesign. sage2 redesigned,
-   dropped greatsage's edge cases and scores 140 gems to greatsage's 1,001 on
-   `00ambush` (measured here today). sage2 is left untouched as a parts bin.
-   Gate: at parity with greatsage on all 40 maps, both sides, before anything
-   is added.
-3. **Then add fight simulation** to the engage/disengage decision, in place of
-   A's fixed ratio, with candidate C's camp choice built in.
+- Done: every module ported, keeping greatsage's iteration orders and
+  tie-breaks; builds; no `ERROR` lines. 00ambush: 1019-644 as side A,
+  628-1005 as side B. 01yellow-brick-road: 1010-404 (see Findings).
+- Running: 80 games against greatsage (40 maps × 2 sides) and a greatsage
+  self-play baseline, compared pair by pair. Then the standard 320-game pool
+  (base, colleague, boss_focus, greatsage), now that you've committed them.
+- Gate: no worse than greatsage on the pool. Then CLOUD asks here for one
+  ladder slot: gs_cpp against a fresh greatsage baseline, 40 matches.
 
 ### Needs the ladder?
 
-No. Read-only, no quota. gs_cpp reaches the ladder only after it passes the
-local gate, with LOCAL's agreement and the lock taken above first.
+Not yet. Possibly one two-arm test of gs_cpp this evening, after your 17:25Z
+slot, and only if the local gate passes. The time will be written here first.
 
 ### Findings
 
-- **A's local gem gain was overstated.** `bench.py --compare` prints the
-  subject arm's own standard error, not the error of the change. Unpaired,
-  +47.7 gems is about 1.7 SE rather than 2.4; the drop in deaths stays clearly
-  real. `analysis/paired.py` gives paired errors. This is consistent with A
-  failing on the ladder.
-- **Rules, from the handbook's `GameRules.md`:**
-  - A kill gives the killer all carried gems plus 100 base gold, and assists
-    give no gold, so "199 a kill" is a regression estimate, not a rule.
-  - Vision is not shared between allies.
-  - Ranged champions move or basic-attack in a turn, not both, so A's
-    finishing blow costs a ranged champion its escape step.
-  - Win: first to 1,000 tributed gems; at round 2000 compare tributed gems,
-    then lifetime gold earned, then kills.
-- **Standings at 16:00Z:** #228 of 756, #45 of 168 UK, rating 1,630. Third in
-  the UK: Mite, 1,980.
-- **Sprint 2:** every eligible team qualifies at the 2026-10-24 22:59Z
-  snapshot, and it is played on unseen maps, so per-map tuning will not carry
-  over.
-- **BOTTAG, from replays:**
-  - The `da_dis` game at 15:31Z (01islands vs Quantom) was played by
-    `gs_dis075`.
-  - The ranked game at 15:40Z and the unranked game at 15:42Z were untagged,
-    i.e. `greatsage`. The restore worked.
-- **Restore timing:** a 20-match arm takes 3–6 minutes, and the last draft-arm
-  group finished 5.6 minutes after queuing, past `ladderbench.py`'s 300 s
-  restore deadline. Queued groups show `submissionId: null` on the public API,
-  which suggests the bot is bound when a match plays. If so, the tail of an
-  arm can be played by greatsage. A BOTTAG check on every game catches it.
-- **Read-only endpoints** (public, under `/api/v1/`): `ladder?q=`,
-  `teams/<id>/performance`, `match-groups?scope=all&team=<id>`,
-  `tournaments`, `patch-notes`, `announcements`.
+- **A's ladder test was clean, and its gem loss is inside its noise.**
+  - BOTTAG: all 20 `da_base` games were `gs_shopbase`, and all 20 `da_dis`
+    games were `gs_dis075`.
+  - Gems −59.9 a game with a paired se of 61.5: the 20 differences run from
+    −683 to +648.
+  - One opponent carries the loss: Hidden Altar Keepers, 442 → 136. Against
+    the other three, gems went 251 → 251, 303 → 314 and 294 → 350, with
+    deaths down 7 to 12 a game every time.
+  - Mechanism: champions live 430 rounds longer but deal 23% less monster
+    damage, and take champion damage on as many rounds as before. A turns
+    deaths into walking away under fire. Full write-up in
+    `GROUND-UP-PLAN.md`; `analysis/ladder_arms.py` reruns it on any two arms.
+- **01yellow_brick_road is a fuel livelock in greatsage.** Both A arms scored
+  0 there against Quantom, with 0 deaths and 0 monster damage.
+  - Reproduced locally: from round 4 every champion raises `Replan` every turn
+    and never acts.
+  - Cause: `strategy.choose_group`'s first ranking pass loops in Python over
+    every spawn tile of every group. On this map that is about 1.2M fuel for
+    28 groups, which leaves the exact pass under `turn.MIN_FUEL`.
+  - gs_cpp is unaffected and wins the map.
+- **Rules (handbook `GameRules.md`):**
+  - A kill pays the killer the carried gems plus 100 gold; assists pay
+    nothing.
+  - Vision is not shared.
+  - Ranged champions move or attack, not both.
+  - Ties at round 2000 go to tributed gems, then lifetime gold, then kills.
+- **Sprint 2:** everyone qualifies at the 24 Oct 22:59Z snapshot, on unseen
+  maps.
+- **Standings at 16:00Z:** #228 of 756, #45 of 168 in the UK, 1,630. UK third:
+  1,983.
 
 ### Next, in order
 
-1. The A diagnosis and BOTTAG audit, written up in `GROUND-UP-PLAN.md`.
-2. `gs_cpp` at parity with greatsage.
-3. Fight simulation in `gs_cpp`.
-4. A local opponent set that reproduces A's ladder failure. The current pool
-   is too passive to put us below the disengage ratio, so it cannot screen
-   combat changes.
-5. Candidate C on LOCAL's Python base, if LOCAL still wants it. Otherwise it
-   moves into `gs_cpp`.
+1. gs_cpp parity: the 80-game head-to-head, then the 320-game pool.
+2. gs_cpp ladder test, if the gate passes.
+3. Fight simulation in gs_cpp, replacing the fixed disengage ratio. A's data
+   says the rule must judge whether *walking away* is cheaper than fighting,
+   not just whether we are outmatched.
+4. BOTTAG audit of your `db_dis` arm once it lands.
 
 ### Files touched
 
 | path | what changed |
 |---|---|
-| `README.md` | this section |
-| `ws/bots/gs_dis075_avoid/src/__pycache__/` | removed the three `.pyc` files CLOUD committed by mistake |
-| `.gitignore` | ignore `__pycache__/` and `*.pyc` |
+| `ws/bots/gs_cpp/` | the C++ port |
+| `analysis/ladder_arms.py` | fetch and compare two ladder arms, with a BOTTAG audit |
+| `analysis/paired.py`, `analysis/mkavoid.py` | paired errors; candidate C |
+| `GROUND-UP-PLAN.md` | appended: A's ladder diagnosis, the yellow_brick_road livelock, gs_cpp |
 
 ### Notes for LOCAL
 
-- Please commit the standard local opponents (`ws/bots/base`, `colleague`,
-  `boss_focus`), or name another set. Until then CLOUD's local numbers are
-  against greatsage and the `gs_*` builds only, and are not comparable with
-  yours.
-- If you have the `da_base` / `da_dis` group ids, add them to
-  `GROUND-UP-PLAN.md`. Otherwise CLOUD finds them by time and the four pinned
-  team ids.
-- `ladderbench.py` restores after at most 300 s. Suggest printing the pending
-  count at restore and saving it in `meta.json`, or waiting about 10 minutes.
-  It is your harness, so CLOUD will not edit it unless asked.
-- Thanks for the merge. CLOUD is on `Fwinnera` and has no other branches.
+- **A fix for the livelock, for Sprint 2 on the Python bot** (yours to take or
+  leave). It makes the same decisions whenever fuel is not short:
+  - In the first pass, replace the loop over `objective.coords` with one cached
+    `DistanceField` per objective, computed lazily from its spawn tiles with no
+    walls. Eight-neighbour flood distance is exactly the Chebyshev distance, so
+    `travel = field.get(position)` is one SDK call instead of up to ~80 Python
+    iterations.
+  - In the exact pass, `(objective.spawns & reached).positions()` gives the
+    same list, in the same order, as the `is_set` comprehension, for one SDK
+    call.
+  - Sprint 2 is on unseen maps, and any map with large camp regions can hit
+    this. Ask here if you want CLOUD to build and screen it.
+- Item 4 dropped, as you asked; your ladder-like opponent set covers it.
+- Your `gs_dis075_avoid` screen: the A diagnosis suggests C helps only if
+  re-entry is common. The ladder counts can't separate re-entry from simply
+  retreating, so your local pool is the right test.
