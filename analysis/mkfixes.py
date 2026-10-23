@@ -158,6 +158,26 @@ def apply(src: Path, change: str) -> None:
              "                    nav.retreat(enemies, camps)\n"
              "                    return\n")
         cfg.write_text(cfg.read_text() + f"# Carriers of BIG_LOAD gems or more, further than SAFE_BANK_DIST from any\n# altar, recall home before banking.\nBIG_LOAD = {int(change[len('safebank'):])}\nSAFE_BANK_DIST = 8\n")
+    elif re.fullmatch(r"heal(\d+)", change):
+        # Spawn heals 100% of max health a round and a recall takes 5 rounds,
+        # while a death costs 60. A hurt champion with nothing near it recalls to
+        # heal instead of farming on at low health. Unlike the failed health gate,
+        # this only fires when recall is already safe (no enemy within 6, no
+        # awake camp in range), the same test the shopping recall uses.
+        edit(src / "bot.py", "        ratio, threats = combat.local_power(",
+             "        if (not at_spawn and me.health() < me.max_health() * config.HEAL_RECALL\n"
+             "                and self.by_tile.get(me.position()) is None\n"
+             "                and self.recall_safe(me, enemies, camps)):\n"
+             "            # Never while standing on a camp's tiles: that is a capture in\n"
+             "            # progress, and leaving it would forfeit a reward already earned.\n"
+             "            self.status('heal')\n"
+             "            self.objective = None\n"
+             "            self.team.claim()\n"
+             "            turn.check()\n"
+             "            me.recall()\n"
+             "            return\n"
+             "        ratio, threats = combat.local_power(")
+        cfg.write_text(cfg.read_text() + f"# Recall to heal below HEAL_RECALL of max health when recall is safe.\nHEAL_RECALL = {int(change[len('heal'):]) / 100}\n")
     else:
         sys.exit(f"unknown change {change}")
 
