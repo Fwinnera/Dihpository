@@ -48,10 +48,11 @@ one match quota. Most of the ways to waste a day here come from forgetting that.
 
 ## Ladder lock
 
-    held by:   nobody
-    since:     2026-10-23 15:37Z (LOCAL released it; greatsage restored, version 89)
-    for:       -
-    expected:  -
+    held by:   LOCAL
+    since:     2026-10-23 16:00Z
+    for:       disengage at 0.50 ladder test (tags db_base, db_dis); submits
+               from 16:23Z, when the quota allows
+    expected:  released by about 16:50Z
 
 To take it: edit this block, commit and push *before* submitting. To release it:
 set `held by: nobody` and push. If it has been held for more than 90 minutes,
