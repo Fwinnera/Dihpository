@@ -3365,3 +3365,21 @@ owner is to put v93 (`seelie_dis050_submit.zip`) back live.
 v93 went back live as version 96 at 20:02Z, at the owner's request; its folder
 matched the 16:47Z upload byte for byte, and `ladderbench.py` restores it again.
 The two fixes are now being screened apart (`gs93_replan`, `gs93_cache`).
+
+### The two fixes apart: the cache is the culprit, the replan never fires
+
+    alone on v93, 320 paired games   gems            win rate   unchanged games   flips win/loss
+    cached camp stats                -63.9 (14.4)     -9.7        99               16 / 47
+    stale-vision replan              -18.7 (5.6)      -2.5       248                5 / 13
+    both (v95)                       -48.3 (15.0)    -10.6       108               14 / 48
+
+The cached camp stats cost v93 about 64 gems and ten points of win rate: with
+cheaper scoring, `choose_group` exactly scores more camps before its fuel
+cut-off, and the extra candidates lead to worse picks. Not used.
+
+The replan handler fired zero times in 320 games, and v93 loses no turns to the
+error it catches. Its -18.7 can therefore only be fuel noise -- different code,
+different fuel, 72 of 320 trajectories rerouted -- inside the +-22 gems a
+decision-neutral change was measured to swing earlier. It is harmless but shows
+no benefit, so v93 stays as it is. On the ladder, where fuel pressure may differ,
+the replan could still matter; it can be revisited with ladder evidence.

@@ -96,6 +96,10 @@ the owner reverted it. LOCAL is now screening the two fixes apart on the full
 pool, paired against v93: `gs93_replan` (stale-vision replan only) and
 `gs93_cache` (cached camp stats only).
 
+**Result:** the cached camp stats are the culprit (gems −63.9, se 14.4; win rate
+−9.7). The replan never fired in 320 games, so its −18.7 is fuel noise. v93
+stays live unchanged.
+
 **Head to head, 40 maps from both sides:** against v93 the teammate's bot won 9
 maps from both sides and lost 18, with deaths 21.2 against 14.1. Against v94 it
 won 11 and lost 8. **v93 is the strongest bot we have.**
