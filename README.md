@@ -48,11 +48,11 @@ one match quota. Most of the ways to waste a day here come from forgetting that.
 
 ## Ladder lock
 
-    held by:   LOCAL
-    since:     2026-10-23 16:00Z
-    for:       disengage at 0.50 ladder test (tags db_base, db_dis); submits
-               from 16:23Z, when the quota allows
-    expected:  released by about 16:50Z
+    held by:   FROZEN by the owner, 2026-10-23 16:40Z
+    since:     2026-10-23 16:40Z
+    for:       no submissions to the website by either agent until the review
+               of Seelie's bot (py-t04-gem-value) is sorted. The owner lifts it.
+    live bot:  greatsage, version 91, restored 16:35Z
 
 To take it: edit this block, commit and push *before* submitting. To release it:
 set `held by: nobody` and push. If it has been held for more than 90 minutes,
@@ -65,35 +65,33 @@ ask the owner before overriding it.
 **Agent:** Claude Code on the owner's Mac. It has the engine (`cambc`), the
 local harness, the platform login and the GitHub deploy key.
 **Branch:** `Fwinnera`.
-**Updated:** 2026-10-23 16:20Z.
+**Updated:** 2026-10-23 16:42Z.
 
 ### Doing now
 
-Two tracks run in parallel.
+**The owner has frozen all website submissions** until the review below is
+sorted. The 0.50 ladder test was stopped before its candidate arm submitted;
+its baseline arm (`db_base`, 20 games) played and greatsage was restored as
+version 91. Nothing is live but greatsage.
 
-**Ladder (lock held):** the disengage test at ratio **0.50** (`gs_dis050`)
-against a fresh baseline (`gs_shopbase`), tags `db_base` / `db_dis`, with
-opponents pinned `--same-as da_base`. The quota was full at 16:00Z (50 in the
-trailing hour, two of those batches other teams' scrims against us). Each arm
-re-counts the trailing hour and waits for room: the baseline goes out about
-16:23Z, the candidate about 16:33Z, and the result lands about 16:45Z.
+**Review of Seelie's bot** (`py-t04-gem-value`, Seelie's latest upload before
+the ladder tests began; installed as `ws/bots/seelie_t04` with a BOTTAG). It is
+greatsage with two changes:
 
-**Local (no ladder):** a full-pool screen of the next candidates, all aimed at
-the farming cost that sank 0.75 on the ladder (champions leaving fights they
-didn't need to leave):
+1. Gold weight 0.3 instead of 1.2 in `strategy.choose_group` (the change LOCAL
+   tested and closed earlier: +142 in one ladder comparison, −34 held out).
+2. A robustness fix in `navigation.retreat`: fuel checkpoints inside the threat
+   loops, a dead-champion guard, and camps' fixed spawn tiles instead of live
+   positions, so a fuel suspension between a visibility check and a live query
+   can't throw.
 
-| bot | change |
-|---|---|
-| `gs_b` | candidate B alone: no unconditional `gap <= 4` accept |
-| `gs_dis075_out` | disengage at 0.75, but only when also outnumbered |
-| `gs_dis050_b` | disengage at 0.50 plus B |
-| `gs_dis075_out_b` | outnumbered-only disengage plus B |
-| `gs_dis075_avoid` | **CLOUD's candidate C**, measured as-is, not modified |
+LOCAL is measuring it on the full pool, auditing greatsage for other places
+with the same bug class as fix 2, and testing each change on its own.
+First 68 games against greatsage: win rate 50.0% → 60.3% (paired se 8.7), gems
++43 (se 52), within the noise so far.
 
-Results about 16:45Z. The best of these, or of the 0.50 ladder result, takes
-the next ladder slot, about 17:25Z when the quota allows. All are built by
-`analysis/mkdisengage.py` (flags `--outnumbered`, `--no-gap-accept`,
-`--b-only`).
+Also running locally: the last two disengage candidates and the ladder-like
+opponent check. B (removing `gap <= 4`) is dead: −159 gems, win rate −25.
 
 ### What the bot is and what is live
 
