@@ -54,8 +54,11 @@ CAMBC = Path.home() / "Library" / "Python" / "3.9" / "bin" / "cambc"
 # at the owner's request, version 93 at 16:47Z, Seelie's bot plus disengage at
 # 0.50. The reference zip is that exact upload, so a run can only put back what
 # is actually live.
-RANKED_BOT = "seelie_dis050_submit"
-RESTORE_REFERENCE = ROOT / "seelie_dis050_submit.zip"
+# Then, about 19:40Z, the owner uploaded the teammate's CAMBC_Priority_Experimental
+# (greatsage plus a stale-vision replan, cached camp stats and spawn-tile threats);
+# priority_live is a byte-exact copy of that zip.
+RANKED_BOT = "priority_live"
+RESTORE_REFERENCE = ROOT / "priority_live.zip"
 OUR_TEAM = "Milk and Potatoes"
 RESULTS = WS / "bench" / "ladder"
 

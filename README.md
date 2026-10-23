@@ -48,16 +48,13 @@ one match quota. Most of the ways to waste a day here come from forgetting that.
 
 ## Ladder lock
 
-    held by:   FROZEN by the owner since 2026-10-23 16:40Z: no test submissions
-               by either agent until the owner lifts it.
-    live bot:  VERSION 93, submitted at the owner's request at 16:47Z:
-               ws/bots/seelie_dis050_submit = Seelie's py-t04-gem-value plus
-               disengage at 0.50. ladderbench.py restores exactly this
-               (verified against seelie_dis050_submit.zip).
-    before it: Seelie's py-t04-gem-value (about 16:41Z), greatsage before that.
-    pending:   the owner has v94_untested.zip (v93 + Willow farming + travel 0.6,
-               untested). If it goes live, switch ladderbench's restore target
-               to ws/bots/v94_submit before any ladder test.
+    held by:   THE OWNER, about 19:40Z: running their own unranked games with
+               the teammate's bot live. Neither agent submits or queues games.
+    live bot:  the teammate's CAMBC_Priority_Experimental. ladderbench.py
+               restores ws/bots/priority_live, a byte-exact copy verified
+               against priority_live.zip (20,333 bytes).
+    history:   greatsage until about 16:41Z, then Seelie's py-t04 until 16:47Z,
+               then version 93 (Seelie's plus disengage at 0.50), then this.
 
 To take it: edit this block, commit and push *before* submitting. To release it:
 set `held by: nobody` and push. If it has been held for more than 90 minutes,
@@ -88,21 +85,27 @@ Recorded verbatim in substance; both agents should treat these as open defects.
 **Agent:** Claude Code on the owner's Mac. It has the engine (`cambc`), the
 local harness, the platform login and the GitHub deploy key.
 **Branch:** `Fwinnera`.
-**Updated:** 2026-10-23 16:48Z.
+**Updated:** 2026-10-23 19:48Z.
 
 ### Doing now
 
-**Live bot: version 93, `seelie_dis050_submit`**, submitted at 16:47Z at the
-owner's request. It is Seelie's `py-t04-gem-value` plus disengage at 0.50,
-untagged, and differs from Seelie's bot only in `bot.py`, `combat.py` and
-`config.py`. Its tagged twin played 40 local games with no faults and no
-`ERROR` lines before upload. `ladderbench.py` now restores exactly this bot.
-Test submissions stay frozen until the owner lifts the freeze.
+**The teammate's `CAMBC_Priority_Experimental` is live** (`ws/bots/priority_live`;
+`ws/bots/priority_exp` is the same code with a BOTTAG). It is greatsage plus three
+robustness and fuel fixes:
 
-**Ladder use, no submission:** 20 unranked games of the live version 93 at
-16:50Z against the four teams pinned in `db_base` (same maps and sides), tag
-`v93_live`, for a before-and-after with greatsage. With `db_base`'s 20 at
-16:31Z, the trailing hour holds 40 until about 17:31Z.
+1. `main.py`: a "not in vision" error after a fuel pause rolled the turn into a
+   new round now replans instead of losing the turn.
+2. `strategy.py`: camp design stats are cached once, so camp choice spends less
+   fuel and scores more camps exactly before its 950,000-fuel cut-off.
+3. `navigation.py`: retreat threats use camps' spawn tiles.
+
+It has none of Seelie's gold weight, v93's disengage or v94's changes.
+
+**LOCAL is comparing it head to head**, 40 maps × both sides each, against
+version 93 (`h2h_prio_v93`) and v94 (`h2h_prio_v94`). Then comes its full-pool
+run (`wide_priority_exp`), paired with greatsage and v93. The v94 fix screen is
+paused (Willow farming stopped at 194/320). Nothing goes to the ladder while the
+owner runs their own games.
 
 **Version 93's evidence so far:** local, 320 paired games against Seelie's bot,
 gems +57.9 (se 19.1), deaths −4.7. Ladder, 20 games against greatsage's
