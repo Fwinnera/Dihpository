@@ -2618,3 +2618,68 @@ than gaining. Adding all five passive families costs another 25. Neither is take
 Only the one-line build-order change goes forward, and only to the ladder test,
 because local opponents cannot reach 1,000 gems and this harness has bought a
 local win that meant nothing before.
+
+## Treasure on the ladder: the mechanism holds, the outcome does not move
+
+Twenty games on ranks 25, 60, 120 and 240, fourteen of them diverged:
+
+    metric              tr_base   tr_gold   change
+    gold earned            3941      4523     +581   (+15%)
+    gems collected          339       370      +32
+    gems submitted          306       309       +3
+    deaths                 26.6      28.9     +2.3
+    record                 4-16      3-17
+
+The predicted mechanism is confirmed -- more gold, more collection -- but at a
+third of the local size, and none of it reaches the score. Locally the extra gold
+compounded unopposed for 2,000 rounds; on the ladder the opponent reaches 1,000 by
+round 1,177 and we are being out-collected 370 to 940, so a stronger champion
+arrives at a game that is already lost. Not shipped: a flat gem delta with deaths
+up is not a reason to change the live bot, however sound the mechanism.
+
+## The other hardcoded table: the draft
+
+Applying the same test -- a count that is zero for us and large for them -- to
+the roster, over 470 games:
+
+    champion        ours  theirs
+    Vesper Vale       3%     71%
+    Heart of Ruin     3%     70%
+    Tavi / Issac      0%    ~31%
+    Willow           97%     12%
+
+`roster.DRAFT_ORDER` ranks Vesper Vale eighth and Heart of Ruin twelfth of twelve.
+Both teams can field the same champion (Ryth: 75% ours, 70% theirs), so the
+field's rates are its own preference and not what our picks left over.
+
+The design data, dumped from `Champion.design()` inside a match, explains it.
+Willow and Vesper Vale share strength 55 and range 3, but Vesper Vale has 1,000
+health against 700 and grows 100 health and 5 strength per shard against 50 and
+3. Willow has the worst growth in the roster, so every item bought for her is
+worth about half. Heart of Ruin is a shield-and-dash tank with strength 30.
+
+Local screen, 24 games an arm against the tagged baseline:
+
+    arm               roster change                    gems  deaths  record  delta
+    gs_draft_vv       Willow -> Vesper Vale             685    20.3    15-9   +170
+    gs_draft_field    the field's own top five          533    22.3    9-15    +18
+    gs_draft_hor      Willow -> Heart of Ruin           473    23.2    5-19    -42
+    gs_draft_both     Willow, Varg -> VV, HoR           229    27.6    2-22   -287
+
+Only the single swap wins, and it wins on 19 diverged games by +215. Dropping Varg
+is catastrophic because `strategy.dps` multiplies Varg's damage by the camp count
+-- the bot's camp clearing is built around that splash -- so the field's roster is
+not ours to copy wholesale. It goes to the ladder alone.
+
+## Banking threshold: the ledger is clear, the local harness cannot see it
+
+In the 34 ladder games where we submitted under 60 while collecting 80 or more,
+the ledger balances to the gem: 127 collected, 99 lost to deaths, 1 carried, and
+1.0 deposits in the whole game. Five champions collecting 127 reach about 25 each,
+so `BANK_GEMS = 24` means each is killed just short of it, again and again.
+
+Locally, lowering it shows nothing: 8, 12 and 16 diverge from the baseline in only
+6 to 10 of 24 games, because local opponents do not apply the pressure that kills
+a carrier, and 8 is worse in eight of ten. Stacked on the draft swap, 12 matches
+the swap alone (+163 against +170). This is a ladder-only question and waits its
+turn behind the draft.
