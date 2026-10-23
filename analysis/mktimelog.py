@@ -58,6 +58,11 @@ WRAPPER = '''    def play_turn(self):
             counts = self.__dict__.setdefault('time_counts', {})
             counts['turns'] = counts.get('turns', 0) + 1
             counts[self.label] = counts.get(self.label, 0) + 1
+            # Travel since the last objective was reached; a dropped objective wastes it.
+            if self.label == 'travel':
+                self.trip = self.__dict__.get('trip', 0) + 1
+            elif self.label in ('approach', 'capture'):
+                self.trip = 0
             for kind in ('camp', 'champion'):
                 if combat.hits[kind]:
                     key = 'hit_' + ('camp' if kind == 'camp' else 'champ')
@@ -67,6 +72,13 @@ WRAPPER = '''    def play_turn(self):
                 self.time_printed = now // 25
                 print('TL %d %s %s' % (now, bc.me().champion_name(),
                                        ' '.join('%s=%d' % kv for kv in sorted(counts.items()))), flush=True)
+
+    def event(self, key):
+        counts = self.__dict__.setdefault('time_counts', {})
+        counts[key] = counts.get(key, 0) + 1
+        if key.startswith('ev_drop'):
+            counts['ev_wasted_travel'] = counts.get('ev_wasted_travel', 0) + self.__dict__.get('trip', 0)
+            self.trip = 0
 
     def _play_turn(self):
 '''
@@ -92,6 +104,22 @@ LABELS = [
     ("bot.py", "        targets = observed\n        if not targets:\n            nav.move_to(objective.spawns)\n            return\n",
      "        targets = observed\n        if not targets:\n            self.status('travel')\n            nav.move_to(objective.spawns)\n            return\n"),
     ("bot.py", "        self.status('farm')\n", "        self.status('approach')\n"),
+    # Events, counted beside the labels: an objective found respawning or taken
+    # on arrival is a wasted trip; every choose_group call is a re-choice.
+    ("bot.py", "                if isinstance(state, gm.CampGroupRespawning):\n"
+               "                    self.respawns[objective.handle] = bc.round_number() + state.timer\n"
+               "                    objective = None\n",
+     "                if isinstance(state, gm.CampGroupRespawning):\n"
+     "                    self.respawns[objective.handle] = bc.round_number() + state.timer\n"
+     "                    objective = None\n"
+     "                    self.event('ev_drop_respawn')\n"),
+    ("bot.py", "                    if owner is not None and owner != self.team.slot:\n"
+               "                        objective = None\n",
+     "                    if owner is not None and owner != self.team.slot:\n"
+     "                        objective = None\n"
+     "                        self.event('ev_drop_owned')\n"),
+    ("bot.py", "            self.supporting_handle = None\n            objective = strategy.choose_group(",
+     "            self.supporting_handle = None\n            self.event('ev_choose')\n            objective = strategy.choose_group("),
 ]
 
 

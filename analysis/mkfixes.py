@@ -120,6 +120,44 @@ def apply(src: Path, change: str) -> None:
              "BUILDS = {bc.ChampionType.WILLOW: (I.TREASURE_SHARD_OF_FOCUS,\n"
              "          I.JUNGLE_SHARD_OF_FOCUS, I.DURABILITY_SHARD_OF_HEALTH,\n"
              "          I.POWER_SHARD_OF_FOCUS)}")
+    elif change == "claimresp":
+        # Champions see their allies' claims but not their captures, so each one
+        # learns that a camp is respawning only by walking to it: up to a fifth
+        # of a farmer's turns are travel, and a share of it ends on a respawning
+        # camp. An ally whose claim moves straight from group G to another group
+        # has just captured G or found it respawning, so G is marked respawning
+        # for its full timer. A move to idle is a retreat, a bank trip or a death
+        # and says nothing. A champion still walking to G re-chooses.
+        b = src / "bot.py"
+        edit(b, "        self.bank_progress = Progress(limit=10)\n",
+             "        self.bank_progress = Progress(limit=10)\n        self.peer_claims = None\n        self.respawn_of = None\n")
+        edit(b, "        enemies = [e for e in bc.vision.champions(bc.Team.ENEMY) if e.is_alive()]\n",
+             "        self.infer_respawns()\n"
+             "        enemies = [e for e in bc.vision.champions(bc.Team.ENEMY) if e.is_alive()]\n")
+        edit(b, "    def farm(self, me, enemies):\n        objective = self.objective\n",
+             "    def infer_respawns(self):\n"
+             "        if self.respawn_of is None:\n"
+             "            self.respawn_of = {g.__index__(): g.max_respawn_timer() for g in self.groups}\n"
+             "        # Raw claim words: a support claim (Willow following a farmer) moves with\n"
+             "        # its leader and says nothing about captures, so it counts as idle.\n"
+             "        turn.check()\n"
+             "        bc.shared_memory.read(0, self.team.buffer)\n"
+             "        word = int.from_bytes(self.team.buffer, 'little')\n"
+             "        claims = []\n"
+             "        for i in range(len(self.team.allies)):\n"
+             "            value = word >> (10 * i) & 1023\n"
+             "            claims.append(-1 if value & 512 else (value & 511) - 1)\n"
+             "        now = bc.round_number()\n"
+             "        if self.peer_claims is not None:\n"
+             "            for i, (before, after) in enumerate(zip(self.peer_claims, claims)):\n"
+             "                if i != self.team.slot and before >= 0 and after >= 0 and after != before:\n"
+             "                    until = now + self.respawn_of.get(before, 0)\n"
+             "                    if until > self.respawns.get(before, 0):\n"
+             "                        self.respawns[before] = until\n"
+             "        self.peer_claims = claims\n\n"
+             "    def farm(self, me, enemies):\n        objective = self.objective\n"
+             "        if objective is not None and self.respawns.get(objective.handle, 0) > bc.round_number():\n"
+             "            objective = None\n")
     elif re.fullmatch(r"raid(\d+)", change):
         # Monolith groups hold 35% of the gems on the 40 maps (mean 257 gems,
         # 24,086 health) and choose_group skipped them outright. The #1 team
