@@ -49,11 +49,13 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent
 WS = ROOT / "ws"
 CAMBC = Path.home() / "Library" / "Python" / "3.9" / "bin" / "cambc"
-# The owner made Seelie's py-t04-gem-value the live ranked bot at about 16:41Z on
-# 2026-10-23. seelie_live is a byte-exact copy of that submission and
-# seelie_live.zip its bundle, so every run restores what is actually live.
-RANKED_BOT = "seelie_live"           # restored after every run
-RESTORE_REFERENCE = ROOT / "seelie_live.zip"
+# The live ranked bot, restored after every run. History on 2026-10-23: greatsage
+# until about 16:41Z; then Seelie's py-t04-gem-value (ws/bots/seelie_live); then,
+# at the owner's request, version 93 at 16:47Z, Seelie's bot plus disengage at
+# 0.50. The reference zip is that exact upload, so a run can only put back what
+# is actually live.
+RANKED_BOT = "seelie_dis050_submit"
+RESTORE_REFERENCE = ROOT / "seelie_dis050_submit.zip"
 OUR_TEAM = "Milk and Potatoes"
 RESULTS = WS / "bench" / "ladder"
 

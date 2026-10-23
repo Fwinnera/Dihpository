@@ -3063,3 +3063,13 @@ The same screens settled two more things:
 What goes forward is Seelie's bot plus disengage at 0.50
 (`gs_seelie_dis050`, untagged as `seelie_dis050_submit`), racing Seelie's bot
 on the full pool now.
+
+## Version 93 is live: Seelie's bot plus disengage at 0.50
+
+Submitted at 16:47Z at the owner's request, before the local race against
+Seelie's bot had finished. Its tagged twin had played 40 clean local games
+(no faults, no `ERROR` lines). The upload is `ws/bots/seelie_dis050_submit`,
+bundled as `seelie_dis050_submit.zip`, and `ladderbench.py` restores exactly
+that. The ladder evidence for disengage so far is from 0.75 on greatsage --
+deaths -7.8, gems -59.8 -- so version 93's own ranked results are the real
+test.

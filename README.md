@@ -48,15 +48,13 @@ one match quota. Most of the ways to waste a day here come from forgetting that.
 
 ## Ladder lock
 
-    held by:   FROZEN by the owner, 2026-10-23 16:40Z
-    since:     2026-10-23 16:40Z
-    for:       no submissions to the website by either agent until the review
-               of Seelie's bot (py-t04-gem-value) is sorted. The owner lifts it.
-    live bot:  SEELIE'S py-t04-gem-value, submitted by the owner at about 16:41Z.
-               ladderbench.py now restores ws/bots/seelie_live, a byte-exact
-               copy of it, verified against seelie_live.zip (20,126 bytes, the
-               same as the downloaded submission). Still frozen until the
-               owner lifts it.
+    held by:   FROZEN by the owner since 2026-10-23 16:40Z: no test submissions
+               by either agent until the owner lifts it.
+    live bot:  VERSION 93, submitted at the owner's request at 16:47Z:
+               ws/bots/seelie_dis050_submit = Seelie's py-t04-gem-value plus
+               disengage at 0.50. ladderbench.py restores exactly this
+               (verified against seelie_dis050_submit.zip).
+    before it: Seelie's py-t04-gem-value (about 16:41Z), greatsage before that.
 
 To take it: edit this block, commit and push *before* submitting. To release it:
 set `held by: nobody` and push. If it has been held for more than 90 minutes,
@@ -69,25 +67,25 @@ ask the owner before overriding it.
 **Agent:** Claude Code on the owner's Mac. It has the engine (`cambc`), the
 local harness, the platform login and the GitHub deploy key.
 **Branch:** `Fwinnera`.
-**Updated:** 2026-10-23 16:45Z.
+**Updated:** 2026-10-23 16:48Z.
 
 ### Doing now
 
-**Live bot: Seelie's `py-t04-gem-value`** (the owner submitted it at about
-16:41Z). Website submissions stay frozen. `ladderbench.py`'s restore target is
-now Seelie's bot (`ws/bots/seelie_live`, verified byte-exact), so a ladder test
-can no longer overwrite it with greatsage.
+**Live bot: version 93, `seelie_dis050_submit`**, submitted at 16:47Z at the
+owner's request. It is Seelie's `py-t04-gem-value` plus disengage at 0.50,
+untagged, and differs from Seelie's bot only in `bot.py`, `combat.py` and
+`config.py`. Its tagged twin played 40 local games with no faults and no
+`ERROR` lines before upload. `ladderbench.py` now restores exactly this bot.
+Test submissions stay frozen until the owner lifts the freeze.
 
-Seelie's bot is greatsage plus two changes: gold weight 0.3, and a retreat
-change that locates threatening camps at their spawn tiles and adds fuel
-checkpoints. The crash that change prevents is rare: greatsage loses only 3
-champion-turns in 320 local games to it (`analysis/errors.py`). Head to head
-against greatsage, the first 68 games gave a win rate of 60.3% against 50.0%
-(paired se 8.7), inside the noise.
+**Still measuring:** `gs_seelie_dis050` (the tagged twin) against Seelie's bot
+on the full local pool, paired game for game, plus Seelie's bot against
+greatsage. Disengage at 0.50 on greatsage was +41.9 gems locally (se 18.9),
+but disengage at 0.75 lost 59.8 gems on the ladder, so the ladder still has to
+judge version 93. Its ranked results will show it.
 
-**Now racing:** `gs_seelie_dis050`, Seelie's bot plus disengage at 0.50
-(melee-only finishing blow), against Seelie's bot on the full local pool, paired
-game for game.
+Seelie's bot is greatsage plus gold weight 0.3 and a retreat change. See
+`GROUND-UP-PLAN.md`, "Seelie's bot, now live".
 
 **Local screen results**, paired against greatsage over 320 games:
 
