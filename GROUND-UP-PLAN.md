@@ -2897,3 +2897,27 @@ lose farming time standing off -- and win rate drops eight points.
 
 0.75 goes to the ladder, built both on greatsage (`gs_dis075`) and on the draft
 swap (`gs_vv_dis075`), so it can follow whichever base the draft test leaves.
+
+## The draft swap on the ladder: flat, not shipped
+
+Twenty games on identical pairings, a fresh tagged baseline against Willow ->
+Vesper Vale:
+
+    metric              dv_base    dv_vv    change
+    gems submitted        289.3    285.9     -3.4
+    gems collected        319.1    338.2    +19.1
+    gold earned          3427.0   3555.7   +128.7
+    deaths                 24.6     23.4     -1.3
+    record                 1-19     2-18
+    per-game gems: 9 better, 9 worse, 2 same
+
+The same pattern as Treasure and as its own full pool: more gold and collection,
+no gems. Not shipped; disengage is tested on greatsage.
+
+The contamination check could not run, and the reason matters for every
+cross-run comparison: `--opponents 25,240,60,120` resolves ranks to whoever holds
+them at launch, and the ladder had moved between the Treasure run and this one --
+the four teams were different. A comparison across runs must pin opponents by team
+id with `--same-as`. The disengage test does, which also makes its fresh baseline
+a free contamination check: same bot, same four teams, an hour apart, so it
+should come out bit-identical to `dv_base`.
