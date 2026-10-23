@@ -3184,3 +3184,23 @@ The party rule against v93 on its two maps, both sides:
 
 Three wins in four against one, and with the earlier 32 games a clear net
 gain. `gs_cpp93_party` is CLOUD's ladder candidate, when the freeze lifts.
+
+### 01elk_arena: one gem group, and party play does not help locally
+
+On the ladder (A's 40 games) we die 38.6 times a game on 01elk_arena and 33.5
+on 00swirl, nearly all to champions, and the deaths cluster at the map centre.
+01elk_arena has exactly one gem-bearing group -- 2 elks and 6 gem clusters in
+the middle, 72 gems a capture -- and 28 gold-only groups, so both teams fight
+over one objective. Across the pool, only 00stampede (1), 01elk_arena (1) and
+00contest (2) have two or fewer gem groups; the next is 01hooks with 4.
+
+`gs_cpp93_party2` extended the party rule to maps with at most two gem groups,
+which adds exactly 01elk_arena. On that map, both sides, against v93,
+greatsage, base, colleague and boss_focus:
+
+    gs_cpp93_party  (solo there)   10 wins of 10, 6,948 gems, 277 deaths
+    gs_cpp93_party2 (party there)   5 wins of 10, 4,752 gems, 336 deaths
+
+Rejected. The local opponents do not reproduce the ladder's slaughter on this
+map -- the solo C++ bot wins all ten -- so 01elk_arena needs ladder-strength
+opponents to study, which is the opponent set LOCAL is building.
