@@ -3509,3 +3509,18 @@ twin 2, with win rate -1.2 and -7.5. Positive on gems, but 80 games on these
 high-variance maps cannot resolve it, and win rate falls: the raid trades wins
 for gems. `bench.py` now takes `BENCH_MAPS` to sweep a subset, and
 `analysis/subset.py` compares arms on a subset (`--mono 0.5` for these maps).
+
+### Bruiser + heal60: consistently positive, not yet significant
+
+    combo vs twin 1 (in sample)             +18.6 gems (z 1.0)   win +1.2   deaths -0.70
+    combo re-roll vs fresh twin 3           +14.8 gems (z 0.8)   win +2.8   deaths -0.75
+    combo re-roll vs twin 2                 +11.5 gems (z 0.6)   win +1.6   deaths -0.70
+    twins vs twin 3                          +3.3 and -2.6 (the method now holds)
+    pooled, 2 combo arms vs 3 twins          +15.2 gems (se 17.8, z 0.85); deaths -0.71 (z -1.64)
+
+Pooling re-rolls barely shrank the error, because most of the variance is
+game-to-game (each map, opponent and side reacts differently), not re-roll luck.
+The pool only has 320 distinct games, so a 15-gem effect needs more distinct
+games, not more re-rolls of the same ones. The combination and a twin are now
+being run against four more opponents (boss_full, seelie_t04, priority_exp,
+gs_dis075) for 640 distinct games (`analysis/pooled.py`).
