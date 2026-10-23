@@ -2847,3 +2847,33 @@ moved only 4.3.
 
 Judged on deaths and kill/death ratio first. The threshold for A is calibrated
 locally against the in-game power ratio before it goes to the ladder.
+
+## Candidate A: disengage from lost fights, and its calibration
+
+`analysis/mkdisengage.py` builds the rule from pristine greatsage. Each turn,
+after the low-health retreat and before capture and combat, `combat.local_power`
+compares our health-times-strength within five tiles (allies at 0.75, as in
+`choose_enemy`) with the enemy champions'. Below `DISENGAGE_RATIO` the champion
+takes a killing blow already in reach, if there is one, then withdraws along the
+existing threat-aware `nav.retreat`, and stays out until the ratio recovers by
+0.2. The same function, with the threshold at zero and a print, is the logger
+`gs_fightlog`, so the calibration is against exactly the number the rule reads.
+
+160 local games, every map against the four standard opponents, about 96,000
+champion-turns with an enemy champion in reach, each matched to the event log
+(`analysis/calibrate.py`; bot stdout sits NUL-padded inside the replay bundle):
+
+    ratio        turns    died in 8   kill in 8
+    < 0.25      10,990       45.6%        3.0%
+    0.25-0.50    9,955       27.4%        3.7%
+    0.50-0.75    8,844       13.1%        5.6%
+    0.75-1.00    7,947        7.1%        6.4%
+    1.00-1.25    6,342        4.7%        9.2%
+    >= 3.00     27,128        1.4%       41.2%
+
+Death overtakes the kill between 0.75 and 1.00 for a champion already in a
+fight, near 1.25 on the first turn of an encounter, and near 0.75-1.00 for a
+carrier. A fifth of all turns near an enemy are spent below 0.5. A death costs
+more than a kill earns -- 199 gold to them, plus respawn and farming time -- but
+leaving forgoes kills, so the threshold is bracketed at 0.50, 0.75 and 1.00 and
+the full pool chooses.
