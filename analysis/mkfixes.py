@@ -135,6 +135,29 @@ def apply(src: Path, change: str) -> None:
             "# Monolith raids: eligible from RAID_ROUND, costed for 1 + RAID_ASSUME raiders\n"
             "# (or more if more have claimed it), and a claimed raid pulls teammates in.\n"
             f"RAID_ROUND = {int(change[len('raid'):])}\nRAID_ASSUME = 2\nRAID_PULL = 40\n"))
+    elif re.fullmatch(r"safebank(\d+)", change):
+        # A raid reward is 200 gems on one champion, and a kill hands the killer
+        # everything carried. The first raid game collected 600 gems and lost all
+        # 600 walking to the nearest altar. A big load goes home first: recall
+        # when it is safe, back away from enemies until it is, then bank at the
+        # home altar a few steps from spawn.
+        edit(src / "bot.py",
+             "    def bank(self, me, enemies, camps):\n        self.team.claim()\n",
+             "    def bank(self, me, enemies, camps):\n        self.team.claim()\n"
+             "        # Only while far from every altar: from spawn the home altar is close, so\n"
+             "        # ordinary banking takes over instead of recalling again in a loop (the\n"
+             "        # first version did, and two carriers ended a game holding 952 gems).\n"
+             "        if me.gem_count() >= config.BIG_LOAD and self.altar_field.get(me.position()) > config.SAFE_BANK_DIST:\n"
+             "            if self.recall_safe(me, enemies, camps):\n"
+             "                turn.check()\n"
+             "                me.recall()\n"
+             "                return\n"
+             "            for enemy in enemies:\n"
+             "                turn.check()\n"
+             "                if nav.distance(me.position(), enemy.position()) <= 6:\n"
+             "                    nav.retreat(enemies, camps)\n"
+             "                    return\n")
+        cfg.write_text(cfg.read_text() + f"# Carriers of BIG_LOAD gems or more, further than SAFE_BANK_DIST from any\n# altar, recall home before banking.\nBIG_LOAD = {int(change[len('safebank'):])}\nSAFE_BANK_DIST = 8\n")
     else:
         sys.exit(f"unknown change {change}")
 

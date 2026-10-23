@@ -3417,3 +3417,31 @@ carrier with 200 gems walks to the altar and dies. #1's Prism carries a median
 peak of 196 and dies 1.4 times a game, so their carrier is protected. Screening
 on the full pool will say whether the raid pays on aggregate; if it fails, the
 next version needs an escorted bank after the raid.
+
+### Game constants, read from inside a match (`ws/bots/probe_consts`)
+
+    CAPTURE_TIME 5   RESPAWN_TIME 60   RECALL_TIME 5   SPAWN_HEALING 1.0
+    SUBMIT_GEM_DURATION_MULTIPLIER 0.1   SUBMIT_GEM_BASE_DURATION 0   MINIMUM 1   SUBMIT_GEMS_RANGE 1
+    KILL_GOLD 100   ASSIST_GOLD 0   PASSIVE_GOLD 0   WINNING_GEMS 1000   MAX_ROUNDS 2000
+    ACTIVE_WARDS 1   WARD_COOLDOWN 10   WARD_LIFETIME -1   WARD_VISION_RADIUS 6   ALTAR_LOCK_HITS 5
+
+- **A deposit is a channel of 0.1 rounds per gem.** 24 gems is 2.4 rounds;
+  a 200-gem monolith reward is 20 rounds standing within a tile of the altar.
+  That is why bigger bank loads measured worse (36: -11, 48: -22) and why the
+  raid's carriers die at the altar.
+- **Respawn is 60 rounds**, so each death costs a champion 60 rounds; at 14-21
+  deaths a game that is 15-20% of all champion time.
+- **Spawn heals 100% of max health a round**, so a recall (5 rounds) is a
+  full heal.
+- A kill pays 100 gold plus everything the victim carried; assists pay
+  nothing; there is no passive gold. One ward at a time.
+
+### Safe-bank candidate and its bug
+
+`safebank80`: a carrier of 80 or more gems far from every altar recalls home
+(or backs off enemies within 6) before banking. The first version recalled in
+a loop -- recall, step out of spawn, recall again -- and two carriers ended a
+`00rows` game holding 952 gems. Restricting it to "more than 8 tiles from every
+altar" removed the loop, but on maps whose altars are all mid-map (no home
+altar) the carrier is still far from every altar at spawn, so recall-home cannot
+work there. #1 banks at depth about 0.5 for the same reason.
