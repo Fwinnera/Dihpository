@@ -120,6 +120,22 @@ def apply(src: Path, change: str) -> None:
              "BUILDS = {bc.ChampionType.WILLOW: (I.TREASURE_SHARD_OF_FOCUS,\n"
              "          I.JUNGLE_SHARD_OF_FOCUS, I.DURABILITY_SHARD_OF_HEALTH,\n"
              "          I.POWER_SHARD_OF_FOCUS)}")
+    elif change == "hunt":
+        # Carriers are the richest targets: a kill pays 100 gold plus everything
+        # carried. The top five kill 1.6-3.3 carriers a game; we kill 0.6, and a
+        # carrier's gems were only the last tie-break. Within reach (7 tiles), a
+        # carrier of HUNT_GEMS or more is accepted at HUNT_POWER of the local
+        # strength rather than 1.15, and targets rank by gems before health.
+        # Disengage still runs first, so a lost fight is still left.
+        c = src / "combat.py"
+        edit(c, "        if not (killable or interrupt or defending or gap <= 4 or allied_power > enemy_power * 1.15):\n",
+             "        rich = enemy.gem_count() >= config.HUNT_GEMS and allied_power > enemy_power * config.HUNT_POWER\n"
+             "        if not (killable or interrupt or defending or gap <= 4 or allied_power > enemy_power * 1.15 or rich):\n")
+        edit(c, "        if gap > 4 and not (killable or interrupt or allied_power > enemy_power * 1.15):\n",
+             "        if gap > 4 and not (killable or interrupt or allied_power > enemy_power * 1.15 or rich):\n")
+        edit(c, "        score = (not attack_mask.is_set(enemy.position()), not interrupt, not killable, enemy.health() / max(1, me.strength()), gap, -enemy.gem_count())\n",
+             "        score = (not attack_mask.is_set(enemy.position()), not interrupt, not killable, -enemy.gem_count(), enemy.health() / max(1, me.strength()), gap)\n")
+        cfg.write_text(cfg.read_text() + "# Hunt carriers of HUNT_GEMS or more at HUNT_POWER of the local strength.\nHUNT_GEMS = 15\nHUNT_POWER = 0.8\n")
     elif change == "claimresp":
         # Champions see their allies' claims but not their captures, so each one
         # learns that a camp is respawning only by walking to it: up to a fifth
