@@ -2951,3 +2951,74 @@ Next for A, cheapest first: 0.50 (nearly as good locally -- deaths -5.2, gems
 +41.9 -- while leaving fights far less often); disengage only when outnumbered,
 not merely outmatched; and stop the farming choice from walking a disengaged
 champion straight back to the camp it left.
+
+## CLOUD: where A's ladder gems went, and a map where greatsage never moves
+
+### The A test was clean, and its gem loss is inside its own noise
+
+All 40 games were downloaded and their replays' `BOTTAG` lines read
+(`analysis/ladder_arms.py`): every `da_base` game was played by `gs_shopbase` and
+every `da_dis` game by `gs_dis075`. Nothing was contaminated.
+
+Paired by opponent and map, the 20 gem differences run from -683 to +648. Their
+mean is -59.9 with a paired standard error of 61.5, so the result is one standard
+error from zero: it does not show that A costs gems, and it does not show that it
+doesn't. Seven games better, eleven worse, two the same. Not shipping it was the
+right call under the agreed rule; the rule was set for a test that cannot
+resolve a 60-gem effect in 20 games.
+
+    per game            da_base    da_dis    change
+    deaths                 23.6      15.8      -7.8
+    rounds alive         4554.8    4985.0    +430.2
+    monster damage        50975     39462    -11512
+    camp clears            39.3      39.4      +0.1
+    deposits                9.9       8.1      -1.8
+    rounds taking champion damage  278.9  289.1  +10.2
+    monster damage per round alive  11.19   7.92
+
+The mechanism is visible in the counts. Champions live 430 rounds longer and
+deal 23% less monster damage, 29% less per round alive. They are taking champion
+damage on as many rounds as before. A converts deaths into time spent walking
+away under fire, not into time farming.
+
+By opponent, the whole mean is one team: against Hidden Altar Keepers gems went
+442 -> 136 a game (two games, 01islands -683 and 00quadrants -478, carry most of
+it). Against the other three it was 251 -> 251, 303 -> 314 and 294 -> 350, with
+deaths down 7 to 12 a game every time; without Hidden Altar Keepers the mean is
++22.4 over 15 games.
+
+### 01yellow_brick_road: greatsage spends every turn's fuel and never acts
+
+Both arms scored 0 against Quantom on `01yellow_brick_road`, with 0 deaths and 0
+monster damage: the whole team stood still for the whole game. Section 4 above
+recorded the same thing locally on 21 Oct and left it unexplained.
+
+Reproduced locally (greatsage against itself, `config.DEBUG = True`): neither
+team prints a single state line, and the per-turn fuel log in the replay bundle
+(`team-a.fuel`, little-endian uint64 after a 13-byte header) shows why. Every
+champion uses the whole 5,000,000 of its first turn and 2,500,000 of its second,
+and then about 2,275,000 every turn after -- exactly the budget less
+`turn.MIN_FUEL`. The turn guard is raising `Replan` every turn, before any
+action. The setup it keeps abandoning is only stored on completion (`metadata`,
+`altar_field`, `crystal_needed`), so it restarts from nothing each turn and never
+finishes. It is opponent-dependent on the ladder (483 and 474 gems on the same
+map against two other teams), which fits a setup cost that sits right at the
+budget.
+
+The C++ port (`gs_cpp`, below) finishes the same setup inside its first few
+turns and wins the map 1,010 to 404 against greatsage.
+
+### gs_cpp: greatsage, ported to C++ line for line
+
+`ws/bots/gs_cpp` translates every greatsage module -- bot, escort, boss, combat,
+navigation, strategy, teamwork, progress, policy, draft, config, turn -- keeping
+its iteration orders and tie-breaks (first minimum, stable sorts) and doing its
+arithmetic in double. Every absolute fuel threshold is the Python one divided by
+25, the language multiplier. First games:
+
+    00ambush            gs_cpp 1019 - 644 greatsage   (gs_cpp side A)
+    00ambush            greatsage 1005 - 628 gs_cpp   (gs_cpp side B)
+    01yellow-brick-road gs_cpp 1010 - 404 greatsage
+
+No `ERROR` lines in either team's log. The 80-game parity sweep against greatsage
+(both sides, all 40 maps, against a greatsage self-play baseline) is running.
