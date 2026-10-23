@@ -96,6 +96,11 @@ local harness, the platform login and the GitHub deploy key.
 the 90% test: pooled over 640 distinct games against four unselected v93
 re-rolls, gems +19.4 (z 1.51), win rate +2.5, deaths −1.03. Its ranked results
 are the real verdict. If they slip, put v93 back
+
+**First ladder check (5 unranked games at 23:29Z, no submission, tag `v97_live`)**
+against Hidden Altar Keepers on the `db_base` maps and sides: gems +68.6 and gold
++1,334 against v93's games, gems +17.2 and deaths −6.8 against greatsage's; 0-5 in
+all three. A lean, not a result.
 (`seelie_dis050_submit.zip`) and switch the restore target.
 
 **Important for anyone screening against v93:** v93 was chosen as the best bot

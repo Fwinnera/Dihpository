@@ -3551,3 +3551,13 @@ real test.
 
 Version 97 went live at 23:21Z at the owner's request; its folder matched the
 `v97.zip` handed over, byte for byte, and `ladderbench.py` restores it.
+
+v97's first ladder check: five unranked games at 23:29Z against Hidden Altar
+Keepers on the `db_base` maps and sides (no submission; v97 was live):
+
+    against v93's games (16:50Z)        gems +68.6, collected +74.0, gold +1,334, deaths +0.6, 0-5 both
+    against greatsage's games (16:31Z)  gems +17.2, collected +39.2, gold +1,202, deaths -6.8, 0-5 both
+
+Games last 105-187 rounds longer before the opponent reaches 1,000. A lean in
+v97's favour; five games resolve nothing, and the opponent may have resubmitted
+since the afternoon.
