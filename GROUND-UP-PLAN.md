@@ -3132,3 +3132,19 @@ Version 93 is Seelie's bot plus disengage at 0.50, so the C++ line now has
 camps at their spawn tiles, and disengage at 0.50 with the melee-only finishing
 blow) and `gs_cpp93_party` (plus the party rule). Its parity sweep against
 `gs_seelie_dis050` is running.
+
+### Version 93's evidence, as of 16:58Z
+
+Local, full pool, 320 paired games against Seelie's bot: gems +57.9 (se 19.1),
+win rate +6.9 (se 3.3), deaths -4.7 (se 0.66), kills +2.4, gold +675; positive
+against all four opponents; 170 games better and 113 worse (sign test p =
+0.001). Disengage gains more on Seelie's base than on greatsage's (+42).
+
+Ladder, 20 unranked games (tag `v93_live`) against the four teams, maps and
+sides of `db_base` (greatsage, 16:31Z): gems 289.3 -> 352.2 (+62.9), collected
++82.4, deaths 24.6 -> 18.0, opponent gems -24.3, record 1-19 both, 9 better and
+8 worse. That is the reverse of disengage at 0.75 on greatsage (gems -59.8) at
+the same death reduction, but at twenty games it is a lean, not a result.
+
+Ranked: the first batch it played (16:50Z, against slayer) went 2-3. The
+rating is 1,644, rank 212, against 1,630 and rank 228 at 16:00Z.

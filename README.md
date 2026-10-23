@@ -83,6 +83,11 @@ Test submissions stay frozen until the owner lifts the freeze.
 `v93_live`, for a before-and-after with greatsage. With `db_base`'s 20 at
 16:31Z, the trailing hour holds 40 until about 17:31Z.
 
+**Version 93's evidence so far:** local, 320 paired games against Seelie's bot,
+gems +57.9 (se 19.1), deaths −4.7. Ladder, 20 games against greatsage's
+`db_base` pairings, gems +62.9, deaths −6.6. First ranked batch 2-3; rating
+1,644, rank 212. Details in `GROUND-UP-PLAN.md`.
+
 **Still measuring:** `gs_seelie_dis050` (the tagged twin) against Seelie's bot
 on the full local pool, paired game for game, plus Seelie's bot against
 greatsage. Disengage at 0.50 on greatsage was +41.9 gems locally (se 18.9),
