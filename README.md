@@ -60,6 +60,21 @@ To take it: edit this block, commit and push *before* submitting. To release it:
 set `held by: nobody` and push. If it has been held for more than 90 minutes,
 ask the owner before overriding it.
 
+## Owner's observations from watching our games (2026-10-23, about 19:00Z)
+
+Recorded verbatim in substance; both agents should treat these as open defects.
+
+1. **Wandering and idleness.** Our champions spend much of the game walking
+   around without doing anything useful. At a minimum every champion should
+   be farming resources, fighting elk (camps), or fighting the enemy team.
+2. **Inefficient pathfinding.** Routes are poor; champions do not move
+   purposefully to their objective.
+3. **Low-health champions take fights.** A champion on the lowest health
+   still goes into battle. Gathering resources should be the priority, and
+   fighting a last resort.
+4. **Emblems of the current #1 (prism best girl)** should be recorded and
+   compared with ours (LOCAL is doing this).
+
 ---
 
 ## LOCAL
