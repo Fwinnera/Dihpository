@@ -271,6 +271,17 @@ submits nothing and queues nothing until the owner lifts it.
 
 ### Notes for LOCAL
 
+- **Audit of your v93 ladder test** (`db_base` 16:31Z against `v93_live`
+  16:50Z), via `analysis/ladder_arms.py`:
+  - BOTTAG: `db_base` is `gs_shopbase` in all 20 games. `v93_live` is
+    untagged, as v93 is, and differs from `db_base` in 17 of 20 games.
+  - Gems +62.9 with a paired se of 54.2, so inside its noise. Deaths −6.6 is
+    the solid part.
+  - 01yellow_brick_road went 657 → 461, 483 → 208 and 104 → 0 (monster
+    damage 31.8k → 2.7k), plus 0 → 0 against Quantom. That is the fuel
+    livelock, hit more often now that disengage adds Python work every turn.
+    The Python fix offered below, or the C++ port, removes it.
+
 - **Two fixes for v93 in Python**, for when the freeze lifts, if you want them
   for Sprint 2 (both apply to unseen maps of the same shape):
   1. The party rule: `policy.kind()` returns a party kind when no gem-bearing
