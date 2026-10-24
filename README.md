@@ -290,57 +290,38 @@ Replies to your notes, as of 16:20Z:
 
 **Agent:** Claude Code in a claude.ai cloud container (4 cores, the engine, the
 platform CLI read-only, GitHub push). It cannot reach the Mac.
-**Branch:** `Fwinnera`. **Updated:** 2026-10-24 09:55Z.
+**Branch:** `Fwinnera`. **Updated:** 2026-10-24 11:35Z.
 
-### Doing now (2026-10-24 09:45Z) — CLOUD's slice of "learn from lost games"
+### Doing now (2026-10-24 11:35Z) — CLOUD's slice of "learn from lost games"
 
-LOCAL has the v100 autopsy, team jobs (`lteam50`) and the contested-camp
-discount (`lctNN`); CLOUD does not touch those. CLOUD mines our **last 300
-ranked games** (154 W, 146 L; `analysis/lossmine.py`, summaries on CLOUD only).
-Findings so far:
+**Result: v101 = v100 + `lad_race`, ready for the owner, not uploaded.**
+`ws/bots/v101_submit`, `v101_submit.zip` (23,200 bytes, sha256
+`596edc37492549c2772b7957d6bc90b8f404b3cd6511d7411a0dda4a57e64a42`); rebuild with
+`analysis/mksubmit.py v101 bruiser+heal60+fieldresume+raid900+monogate+cheapretry+party+lockbreak+lad_race`.
+16 lines differ from v100; eight smoke games clean.
 
-- **Not the problem:** fuel exhaustion (us 8-11 events a game, opponents 50-60)
-  and deaths to camps (2.6 a game for both sides, wins and losses alike).
-- **The fight gap:** in losses we die to champions 17.7 times a game (them 6.4);
-  most are lone pick-offs (9.6), and **4.4 are within 8 tiles of our own spawn**
-  (0.7 in wins), empty-handed, not at an altar: invaders farming beside our
-  base. Worst maps: 00swirl, 01hooks, 00gem_fields. Arm `gs100_hold`
-  (`lad_spawnhold`: stay in spawn while outmatched there) is built; it rarely
-  fires locally, so the local screen can only show it does no harm.
-- **Races lost holding the winning gems:** 6 losses ended with us on 966-999
-  submitted and 44-107 gems carried when the opponent reached 1,000; 23 more
-  were lost on the round-2000 gems tiebreak.
-- **01boss_battle hoards:** one loss ended with Varg carrying 1,669 gems, another
-  with 1,216; carriers died holding 647 and 419. It reproduces locally: v100
-  deposits 0-1 times all game as side A. Cause found so far: the single central
-  altar sits under an enemy lock (131 turns "locked, can't hit", 10 hits on locks
-  all game) and the boss controller gives up banking for 80 rounds after a few
-  turns without progress, carrying everything. Tracing it now; fix next.
-
-**v100's first 20 ranked games (09:00-09:30Z): 12 wins, 8 losses (60%)**,
-against 154 of 300 (51%) before it. Losses: 01boss_battle 0-1094, 00fragment,
-00quadrants, 00gemfight, 00lanes, 00ambush, 00great_wall, and **00swirl 870-891
-on the round-2000 tiebreak with 119 gems unbanked**: exactly the case `lad_race`
-fixes.
-
-**Running on CLOUD (four distinct opponents, against v100's own runs):**
-`race100` (`lad_race`: bank when ours + visible allies' loads would win, and
-bank 6+ gems once either side is within 200/150 of winning): **+11.9 gems
-(clustered z 0.97), win +1.6** over 320 games; in local close races it loses 6
-of 19 against v100's 9 of 18. Second half running (`race100b`, other four
-opponents). `boss100` (`lad_bossbank`): **rejected**, 01boss-battle wins 7 -> 3.
-`hold100` (`lad_spawnhold`): **rejected**, −6.0, near-spawn deaths unchanged.
-Arms: `ws/bots/gs100_race`, `gs100_boss`, `gs100_hold` (all v100 + change +
-reroll2; baseline tag `lk99`).
-
-**lockbreak is confirmed out of sample** (+23.2, z 1.79; pooled 640 games
-+35.2, z 3.79). CLOUD's CPU is free from now; LOCAL's replication of v100
-(+113, z 4.57) is noted in the handoff below.
+- **`lad_race`** (from our ranked losses: 6 of 146 ended with us on 966-999
+  holding 44-107 gems when the opponent reached 1,000, 23 more on the round-2000
+  tiebreak, and v100's own 00swirl loss 870-891 with 119 gems carried): bank when
+  ours plus the loads of visible allies would win, and bank 6+ gems once either
+  side is within 200 / 150 of winning. **640 games against v100's own runs: gems
+  +14.4 (clustered z 1.30), win +1.9.** Close races (both 850+): v100 lost 15 of
+  30, v101 17 of 39. Modest locally because local opponents rarely race.
+- **Rejected:** `lad_bossbank` (01boss-battle wins 7 -> 3), `lad_spawnhold`
+  (−6.0; near-spawn deaths unchanged, so they are fights over camps beside our
+  base, not champions stepping out of spawn).
+- **What the 300 ranked games say** (`GROUND-UP-PLAN.md`, "learning from 300
+  ranked games"): fuel and camp deaths do not separate wins from losses; the
+  fight does (deaths to champions 17.7 vs 7.9, mostly lone pick-offs in our own
+  half); 01boss_battle's only deposit tile is the monolith's spawn tile, which
+  is why we hoard there (needs a deposit timed to the boss's death; open).
+- **v100's first 20 ranked games: 12-8.**
 
 ### START HERE, LOCAL: handoff of everything CLOUD did since your brief
 
-**Recommended upload: v100** (`ws/bots/v100_submit`, `v100_submit.zip`,
-22,989 bytes, sha256 `bb576f15f371bb396fce442b6edf6ca3fcb701c18d3fa94494cefe8b68d7a8dc`).
+**Live: v100** (`ws/bots/v100_submit`, `v100_submit.zip`, 22,989 bytes, sha256
+`bb576f15f371bb396fce442b6edf6ca3fcb701c18d3fa94494cefe8b68d7a8dc`). **Next candidate:
+v101** = v100 + `lad_race` (see Doing now above; not uploaded).
 **v100 is LIVE as version 105** (uploaded by CLOUD 08:53Z at the owner's
 explicit request). The owner has the v98, v99 and v100 zips. Ladder check:
 20 unranked games against the four pinned db_base teams (done 09:0xZ):
@@ -350,6 +331,7 @@ show the local gain**; these teams beat us 18 of 20 whatever we run, and
 the five maps hold little of what v98-v100 fix. Watch v100's ranked results. Zips are gitignored; rebuild any of them
 byte for byte with `analysis/mksubmit.py` (it rebuilt v97 exactly as a check):
 
+    python3 analysis/mksubmit.py v101 bruiser+heal60+fieldresume+raid900+monogate+cheapretry+party+lockbreak+lad_race
     python3 analysis/mksubmit.py v100 bruiser+heal60+fieldresume+raid900+monogate+cheapretry+party+lockbreak
     python3 analysis/mksubmit.py v99  bruiser+heal60+fieldresume+raid900+monogate+cheapretry+party
     python3 analysis/mksubmit.py v98  bruiser+heal60+fieldresume+cheapretry+party
@@ -362,10 +344,11 @@ smoke games (v100: 8 of 8 won, including 01shortcut 1028-354 and 1027-0).
 
 | version | = | evidence (clustered SE, see Measurement) |
 |---|---|---|
-| v97 (live) | v93 + Bruiser + heal-recall 60% | your 640-game pass, +19.4 (plain z 1.51) |
+| v97 | v93 + Bruiser + heal-recall 60% | your 640-game pass, +19.4 (plain z 1.51) |
 | **v98** | v97 + `fieldresume` + `cheapretry` + `party` | 640 games, 8 opponents, vs fresh v97 twins: **gems +59.4, win +9.5** (official outcome); clustered z 2.98 (plain 4.55); each half alone z 2.16 / 2.06; every opponent up |
 | **v99** | v98 + `raid900` + `monogate` | on the 9 monolith-heavy maps, three replicates: +57.7, +65.2, +63.8; pooled 144 games **+61.5, z 2.22**, win +2.1; off those maps v99 plays like v98 (−11.8, se 13.2). ≈ +14 a game pool-wide |
-| **v100** | v99 + `lockbreak` | screen, 4 distinct opponents, 320 games vs fresh v99 twin: **gems +47.1 (z 3.57), win +9.1 (z 2.90)**, opponent gems −85; confirmation on the other 4 opponents with a fresh re-roll pair: **+23.2 (z 1.79)**; pooled 640 games **+35.2 (z 3.79), win +5.2 (z 2.03)** |
+| **v100** (live, version 105) | v99 + `lockbreak` | screen, 4 distinct opponents, 320 games vs fresh v99 twin: **gems +47.1 (z 3.57), win +9.1 (z 2.90)**, opponent gems −85; confirmation on the other 4 opponents with a fresh re-roll pair: **+23.2 (z 1.79)**; pooled 640 games **+35.2 (z 3.79), win +5.2 (z 2.03)** |
+| **v101** | v100 + `lad_race` | 640 games vs v100's own runs (both opponent sets): **gems +14.4 (clustered z 1.30), win +1.9**; close races lost 17 of 39 vs v100's 15 of 30 |
 
 Head to head against v100, all 40 maps from both sides: the teammate's
 `camp-cache-only` bot loses 27-53 (v100 +212 gems a game, z 4.1); v93

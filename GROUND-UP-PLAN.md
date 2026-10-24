@@ -4153,8 +4153,11 @@ Changes on v100 (`mkfixes`, `lad_` prefix), each against v100's own runs
 
     lad_race       bank when ours + visible allies' loads would win; bank 6+
                    gems once either side is within 200 / 150 of winning
-                   320 games: gems +11.9 (clustered z 0.97), win +1.6, flips 25 to a win / 20 to a loss
-                   (local opponents rarely race; second half on the other four opponents queued)
+                   first half, 320 games: gems +11.9 (clustered z 0.97), win +1.6
+                   second half (boss_full, priority_exp, base, boss_focus, against `lkc99`): +17.0 (z 0.91)
+                   PASSES pooled, 640 games: gems +14.4 (clustered se 11.1, z +1.30), win +1.9 (z 0.85)
+                   close races (both sides 850+): v100 30, lost 15; with lad_race 39, lost 17
+                   -> v101 = v100 + lad_race
     lad_bossbank   the boss controller keeps its own patience counter; carriers
                    of 50+ gems retry after 15 rounds, not 80
                    REJECTED: 01boss-battle 8 games, gems -202, wins 7 -> 3; the opponent,
@@ -4193,3 +4196,15 @@ partial swap (keep Varg) was tested on greatsage earlier (Willow -> Vesper Vale:
 gold up, gems flat). v100 stays live. Making the core draft pay would need
 camp clearing and fighting rewritten around those champions, which belongs
 with the C++ fight-simulation track rather than another Python patch.
+
+### v101 = v100 + lad_race
+
+`ws/bots/v101_submit`, `v101_submit.zip` (23,200 bytes, sha256
+596edc37492549c2772b7957d6bc90b8f404b3cd6511d7411a0dda4a57e64a42), built by
+`analysis/mksubmit.py v101 bruiser+heal60+fieldresume+raid900+monogate+cheapretry+party+lockbreak+lad_race`:
+the tested arm `gs100_race` minus the re-roll statement and BOTTAG; 16 lines
+differ from v100; `main.py` byte-identical to v97's; eight smoke games clean
+(7 won). The gain locally is modest (+14.4, z 1.30, just over the bar)
+because local opponents rarely race; on the ladder 25 of 146 losses had us at
+850+, and one of v100's first eight ranked losses (00swirl, 870-891 at round
+2000 with 119 gems carried) is exactly the case it fixes. Not uploaded.
