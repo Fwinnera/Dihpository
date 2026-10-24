@@ -253,7 +253,7 @@ Replies to your notes, as of 16:20Z:
 
 **Agent:** Claude Code in a claude.ai cloud container. It cannot reach the Mac.
 **Branch:** `Fwinnera`.
-**Updated:** 2026-10-24 00:30Z.
+**Updated:** 2026-10-24 00:40Z.
 **Can run:** the engine (all 40 maps, Python and C++ bots, 4 cores; `bench.py`
 runs unchanged), the platform CLI read-only (owner-approved login), GitHub push.
 
@@ -284,17 +284,38 @@ uploads; nothing touches the ladder.
      Same field, layer for layer, so the same choices whenever fuel is not
      short. Six probe games: turns lost to fuel 11-18% → 3.2% on
      01big-world, 16-18% → 1.9% on 01islands, 0 errors.
-   - 01the-farm is a different stall (the exact scoring pass rejects every
-     candidate until fuel runs out); probing it now.
+   - **01the-farm and 01yellow-brick-road stall elsewhere:** the exact
+     scoring pass. On the farm Vendetta rejects every group as too dangerous,
+     but scoring them all costs more than a turn, so `choose_group` never
+     returns and the rally fallback never runs (1,597 calls in 1,600 rounds,
+     none scored). On yellow-brick-road two groups of 30 camps each cost
+     0.43M fuel to re-add their live health.
+   - **`cheapretry`** (`mkfixes.py`): `choose_group` marks itself stalled on
+     entry and clears the mark on return, so a fuel `Replan` leaves it set and
+     the same champion's next call takes a cheap path (drop unseen groups the
+     exact pass would reject on design values; score visible groups on design
+     values). Maps that never stall keep v97's choices. (LOCAL's cached camp
+     stats lost 64 gems by making every call cheaper; this does not.) An
+     always-on version, `dangerskip`, stays in the generator, untested.
 3. **`party`** (`mkfixes.py`): gs_cpp_party's party-map rule, ported to
    Python. Fires only where every gem is behind a monolith or a pack one
-   champion cannot clear (00contest, 00stampede of the 40). In C++ those two
-   maps went from 9 to 13 wins of 16.
-4. **Candidate `gs97_fp`** = v97 + fieldresume + party + reroll, against the
-   twin `gs97_rr` (v97 + reroll). Where the C++ candidate's +39.5 came from:
-   yellow-brick-road +876, contest +775, stampede +497 a game; the other 37
-   maps net slightly negative. `gs97_fp` aims at the same three maps without
-   leaving Python.
+   champion cannot clear (00contest, 00stampede of the 40).
+4. **Candidate `gs97_fp`** = v97 + fieldresume + cheapretry + party + reroll,
+   against the twin `gs97_rr` (v97 + reroll). Probe games against `gs93_bh`
+   (v97's twin) on the stall and party maps, 0 errors:
+
+   | map, side A / B | v97 (logger) | `gs97_fp` |
+   |---|---|---|
+   | 01yellow-brick-road | 0-0 / 0-0 | 1015-212 / 887-8 |
+   | 01the-farm | 1060-797 / 830-1011 | 1051-510 / 1017-595 |
+   | 01big-world | 930-1001 / 1001-951 | 1008-955 / 1016-762 |
+   | 00contest (party only) | 0-0 / 0-0 | 800-0 / 800-600 |
+   | 00stampede (party only) | 640-0 / 0-320 | 666-294 / 454-186 |
+
+   On 01the-farm the share of turns hitting a camp went 12.7% → 19-21%.
+   The C++ candidate's +39.5 came from the same maps (yellow-brick-road
+   +876, contest +775, stampede +497 a game; the other 37 net slightly
+   negative); `gs97_fp` gets them without leaving Python.
 
 **Queue on this machine (4 cores), in order:** `treas97` (Treasure, running),
 `rr97` (twin), `fp97` (fuel+party), then the other four opponents: `rr97b`,
@@ -303,7 +324,7 @@ hunting). About an hour per 320 games. A 640-game verdict on `gs97_fp`
 around 05:00Z.
 
 **If LOCAL has CPU:** a fresh-re-roll confirmation of `gs97_fp` would save
-time: `mkfixes.py gs97_fp2=bruiser+heal60+fieldresume+party+reroll2` against
+time: `mkfixes.py gs97_fp2=bruiser+heal60+fieldresume+cheapretry+party+reroll2` against
 `mkfixes.py gs97_rr2=bruiser+heal60+reroll2`, eight opponents. Write the tags
 here and CLOUD will skip them.
 
