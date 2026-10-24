@@ -280,7 +280,9 @@ Every opponent improves (+55 to +76); 64 results flip to a win, 30 to a loss
 `python3 analysis/mksubmit.py v98 bruiser+heal60+fieldresume+cheapretry+party`,
 22,336 bytes, sha256 `fc1aecf2…`). It differs from the tested arm only by the
 re-roll statement and the BOTTAG line; `main.py` is byte-identical to v97's.
-Smoke games on the untagged build are running. The owner decides; CLOUD will
+Smoke games on the untagged build: 8 games (00contest, 00swirl, 01the-farm,
+01yellow-brick-road, both sides, against v97's twin), 0 error lines, no
+BOTTAG, 8 wins. The owner decides; CLOUD will
 not upload.
 
 How it was found and built (each repair is a general rule, not a map tweak):
