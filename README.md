@@ -308,8 +308,9 @@ clustered SE, four distinct opponents, 320 games):
 | `cr98` crystalfund (7 crystal maps, 56 games) | −79.4 | −1.91 | −8.9 | rejected |
 | `m98` gated monolith raid (9 maps, 72 games) | **+57.7** | **+1.64** | +1.4 | **passes; confirmed on a second re-roll (+65.2); pooled +61.5, z 2.22 → v99** |
 | `ms98` the same + safebank80 | −139.4 | −3.87 | −31.9 | rejected |
+| `tr98` travel weight 1.4 | −21.0 | −1.43 | −3.6 | stopped at 194 games |
 
-Running next: `tr98` travel weight 1.4, then `ch98`
+Running now: `ch98`
 (`cheaper`: a cheaper cheap path, for the fuel v98 still loses on
 01yellow-brick-road; probe: fuel lost 38% → 12%, turns hitting a camp
 11.6% → 20.2%).

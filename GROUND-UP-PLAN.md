@@ -3879,3 +3879,8 @@ byte-identical to v97's; eight smoke games clean (7 wins against v97's twin).
 Not uploaded.
 
 Also run: travel weight 1.4 (`tr98`) is flat to negative so far.
+
+**Travel weight 1.4 (`tr98`): stopped for futility at 194 of 320 games, -21
+gems (clustered z -1.4), win rate -3.6.** LOCAL's 0.6 and 0.4 lost too, so the
+greatsage weight of 1.0 sits at or near the optimum; the 22% of turns spent
+travelling is not a weighting problem.
