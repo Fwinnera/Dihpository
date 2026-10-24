@@ -3834,3 +3834,10 @@ unchanged at 22%, twice the time spent hitting camps.
 greatsage -17.7, gs_dis075 -26.8, seelie_t04 -34.0. Accepting fights for
 carriers at 0.8 of the enemy's local strength costs more than the carried gems
 pay. Not passed.
+
+**Crystalfund (`cr98`, the 7 crystal maps, 56 games): -79.4 gems (clustered
+z -1.9), win rate -8.9.** By map: 01boss-battle -363, 01fracture -204,
+01shortcut -40, 00ambush -7, 01big-world -3, 01islands +1, 00quadrants +62.
+The idle time it targets on 01islands and 01big-world did not turn into gems,
+and keeping the next crystal's price delays shards, which costs most on
+01boss-battle, where the party needs its items for the monolith. Rejected.

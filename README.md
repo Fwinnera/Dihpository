@@ -294,8 +294,9 @@ clustered SE, four distinct opponents, 320 games):
 | `c98` claim-inferred respawns | −37.9 | −1.04 | −9.2 | stopped at 109 games |
 | `h98` carrier hunting | −12.6 | −0.95 | −1.9 | fails |
 | `pm98` party only on all-monolith maps | −194 on the party maps | | | rejected |
+| `cr98` crystalfund (7 crystal maps, 56 games) | −79.4 | −1.91 | −8.9 | rejected |
 
-Running next: `cr98` crystalfund (7 crystal maps), `m98`/`ms98` gated monolith
+Running next: `m98`/`ms98` gated monolith
 raid (9 monolith-heavy maps), `tr98` travel weight 1.4, then `ch98`
 (`cheaper`: a cheaper cheap path, for the fuel v98 still loses on
 01yellow-brick-road; probe: fuel lost 38% → 12%, turns hitting a camp
