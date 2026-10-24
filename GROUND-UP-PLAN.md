@@ -3889,3 +3889,29 @@ travelling is not a weighting problem.
 320 games.** Box distances, six sample tiles a group and a give-up when fuel
 runs low did cut fuel loss on 01yellow-brick-road in the probe (38% to 12%),
 but they change nothing measurable over the pool. Not adopted.
+
+## CLOUD: where v98 still loses, and enemy altar locks
+
+v98's worst map over its 640 test games is **01shortcut: 0 wins of 16** (v97: 5
+of 16), 422 gems against 919. Its champions spend 30% of their turns banking
+(the median map: 9%). `gs98_bankprobe` counted the branches of `bank()` there:
+811 bank-turns within a few tiles of an altar for 17 deposits, 679 turns with
+the near altar under an **enemy altar lock**, and 608 turns 45+ tiles from any
+altar goal. Both teams place a lock on every altar they pass (10 gold, five
+hits to clear, and it blocks only the other team's deposits). `bank()` broke a
+lock only when no altar at all was free, so with two altars our carriers
+walked across the map to the free one, and back.
+
+Other maps with high bank time in v98's profile: 00rushbait-v2 30% (a 38%-win
+map for v98), 00reverse-spiral 25%, 00great-wall 22%, 01the-farm 19%.
+
+**`lockbreak`**: a locked altar wins when its distance plus six turns of
+hitting is less than the nearest free altar's; once the lock falls, our own
+lock goes on in `finish_turn`. Probe, against a v99 twin logger on the same
+games (2 games a map):
+
+    01shortcut        bank 27.9% -> 23.6%   twin 266-1016, 125-1007   lockbreak 854-894, 1063-16
+    00rushbait-v2     bank 20.0% -> 13.5%   twin 1011-29, 857-1025    lockbreak 1011-29, 1005-117
+    00reverse-spiral  bank 13.2% -> 11.0%   both won both
+
+Screening on v99 (`lk99` against the fresh v99 twin `r299`, 320 games).
