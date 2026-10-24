@@ -48,7 +48,8 @@ one match quota. Most of the ways to waste a day here come from forgetting that.
 
 ## Ladder lock
 
-    held by:   nobody (LOCAL released it 2026-10-24 20:03Z).
+    held by:   LOCAL since 2026-10-24 21:36Z, for the owner's request: upload
+               gs_stand_submit, then the standard 20-game unranked check.
     live bot:  VERSION 109 = gs_fix2_submit (ws/bots/gs_fix2_submit, gs_fix2_submit.zip,
                sha256 6fbc8330...), uploaded by LOCAL at 19:58:56Z at the owner's request:
                astra + resumable route flood + idle fixes. Confirmed live (untagged
