@@ -48,7 +48,9 @@ one match quota. Most of the ways to waste a day here come from forgetting that.
 
 ## Ladder lock
 
-    held by:   nobody. Test submissions stay frozen until the owner lifts it.
+    held by:   CLOUD, since 2026-10-24 08:58Z: uploading v100 at the owner's
+               explicit request ("submit and run some tests"), then 20 unranked
+               games (4 pinned db_base teams x 5 maps). v100 stays live.
     live bot:  VERSION 97, uploaded at 23:21Z at the owner's request:
                ws/bots/v97_submit = v93 plus Bruiser over Power and a safe
                heal-recall below 60% health. ladderbench.py restores exactly
@@ -251,260 +253,135 @@ Replies to your notes, as of 16:20Z:
 
 ## CLOUD
 
-**Agent:** Claude Code in a claude.ai cloud container. It cannot reach the Mac.
-**Branch:** `Fwinnera`.
-**Updated:** 2026-10-24 07:50Z.
-**Can run:** the engine (all 40 maps, Python and C++ bots, 4 cores; `bench.py`
-runs unchanged), the platform CLI read-only (owner-approved login), GitHub push.
+**Agent:** Claude Code in a claude.ai cloud container (4 cores, the engine, the
+platform CLI read-only, GitHub push). It cannot reach the Mac.
+**Branch:** `Fwinnera`. **Updated:** 2026-10-24 08:55Z.
 
-### Doing now
+### START HERE, LOCAL: handoff of everything CLOUD did since your brief
 
-**Recommended upload: v99 = v98 + the gated monolith raid** (not uploaded;
-the owner decides). `ws/bots/v99_submit`, zip `v99_submit.zip` (22,818 bytes,
-sha256 `22b488edc24c85c56858f24b877511821ee384f833be3ec13e91b8e85a6b2773`;
-rebuild: `python3 analysis/mksubmit.py v99 bruiser+heal60+fieldresume+raid900+monogate+cheapretry+party`).
-The raid fires only on maps where monoliths hold at least half the gems (read
-from the map at the start, so it carries to unseen maps); on those 9 maps, two
-re-rolls pooled, 144 games: gems +61.5 (clustered z 2.22), win rate +2.1.
-Elsewhere it makes v98's choices. Eight smoke games clean, 7 wins against
-v97's twin. If the owner prefers the bot with the bigger test behind it, v98
-below is the fallback.
+**Recommended upload: v100** (`ws/bots/v100_submit`, `v100_submit.zip`,
+22,989 bytes, sha256 `bb576f15f371bb396fce442b6edf6ca3fcb701c18d3fa94494cefe8b68d7a8dc`).
+**Nothing has been uploaded; the live bot is still v97.** The owner has the
+v98, v99 and v100 zips and decides. Zips are gitignored; rebuild any of them
+byte for byte with `analysis/mksubmit.py` (it rebuilt v97 exactly as a check):
 
-**v98 passes the 640-game test at z 4.55 and is ready for the owner (not
-uploaded).** v98 = v97 + three repairs (`fieldresume`, `cheapretry`, `party`).
-Pooled over all eight opponents against fresh v97 twins:
+    python3 analysis/mksubmit.py v100 bruiser+heal60+fieldresume+raid900+monogate+cheapretry+party+lockbreak
+    python3 analysis/mksubmit.py v99  bruiser+heal60+fieldresume+raid900+monogate+cheapretry+party
+    python3 analysis/mksubmit.py v98  bruiser+heal60+fieldresume+cheapretry+party
 
-| | change | se | z |
+Every `*_submit` is the tested arm minus the decision-neutral re-roll line and
+the BOTTAG print; `main.py` is byte-identical to v97's; each had eight clean
+smoke games (v100: 8 of 8 won, including 01shortcut 1028-354 and 1027-0).
+
+#### The lineage and its evidence
+
+| version | = | evidence (clustered SE, see Measurement) |
+|---|---|---|
+| v97 (live) | v93 + Bruiser + heal-recall 60% | your 640-game pass, +19.4 (plain z 1.51) |
+| **v98** | v97 + `fieldresume` + `cheapretry` + `party` | 640 games, 8 opponents, vs fresh v97 twins: **gems +59.4, win +9.5** (official outcome); clustered z 2.98 (plain 4.55); each half alone z 2.16 / 2.06; every opponent up |
+| **v99** | v98 + `raid900` + `monogate` | on the 9 monolith-heavy maps, three replicates: +57.7, +65.2, +63.8; pooled 144 games **+61.5, z 2.22**, win +2.1; off those maps v99 plays like v98 (−11.8, se 13.2). ≈ +14 a game pool-wide |
+| **v100** | v99 + `lockbreak` | screen, 4 distinct opponents, 320 games vs fresh v99 twin: **gems +47.1 (z 3.57), win +9.1 (z 2.90)**, opponent gems −85; confirmation on the other 4 opponents with a fresh re-roll pair: **+29.2 (z 1.88) at 145 of 320**, running (tags `rr99c`, `lkc99`) |
+
+Head to head against v100, all 40 maps from both sides: the teammate's
+`camp-cache-only` bot loses 27-53 (v100 +212 gems a game, z 4.1); v93
+(the owner's second upload, byte-identical to `seelie_dis050_submit`) is
+running (`h2h_v93`).
+
+#### What each change does (all in `analysis/mkfixes.py`, general rules, no map names)
+
+- **`fieldresume`**: a dash champion's travel field is a walking flood plus up
+  to eight jump layers, ~0.8M fuel per flood on big maps, so it never finished
+  inside one Python turn and the champion stood still. The finished layers now
+  survive a fuel suspension and the next turn resumes. Same field, same choices.
+- **`cheapretry`**: `choose_group` marks itself stalled on entry and clears the
+  mark on return, so only a call that fuel cut short sends the same champion's
+  next call down a cheap path (drop unseen groups the exact pass would reject;
+  score visible groups on design values). Fixes Vendetta never returning on
+  01the-farm (1,597 calls in 1,600 rounds) and the 30-camp groups of
+  01yellow-brick-road. Calls never cut short are unchanged — this is why it
+  works where your cached camp stats (every call cheaper) lost 64.
+- **`party`**: gs_cpp_party's rule in Python. If no gem-bearing group can be
+  cleared alone, the boss controller plays the map as a party and gates every
+  heavy objective. Fires on exactly 00contest and 00stampede of the 40.
+- **`raid900` + `monogate`**: your raid900, only where monoliths hold at least
+  half the map's gems (read at game start; 9 of 40 maps). Without the gate it
+  was −35 at 25-50% shares.
+- **`lockbreak`**: both teams lock every altar they pass (5 hits to clear).
+  `bank()` broke a lock only if no altar was free, so carriers crossed the map
+  to the other altar (01shortcut: v98 0 wins of 16, 30% of turns banking, 811
+  bank-turns beside a locked altar for 17 deposits). Now a locked altar wins
+  when its distance + 6 beats the nearest free one; our own lock then goes on.
+
+#### Measurement: read before trusting any z
+
+- **greatsage, base and boss_focus replay each other**: identical gem totals
+  on 56-61 of 80 map-sides. `paired.py`/`pooled.py` SEs are too small.
+  **Use `analysis/clustered.py BASE CAND [BASE2 CAND2]`** (clusters by map and
+  side within each opponent set). v97's own z 1.51 is probably near 1.0
+  clustered; Treasure fell from 1.12 to 0.84.
+- **Screen on four distinct opponents**: `greatsage,colleague,seelie_t04,gs_dis075`.
+  Confirm on the others (`boss_full,priority_exp,base,boss_focus`).
+- **Twins on disk** (all `ws/bench`, gitignored on your side, here only):
+  v97 `rr97`/`rr97b`; v98 `fp97`/`fp97b`; v99 `r299` (reroll2, distinct 4),
+  `rr99c` (reroll, other 4).
+- Re-rolls barely move games on some maps (v98 twin vs re-roll: −1.4, se 5.2
+  on the monolith maps), so evidence comes from maps and opponents more than
+  from re-rolls.
+- `00stampede` is all or nothing (800 or 0 from small changes); judge it on
+  many games.
+- `bench.py --opponents` with base/boss_focus mostly duplicates greatsage.
+
+#### Rejected this round (each v98 + one change unless noted, 320 games, clustered)
+
+| change | gems | z | note |
 |---|---|---|---|
-| gems submitted (640 games) | **+59.4** | 13.1 | **+4.55** |
-| win rate | **+11.4 points** | 2.2 | **+5.3** |
-| deaths | −0.5 | 0.4 | −1.4 |
-| second half alone (4 opponents unused in design) | +51.4 gems, +8.4 win | 18.4 | +2.8 |
+| Treasure first | +13.3 | +0.90 | +15.1 on v97 too; small lean, third sample `tr299` queued |
+| claim-inferred respawns | −37.9 | −1.04 | stopped at 109 games |
+| carrier hunting | −12.6 | −0.95 | |
+| crystalfund (crystal money) | −79.4 | −1.91 | 56 games on the 7 crystal maps |
+| raid + safebank80 | −139.4 | −3.87 | the safe-bank recall hurts |
+| travel weight 1.4 | −21.0 | −1.43 | stopped at 194; 1.0 is near the optimum |
+| `cheaper` (cheaper cheap path) | −4.7 | −0.29 | |
+| party only on all-monolith maps | −194 on the party maps | −2.8 | |
+| dangerskip (always-on cheapretry) | not run | | same failure mode as your cache |
 
-One-sided 90% lower bound +42.9 gems; every one of the eight opponents
-improves; 0 error lines in 640 games. **With games clustered by map and
-side** (three default opponents play identical games on 52 of 80
-map-sides, so the plain SE is too small): gems z 2.98, win rate (official
-outcome, +9.5) z 3.19, and each half passes alone (z 2.16, 2.06). By map group: stall maps +145 (z 4.7),
-party maps +282, every other map +33 (z 2.4). v97 passed this test at +19.4
-(z 1.51).
+#### Running now (this machine), results append to `GROUND-UP-PLAN.md`
 
-**The submission:** `ws/bots/v98_submit` (untagged), zip `v98_submit.zip`,
-22,336 bytes, sha256 `fc1aecf2198e3ef0dd102db42e1b470c7cadac0519e171dc241f5e719ee03b20`
-(rebuild: `python3 analysis/mksubmit.py v98 bruiser+heal60+fieldresume+cheapretry+party`).
-The tested arm minus the re-roll statement and BOTTAG; `main.py`
-byte-identical to v97's; eight smoke games clean. After an upload, the
-brief's quick ladder check is next.
+1. `lkc99` vs `rr99c`: v100's confirmation (~09:15Z).
+2. `h2h_v93`: v100 head to head with v93.
+3. `tr299` vs `r299`: Treasure's third sample, on v99.
 
-**Screens on the v98 base** (each v98 + one change, against v98's own runs,
-clustered SE, four distinct opponents, 320 games):
+#### Next, for whoever picks it up
 
-| arm | gems | clustered z | win rate | verdict |
-|---|---|---|---|---|
-| `t98` Treasure first | +13.3 | +0.90 | +0.6 | small lean, not passed (v97 base: +15.1) |
-| `c98` claim-inferred respawns | −37.9 | −1.04 | −9.2 | stopped at 109 games |
-| `h98` carrier hunting | −12.6 | −0.95 | −1.9 | fails |
-| `pm98` party only on all-monolith maps | −194 on the party maps | | | rejected |
-| `cr98` crystalfund (7 crystal maps, 56 games) | −79.4 | −1.91 | −8.9 | rejected |
-| `m98` gated monolith raid (9 maps, 72 games) | **+57.7** | **+1.64** | +1.4 | **passes; confirmed on a second re-roll (+65.2); pooled +61.5, z 2.22 → v99** |
-| `ms98` the same + safebank80 | −139.4 | −3.87 | −31.9 | rejected |
-| `tr98` travel weight 1.4 | −21.0 | −1.43 | −3.6 | stopped at 194 games |
-| `ch98` cheaper cheap path | −4.7 | −0.29 | −1.2 | flat, not adopted |
-| `lk99` **lockbreak** (on v99, vs v99 twin) | **+47.1** | **+3.57** | **+9.1** | **passes; confirming on the other four opponents → v100** |
+1. **If the owner uploads v100:** take the ladder lock, run the brief's quick
+   check (5 unranked games, pinned `db_base` team by id, maps
+   `01islands,00swirl,01elk_arena,00quadrants,01yellow_brick_road`, sides
+   `a,b,a,b,a`), count the trailing-hour quota first, release the lock.
+2. **Leads, not yet worked** (`GROUND-UP-PLAN.md`, "The weakest maps left"):
+   01starvation wastes 23% of turns walking to camps found respawning
+   (contested-camp penalty); 00road-of-riches is 45% travel on long single
+   trips; 01islands/01big-world idle 22% without a crystal (crystalfund failed);
+   v100's weakest maps are 00great-wall, 00road-of-riches, 01starvation (25%
+   wins) and 01fracture (38%).
+3. The C++ line is paused: its +39.5 over v93 was the same stall and party
+   maps, which v98 now covers in Python.
 
-**`lockbreak`** (found from v98's worst map, 01shortcut, 0 wins of 16): carriers
-broke an enemy altar lock only when no altar was free, so they walked across
-the map to the other altar and back. Now a locked altar wins when its distance
-plus six turns of hitting beats the nearest free one. Running now: its
-confirmation with a fresh re-roll pair on boss_full, priority_exp, base and
-boss_focus (~09:00Z); `ws/bots/v100_submit` (v99 + lockbreak) is built;
-its 8 smoke games are clean and all won (01shortcut 1028-354, 1027-0). Then Treasure's third sample.
+#### Tools added (all in `analysis/`)
 
-How it was found and built (each repair is a general rule, not a map tweak):
-
-1. **Where champion-turns go (brief item 1): done.** `analysis/mktimelog.py`
-   builds a logger, `analysis/timeprofile.py` reads it. v97 over 200 games
-   (tags `tl97`, `tl97b`):
-   - hitting a camp 8.8-10.7% of turns (the top five: 16.5-17.9%);
-   - travel 22-25%, dead 12-15%, Willow's escort 12-13%, approach 11-14%,
-     bank 8.5%, combat 8%;
-   - **cut short by fuel: 6.3% of all champion-turns**, almost all on big
-     maps: 01yellow-brick-road 100%, 01the-farm 35%, 01big-world 18%,
-     01islands 15%, 00lanes 7% (median map 1.1%);
-   - travel wasted walking to a camp that turns out respawning or taken:
-     8.7% of turns.
-2. **The biggest non-farming leak is fuel, and it is fixable in Python.** A
-   probe that records where `Replan` fires (`gs97_fuelprobe`) puts it in one
-   place: `choose_group` asks `nav.field_from` for a dash champion's travel
-   field, a walking flood plus up to eight jump layers. One flood costs about
-   0.8M fuel on 01big-world, a third of a Python turn, so the field never
-   finishes and the champion stands still, turn after turn.
-   - **`fieldresume`** (`mkfixes.py`): the finished layers stay in a module
-     global keyed by origin and mobility, and the next turn resumes the flood.
-     Same field, layer for layer, so the same choices whenever fuel is not
-     short. Six probe games: turns lost to fuel 11-18% → 3.2% on
-     01big-world, 16-18% → 1.9% on 01islands, 0 errors.
-   - **01the-farm and 01yellow-brick-road stall elsewhere:** the exact
-     scoring pass. On the farm Vendetta rejects every group as too dangerous,
-     but scoring them all costs more than a turn, so `choose_group` never
-     returns and the rally fallback never runs (1,597 calls in 1,600 rounds,
-     none scored). On yellow-brick-road two groups of 30 camps each cost
-     0.43M fuel to re-add their live health.
-   - **`cheapretry`** (`mkfixes.py`): `choose_group` marks itself stalled on
-     entry and clears the mark on return, so a fuel `Replan` leaves it set and
-     the same champion's next call takes a cheap path (drop unseen groups the
-     exact pass would reject on design values; score visible groups on design
-     values). Maps that never stall keep v97's choices. (LOCAL's cached camp
-     stats lost 64 gems by making every call cheaper; this does not.) An
-     always-on version, `dangerskip`, stays in the generator, untested.
-3. **`party`** (`mkfixes.py`): gs_cpp_party's party-map rule, ported to
-   Python. Fires only where every gem is behind a monolith or a pack one
-   champion cannot clear (00contest, 00stampede of the 40).
-4. **Candidate `gs97_fp`** = v97 + fieldresume + cheapretry + party + reroll,
-   against the twin `gs97_rr` (v97 + reroll). Probe games against `gs93_bh`
-   (v97's twin) on the stall and party maps, 0 errors:
-
-   | map, side A / B | v97 (logger) | `gs97_fp` |
-   |---|---|---|
-   | 01yellow-brick-road | 0-0 / 0-0 | 1015-212 / 887-8 |
-   | 01the-farm | 1060-797 / 830-1011 | 1051-510 / 1017-595 |
-   | 01big-world | 930-1001 / 1001-951 | 1008-955 / 1016-762 |
-   | 00contest (party only) | 0-0 / 0-0 | 800-0 / 800-600 |
-   | 00stampede (party only) | 640-0 / 0-320 | 666-294 / 454-186 |
-
-   On 01the-farm the share of turns hitting a camp went 12.7% → 19-21%.
-   The C++ candidate's +39.5 came from the same maps (yellow-brick-road
-   +876, contest +775, stampede +497 a game; the other 37 net slightly
-   negative); `gs97_fp` gets them without leaving Python.
-
-**Queue on this machine (4 cores), in order:** `rr97b` and `fp97b` (the
-second half of v98's test, about 03:15Z); then **every further experiment on
-the v98 base**, judged against v98's own runs (`fp97`, `fp97b`), so a pass
-needs no separate stacking test: `t98` (Treasure; +15.1 on v97), `c98`
-(claim-inferred respawns), `h98` (carrier hunting), then map-restricted
-`cr98`/`cr98b` (crystalfund, the 7 crystal maps), `m98`/`ms98` (+`b`)
-(monolith raid gated on share ≥ 0.5, plain and with safebank80, the 9
-monolith-heavy maps), and `tr98` (travel weight 1.4). Leaders on the first
-four opponents get the other four.
-
-**Map table** (`analysis/maptable.py`, from two 3-round probes on every map,
-`ws/bench/maptable.json`): the party rule fires on exactly 00contest and
-00stampede; 7 maps need crystals (00ambush, 00quadrants, 01big-world,
-01boss-battle, 01fracture, 01islands, 01shortcut), the same maps where
-champions idle; 9 non-party maps take half or more of their gems from
-monoliths (00great-wall, 00monolith, 00rows, 00split, 01big-world,
-01broken-curve, 01corridors, 01gold-rush, 01starvation).
-
-**If LOCAL has CPU:** a fresh-re-roll confirmation of `gs97_fp` would save
-time: `mkfixes.py gs97_fp2=bruiser+heal60+fieldresume+cheapretry+party+reroll2` against
-`mkfixes.py gs97_rr2=bruiser+heal60+reroll2`, eight opponents. Write the tags
-here and CLOUD will skip them.
-
-### Findings
-
-- **v98 passes** (above). Its three repairs are general rules, so they
-  should carry to Sprint 2's unseen maps: any map big enough for a dash
-  champion's travel field to outgrow a turn, any map where scoring the
-  candidates costs more than a turn, any map whose gems all sit behind heavy
-  objectives.
-- **Measurement:** greatsage, base and boss_focus replay each other on most
-  maps; use `analysis/clustered.py` for the standard error, and the distinct
-  opponents (`greatsage`, `colleague`, `seelie_t04`, `gs_dis075`) for
-  screens.
-- **00stampede is all or nothing**: tiny trajectory changes swing it between
-  800 and 0, so per-map results there need many re-rolls.
-- **The C++ port's edge was the same stall and party maps.** Against v93:
-  stall maps +182, party maps +636, everything else −18. v98 takes those gains
-  on the Python base, so the C++ line is paused.
-
-### Next, in order
-
-1. Screens on the v98 base (running): Treasure, claim-inferred respawns,
-   carrier hunting, crystalfund, gated monolith raid, travel weight 1.4.
-   Leaders get a second, independent re-roll before any hand-over.
-2. A logger run of v98 over the pool, to see how its time use changed and
-   what the next leak is.
-3. After the owner uploads v98: the brief's quick ladder check (5 unranked
-   games against a pinned `db_base` team), with the ladder lock taken.
-
-### Files touched
-
-| path | what changed |
-|---|---|
-| `analysis/mkfixes.py` | changes: treasure, claimresp, hunt, fieldresume, dangerskip, cheapretry, party, partymono, monogate, crystalfund |
-| `analysis/mktimelog.py`, `timeprofile.py` | time-use logger and reader |
-| `analysis/maptable.py`, `bymaps.py`, `clustered.py`, `mksubmit.py` | map table; by-map split; clustered SE; untagged submission builder |
-| `ws/bots/v98_submit` | the candidate, untagged |
-| `ws/bots/gs97_*`, `gs98_*`, probes | test arms and probes |
-| `ws/bots/gs_cpp*` | the C++ line (paused) |
-| `GROUND-UP-PLAN.md` | appended: time profile, fuel diagnosis, v98's tests, clustered errors |
+`mktimelog.py` + `timeprofile.py` (where champion-turns go; fuel cut-short
+sites), `maptable.py` (per-map structure: altars, monolith share, crystal
+need, policy kind; `ws/bench/maptable.json`), `bymaps.py` (paired split by
+map groups), `clustered.py` (honest SE), `mksubmit.py` (untagged submission
++ zip + checks). Probe bots: `gs97_fuelprobe`, `gs97_fuelcost`,
+`gs97_rejprobe`, `gs97_ybrprobe`, `gs97_idleprobe`, `gs98_bankprobe`,
+`gs100_bankprobe`, `probe_camps`, `probe_nav`.
 
 ### Notes for LOCAL
 
-- **The teammate's `camp-cache-only` bot (owner sent it 2026-10-24 ~07:50Z)**
-  is byte-identical to your `gs93_cache` arm apart from the BOTTAG line: v93
-  plus cached camp design stats. You measured it at −45.2 gems (z −3.1) and
-  −7.2 win rate against v93's twin. It has none of v97 (Bruiser, heal-recall),
-  v98 (fuel repairs, party rule), v99 (monolith raid) or v100 (lockbreak).
-  It attacks the same symptom as v98's `cheapretry` (fuel spent re-reading
-  camps), but on every call rather than only after a stalled one.
-  **Head to head, v100 wins 53 of 80** (all 40 maps, both sides), gem margin
-  +212 a game (clustered z 4.1); maps won from both sides 16, lost from both
-  3 (00lanes, 00quadrants, 01concentrated-wealth). Copy at
-  `ws/bots/teammate_cco`, tag `h2h_cco`.
-
-- **v99 (2026-10-24 06:00Z) = v98 + the gated monolith raid** (`raid900` +
-  `monogate`): on the 9 monolith-heavy maps, two re-rolls, 144 games, gems
-  +61.5 (clustered z 2.22); elsewhere v98's choices. `ws/bots/v99_submit`,
-  zip sha256 `22b488ed…`. Recommended over v98; v98 is the fallback. Your
-  safebank80 hurts on top of it (−139, z −3.9).
-- **v98 passes (2026-10-24 03:10Z): v97 + `fieldresume` + `cheapretry` +
-  `party`.** 640 games against fresh v97 twins, eight opponents: gems +59.4
-  (z 4.55), win rate +11.4 (z 5.3); the four opponents not used in design
-  alone: +51.4 (z 2.8). `ws/bots/v98_submit` is the untagged folder; build the zip
-  with `analysis/mksubmit.py` (the same tool rebuilds v97 byte for byte).
-  The owner decides on uploading. When it is live, the brief's quick ladder
-  check (5 unranked games against a pinned `db_base` team) is the next step;
-  01yellow-brick-road is in that map set and v97 scores 0 there.
-- **What the three repairs fix**, from the time profile and three probes:
-  (1) a dash champion's travel field (9 floods, ~0.8M fuel each on big maps)
-  never finished inside one turn; it now resumes across turns. (2)
-  `choose_group` could spend a whole turn rejecting dangerous groups or
-  re-adding 30 camps' health and never return (Vendetta on 01the-farm: 1,597
-  calls in 1,600 rounds, none scored); after a call that fuel cut short, the
-  next call takes a cheap path. Calls that are never cut short are unchanged,
-  which avoids your cached-camp-stats failure (−64). (3) Party maps.
-- **Measurement warning:** greatsage, base and boss_focus give identical
-  gem totals on 52 of 80 map-sides, so `paired.py`/`pooled.py` SEs are too
-  small. `analysis/clustered.py BASE CAND [BASE2 CAND2]` clusters by map and
-  side. v98 still passes (z 2.98); Treasure on v97 drops from z 1.12 to
-  0.84; v97's own z 1.51 is probably near 1.0 clustered.
-- **Treasure on v97** leads but has not passed: +15.1 gems (z 1.1), kills +1.4
-  (z 3.3), gold +1,586 over 320 games; the second half is queued.
-- **The C++ line is deprioritised.** gs_cpp93_party's +39.5 against v93 came
-  from the same stall and party maps (+182 and +636), with the other maps at
-  −18; v98 gets those gains on the proven Python base.
-
-- **Audit of your v93 ladder test** (`db_base` 16:31Z against `v93_live`
-  16:50Z), via `analysis/ladder_arms.py`:
-  - BOTTAG: `db_base` is `gs_shopbase` in all 20 games. `v93_live` is
-    untagged, as v93 is, and differs from `db_base` in 17 of 20 games.
-  - Gems +62.9 with a paired se of 54.2, so inside its noise. Deaths −6.6 is
-    the solid part.
-  - 01yellow_brick_road went 657 → 461, 483 → 208 and 104 → 0 (monster
-    damage 31.8k → 2.7k), plus 0 → 0 against Quantom. That is the fuel
-    livelock, hit more often now that disengage adds Python work every turn.
-    The Python fix offered below, or the C++ port, removes it.
-
-- **Two fixes for v93 in Python**, for when the freeze lifts, if you want them
-  for Sprint 2 (both apply to unseen maps of the same shape):
-  1. The party rule: `policy.kind()` returns a party kind when no gem-bearing
-     group is solo-clearable, `create_bot` uses `BossBot` for it, and
-     `BossBot` gates heavy objectives as it gates monoliths. In C++ it is
-     about 40 lines: `git diff` between `ws/bots/gs_cpp` and
-     `ws/bots/gs_cpp_party`.
-  2. The livelock fix: one cached Chebyshev `DistanceField` per objective in
-     the first pass, and `(objective.spawns & reached).positions()` in the
-     exact pass. It makes the same decisions whenever fuel is not short.
-- `gs_seelie_dis050/src/main.py` printed no `BOTTAG` when I grepped it. If the
-  tag is printed elsewhere, ignore this.
+- Your brief's items: 1 (time profile) done and it found the fuel stalls (v98);
+  2 Treasure: small lean, not passed; 3 carrier hunting: fails; 4 monolith
+  raid gated on share ≥ 0.5: passes (v99); 5 draft: not attempted; 6 C++:
+  paused, superseded by v98.
+- The owner shared two teammate bots: `camp-cache-only` = your `gs93_cache`
+  (copy at `ws/bots/teammate_cco`); `bot.zip` = v93 (`seelie_dis050_submit`).
+- Ladder lock untouched; CLOUD has queued no platform games today.
