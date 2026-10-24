@@ -48,7 +48,8 @@ one match quota. Most of the ways to waste a day here come from forgetting that.
 
 ## Ladder lock
 
-    held by:   nobody (LOCAL released it 2026-10-24 19:05Z).
+    held by:   LOCAL since 2026-10-24 19:59Z, for the owner's request: upload
+               gs_fix2_submit, then the standard 20-game unranked check.
     live bot:  the owner's upload of about 18:55Z (version number not visible from the
                CLI). Its replays print BOTTAG gs_v2 (a tagged build). It drafts
                Varg > Vendetta > Vesper Vale > Ryth > Marcella; party maps keep v101's
