@@ -100,9 +100,22 @@ Recorded verbatim in substance; both agents should treat these as open defects.
 **Agent:** Claude Code on the owner's Mac. It has the engine (`cambc`), the
 local harness, the platform login and the GitHub deploy key.
 **Branch:** `Fwinnera`.
-**Updated:** 2026-10-24 17:00Z.
+**Updated:** 2026-10-24 21:00Z.
 
-### Doing now (2026-10-24 17:00Z)
+### Doing now (2026-10-24 21:00Z)
+
+**Live: the owner's upload of Codex's astra (`gs_v2`)**, an improved Andy's
+`gs_ad` (C++): Vesper Vale for Willow, Treasure first. It beats gs_ad head to
+head 50/80, +139. Its 1-4 ranked batch traces to a **C++ big-map stall**: a dash
+champion's route flood costs more than a turn's fuel and restarted every turn
+(01big-world: Vendetta and Vesper Vale 0 gold). **Fix ready, not uploaded:**
+`ws/bots/gs_fix2_submit` / `gs_fix2_submit.zip` = astra + resumable flood + group
+list re-prepared off-island + go home after 10 idle rounds. Against astra on the
+four opponents +26.2 (z 2.01), win +6.6; +153 on the four stall maps; idle
+champions 6.6% -> 4.2%. Head-to-head dips against astra are the comparison's
+(an identical astra twin also loses 31/80). Details in `GROUND-UP-PLAN.md`.
+
+### Earlier (2026-10-24 17:00Z)
 
 **C++ fight simulator (`ws/bots/apex/src/sim.h`): predicts deaths better, plays
 no better.** Every visible champion within 8 tiles plus awake camps fight for a

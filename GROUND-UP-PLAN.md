@@ -4452,3 +4452,56 @@ left turns shorter; the throws were in `recall_safe`'s camp loop and
 `main.cpp` now treats an exception in a later round exactly as a Replan in a
 later round -- a fresh turn this round, no ERROR line -- and errors in the same
 round still print. 40 games on the maps that produced them: 0 errors.
+
+## LOCAL: Andy's gs_ad, Codex's astra (gs_v2), and the big-map stall fix
+
+**What they are.** `gs_ad` (Andy, C++) is a C++ v101 like our cv101 plus a rule
+against channelling 40+ gems alone. `gs_ad_astra` (Codex's "improved" gs_ad) is
+the bot live since ~18:55Z (its replays print `BOTTAG gs_v2`): gs_ad with the
+draft Varg > Vendetta > Vesper Vale > Ryth > Marcella (Willow to sixth),
+Treasure > Jungle > Durability emblems, retreat may stay put, a walk-only move to
+an unreachable goal gives up, and a decision-identical rewrite of the splash count.
+
+**Astra is better than gs_ad.** Head to head 50 of 80, +139 gems a game (95%
++13 to +268), deaths 13.8 against 16.3, gold 7,472 against 5,324. On the four
+distinct opponents +14.0 (z +0.74) against gs_ad and a twin (which differ by +-2.5).
+Ladder: standard unranked check 4 of 20 (best on those pairings).
+
+**Its 1-4 ranked batch (19:10Z, Dirty Coding, rating 1,674 against our 1,652).**
+01big-world 387-656: Vendetta and Vesper Vale earned 0 gold, bought nothing.
+00rows 233-1,003: Varg collected 625, banked 107; their Heart of Ruin 18 kills,
+0 deaths. 00gem-fields 240-1,061: 26 deaths to 6. 01fracture 869-892 on the
+round-2000 tiebreak, 313 collected gems not banked.
+
+**The stall.** A dash champion's travel flood (up to eight jump layers) on
+01big-world costs ~79k of a turn's 100k fuel. With the turn's other work done
+first it was cut every turn and restarted (252 cut turns in Vendetta's first
+400 rounds), so it never chose a camp: 0 gold in all 6 of gs_ad's local games
+there. Python fixed this as `fieldresume`; the C++ line never had it. Astra's
+draft doubles it (Vesper Vale also dashes). A second stall: a champion that
+spends its last crystal reaching an island keeps a one-group list (Ryth idle
+1,514 rounds on 01big-world with 0 gold).
+
+**The fixes.** `gs_ad_fix`: `nav::field_from` keeps a cut flood and resumes it
+next turn from the same origin and mobility (same layers, same order).
+`gs_ad_fix2`: plus prepare the group list again when standing outside the area
+it was prepared for, and after 10 idle rounds away from spawn recall when safe.
+On 01big-world (4 games): astra 1 win, Vesper Vale 0 gold in all; fix 3 wins,
+Vesper Vale 1,050-1,639; fix2 3 wins, every champion 200+ gold.
+
+    against astra, four opponents (320)     gems           win          idle champions*
+    gs_ad_fix                               +30.8 (z 2.42)  +5.9 (z 2.05)  4.5%
+    gs_ad_fix2                              +26.2 (z 2.01)  +6.6 (z 2.14)  4.2%   (astra 6.6%, gs_ad 5.0%)
+      on the 4 maps where astra stalls      +163.5 / +152.8
+      on the other 36                       +16.1 / +12.1
+    * champion-games under 200 gold, Willow excluded
+
+Head to head against astra both lean -87/-88 (37 and 35 of 80), all from the 36
+maps where the fix barely acts. A decision-identical astra twin does the same
+against astra (31 of 80, -96; -106 on those maps; deaths 16.3 against 14.9), so
+it is the comparison, not the fix. Against that twin the fix is 40 of 80 (-32),
++337 on the stall maps. Remaining idle spots: 00lost-world, 00road-of-riches.
+
+`ws/bots/gs_fix2_submit` is gs_ad_fix2 untagged (`gs_fix2_submit.zip`, 28,073
+bytes, sha256 6fbc8330...); smoke game against base on 00contest 1000-0, no
+crashes, no ERROR lines. Not uploaded.
