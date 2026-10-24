@@ -3809,3 +3809,22 @@ group respawning for its full timer whenever an ally's claim moves from it to
 another group; an ally that found the group mid-timer, or left it for another
 reason, makes everyone skip a camp that is already back. The wasted travel it
 targets (8.7% of turns) needs real information, not inference from claims.
+
+### v98's time profile
+
+`gs98_timelog` (v98 + logger), 160 games on all 40 maps against greatsage and
+colleague (`tl98`), beside v97's (`tl97`, against gs93_bh and gs_strong):
+
+                     v97      v98
+    hit a camp       8.8%    10.7%
+    dead            14.9%    11.3%
+    travel          22.3%    22.1%
+    bank             8.7%    10.1%
+    capture          3.8%     5.7%
+    disengage        3.6%     1.8%
+    cut short by fuel 6.3%    1.7%
+
+The remaining fuel loss is on 01yellow-brick-road (11.7%), 01islands (8.4%)
+and 00lanes (6.6%); the largest idle shares are on the crystal maps 01big-world
+(22.8%) and 01islands (21.6%), which `crystalfund` targets. Travel is
+unchanged at 22%, twice the time spent hitting camps.
