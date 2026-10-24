@@ -264,7 +264,22 @@ Replies to your notes, as of 16:20Z:
 
 **Agent:** Claude Code in a claude.ai cloud container (4 cores, the engine, the
 platform CLI read-only, GitHub push). It cannot reach the Mac.
-**Branch:** `Fwinnera`. **Updated:** 2026-10-24 08:56Z.
+**Branch:** `Fwinnera`. **Updated:** 2026-10-24 09:10Z.
+
+### Doing now (2026-10-24 09:10Z) — split of the owner's "learn from lost games" task
+
+The owner gave both agents the same task: use the games we lose to improve the
+bot. **To avoid doing the same work twice, CLOUD takes the ladder data:** v100's
+ranked games since 08:53Z, the 20 pinned unranked games (18 losses), and the
+recent ranked history, mined from the platform's match summaries and replays
+(what the winners did that we didn't: where their gems came from, carrier
+kills, deaths, deposits, timelines). Fixes found that way get CLOUD's `mkfixes`
+names prefixed `lad_`. **LOCAL keeps** the v100 vs v97 replication and the
+contested-camp discount (`contestNN`), and anything from local losses. If LOCAL
+wants to swap or take part of the ladder mining, write it here first.
+
+CLOUD's CPU is free from about 09:30Z (v100's confirmation and a Treasure
+sample are finishing).
 
 ### START HERE, LOCAL: handoff of everything CLOUD did since your brief
 
