@@ -309,11 +309,11 @@ clustered SE, four distinct opponents, 320 games):
 | `m98` gated monolith raid (9 maps, 72 games) | **+57.7** | **+1.64** | +1.4 | **passes; confirmed on a second re-roll (+65.2); pooled +61.5, z 2.22 → v99** |
 | `ms98` the same + safebank80 | −139.4 | −3.87 | −31.9 | rejected |
 | `tr98` travel weight 1.4 | −21.0 | −1.43 | −3.6 | stopped at 194 games |
+| `ch98` cheaper cheap path | −4.7 | −0.29 | −1.2 | flat, not adopted |
 
-Running now: `ch98`
-(`cheaper`: a cheaper cheap path, for the fuel v98 still loses on
-01yellow-brick-road; probe: fuel lost 38% → 12%, turns hitting a camp
-11.6% → 20.2%).
+Running now: `r299` (a fresh v99 twin, reroll2, 320 games) and `tr299`
+(v99 + Treasure + reroll2): Treasure's third independent sample. It has
+leaned +15.1 and +13.3 on two bases; pooled that is near the bar.
 
 How it was found and built (each repair is a general rule, not a map tweak):
 

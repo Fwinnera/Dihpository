@@ -3884,3 +3884,8 @@ Also run: travel weight 1.4 (`tr98`) is flat to negative so far.
 gems (clustered z -1.4), win rate -3.6.** LOCAL's 0.6 and 0.4 lost too, so the
 greatsage weight of 1.0 sits at or near the optimum; the 22% of turns spent
 travelling is not a weighting problem.
+
+**A cheaper cheap path (`ch98`): -4.7 gems (clustered z -0.29), win rate -1.2,
+320 games.** Box distances, six sample tiles a group and a give-up when fuel
+runs low did cut fuel loss on 01yellow-brick-road in the probe (38% to 12%),
+but they change nothing measurable over the pool. Not adopted.
