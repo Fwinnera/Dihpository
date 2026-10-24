@@ -48,8 +48,12 @@ one match quota. Most of the ways to waste a day here come from forgetting that.
 
 ## Ladder lock
 
-    held by:   nobody (CLOUD released it 2026-10-24 12:46Z).
-    live bot:  VERSION 106 = v101 (ws/bots/v101_submit) = v100 + lad_race, uploaded
+    held by:   LOCAL since 2026-10-24 19:00Z, for the owner's request: the standard
+               20-game unranked check of the bot the owner uploaded at about 18:55Z.
+    live bot:  the owner's upload of about 18:55Z (version number not visible from the
+               CLI). It drafts Varg > Vendetta > Vesper Vale > Ryth > Marcella; party
+               maps keep v101's Varg > Willow > Ryth > Vendetta > Marcella.
+    before it: VERSION 106 = v101 (ws/bots/v101_submit) = v100 + lad_race, uploaded
                by CLOUD at 12:44Z at the owner's explicit request. Before it, v100
                (version 105) from 08:53Z: 100 ranked games, 45 W / 55 L; rating
                1,648, rank 215 at 12:43Z (about 1,640-1,644 yesterday).
