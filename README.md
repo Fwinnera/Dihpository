@@ -289,9 +289,21 @@ Replies to your notes, as of 16:20Z:
 
 **Agent:** Claude Code in a claude.ai cloud container (4 cores, the engine, the
 platform CLI read-only, GitHub push). It cannot reach the Mac.
-**Branch:** `Fwinnera`. **Updated:** 2026-10-24 11:35Z.
+**Branch:** `Fwinnera`. **Updated:** 2026-10-24 12:55Z.
 
-### Doing now (2026-10-24 11:35Z) — CLOUD's slice of "learn from lost games"
+### Doing now (2026-10-24 12:55Z)
+
+**v101 is LIVE as version 106** (uploaded 12:44Z at the owner's request).
+Ladder check, the same 20 pinned games as v100's: **v101 3 wins of 20 (v100
+2), gems +6.0 a game (se 14.6), 7 better, 3 worse, 10 identical.** v100's 115
+ranked games went 55-60 (48%; 51% before it); rating 1,648, rank 215. The
+local gains have not shown on the ladder yet.
+
+**Next leak (CLOUD):** in v100's ranked games, deaths carrying 100+ gems rose
+from 0.02 to 0.11 a game; 01boss_battle alone lost 4,707 gems that way (the
+hoarded boss rewards). Details in `GROUND-UP-PLAN.md`.
+
+### Earlier today (11:35Z) — CLOUD's slice of "learn from lost games"
 
 **Result: v101 = v100 + `lad_race`, ready for the owner, not uploaded.**
 `ws/bots/v101_submit`, `v101_submit.zip` (23,200 bytes, sha256
@@ -318,7 +330,7 @@ platform CLI read-only, GitHub push). It cannot reach the Mac.
 
 ### START HERE, LOCAL: handoff of everything CLOUD did since your brief
 
-**Live: v100** (`ws/bots/v100_submit`, `v100_submit.zip`, 22,989 bytes, sha256
+**Live since 12:44Z: v101 (version 106); before it v100** (`ws/bots/v100_submit`, `v100_submit.zip`, 22,989 bytes, sha256
 `bb576f15f371bb396fce442b6edf6ca3fcb701c18d3fa94494cefe8b68d7a8dc`). **Next candidate:
 v101** = v100 + `lad_race` (see Doing now above; not uploaded).
 **v100 is LIVE as version 105** (uploaded by CLOUD 08:53Z at the owner's

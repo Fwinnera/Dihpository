@@ -4208,3 +4208,31 @@ differ from v100; `main.py` byte-identical to v97's; eight smoke games clean
 because local opponents rarely race; on the ladder 25 of 146 losses had us at
 850+, and one of v100's first eight ranked losses (00swirl, 870-891 at round
 2000 with 119 gems carried) is exactly the case it fixes. Not uploaded.
+
+## CLOUD: v101 uploaded (version 106) at the owner's request; ladder check
+
+Uploaded 12:44Z (the platform numbered it 106, straight after CLOUD's 105).
+Before it, v100's 115 ranked games (08:53-12:44Z) went 55-60 (48%), against
+145-140 (51%) for the 285 before; rating 1,648, rank 215 at 12:43Z, against
+about 1,640-1,644 yesterday. The local gains have not yet shown on the ladder.
+
+The same 20 pinned unranked games as v100's 08:53Z check (same four teams by
+id, same maps and sides; groups 6c6c9f43, 45ab5acd, 5c3d12cf, a56274c2):
+
+    run          wins   gems   opp gems  deaths
+    db_base       1/20   289     945      24.6
+    v93_live      1/20   352     920      18.0
+    v100_live     2/20   357     912      19.8
+    v101_live     3/20   363     861      18.0
+
+    v101 vs v100 on the same pairings: gems +6.0 (paired se 14.6), 7 better, 3 worse,
+    10 bit-identical (those opponents have not changed since 08:53Z; lad_race only
+    acts in games that reach an endgame race). New win: NTU on 01yellow_brick_road
+    231-0 (v100 lost it 200-1,043).
+
+**The next leak, from v100's ranked games:** gems lost to kills rose from 70 a
+game (before v100) to 123, and deaths while carrying 100+ gems from 0.02 to
+0.11 a game. 01boss_battle alone accounts for 4,707 gems lost in such deaths
+over v100's period: the carriers that hoard there (its only deposit tile is the
+boss's) die holding the boss's rewards. The monolith-heavy maps add a few
+hundred (01corridors 428, 01big_world 243, 01broken_curve 200).
