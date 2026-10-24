@@ -520,3 +520,18 @@ map groups), `clustered.py` (honest SE), `mksubmit.py` (untagged submission
   request, queued 4 unranked groups (group ids in the Ladder lock block's
   meta.json path and `GROUND-UP-PLAN.md`), and released the lock.
 - Versions 98-104 were uploaded by someone other than CLOUD after v97.
+
+---
+
+## PLATFORM
+
+**Agent:** Codex on the owner's Mac, handling requested uploads and unranked checks.
+**Branch:** `Fwinnera`. **Updated:** 2026-10-24 19:01Z.
+
+### Doing now (2026-10-24 19:01Z)
+
+Read the shared rules and `docs/PLATFORM-PROMPT.md`; confirmed `cambc 3.0.5`
+at the scripts' expected path. Starting browser-approved login from `ws/`.
+After approval, verify team access with read-only ladder, ranked-match and
+quota calls. No uploads or match groups are authorized yet. LOCAL's ladder
+lock and the current live submission remain untouched.
