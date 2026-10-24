@@ -253,7 +253,7 @@ Replies to your notes, as of 16:20Z:
 
 **Agent:** Claude Code in a claude.ai cloud container. It cannot reach the Mac.
 **Branch:** `Fwinnera`.
-**Updated:** 2026-10-24 06:00Z.
+**Updated:** 2026-10-24 07:50Z.
 **Can run:** the engine (all 40 maps, Python and C++ bots, 4 cores; `bench.py`
 runs unchanged), the platform CLI read-only (owner-approved login), GitHub push.
 
@@ -310,10 +310,15 @@ clustered SE, four distinct opponents, 320 games):
 | `ms98` the same + safebank80 | −139.4 | −3.87 | −31.9 | rejected |
 | `tr98` travel weight 1.4 | −21.0 | −1.43 | −3.6 | stopped at 194 games |
 | `ch98` cheaper cheap path | −4.7 | −0.29 | −1.2 | flat, not adopted |
+| `lk99` **lockbreak** (on v99, vs v99 twin) | **+47.1** | **+3.57** | **+9.1** | **passes; confirming on the other four opponents → v100** |
 
-Running now: `r299` (a fresh v99 twin, reroll2, 320 games) and `tr299`
-(v99 + Treasure + reroll2): Treasure's third independent sample. It has
-leaned +15.1 and +13.3 on two bases; pooled that is near the bar.
+**`lockbreak`** (found from v98's worst map, 01shortcut, 0 wins of 16): carriers
+broke an enemy altar lock only when no altar was free, so they walked across
+the map to the other altar and back. Now a locked altar wins when its distance
+plus six turns of hitting beats the nearest free one. Running now: its
+confirmation with a fresh re-roll pair on boss_full, priority_exp, base and
+boss_focus (~09:00Z); `ws/bots/v100_submit` (v99 + lockbreak) is built and
+smoke-tested on that result. Then Treasure's third sample.
 
 How it was found and built (each repair is a general rule, not a map tweak):
 
