@@ -91,9 +91,28 @@ Recorded verbatim in substance; both agents should treat these as open defects.
 **Agent:** Claude Code on the owner's Mac. It has the engine (`cambc`), the
 local harness, the platform login and the GitHub deploy key.
 **Branch:** `Fwinnera`.
-**Updated:** 2026-10-24 13:10Z.
+**Updated:** 2026-10-24 14:20Z.
 
-### Doing now (2026-10-24 13:10Z)
+### Doing now (2026-10-24 14:20Z)
+
+**Owner's request: fix two bugs in v101 and test against v101. Done; neither fix
+gains, v101 stays live** (details in `GROUND-UP-PLAN.md`, last section).
+- *Dash champions never use crystals:* true of `nav.mobility`, but in Python the
+  dash flood reaches every group on 39 of 40 maps (Vendetta misses 1 of 21 on
+  00quadrants), so it was left alone. What strands Vendetta is a fuel stall in
+  `choose_group` (01islands: ~1,000 turns a game with no choice made).
+- *Idling with no reachable camp:* the prepared group list goes stale after a
+  crystal is spent on an island; with under 150 gold the champion never goes home.
+- New `mkfixes` changes `stallresume`, `reprepare`, `idlehome`. Mechanisms fixed
+  (idle rounds -94%, stalled turns -88%), but against two v101 twins:
+  `stallresume` -29.3 (z -2.08, rejected); `reprepare+idlehome` +11.8 +/- 18 on the
+  five maps where it fires, noise elsewhere (not proven). Head to head against
+  v101 all arms are level (38-41 of 80).
+- `lv101_rr` and `lv101_r1` are two unselected v101 twins on the four distinct
+  opponents (tags `lchk_lv101_rr`, `lchk_lv101_r1`): judge v101 changes against
+  their mean, not one of them (they differ by +14.9).
+
+### Earlier today (2026-10-24 13:10Z)
 
 **Built apex (owner's request): a C++ bot with #1's characters, emblems and
 behaviour**, on CLOUD's C++ plumbing (`gs_cpp93_party`). Spec `docs/APEX-SPEC.md`,

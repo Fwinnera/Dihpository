@@ -4303,3 +4303,54 @@ Mechanisms (`analysis/champs.py`, per game a champion played):
 Conclusion: #1's results come from its whole engine, not from its draft, items
 and banking rules; transplanted onto ours they cost 200-300 gems a game. Not
 uploaded (the live bot is CLOUD's v101, version 106). `cv100` is a verified C++ equivalent of v100 for any C++ work.
+
+## LOCAL: the idle and dash-champion bugs in v101 -- mechanisms fixed, no gain
+
+The owner asked for two fixes in the live line: dash champions never using
+teleport crystals, and champions idling with no reachable camp. Measured first,
+with a logging copy of v101 (`STATE` per champion, `REPLAN` with its location)
+against v101 on all 40 maps:
+
+- **Dash champions and crystals: barely fires in Python.** `nav.mobility` does put
+  any dash champion in dash-only mode, but the dash flood (eight layers of
+  two-tile jumps) reaches every group on 39 maps; Vendetta, our only dash pick,
+  misses one group of 21 on 00quadrants. In C++ apex it stranded Heart of Ruin
+  and Vesper Vale; in v101 it does not, so it was left alone.
+- **What does strand the dash champion is fuel.** On 01islands Vendetta reaches
+  all 46 groups, `choose_group`'s first pass ranks them for 1.3M of a turn's 2.4M
+  fuel after 0.7M of sensing, and the exact pass is cut before it scores one: no
+  choice, and the next turn starts over. 918-1,099 such turns a game there;
+  01yellow-brick-road showed 2,926 in one game.
+- **Idling: the prepared group list goes stale.** It is filtered by reach from
+  where the champion stood when its mobility last changed. Spend the last
+  crystal on an island and the list becomes that island's one group (00ambush:
+  Marcella 12 -> 1), kept after death or recall; with under 150 gold the idle
+  branch never goes home. 3,808 idle rounds over the 40 games, on 00ambush,
+  01islands, 01big-world and 00quadrants.
+
+Three `mkfixes` changes: `stallresume` (a choose_group cut short keeps its first
+pass; the next call from the same tile within 3 rounds resumes it), `reprepare`
+(prepare again when standing outside the reach the list was prepared for) and
+`idlehome` (after 10 consecutive idle rounds away from spawn, recall when safe).
+Mechanisms, same logging, all 40 maps against v101: idle rounds 3,808 -> 229,
+choose_group fuel restarts 3,695 -> 456 (Vendetta 1,924 -> 150), no ERROR lines.
+
+Four distinct opponents, 320 games an arm, against the mean of two unselected
+v101 twins (`lv101_rr`, `lv101_r1`; they differ by +14.9 between themselves):
+
+    all three (lfix_all)            gems -43.9 (clustered z -2.42)   win -4.7
+    stallresume (lfix_sr)           gems -29.3 (z -2.08)             win -2.5
+    reprepare + idlehome (lfix_idle) gems -17.5 (z -1.57)            win -4.1
+      on the 5 maps where it fires  gems +11.8 (se 18.0)             win +3.8
+    head to head against v101 (80): twin 41/80 +22; all 41/80 -18; sr 40/80 -34; idle 38/80 +5
+
+An event-counting copy shows where each fires against those opponents:
+`stallresume` 1,321 resumes on 29 of 40 maps, so it is a broad change, and it
+measures worse; even on 01yellow-brick-road, the worst stall, it gained +5. The
+stalled champion's lost turns were not costing gems. `reprepare` and `idlehome`
+fire 27 and 55 times, on 00ambush, 00quadrants, 01islands, 01big-world and
+01fracture only; there they are +11.8 +/- 18, and their overall figure is
+noise from maps their code never touches (01boss-battle, played by the party
+controller, had no events and still swung -164 to -472 between arms). None
+clears the bar; v101 stays live. `reprepare + idlehome` is safe and correct and
+could ride along with a future change that passes on its own.

@@ -808,6 +808,99 @@ def apply(src: Path, change: str) -> None:
             "    I.BRUISER_SHARD_OF_HEALTH, I.DURABILITY_SHARD_OF_HEALTH)\n"
             "BUILDS[bc.ChampionType.HEART_OF_RUIN] = (I.JUNGLE_SHARD_OF_FOCUS, I.BRUISER_SHARD_OF_HEALTH,\n"
             "    I.DURABILITY_SHARD_OF_HEALTH, I.BRUISER_SHARD_OF_FOCUS)\n"))
+    elif change == "stallresume":
+        # On 01islands a dash champion reaches all 46 groups, and ranking them in
+        # choose_group's first pass costs 1.3M of a turn's 2.4M fuel after 0.7M
+        # of sensing. The exact pass then ran out before scoring a single group,
+        # returned nothing, and the next turn started the ranking again: Vendetta
+        # stood still for 900-1,100 turns a game (v101_dbg: REPLAN in
+        # choose_group). cheapretry's cheap path costs the same. Now a call that
+        # fuel cut short keeps its first pass; the next call from the same tile
+        # within RESUME_ROUNDS resumes it, so the exact pass gets that fuel. A
+        # call that is not cut short makes exactly the choice it made before.
+        s = src / "strategy.py"
+        edit(s, "stalled = False\n\ndef choose_group(metadata, me, respawns, current, team, enemies):\n"
+                "    global stalled\n",
+             "stalled = False\n"
+             "# The first pass of a call that fuel cut short: [metadata, (x, y), round,\n"
+             "# next index, ranked]. The same champion's next call from the same tile\n"
+             "# resumes it instead of ranking every group again.\n"
+             "first_pass = None\n\n"
+             "def choose_group(metadata, me, respawns, current, team, enemies):\n"
+             "    global stalled, first_pass\n")
+        edit(s, "    capture = bc.constants.CAPTURE_TIME\n    ranked = []\n"
+                "    seen = bc.vision.visible_tiles() if cheap else None\n"
+                "    for i, objective in enumerate(metadata):\n"
+                "        if i % 8 == 0:\n"
+                "            turn.check()\n",
+             "    capture = bc.constants.CAPTURE_TIME\n"
+             "    seen = bc.vision.visible_tiles() if cheap else None\n"
+             "    if (first_pass is not None and first_pass[0] is metadata and first_pass[1] == (x, y)\n"
+             "            and now - first_pass[2] <= config.RESUME_ROUNDS):\n"
+             "        ranked = first_pass[4]\n"
+             "    else:\n"
+             "        ranked = []\n"
+             "        first_pass = [metadata, (x, y), now, 0, ranked]\n"
+             "    for i in range(first_pass[3], len(metadata)):\n"
+             "        objective = metadata[i]\n"
+             "        if i % 8 == 0:\n"
+             "            # Every group before i is ranked; a suspension here resumes at i.\n"
+             "            first_pass[3] = i\n"
+             "            turn.check()\n")
+        edit(s, "    ranked.sort(key=lambda row: row[0])\n    field, reached = nav.field_from(position)\n",
+             "    first_pass[3] = len(metadata)\n"
+             "    ranked.sort(key=lambda row: row[0])\n    field, reached = nav.field_from(position)\n")
+        edit(s, "    stalled = False\n    return best\n", "    stalled = False\n    first_pass = None\n    return best\n")
+        cfg.write_text(cfg.read_text() + "# A choose_group first pass cut short by fuel resumes from the same tile within this many rounds.\nRESUME_ROUNDS = 3\n")
+    elif change == "reprepare":
+        # Groups are filtered by what a champion can reach from where it stood when
+        # the list was prepared, and the list was prepared again only when its
+        # mobility changed. A champion that spent its last crystal reaching an
+        # island kept that island's one group after dying or recalling home
+        # (00ambush: Marcella 12 groups -> 1, then idle 925 rounds; 01islands,
+        # 01big-world the same). Prepare again whenever it stands outside the
+        # area the list was prepared for.
+        b = src / "bot.py"
+        edit(b, "        self.mobility_mode = None\n",
+             "        self.mobility_mode = None\n        self.prepared_reach = None\n")
+        edit(b, "        if self.metadata is None or self.mobility_mode != mode:\n"
+                "            self.metadata = strategy.prepare(self.groups)\n"
+                "            self.mobility_mode = mode\n",
+             "        if (self.metadata is None or self.mobility_mode != mode\n"
+             "                or not self.prepared_reach.is_set(me.position())):\n"
+             "            self.metadata = strategy.prepare(self.groups)\n"
+             "            self.mobility_mode = mode\n"
+             "            # The tiles this list is valid from (prepare's own cached flood).\n"
+             "            self.prepared_reach = nav.field_from(me.position())[1].copy()\n"
+             "            self.prepared_reach.set(me.position(), True)\n")
+    elif change == "idlehome":
+        # An idle champion went home only with 150 gold to shop. On island maps
+        # one with no crystal and less gold stood beside its single reachable
+        # group for hundreds of rounds (00ambush, 01islands, 01big-world). After
+        # IDLE_HOME consecutive idle rounds away from spawn it recalls when that is
+        # safe: home reaches more groups on foot, and the shop sells a crystal.
+        b = src / "bot.py"
+        edit(b, "        self.mobility_mode = None\n",
+             "        self.mobility_mode = None\n        self.idle_rounds, self.idle_last = 0, -1\n")
+        edit(b, "        self.objective = objective\n        if objective is None:\n            self.team.claim()\n",
+             "        self.objective = objective\n        if objective is None:\n"
+             "            # Consecutive rounds that ended here, whatever controller called farm.\n"
+             "            now = bc.round_number()\n"
+             "            self.idle_rounds = self.idle_rounds + 1 if self.idle_last == now - 1 else 1\n"
+             "            self.idle_last = now\n"
+             "            self.team.claim()\n")
+        edit(b, "            elif me.gold_count() >= 150 and self.recall_safe(me, enemies, []):\n"
+                "                turn.check()\n"
+                "                me.recall()\n"
+                "            return\n",
+             "            elif ((me.gold_count() >= 150\n"
+             "                   or (self.idle_rounds >= config.IDLE_HOME\n"
+             "                       and not gm.spawn_region(bc.Team.ALLY).is_set(me.position())))\n"
+             "                  and self.recall_safe(me, enemies, [])):\n"
+             "                turn.check()\n"
+             "                me.recall()\n"
+             "            return\n")
+        cfg.write_text(cfg.read_text() + "# An idle champion away from spawn recalls home after this many consecutive idle rounds.\nIDLE_HOME = 10\n")
     elif change == "reroll2":
         # A second, different decision-neutral perturbation, for an independent
         # re-roll when "reroll" has already been used in the selection.
