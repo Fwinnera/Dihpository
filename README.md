@@ -53,6 +53,8 @@ one match quota. Most of the ways to waste a day here come from forgetting that.
     live bot:  the owner's upload of about 18:55Z (version number not visible from the
                CLI). It drafts Varg > Vendetta > Vesper Vale > Ryth > Marcella; party
                maps keep v101's Varg > Willow > Ryth > Vendetta > Marcella.
+               Check queued 18:58Z (tag owner_1855), groups 4f5fee9e, e510f355,
+               e14d775f, 678ee235 (standard pinned teams, maps and sides).
     before it: VERSION 106 = v101 (ws/bots/v101_submit) = v100 + lad_race, uploaded
                by CLOUD at 12:44Z at the owner's explicit request. Before it, v100
                (version 105) from 08:53Z: 100 ranked games, 45 W / 55 L; rating
