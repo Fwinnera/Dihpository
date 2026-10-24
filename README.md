@@ -340,15 +340,15 @@ How it was found and built (each repair is a general rule, not a map tweak):
    +876, contest +775, stampede +497 a game; the other 37 net slightly
    negative); `gs97_fp` gets them without leaving Python.
 
-**Queue on this machine (4 cores), in order:** `treas97` (Treasure, running),
-`rr97` (twin), `fp97` (fuel+party), then the other four opponents: `rr97b`,
-`fp97b`; then `claim97` (claim-inferred respawns), `hunt97` (carrier
-hunting); then map-restricted screens against the twins' games on the same
-maps: `cr97`/`cr97b` (`crystalfund`, the 7 maps that need crystals) and
-`mono97`/`mono97s` (+`b`) (raid900 gated on monolith share ≥ 0.5, plain and
-with `safebank80`, the 9 monolith-heavy maps); last `trav97` (travel weight
-1.4: LOCAL's 0.6 and 0.4 lost 15 and 24, so the other direction is untested).
-About an hour per 320 games. The `gs97_fp` verdict lands around 05:00Z.
+**Queue on this machine (4 cores), in order:** `rr97b` and `fp97b` (the
+second half of v98's test, about 03:15Z); then **every further experiment on
+the v98 base**, judged against v98's own runs (`fp97`, `fp97b`), so a pass
+needs no separate stacking test: `t98` (Treasure; +15.1 on v97), `c98`
+(claim-inferred respawns), `h98` (carrier hunting), then map-restricted
+`cr98`/`cr98b` (crystalfund, the 7 crystal maps), `m98`/`ms98` (+`b`)
+(monolith raid gated on share ≥ 0.5, plain and with safebank80, the 9
+monolith-heavy maps), and `tr98` (travel weight 1.4). Leaders on the first
+four opponents get the other four.
 
 **Map table** (`analysis/maptable.py`, from two 3-round probes on every map,
 `ws/bench/maptable.json`): the party rule fires on exactly 00contest and
