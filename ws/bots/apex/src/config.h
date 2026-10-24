@@ -66,6 +66,30 @@ inline constexpr bool DEBUG = false;
 // Decision-neutral re-roll for twins: burn this many loop iterations a turn, which
 // moves every fuel suspension and so re-rolls trajectories without changing a choice.
 inline constexpr int REROLL = 0;
+// Fight simulator (sim.h): SIM_LOG prints its prediction beside the ratio rule's
+// whenever an enemy is within DISENGAGE_RADIUS, and each death, for validation.
+inline constexpr bool SIM_LOG = false;
+inline constexpr int SIM_RADIUS = 8;
+inline constexpr int SIM_HORIZON = 5;
+// Reuse a prediction for up to SIM_CACHE rounds while the number of enemies in
+// sight is unchanged, and simulate only when SIM_RESERVE fuel stays free for the
+// rest of the turn: at 8 rounds, uncached and unreserved, the simulation starved
+// movement and combat (-110 to -124 gems against cv101).
+inline constexpr int SIM_CACHE = 3;
+inline constexpr std::uint64_t SIM_RESERVE = 35'000;
+// Run the simulation where the disengage check would and ignore it: its cost alone.
+inline constexpr bool SIM_DRY = false;
+// Disengage on: 0 the ratio rule, 1 the simulator (I die within the horizon, or,
+// once leaving, would end below SIM_STAY of my health), 2 either, 3 the simulated
+// health left below SIM_LEAVE of max (SIM_LEAVE + SIM_HYSTERESIS once leaving).
+// At 0.25 it flags as often as the ratio rule and catches 77.5% of deaths, not 71%.
+inline constexpr int DISENGAGE_MODE = 0;
+inline constexpr double SIM_STAY = 0.35;
+inline constexpr double SIM_LEAVE = 0.25;
+inline constexpr double SIM_HYSTERESIS = 0.15;
+// Chase an enemy only into a fight the simulator says I survive; a simulated
+// kill that I survive also licenses a chase the power comparison would refuse.
+inline constexpr bool ENGAGE_SIM = false;
 
 inline bool tank(bc::champion_type type) { return HOR_TANK && type == bc::champion_type::heart_of_ruin; }
 inline bool finisher(bc::champion_type type) { return PRISM_FINISHER && type == bc::champion_type::prism; }

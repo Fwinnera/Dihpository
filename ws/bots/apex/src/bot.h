@@ -5,6 +5,7 @@
 #include "config.h"
 #include "nav.h"
 #include "progress.h"
+#include "sim.h"
 #include "strategy.h"
 #include "teamwork.h"
 #include "turn.h"
@@ -32,6 +33,27 @@ public:
     Progress progress{};
     std::optional<int> supporting_handle;
     Progress bank_progress{10};
+    bool logged_death = false;
+    std::optional<sim::Outcome> fight;
+    std::int64_t fight_round = -1, fight_made = -1;
+    std::size_t fight_enemies = 0;
+
+    // The fight around us this turn, simulated at most once; none when fuel is short.
+    const sim::Outcome* simulate(const std::vector<bc::champion>& enemies, const std::vector<bc::camp>& camps) {
+        const auto now = static_cast<std::int64_t>(bc::round_number());
+        if (fight_round != now) {
+            fight_round = now;
+            // A recent prediction stands while the enemies in sight are as many.
+            const bool recent = fight && now - fight_made < config::SIM_CACHE && enemies.size() == fight_enemies;
+            if (!recent) {
+                fight = sim::predict(team->allies, enemies, camps, config::SIM_RADIUS, config::SIM_HORIZON,
+                                     config::SIM_RESERVE);
+                fight_made = now;
+                fight_enemies = enemies.size();
+            }
+        }
+        return fight ? &*fight : nullptr;
+    }
 
     virtual ~Bot() = default;
 
@@ -277,12 +299,16 @@ public:
         }
         shop(me);
         if (!me.is_alive()) {
+            if (config::SIM_LOG && !logged_death)
+                std::cout << "DEATH r=" << bc::round_number() << " s=" << team->slot << std::endl;
+            logged_death = true;
             team->claim();
             current_group.reset();
             objective = nullptr;
             status("dead");
             return;
         }
+        logged_death = false;
         if (me.is_recalling() || me.is_submitting_gems() || me.is_teleporting()) {
             const auto held = held_at(me.position());
             if (held && std::holds_alternative<bc::map::camp_group_reward_available>(held->group.state())) {
@@ -368,8 +394,33 @@ public:
         }
         {
             const auto [ratio, threats] = combat::local_power(enemies, team->allies, config::DISENGAGE_RADIUS);
+            if (config::SIM_LOG && threats > 0) {
+                const auto before = bc::fuel_remaining();
+                const auto predicted = sim::predict(team->allies, enemies, camps, config::SIM_RADIUS, config::SIM_HORIZON);
+                if (predicted) {
+                const auto& o = *predicted;
+                std::cout << "SIMCOST " << before - bc::fuel_remaining() << std::endl;
+                std::cout << "PRED r=" << bc::round_number() << " s=" << team->slot << " ratio=" << ratio
+                          << " die=" << o.me_dies << " at=" << o.round << " hp=" << o.me_hp / D(me.max_health())
+                          << " now=" << D(me.health()) / D(me.max_health()) << " gems=" << me.gem_count()
+                          << " kill=" << o.theirs_dead << " lose=" << o.ours_dead << " fuel=" << bc::fuel_remaining() << std::endl;
+                }
+            }
             const double leave = config::DISENGAGE_RATIO + (disengaging ? config::DISENGAGE_HYSTERESIS : 0);
-            disengaging = !at_spawn && threats > 0 && ratio < leave;
+            if (config::SIM_DRY && threats > 0) simulate(enemies, camps);
+            bool danger = ratio < leave;
+            if (config::DISENGAGE_MODE > 0 && threats > 0) {
+                if (const auto* o = simulate(enemies, camps)) {
+                    if (config::DISENGAGE_MODE == 3) {
+                        const double line = config::SIM_LEAVE + (disengaging ? config::SIM_HYSTERESIS : 0);
+                        danger = o->me_hp < D(me.max_health()) * line;
+                    } else {
+                        const bool lost = o->me_dies || (disengaging && o->me_hp < D(me.max_health()) * config::SIM_STAY);
+                        danger = config::DISENGAGE_MODE == 1 ? lost : danger || lost;
+                    }
+                }
+            }
+            disengaging = !at_spawn && threats > 0 && danger;
             if (disengaging) {
                 status("disengage");
                 objective = nullptr;
@@ -426,11 +477,22 @@ public:
             me.recall();
             return;
         }
+        // recall_safe reads every visible camp with no fuel check between them; a turn
+        // that ran dry there resumes next round, and this turn's enemies may be out of
+        // sight. Replan instead of reading them.
+        turn::check();
         const auto& enemy_spawn = gm::spawn_region(bc::team::enemy);
         std::vector<bc::champion> pursuit;
         for (const auto& e : enemies)
             if (!enemy_spawn.is_set(e.position())) pursuit.push_back(e);
-        const auto target = combat::choose_enemy(pursuit, team->allies);
+        bool favourable = false;
+        if (config::ENGAGE_SIM && !pursuit.empty()) {
+            if (const auto* o = simulate(enemies, camps)) {
+                if (o->me_dies) pursuit.clear();
+                favourable = !o->me_dies && o->theirs_dead > 0;
+            }
+        }
+        const auto target = combat::choose_enemy(pursuit, team->allies, false, favourable);
         if (target) {
             status("combat");
             bool acted = combat::fight(*target, pursuit);

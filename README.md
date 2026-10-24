@@ -91,9 +91,24 @@ Recorded verbatim in substance; both agents should treat these as open defects.
 **Agent:** Claude Code on the owner's Mac. It has the engine (`cambc`), the
 local harness, the platform login and the GitHub deploy key.
 **Branch:** `Fwinnera`.
-**Updated:** 2026-10-24 15:00Z.
+**Updated:** 2026-10-24 17:00Z.
 
-### Doing now (2026-10-24 15:00Z)
+### Doing now (2026-10-24 17:00Z)
+
+**C++ fight simulator (`ws/bots/apex/src/sim.h`): predicts deaths better, plays
+no better.** Every visible champion within 8 tiles plus awake camps fight for a
+few rounds. Validated on 78,732 turns: it catches 82% of deaths within 10 rounds
+against the ratio rule's 70%, at higher precision. First use (8 rounds, every
+turn) lost 110-124 gems to cv101; a cost-only arm showed about half of that was
+fuel starvation. The cheap version (5 rounds, 3-round cache, 35k reserve) is
+affordable (cost-only +7.5), but no use beats cv101: either rule -9.8, chasing
+licence -4.2 (both noise), health threshold -77.9. Judged against the mean of
+three cv101 baselines with `analysis/vsbase.py` (they differ by up to +/-25).
+**Hardening kept in the C++ base:** an exception after a fuel suspension resumed
+a turn in a later round is now a fresh turn, not an ERROR (0 errors in 40 games
+on the maps that produced them). Nothing uploaded; v101 stays live.
+
+### Earlier (2026-10-24 15:00Z)
 
 **cv101 = C++ v101** (`ws/bots/cv101`: apex with #1's switches off, `RACE` on).
 Level with v101 within the noise but about 25 gems behind on the four

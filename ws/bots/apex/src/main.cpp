@@ -42,6 +42,10 @@ int main() {
             bc::end_turn();
             continue;
         } catch (const std::exception& error) {
+            // A turn that ran out of fuel resumes next round inside the old call stack,
+            // where a unit it saw may now be out of sight ("Unit is not in vision").
+            // That is the Replan case above, not a bug: play a fresh turn this round.
+            if (turn::started >= 0 && static_cast<std::int64_t>(bc::round_number()) != turn::started) continue;
             // An uncaught exception would resign the whole team. Log and yield.
             std::cout << "ERROR " << error.what() << std::endl;
         } catch (...) {

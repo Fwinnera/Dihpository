@@ -4379,3 +4379,76 @@ cv101 uses a median 28,300 (90th percentile 46,900, maximum 91,400 over 603
 sampled turns), where a Python operation costs about 500 of v101's 2.4M.
 
 A `REROLL` switch (a dead loop of N iterations a turn) builds C++ twins.
+
+## LOCAL: a C++ fight simulator (sim.h) -- better predictions, first use starved the turn
+
+The owner's request: use C++'s headroom for heavier computation. A C++ turn has
+100,000 fuel and cv101 uses a median 28,300; a Python operation costs about 500.
+
+`ws/bots/apex/src/sim.h` simulates the fight around a champion: every visible
+champion within 8 tiles and the awake camps among them, for a few rounds. Each
+champion closes on the nearest enemy and hits the weakest one in reach (damage
+per round = strength x (1 + 1/cooldown per attack reset) + focus x (modifier /
+cooldown per damaging ability); Heart of Ruin's missing-health bonus), healers
+mend their most hurt ally, camps hit the nearest champion. Switches in config.h:
+`DISENGAGE_MODE` (0 ratio rule, 1 simulator, 2 either, 3 simulated health left
+below `SIM_LEAVE`), `ENGAGE_SIM` (no chase into a simulated death; a simulated
+kill that I survive licenses one), `SIM_LOG` (validation lines),
+`SIM_DRY` (simulate and ignore: the cost alone), `SIM_HORIZON`, `SIM_CACHE`,
+`SIM_RESERVE`. `analysis/simcheck.py` scores predictions against deaths within
+10 rounds; `analysis/vsbase.py` judges arms against the mean of several twins
+(the three cv101 baselines differ from each other's mean by +7.0, +18.6, -25.6).
+
+**Validation, 80 games (78,732 turns with an enemy within 5 tiles, 9.4% followed
+by a death):** ratio < 0.5 flags 25,422 turns, precision 20.4%, recall 69.9%;
+"the simulator says I die" flags 26,847, precision 22.7%, recall 82.1%. AUC
+0.786 against 0.788 (current health alone: 0.705).
+
+**First use, 8 rounds, simulated every turn near an enemy:** against the three
+cv101 baselines on the four opponents, all four arms lost heavily:
+
+    simulator back-off (fs_d1)       gems -120.8 (z -4.78)   win -18.4   deaths +4.04
+    either rule (fs_d2)              gems -110.3 (z -4.84)   win -17.8   deaths +3.44
+    simulator chasing (fs_e)         gems -117.5 (z -5.38)   win -16.6   deaths +4.42
+    both (fs_d1e)                    gems -124.0 (z -5.07)   win -18.8   deaths +4.18
+
+`fs_d2` retreats wherever cv101 does and more, yet died more: the decisions
+cannot explain it. One simulation cost a median 21k fuel (95th percentile 56k;
+engine reads, about eleven a unit, are most of it), so the turn's movement and
+fighting ran short. Two bugs were found and fixed on the way: a turn that ran
+dry inside the simulation resumed next round on units it could no longer see
+("Unit is not in vision", 9 errors in 6 games on 00contest); the fix budgets
+each simulation by its unit count and checks fuel inside the loop.
+
+**Second use: cheaper.** 5 rounds instead of 8; a prediction reused for up to 3
+rounds while the number of enemies in sight is unchanged; a simulation only
+when 35,000 fuel stays free for the rest of the turn; engine reads trimmed
+(positions once, camps filtered on their fixed spawn tile, one fuel check a
+list). Cost per simulation: median 18.3k (95th percentile 43.8k), from 22.7k and
+56.5k. At 5 rounds the simulator still ranks danger better (AUC 0.787 against
+0.767, 40 games), and its health-left score, cut at 0.25 of max, flags as often
+as the ratio rule while catching 77.5% of deaths, not 71.0% (precision 28.7%
+against 26.3%). Against the three cv101 baselines, 320 games an arm:
+
+    cost only, old settings (fs2_dryold)   gems  -60.2 (z -3.44)   win  -9.1   deaths +1.88
+    cost only, new settings (fs2_dry)      gems   +7.5 (z +0.46)   win  +1.3   deaths +0.36
+    either rule (fs2_d2)                   gems   -9.8 (z -0.59)   win  -0.3   deaths +0.04
+    health left < 0.25 (fs2_d3)            gems  -77.9 (z -3.71)   win -13.8   deaths +1.75
+    simulator chasing (fs2_e)              gems   -4.2 (z -0.22)   win  -2.5   deaths +0.65
+    health left + chasing (fs2_d3e)        gems  -59.7 (z -3.01)   win  -8.1   deaths +1.66
+
+So the cost explained about half of the first failure, and the cheap version
+is affordable. But no use of the predictions beats cv101: the either rule and
+the chasing licence are level, and the better-scoring health threshold is
+clearly worse. Predicting who dies is not the bottleneck; what a champion
+does after the warning (where it retreats to, what it gives up by leaving) is.
+Not uploaded; v101 stays live.
+
+**Hardening that stays in the C++ base.** A turn that runs out of fuel resumes
+next round inside the old call stack, and the next engine read of a unit now
+out of sight threw "Unit is not in vision" (1 game in ~320 once the simulator
+left turns shorter; the throws were in `recall_safe`'s camp loop and
+`choose_enemy`'s per-enemy reads, both with no fuel check across ~50 reads).
+`main.cpp` now treats an exception in a later round exactly as a Replan in a
+later round -- a fresh turn this round, no ERROR line -- and errors in the same
+round still print. 40 games on the maps that produced them: 0 errors.

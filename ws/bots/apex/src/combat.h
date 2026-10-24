@@ -224,7 +224,8 @@ inline bool fight(const T& target, const std::vector<T>& nearby = {}) {
 }
 
 inline std::optional<bc::champion> choose_enemy(const std::vector<bc::champion>& enemies,
-                                                const std::vector<bc::champion>& allies, bool defending = false) {
+                                                const std::vector<bc::champion>& allies, bool defending = false,
+                                                bool favourable = false) {
     auto& me = bc::self();
     const auto attack_mask = me.attack_tiles();
     using Score = std::tuple<bool, bool, bool, double, std::int64_t, std::int64_t>;
@@ -241,16 +242,20 @@ inline std::optional<bc::champion> choose_enemy(const std::vector<bc::champion>&
         double enemy_power = 0;
         for (const auto& e : enemies)
             if (distance(e.position(), enemy.position()) <= 4) enemy_power += D(e.health()) * std::max(1.0, D(e.strength()));
+        // One enemy costs about fifty engine reads (~15k fuel), more than turn::MIN_FUEL:
+        // check again before the damage reads, or a turn that runs dry here resumes
+        // next round reading an enemy it can no longer see.
+        turn::check();
         double burst = D(me.strength()) * 2;
         for (const auto& a : me.abilities())
             if (a.is_ready() && (a.is_damage() || a.is_cc() || a.is_aoe_damage()))
                 burst = std::max(burst, D(me.strength()) + D(a.damage_amount(enemy)));
         const bool killable = D(enemy.health()) <= burst;
         const bool interrupt = enemy.is_submitting_gems() && enemy.gem_count() > 0;
-        if (!(killable || interrupt || defending || gap <= 4 || allied_power > enemy_power * 1.15)) continue;
+        if (!(killable || interrupt || defending || gap <= 4 || favourable || allied_power > enemy_power * 1.15)) continue;
         // A carrier banks rather than travelling after a healthy enemy.
         if (me.gem_count() >= 22 && !(attack_mask.is_set(enemy.position()) && killable)) continue;
-        if (gap > 4 && !(killable || interrupt || allied_power > enemy_power * 1.15)) continue;
+        if (gap > 4 && !(killable || interrupt || favourable || allied_power > enemy_power * 1.15)) continue;
         Score score{!attack_mask.is_set(enemy.position()), !interrupt, !killable,
                     D(enemy.health()) / std::max(1.0, D(me.strength())), gap, -static_cast<std::int64_t>(enemy.gem_count())};
         if (!best_score || score < *best_score) {
