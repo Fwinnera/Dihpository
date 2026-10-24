@@ -3921,3 +3921,20 @@ opponents, 320 games): all maps +5.2 gems (clustered z 0.39); on the 9
 monolith-heavy maps +63.8 (a third replicate of the raid's gain, after +57.7
 and +65.2); on every other map -11.8 (se 13.2), i.e. v99 plays like v98 off
 the monolith maps, as designed.
+
+**`lockbreak` on v99 (`lk99` against the fresh v99 twin `r299`), 320 games on
+four distinct opponents:**
+
+    gems +47.1 (clustered se 13.2, z +3.57)    win rate +9.1 (clustered z +2.90)
+    opponent gems -85.3   gems collected +33.2   deaths -0.7   gold +168
+    by opponent: seelie_t04 +61.0, colleague +55.0, gs_dis075 +38.7, greatsage +33.6
+    by map: 00split +336, 00rushbait-v2 +326, 01shortcut +324, 00reverse-spiral +258,
+            00corners +183, 00pilgrimage +150 ... 01elk-arena -81, 01starfish -71
+    117 of 320 games unchanged (maps where no lock is met)
+
+The opponent loses 85 gems a game as well: after we break their lock, our own
+goes on and blocks their deposits there. It is the best of this round's
+screens, so it carries some of the winner's curse; it is being confirmed with a
+fresh re-roll pair (`gs99_lock_rr` against `gs99_rr`) on the other four
+opponents (boss_full, priority_exp, base, boss_focus). `ws/bots/v100_submit`
+(v99 + lockbreak) is built and waiting on that result.
