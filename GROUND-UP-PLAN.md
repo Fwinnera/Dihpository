@@ -3676,3 +3676,32 @@ unchanged (21%) on side A; all four games won. It acts only where
 On greatsage Treasure bought gold and no gems; on v97 it leads, and the extra
 gold shows up as kills. Below the 1.28 bar, so it is being extended to 640
 games against the other four opponents (`treas97b` against `rr97b`).
+
+## CLOUD: gs97_fp passes its first 320 games at z 3.6
+
+`gs97_fp` (v97 + fieldresume + cheapretry + party + reroll) against the fresh
+twin `gs97_rr` (v97 + reroll), 320 paired games on the standard four opponents:
+
+    gems +67.5 (se 18.6, z 3.6)    win rate +10.6 (se 3.0, z 3.6)
+    opponent gems -44.1 (z -2.4)   deaths -0.9    kills 0.0    gold +39
+    95% bootstrap +31.1 to +104.7; 144 games better, 95 worse, 81 the same (69 bit-identical)
+    results flipped: 64 to a win, 30 to a loss (p 0.001)
+    by opponent: base +66.9, boss_focus +71.4, colleague +55.3, greatsage +76.2
+
+By map group (`analysis/bymaps.py`):
+
+    party maps (00contest, 00stampede)          16 games   +323.2 (se 146.5)
+    stall maps (yellow-brick, the-farm,
+      big-world, islands, lanes)                40 games   +138.0 (se 37.6, z 3.7)
+    every other map                            264 games    +41.3 (se 19.5, z 2.1)
+
+The other maps gain too. A likely reason, not yet measured: fuel cuts short
+`choose_group` there less often, but when it does v97 loses that turn and
+repeats the same expensive call on the next, while `gs97_fp` takes the cheap
+path once and moves on. A logger run of `gs97_fp` on the full pool would show it. The second half
+(`fp97b` against `rr97b`, the other four opponents) completes the 640.
+
+`ws/bots/v98_submit` and `v98_submit.zip` (22,336 bytes) are built by
+`analysis/mksubmit.py v98 bruiser+heal60+fieldresume+cheapretry+party`. They
+differ from the tested arm only by the decision-neutral re-roll statement and
+the BOTTAG line; `main.py` is byte-identical to v97's. Not uploaded.
