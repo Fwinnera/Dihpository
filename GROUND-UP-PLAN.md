@@ -4582,6 +4582,10 @@ on the pinned 01islands game its per-turn figures equal the local build's turn
 for turn (66,707, 83,537, 66,792, ...), not v109's (`analysis/fuelprint.py`).
 Standard check: 6 wins of 20 (v109 6, astra 4), gems 534 against 839; paired with
 v109's run -60 (se 85), 8 better, 10 worse, 2 same -- level. Versions 110 and 111
-were uploaded by someone else between 19:58Z and 21:35Z. About 95 unranked
-scrims by other teams fell in the hour before the check; the platform still
-accepted our four groups.
+were uploaded by someone else between 19:58Z and 21:35Z. Correction: the ~95
+unranked games in the hour before the check were not other teams' scrims -- the
+owner's match page shows them played with our own versions v105-v111 against
+Lucky Lock Pickers, Claude wrote everything and Preyas, so someone on our team
+was benchmarking versions. By group (best of five), v112 lost all four: 2-3
+Nanyang, 2-3 slop, 1-4 Hidden Altar Keepers, 1-4 Quantom. v109 won one (slop
+3-2, Nanyang 2-3, Quantom 1-4, Hidden Altar Keepers 0-5); astra none.

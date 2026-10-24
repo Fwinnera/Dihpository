@@ -58,6 +58,10 @@ one match quota. Most of the ways to waste a day here come from forgetting that.
                stand_v112; groups 64ab9ed8, 9372fd01, 007aace5, 2ddbad31).
                Result: 6 wins of 20 (v109 6, astra 4), gems 534 against 839; paired
                with v109's run -60 (se 85), 8 better / 10 worse / 2 same: level.
+               By group v112 lost all four (2-3, 2-3, 1-4, 1-4); v109 won one (slop 3-2).
+               NOTE: someone on our team is queueing unranked groups with versions
+               v105-v111 (Lucky Lock Pickers, Claude wrote everything, Preyas); those
+               count toward the 50-an-hour quota.
                Fallback: v109 (ws/bots/gs_fix2_submit).
     before it: VERSION 109 = gs_fix2_submit (ws/bots/gs_fix2_submit, gs_fix2_submit.zip,
                sha256 6fbc8330...), uploaded by LOCAL at 19:58:56Z at the owner's request:
