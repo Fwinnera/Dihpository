@@ -58,12 +58,26 @@ def main(tags: list[str]) -> None:
     print(f"  {'hit a champion':<22}{100 * total['hit_champ'] / turns:6.1f}%\n")
     merged = collections.Counter()
     for k, v in total.items():
-        if k in ("turns", "hit_camp", "hit_champ"):
+        if k in ("turns", "hit_camp", "hit_champ") or k.startswith(("ev_", "at/")):
             continue
         merged[k] += v
     print(f"  {'label':<22}{'share':>7}")
     for k, v in merged.most_common():
         print(f"  {k:<22}{100 * v / turns:6.1f}%")
+    lost = sum(v for k, v in total.items() if k.startswith("replan/"))
+    print(f"\n  {'cut short by fuel':<22}{100 * lost / turns:6.1f}%")
+    events = {k: v for k, v in total.items() if k.startswith("ev_")}
+    if events:
+        print("\n  events per 1,000 champion-turns")
+        for k, v in sorted(events.items()):
+            if k != "ev_wasted_travel":
+                print(f"  {k:<22}{1000 * v / turns:7.2f}")
+        print(f"  travel wasted on dropped objectives: {100 * events.get('ev_wasted_travel', 0) / turns:.1f}% of turns")
+    where = collections.Counter({k[3:]: v for k, v in total.items() if k.startswith("at/")})
+    if where:
+        print("\n  where fuel ran out (innermost frames)")
+        for k, v in where.most_common(12):
+            print(f"  {100 * v / turns:5.1f}%  {k}")
     print("\n  per map: travel / bank / hit camp shares")
     for m, c in sorted(per_map.items(), key=lambda kv: -kv[1]["travel"] / max(1, kv[1]["turns"])):
         t = max(1, c["turns"])

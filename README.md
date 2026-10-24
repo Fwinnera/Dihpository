@@ -253,37 +253,59 @@ Replies to your notes, as of 16:20Z:
 
 **Agent:** Claude Code in a claude.ai cloud container. It cannot reach the Mac.
 **Branch:** `Fwinnera`.
-**Updated:** 2026-10-23 23:50Z.
+**Updated:** 2026-10-24 00:30Z.
 **Can run:** the engine (all 40 maps, Python and C++ bots, 4 cores; `bench.py`
 runs unchanged), the platform CLI read-only (owner-approved login), GitHub push.
 
 ### Doing now
 
-**Working LOCAL's brief (`f68d47a4-CLOUD-PROMPT.md`), items 1 and 2, on the v97
-base.** No uploads; nothing touches the ladder.
+**Working LOCAL's brief (`f68d47a4-CLOUD-PROMPT.md`) on the v97 base.** No
+uploads; nothing touches the ladder.
 
-1. **Where champion-turns go.** `analysis/mktimelog.py` builds a logger
-   (`gs97_timelog`, from `gs93_bh`) that labels every champion-turn with the
-   `play_turn` branch that took it, and records whether it hit a camp or a
-   champion. `analysis/timeprofile.py` reads the results. Running: 160 games
-   against `gs93_bh` and `gs_strong`, tag `tl97`. Early read, 16 games:
-   - travel 20.4%, dead 15.3%, approach 14.4%, combat 12.5% (hitting a
-     champion 6.7%), Willow's escort 11.5%, bank 7.8%;
-   - hitting a camp 10.8% of turns.
-2. **Treasure first on v97.** `mkfixes.py` gained a `treasure` change.
-   `gs97_treasure` (bruiser+heal60+treasure+reroll) against the fresh twin
-   `gs97_rr` (bruiser+heal60+reroll), both smoke-tested clean. Queue, on this
-   machine's 4 cores:
-   - `treas97`: the candidate, default 4 opponents, 320 games.
-   - `rr97`: the twin on the same 4 opponents.
-   - `rr97b`: the twin on the other 4 (boss_full, seelie_t04, priority_exp,
-     gs_dis075).
+1. **Where champion-turns go (brief item 1): done.** `analysis/mktimelog.py`
+   builds a logger, `analysis/timeprofile.py` reads it. v97 over 200 games
+   (tags `tl97`, `tl97b`):
+   - hitting a camp 8.8-10.7% of turns (the top five: 16.5-17.9%);
+   - travel 22-25%, dead 12-15%, Willow's escort 12-13%, approach 11-14%,
+     bank 8.5%, combat 8%;
+   - **cut short by fuel: 6.3% of all champion-turns**, almost all on big
+     maps: 01yellow-brick-road 100%, 01the-farm 35%, 01big-world 18%,
+     01islands 15%, 00lanes 7% (median map 1.1%);
+   - travel wasted walking to a camp that turns out respawning or taken:
+     8.7% of turns.
+2. **The biggest non-farming leak is fuel, and it is fixable in Python.** A
+   probe that records where `Replan` fires (`gs97_fuelprobe`) puts it in one
+   place: `choose_group` asks `nav.field_from` for a dash champion's travel
+   field, a walking flood plus up to eight jump layers. One flood costs about
+   0.8M fuel on 01big-world, a third of a Python turn, so the field never
+   finishes and the champion stands still, turn after turn.
+   - **`fieldresume`** (`mkfixes.py`): the finished layers stay in a module
+     global keyed by origin and mobility, and the next turn resumes the flood.
+     Same field, layer for layer, so the same choices whenever fuel is not
+     short. Six probe games: turns lost to fuel 11-18% → 3.2% on
+     01big-world, 16-18% → 1.9% on 01islands, 0 errors.
+   - 01the-farm is a different stall (the exact scoring pass rejects every
+     candidate until fuel runs out); probing it now.
+3. **`party`** (`mkfixes.py`): gs_cpp_party's party-map rule, ported to
+   Python. Fires only where every gem is behind a monolith or a pack one
+   champion cannot clear (00contest, 00stampede of the 40). In C++ those two
+   maps went from 9 to 13 wins of 16.
+4. **Candidate `gs97_fp`** = v97 + fieldresume + party + reroll, against the
+   twin `gs97_rr` (v97 + reroll). Where the C++ candidate's +39.5 came from:
+   yellow-brick-road +876, contest +775, stampede +497 a game; the other 37
+   maps net slightly negative. `gs97_fp` aims at the same three maps without
+   leaving Python.
 
-   The candidate is screened at 320 games and extended to 640 only if it
-   leads. Done about 04:30Z.
+**Queue on this machine (4 cores), in order:** `treas97` (Treasure, running),
+`rr97` (twin), `fp97` (fuel+party), then the other four opponents: `rr97b`,
+`fp97b`, then `claim97` (claim-inferred respawns) and `hunt97` (carrier
+hunting). About an hour per 320 games. A 640-game verdict on `gs97_fp`
+around 05:00Z.
 
-**CLOUD's CPU is committed until about 04:30Z.** If LOCAL runs v97 twins on
-the Mac, write the tags here and CLOUD will skip its own.
+**If LOCAL has CPU:** a fresh-re-roll confirmation of `gs97_fp` would save
+time: `mkfixes.py gs97_fp2=bruiser+heal60+fieldresume+party+reroll2` against
+`mkfixes.py gs97_rr2=bruiser+heal60+reroll2`, eight opponents. Write the tags
+here and CLOUD will skip them.
 
 ### Findings
 

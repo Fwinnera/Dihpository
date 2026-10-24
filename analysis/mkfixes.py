@@ -245,6 +245,161 @@ def apply(src: Path, change: str) -> None:
              "            return\n"
              "        ratio, threats = combat.local_power(")
         cfg.write_text(cfg.read_text() + f"# Recall to heal below HEAL_RECALL of max health when recall is safe.\nHEAL_RECALL = {int(change[len('heal'):]) / 100}\n")
+    elif change == "fieldresume":
+        # On large maps a dash champion's travel field (a walking flood plus up
+        # to eight jump layers) costs more fuel than a turn has left after
+        # sensing, so choose_group was cut short at the same flood turn after
+        # turn and the champion stood still: 11-35% of champion-turns on
+        # 01the-farm, 01big-world and 01islands (timeprofile.py). The finished
+        # layers now stay in a module global keyed by origin and mobility, and the
+        # next turn resumes the flood where it stopped. The result is the same
+        # field, layer for layer, so every choice it feeds is unchanged.
+        n = src / "navigation.py"
+        edit(n, "cost_key = None\ncost_cache = None\n",
+             "cost_key = None\ncost_cache = None\n# (key, layers, union, done): a travel flood that a fuel suspension cut short.\nfield_partial = None\n")
+        edit(n, "def layers_from(roots, radius, crystal=False, first=None, stop=None, camps=None):\n"
+                "    \"\"\"Flood walking components, then add legal jump portals between them.\"\"\"\n",
+             "def layers_from(roots, radius, crystal=False, first=None, stop=None, camps=None, partial=None):\n"
+             "    \"\"\"Flood walking components, then add legal jump portals between them.\n\n"
+             "    `partial` is a [key, layers, union, done] record that keeps the layers\n"
+             "    finished so far across a fuel suspension; a later call resumes it.\n"
+             "    \"\"\"\n")
+        edit(n, "    if first is None:\n"
+                "        reached, field = bc.Bitboard(), bc.DistanceField()\n"
+                "        field.compute(walls, roots & ~walls, reached)\n"
+                "    else:\n"
+                "        field, reached = first\n"
+                "    layers = [(field, reached)]\n"
+                "    # Native |= mutates its left operand. Keep each layer's component mask\n"
+                "    # independent from the cumulative frontier used by subsequent floods.\n"
+                "    union = reached.copy()\n"
+                "    if stop is not None and union.is_set(stop):\n"
+                "        return layers, union\n"
+                "    for _ in range(1 if crystal else 8):\n"
+                "        turn.check()\n"
+                "        frontier = expand(union, radius, path_walls) & ~walls & ~union\n"
+                "        if frontier.is_empty():\n"
+                "            break\n"
+                "        field, reached = bc.DistanceField(), bc.Bitboard()\n"
+                "        field.compute(walls, frontier, reached)\n"
+                "        if reached.is_empty():\n"
+                "            break\n"
+                "        union |= reached\n"
+                "        layers.append((field, reached))\n",
+             "    if partial is not None:\n"
+             "        layers, union = partial[1], partial[2]\n"
+             "    else:\n"
+             "        if first is None:\n"
+             "            reached, field = bc.Bitboard(), bc.DistanceField()\n"
+             "            field.compute(walls, roots & ~walls, reached)\n"
+             "        else:\n"
+             "            field, reached = first\n"
+             "        layers = [(field, reached)]\n"
+             "        # Native |= mutates its left operand. Keep each layer's component mask\n"
+             "        # independent from the cumulative frontier used by subsequent floods.\n"
+             "        union = reached.copy()\n"
+             "    if stop is not None and union.is_set(stop):\n"
+             "        return layers, union\n"
+             "    while len(layers) <= (1 if crystal else 8) and not (partial is not None and partial[3]):\n"
+             "        turn.check()\n"
+             "        frontier = expand(union, radius, path_walls) & ~walls & ~union\n"
+             "        if frontier.is_empty():\n"
+             "            if partial is not None:\n"
+             "                partial[3] = True\n"
+             "            break\n"
+             "        field, reached = bc.DistanceField(), bc.Bitboard()\n"
+             "        field.compute(walls, frontier, reached)\n"
+             "        if reached.is_empty():\n"
+             "            if partial is not None:\n"
+             "                partial[3] = True\n"
+             "            break\n"
+             "        # No turn.check() between these two lines: a resumed flood must\n"
+             "        # see each layer in both the union and the list, or in neither.\n"
+             "        union |= reached\n"
+             "        layers.append((field, reached))\n")
+        edit(n, "def field_from(position):\n"
+                "    global cost_key, cost_cache\n",
+             "def field_from(position):\n"
+             "    global cost_key, cost_cache, field_partial\n")
+        edit(n, "    if key == cost_key:\n"
+                "        return cost_cache\n"
+                "    field, reached = bc.DistanceField(), bc.Bitboard()\n"
+                "    turn.check()\n"
+                "    field.compute(static_walls(), around(position, 0), reached)\n"
+                "    turn.check()\n"
+                "    radius, crystal = mode\n"
+                "    if radius:\n"
+                "        layers, reached = layers_from(around(position, 0), radius, crystal, (field, reached))\n"
+                "        result = TravelCosts(position, layers), reached\n"
+                "    else:\n"
+                "        result = field, reached\n"
+                "    cost_key, cost_cache = key, result\n"
+                "    return result\n",
+             "    if key == cost_key:\n"
+             "        return cost_cache\n"
+             "    # A flood from this origin that fuel cut short resumes; any other is dropped.\n"
+             "    if field_partial is None or field_partial[0] != key:\n"
+             "        field, reached = bc.DistanceField(), bc.Bitboard()\n"
+             "        turn.check()\n"
+             "        field.compute(static_walls(), around(position, 0), reached)\n"
+             "        field_partial = [key, [(field, reached)], reached.copy(), False]\n"
+             "    turn.check()\n"
+             "    radius, crystal = mode\n"
+             "    if radius:\n"
+             "        layers, reached = layers_from(around(position, 0), radius, crystal, partial=field_partial)\n"
+             "        result = TravelCosts(position, layers), reached\n"
+             "    else:\n"
+             "        result = field_partial[1][0]\n"
+             "    cost_key, cost_cache = key, result\n"
+             "    field_partial = None\n"
+             "    return result\n")
+    elif change == "party":
+        # Party maps (gs_cpp_party's rule, in Python): when every gem on the map
+        # sits behind a monolith or a pack one champion cannot clear alone
+        # (00contest: two monoliths; 00stampede: one herd of six elks), solo
+        # selection skips all of it and the team scores nothing all game. Such a
+        # map is played by the boss controller as a party, which gates every heavy
+        # objective as it gates monoliths. It fires on those two maps of the 40;
+        # in C++ it took them from 9 to 13 wins of 16.
+        edit(src / "policy.py", "cached = None\n",
+             "cached = None\n\n"
+             "# A gem-bearing group one champion can clear alone: no monolith, and no more\n"
+             "# combined strength than one golem. Clusters, wolves and a lone elk qualify.\n"
+             "SOLO_STRENGTH = 120\n\n"
+             "def party_map(groups):\n"
+             "    \"\"\"Every gem sits behind a monolith or a pack that kills a lone farmer.\"\"\"\n"
+             "    for g in groups:\n"
+             "        if not g.gem_value():\n"
+             "            continue\n"
+             "        camps = g.camps()\n"
+             "        if (not any(c.is_monolith() for c in camps)\n"
+             "                and sum(c.base_stats().base_strength for c in camps) <= SOLO_STRENGTH):\n"
+             "            return False\n"
+             "    return True\n")
+        edit(src / "policy.py", "            cached = 2\n        else:\n            cached = 0\n    return cached\n",
+             "            cached = 2\n        elif party_map(groups):\n            cached = 3\n        else:\n            cached = 0\n    return cached\n\n"
+             "def party():\n    \"\"\"Maps played by the party controller.\"\"\"\n    return kind() in (2, 3)\n")
+        edit(src / "policy.py", "    variant = kind()\n    if variant == 2:\n", "    if party():\n")
+        edit(src / "draft.py", "    if variant == 2:\n", "    if policy.party():\n")
+        edit(src / "strategy.py", "        self.monolith = any(c.is_monolith() for c in self.camps)\n",
+             "        self.monolith = any(c.is_monolith() for c in self.camps)\n"
+             "        # A monolith, or more strength than one champion can clear alone.\n"
+             "        self.heavy = self.monolith or self.incoming > 120\n")
+        b = src / "boss.py"
+        edit(b, "        claims = self.team.assignments()\n",
+             "        # On party maps every heavy objective waits for the full party, not\n"
+             "        # only monoliths: 00stampede's gems are a herd of six elks.\n"
+             "        gated = (lambda o: o.heavy) if policy.kind() == 3 else (lambda o: o.monolith)\n"
+             "        claims = self.team.assignments()\n")
+        edit(b, "                          and (not o.monolith or now >= 650)\n"
+                "                          and (not boss_ready or o.monolith)), None)\n",
+             "                          and (not gated(o) or now >= 650)\n"
+             "                          and (not boss_ready or gated(o))), None)\n")
+        edit(b, "                if (self.respawns.get(o.handle, 0) > now or (o.monolith and not boss_ready)\n"
+                "                        or (boss_ready and not o.monolith)):\n",
+             "                if (self.respawns.get(o.handle, 0) > now or (gated(o) and not boss_ready)\n"
+             "                        or (boss_ready and not gated(o))):\n")
+        edit(b, "import turn\n", "import turn\nimport policy\n")
     elif change == "reroll2":
         # A second, different decision-neutral perturbation, for an independent
         # re-roll when "reroll" has already been used in the selection.
