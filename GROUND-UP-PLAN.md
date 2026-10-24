@@ -3938,3 +3938,23 @@ screens, so it carries some of the winner's curse; it is being confirmed with a
 fresh re-roll pair (`gs99_lock_rr` against `gs99_rr`) on the other four
 opponents (boss_full, priority_exp, base, boss_focus). `ws/bots/v100_submit`
 (v99 + lockbreak) is built and waiting on that result.
+
+### The weakest maps left, after lockbreak (leads, not yet worked)
+
+Win rate of the lockbreak arm by map, worst first: 00great-wall 25%,
+00road-of-riches 25%, 01starvation 25%, 01fracture 38%. From v98's profile:
+
+    map                 hit camp  travel  bank   objective choices   wasted travel
+    00road-of-riches      5.4%    45.0%   9.2%   1 per 53 turns         7.2%
+    01starvation          4.0%    49.9%   2.0%   1 per 42 turns        23.1%
+    00great-wall         10.0%    26.2%  21.8%   1 per 47 turns         6.9%
+    every map            10.7%    22.1%  10.1%   1 per 21 turns         6.3%
+
+- **01starvation** (532 gems, 75% of them in monoliths): almost a quarter of
+  all turns are walks that end at a camp found respawning, presumably cleared
+  by the enemy first. A contested-camp penalty (a group closer to the enemy's
+  spawn than our travel time to it is likely gone on arrival) is the obvious
+  next experiment.
+- **00road-of-riches** (51 groups): long single trips, not dropped ones.
+- **00great-wall**: bank 21.8% with four altars; worth a bank probe like
+  01shortcut's.
