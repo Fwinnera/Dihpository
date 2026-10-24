@@ -659,6 +659,42 @@ def apply(src: Path, change: str) -> None:
         cfg.write_text(cfg.read_text() + f"# Team jobs: on a map where this champion would reject at least TEAM_SHARE\n# of the gems alone, those groups are costed for several raiders from TEAM_ROUND.\nTEAM_SHARE = {share / 100}\nTEAM_ROUND = 0\n")
     elif re.fullmatch(r"teamround(\d+)", change):
         edit(cfg, "TEAM_ROUND = 0\n", f"TEAM_ROUND = {int(change[len('teamround'):])}\n")
+    elif change == "lad_spawnhold":
+        # From the ladder (analysis/lossmine.py over 300 ranked games, 146 lost):
+        # in losses we die to champions 17.7 times a game against 7.9 in wins, and
+        # 4.4 of those deaths are within 8 tiles of our own spawn (0.7 in wins),
+        # nearly all empty-handed (mean 3.7 gems) and not at an altar: invaders farm
+        # beside our base and our champions walk out of spawn one or two at a time
+        # into them. Disengage is switched off inside the spawn, so nothing held
+        # them back. Now a champion in our spawn, with enemies within
+        # SPAWN_HOLD_RADIUS and our local strength there under SPAWN_HOLD_RATIO of
+        # theirs, stays inside (enemies cannot enter; spawn heals fully every
+        # round) and hits whatever is already in reach, until allies arrive or the
+        # enemies leave, for at most SPAWN_HOLD_MAX rounds per visit.
+        b = src / "bot.py"
+        edit(b, "        self.disengaging = False\n",
+             "        self.disengaging = False\n        self.hold_started = -1\n")
+        edit(b, "        ratio, threats = combat.local_power(enemies, self.team.allies, config.DISENGAGE_RADIUS)\n",
+             "        if not at_spawn:\n"
+             "            self.hold_started = -1\n"
+             "        elif enemies:\n"
+             "            hold_ratio, hold_threats = combat.local_power(enemies, self.team.allies, config.SPAWN_HOLD_RADIUS)\n"
+             "            now = bc.round_number()\n"
+             "            if self.hold_started < 0 and hold_threats and hold_ratio < config.SPAWN_HOLD_RATIO:\n"
+             "                self.hold_started = now\n"
+             "            if (hold_threats and hold_ratio < config.SPAWN_HOLD_RATIO\n"
+             "                    and now - self.hold_started < config.SPAWN_HOLD_MAX):\n"
+             "                self.status('spawn_hold')\n"
+             "                self.objective = None\n"
+             "                self.team.claim()\n"
+             "                # Free damage: the spawn heals us fully every round.\n"
+             "                reach = [e for e in enemies if e.is_visible() and me.attack_tiles().is_set(e.position())]\n"
+             "                if reach:\n"
+             "                    combat.fight(min(reach, key=lambda e: e.health()), enemies)\n"
+             "                return\n"
+             "        ratio, threats = combat.local_power(enemies, self.team.allies, config.DISENGAGE_RADIUS)\n")
+        cfg.write_text(cfg.read_text() + "# Stay inside our spawn while enemies within SPAWN_HOLD_RADIUS outmatch us there.\n"
+                       "SPAWN_HOLD_RADIUS = 8\nSPAWN_HOLD_RATIO = 1.0\nSPAWN_HOLD_MAX = 40\n")
     elif change == "reroll2":
         # A second, different decision-neutral perturbation, for an independent
         # re-roll when "reroll" has already been used in the selection.
