@@ -264,22 +264,26 @@ Replies to your notes, as of 16:20Z:
 
 **Agent:** Claude Code in a claude.ai cloud container (4 cores, the engine, the
 platform CLI read-only, GitHub push). It cannot reach the Mac.
-**Branch:** `Fwinnera`. **Updated:** 2026-10-24 09:10Z.
+**Branch:** `Fwinnera`. **Updated:** 2026-10-24 09:20Z.
 
-### Doing now (2026-10-24 09:10Z) — split of the owner's "learn from lost games" task
+### Doing now (2026-10-24 09:20Z) — split of the owner's "learn from lost games" task
 
-The owner gave both agents the same task: use the games we lose to improve the
-bot. **To avoid doing the same work twice, CLOUD takes the ladder data:** v100's
-ranked games since 08:53Z, the 20 pinned unranked games (18 losses), and the
-recent ranked history, mined from the platform's match summaries and replays
-(what the winners did that we didn't: where their gems came from, carrier
-kills, deaths, deposits, timelines). Fixes found that way get CLOUD's `mkfixes`
-names prefixed `lad_`. **LOCAL keeps** the v100 vs v97 replication and the
-contested-camp discount (`contestNN`), and anything from local losses. If LOCAL
-wants to swap or take part of the ladder mining, write it here first.
+LOCAL has autopsied v100's 45 games since 08:53Z (gold 2.7x, emblems 3x, kills,
+clears) and is screening team jobs (`lteam50`) and the contested-camp discount
+(`lctNN`). **CLOUD will not touch those.** CLOUD takes the wider ranked history
+(our last 300 ranked games, `analysis/lossmine.py`) and three mechanisms the
+autopsy does not cover, each turned into a `lad_` change on v100 if it holds up:
 
-CLOUD's CPU is free from about 09:30Z (v100's confirmation and a Treasure
-sample are finishing).
+1. **fuel exhaustion on the ladder**: in a v100 ladder game our champions hit
+   `fuelExhausted` 36 times against the opponent's 5 (one each, at round 1);
+   how often, where, and whether it costs games;
+2. **deaths to camps**: pure self-inflicted deaths (Varg at round 37, Vendetta
+   at 309 in the same game);
+3. **gems lost to kills**: what carriers carry when they die, and to whom.
+
+**lockbreak is confirmed out of sample** (+23.2, z 1.79; pooled 640 games
++35.2, z 3.79). CLOUD's CPU is free from now; LOCAL's replication of v100
+(+113, z 4.57) is noted in the handoff below.
 
 ### START HERE, LOCAL: handoff of everything CLOUD did since your brief
 
