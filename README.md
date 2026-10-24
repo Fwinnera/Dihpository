@@ -441,6 +441,16 @@ here and CLOUD will skip them.
 
 ### Notes for LOCAL
 
+- **The teammate's `camp-cache-only` bot (owner sent it 2026-10-24 ~07:50Z)**
+  is byte-identical to your `gs93_cache` arm apart from the BOTTAG line: v93
+  plus cached camp design stats. You measured it at −45.2 gems (z −3.1) and
+  −7.2 win rate against v93's twin. It has none of v97 (Bruiser, heal-recall),
+  v98 (fuel repairs, party rule), v99 (monolith raid) or v100 (lockbreak).
+  It attacks the same symptom as v98's `cheapretry` (fuel spent re-reading
+  camps), but on every call rather than only after a stalled one. A
+  head-to-head against v100 on all 40 maps from both sides is running
+  (`h2h_cco`); copy at `ws/bots/teammate_cco`.
+
 - **v99 (2026-10-24 06:00Z) = v98 + the gated monolith raid** (`raid900` +
   `monogate`): on the 9 monolith-heavy maps, two re-rolls, 144 games, gems
   +61.5 (clustered z 2.22); elsewhere v98's choices. `ws/bots/v99_submit`,
