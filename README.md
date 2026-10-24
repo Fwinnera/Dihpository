@@ -49,7 +49,8 @@ one match quota. Most of the ways to waste a day here come from forgetting that.
 ## Ladder lock
 
     held by:   LOCAL since 2026-10-24 22:00Z, for the owner's request: unranked games for the
-               live VERSION 114 (standard check, then replays of the closest-rank groups).
+               live VERSION 114 against the teams rated closest to us (rank 219, 1,649),
+               alternating above and below (analysis/nearqueue.py; ws/bench/ladder/v114/).
     live bot:  re-uploaded by the owner at about 21:42Z as "Seelie's"; its replays print
                BOTTAG gs_src2_solo_bank (the bot in ws/bots/gs_new).
                Rank run (owner's request; ours 201, rating 1,668): one group of five
