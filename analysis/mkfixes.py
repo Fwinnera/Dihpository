@@ -400,6 +400,24 @@ def apply(src: Path, change: str) -> None:
              "                if (self.respawns.get(o.handle, 0) > now or (gated(o) and not boss_ready)\n"
              "                        or (boss_ready and not gated(o))):\n")
         edit(b, "import turn\n", "import turn\nimport policy\n")
+    elif change == "dangerskip":
+        # On 01the-farm Vendetta finds every group too dangerous to clear alone,
+        # but learns it only by scoring each one exactly, and scoring all of them
+        # costs more fuel than a turn holds. choose_group never returned, so the
+        # rally fallback never ran and Vendetta stood still from round 0 to the
+        # end: 29% of our champion-turns on that map. The exact pass rejects an
+        # unseen group on its design values, which the first pass already has,
+        # so the first pass now drops it there. The exact pass sees the same
+        # survivors in the same order: the same choice whenever fuel is not short.
+        s = src / "strategy.py"
+        edit(s, "    capture = bc.constants.CAPTURE_TIME\n    ranked = []\n",
+             "    capture = bc.constants.CAPTURE_TIME\n    ranked = []\n    seen = bc.vision.visible_tiles()\n")
+        edit(s, "        clear = objective.hp / (damage * (min(objective.count, 3) if splash else 1) + helper_dps)\n",
+             "        clear = objective.hp / (damage * (min(objective.count, 3) if splash else 1) + helper_dps)\n"
+             "        # The exact pass would reject this unseen group on these same values.\n"
+             "        if (max(0, objective.incoming * clear * 0.55 - heal_rate * clear) > hp_budget\n"
+             "                and (objective.spawns & seen).is_empty()):\n"
+             "            continue\n")
     elif change == "reroll2":
         # A second, different decision-neutral perturbation, for an independent
         # re-roll when "reroll" has already been used in the selection.
