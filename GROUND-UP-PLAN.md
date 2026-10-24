@@ -3979,3 +3979,21 @@ The cache attacks the same cost v98's `cheapretry` does (the exact pass
 re-reading every camp), but on every call; making every call cheaper is what
 lost LOCAL 45-64 gems, and `cheapretry` takes the cheap path only after a call
 that fuel cut short.
+
+## CLOUD: v100 uploaded (version 105) at the owner's request; ladder check queued
+
+At 08:53Z the owner asked CLOUD to "submit and run some tests". CLOUD took the
+ladder lock, uploaded `ws/bots/v100_submit` (22,989 bytes; the platform
+numbered it **version 105**, so versions 98-104 were uploaded by someone else
+after v97), and queued one five-game unranked group against each of the four
+pinned `db_base` teams on the db_base maps and sides
+(`01islands,00swirl,01elk_arena,00quadrants,01yellow_brick_road`, `a,b,a,b,a`):
+
+    ❤️Quantom❤️                         33fd952b-b067-40b2-a0d4-ba289bddcb57   group 17cfdf00-889b-4e64-95d4-e3b6667ba64d
+    Hidden Altar Keepers                19a21cd3-4d97-4bbb-adb6-242bf2d676ff   group 2a35b502-673b-4964-b78c-6b1d592fc854
+    slop                                df3d0960-64dc-47b0-b0bd-e9624d61aa5b   group 2a7ef13d-45ed-4907-b61d-b28bbdfd8540
+    Nanyang Technological University    93fd07ff-2f73-4ed4-9911-356cc1034ba5   group 656286bb-be1a-4b23-b62d-84cdcf16efc3
+
+Trailing-hour unranked count before queuing: 0. Lock released after queuing.
+Comparison baselines: LOCAL's db_base (greatsage, 16:31Z) and v93_live (16:50Z)
+groups against the same four teams, maps and sides.

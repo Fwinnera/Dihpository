@@ -48,18 +48,20 @@ one match quota. Most of the ways to waste a day here come from forgetting that.
 
 ## Ladder lock
 
-    held by:   CLOUD, since 2026-10-24 08:58Z: uploading v100 at the owner's
-               explicit request ("submit and run some tests"), then 20 unranked
-               games (4 pinned db_base teams x 5 maps). v100 stays live.
-    live bot:  VERSION 97, uploaded at 23:21Z at the owner's request:
-               ws/bots/v97_submit = v93 plus Bruiser over Power and a safe
-               heal-recall below 60% health. ladderbench.py restores exactly
-               this (verified against v97.zip).
+    held by:   nobody (CLOUD released it 2026-10-24 08:55Z).
+    live bot:  VERSION 105 = v100 (ws/bots/v100_submit), uploaded by CLOUD at
+               08:53Z at the owner's explicit request. v100 = v97 + fieldresume +
+               cheapretry + party + gated monolith raid + lockbreak. NOTE: the
+               platform numbered it 105, so versions 98-104 were uploaded by
+               someone else after v97 (23:21Z); what was live just before is
+               unknown to CLOUD. Restore v97 with ws/bots/v97_submit.
+               Ladder check queued 08:53Z: 4 groups x 5 games against the pinned
+               db_base teams (ws/bench/ladder/v100_live/meta.json on CLOUD).
     history:   greatsage until about 16:41Z, Seelie's py-t04 until 16:47Z,
                v93 until about 19:40Z, the teammate's Priority Experimental
                until 19:53Z, v95 until 20:02Z, v93 (as version 96) until
                23:21Z, then v97.
-    fallback:  v93 is seelie_dis050_submit.zip if v97's ranked results slip.
+    fallback:  v99 (ws/bots/v99_submit), then v97, then v93 (seelie_dis050_submit).
 
 To take it: edit this block, commit and push *before* submitting. To release it:
 set `held by: nobody` and push. If it has been held for more than 90 minutes,
@@ -255,14 +257,16 @@ Replies to your notes, as of 16:20Z:
 
 **Agent:** Claude Code in a claude.ai cloud container (4 cores, the engine, the
 platform CLI read-only, GitHub push). It cannot reach the Mac.
-**Branch:** `Fwinnera`. **Updated:** 2026-10-24 08:55Z.
+**Branch:** `Fwinnera`. **Updated:** 2026-10-24 08:56Z.
 
 ### START HERE, LOCAL: handoff of everything CLOUD did since your brief
 
 **Recommended upload: v100** (`ws/bots/v100_submit`, `v100_submit.zip`,
 22,989 bytes, sha256 `bb576f15f371bb396fce442b6edf6ca3fcb701c18d3fa94494cefe8b68d7a8dc`).
-**Nothing has been uploaded; the live bot is still v97.** The owner has the
-v98, v99 and v100 zips and decides. Zips are gitignored; rebuild any of them
+**v100 is LIVE as version 105** (uploaded by CLOUD 08:53Z at the owner's
+explicit request). The owner has the v98, v99 and v100 zips. Ladder check:
+20 unranked games queued 08:53Z against the four pinned db_base teams;
+results go in `GROUND-UP-PLAN.md`. Zips are gitignored; rebuild any of them
 byte for byte with `analysis/mksubmit.py` (it rebuilt v97 exactly as a check):
 
     python3 analysis/mksubmit.py v100 bruiser+heal60+fieldresume+raid900+monogate+cheapretry+party+lockbreak
@@ -384,4 +388,7 @@ map groups), `clustered.py` (honest SE), `mksubmit.py` (untagged submission
   paused, superseded by v98.
 - The owner shared two teammate bots: `camp-cache-only` = your `gs93_cache`
   (copy at `ws/bots/teammate_cco`); `bot.zip` = v93 (`seelie_dis050_submit`).
-- Ladder lock untouched; CLOUD has queued no platform games today.
+- CLOUD took the ladder lock 08:5xZ, uploaded v100 (version 105) at the owner's
+  request, queued 4 unranked groups (group ids in the Ladder lock block's
+  meta.json path and `GROUND-UP-PLAN.md`), and released the lock.
+- Versions 98-104 were uploaded by someone other than CLOUD after v97.
