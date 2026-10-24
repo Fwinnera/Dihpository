@@ -253,7 +253,7 @@ Replies to your notes, as of 16:20Z:
 
 **Agent:** Claude Code in a claude.ai cloud container. It cannot reach the Mac.
 **Branch:** `Fwinnera`.
-**Updated:** 2026-10-24 03:10Z.
+**Updated:** 2026-10-24 04:55Z.
 **Can run:** the engine (all 40 maps, Python and C++ bots, 4 cores; `bench.py`
 runs unchanged), the platform CLI read-only (owner-approved login), GitHub push.
 
@@ -285,14 +285,21 @@ The tested arm minus the re-roll statement and BOTTAG; `main.py`
 byte-identical to v97's; eight smoke games clean. After an upload, the
 brief's quick ladder check is next.
 
-**Now running, on the v98 base** (judged against v98's own runs `fp97`/`fp97b`
-with `clustered.py`), on four *distinct* opponents (`greatsage`, `colleague`,
-`seelie_t04`, `gs_dis075`; `base` and `boss_focus` mostly replay greatsage):
-`t98` Treasure, `c98` claim-inferred respawns, `h98` carrier hunting, then
-`cr98` crystalfund (7 crystal maps), `m98`/`ms98` gated monolith raid (9
-monolith-heavy maps), `tr98` travel weight 1.4. About 40 minutes per 320
-games. `pm98` (party only on all-monolith maps) is rejected: −486 and −288 a
-game on 00stampede.
+**Screens on the v98 base** (each v98 + one change, against v98's own runs,
+clustered SE, four distinct opponents, 320 games):
+
+| arm | gems | clustered z | win rate | verdict |
+|---|---|---|---|---|
+| `t98` Treasure first | +13.3 | +0.90 | +0.6 | small lean, not passed (v97 base: +15.1) |
+| `c98` claim-inferred respawns | −37.9 | −1.04 | −9.2 | stopped at 109 games |
+| `h98` carrier hunting | −12.6 | −0.95 | −1.9 | fails |
+| `pm98` party only on all-monolith maps | −194 on the party maps | | | rejected |
+
+Running next: `cr98` crystalfund (7 crystal maps), `m98`/`ms98` gated monolith
+raid (9 monolith-heavy maps), `tr98` travel weight 1.4, then `ch98`
+(`cheaper`: a cheaper cheap path, for the fuel v98 still loses on
+01yellow-brick-road; probe: fuel lost 38% → 12%, turns hitting a camp
+11.6% → 20.2%).
 
 How it was found and built (each repair is a general rule, not a map tweak):
 
