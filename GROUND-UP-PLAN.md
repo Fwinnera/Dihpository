@@ -3663,3 +3663,16 @@ next one's price, and an idle champion without one that can afford it recalls to
 buy it. Four probe games (`crprobe`): idle 26-32% → 1.9% on 01islands side B,
 unchanged (21%) on side A; all four games won. It acts only where
 `nav.needs_crystal()`, so it is screened on those maps.
+
+## CLOUD: Treasure first on v97, first half (brief item 2)
+
+`gs97_treasure` (v97 + Treasure first + reroll) against the fresh twin
+`gs97_rr` (v97 + reroll), 320 paired games on the standard four opponents:
+
+    gems +15.1 (se 13.4, z 1.1)   win rate +2.8 (se 2.9)   gold earned +1,586 (z 12.8)
+    kills +1.4 a game (z 3.3)     deaths -0.2              gems collected +22.9
+    by opponent: base +44.5, boss_focus +25.4, greatsage +15.6, colleague -25.3
+
+On greatsage Treasure bought gold and no gems; on v97 it leads, and the extra
+gold shows up as kills. Below the 1.28 bar, so it is being extended to 640
+games against the other four opponents (`treas97b` against `rr97b`).
