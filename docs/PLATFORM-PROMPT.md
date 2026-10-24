@@ -122,8 +122,9 @@ python3 analysis/ladder_arms.py fetch DIR \
     <tag>=<group1>,<group2>,<group3>,<group4>
 python3 analysis/ladder_arms.py compare DIR v101_live <tag>
 ```
- Earlier runs on these exact pairings:
-v93 1 win of 20, v100 2 of 20, v101 3 of 20 (gems 289 / 352 / 357 / 363 for
+
+Earlier runs on these exact pairings: db_base 1 win of 20, v93 1, v100 2,
+v101 3 (gems 289 / 352 / 357 / 363 for
 db_base / v93 / v100 / v101). Twenty games is a lean, not a verdict: one
 game's swing is often 300+ gems.
 
