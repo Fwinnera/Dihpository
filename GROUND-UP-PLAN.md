@@ -4575,3 +4575,13 @@ gems (z +0.28), win -1.1, deaths -0.80 (z -1.74); head to head against v109 42/8
 against the owner's bot; 80% was not reached (best 65-66%, 21 variants tried).
 `ws/bots/gs_stand_submit` / `gs_stand_submit.zip` (37,302 bytes, sha256 679d128d...)
 is it untagged; smoke against base 1000-200, no crashes, no ERROR lines. Not uploaded.
+
+**Uploaded (owner's request): version 112 = gs_stand_submit, 21:35:34Z.** Both
+v109 and it are untagged, so "live" was confirmed from the fuel record instead:
+on the pinned 01islands game its per-turn figures equal the local build's turn
+for turn (66,707, 83,537, 66,792, ...), not v109's (`analysis/fuelprint.py`).
+Standard check: 6 wins of 20 (v109 6, astra 4), gems 534 against 839; paired with
+v109's run -60 (se 85), 8 better, 10 worse, 2 same -- level. Versions 110 and 111
+were uploaded by someone else between 19:58Z and 21:35Z. About 95 unranked
+scrims by other teams fell in the hour before the check; the platform still
+accepted our four groups.
