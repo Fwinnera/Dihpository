@@ -54,7 +54,13 @@ def should_bank(enemies, altar_distance):
             or now + altar_distance + ticks + 20 >= bc.constants.MAX_ROUNDS
             or (enemies and gems >= 22 and me.health() < me.max_health() * 0.70))
 
+# Set while a choose_group call is running; a fuel Replan leaves it set, and
+# the same champion's next call then takes the cheap path.
+stalled = False
+
 def choose_group(metadata, me, respawns, current, team, enemies):
+    global stalled
+    cheap, stalled = stalled, True
     now = bc.round_number()
     position = me.position()
     x, y = position.x, position.y
@@ -82,13 +88,19 @@ def choose_group(metadata, me, respawns, current, team, enemies):
     # before the reserve for movement and combat is spent.
     capture = bc.constants.CAPTURE_TIME
     ranked = []
-    seen = bc.vision.visible_tiles()
+    seen = bc.vision.visible_tiles() if cheap else None
     for i, objective in enumerate(metadata):
         if i % 8 == 0:
             turn.check()
         handle = objective.handle
         if objective.monolith or respawns.get(handle, 0) > now:
             continue
+        if cheap:
+            # The exact pass would reject this unseen group on these same values.
+            clear = objective.hp / (damage * (min(objective.count, 3) if splash else 1) + helper_dps)
+            if (max(0, objective.incoming * clear * 0.55 - heal_rate * clear) > hp_budget
+                    and (objective.spawns & seen).is_empty()):
+                continue
         travel = 10000
         for px, py in objective.coords:
             dx, dy = x - px, y - py
@@ -100,10 +112,6 @@ def choose_group(metadata, me, respawns, current, team, enemies):
             if gap < travel:
                 travel = gap
         clear = objective.hp / (damage * (min(objective.count, 3) if splash else 1) + helper_dps)
-        # The exact pass would reject this unseen group on these same values.
-        if (max(0, objective.incoming * clear * 0.55 - heal_rate * clear) > hp_budget
-                and (objective.spawns & seen).is_empty()):
-            continue
         value = objective.gems + objective.gold * (0.3 if now < 500 else 0.25)
         cost = (clear + capture) * 100 / max(1, value)
         bias = (20 if objective.incoming < 70 else 5) if claimed.get(handle) else 0
@@ -141,7 +149,7 @@ def choose_group(metadata, me, respawns, current, team, enemies):
                 if owner is not None and owner != team.slot and not objective.spawns.is_set(position):
                     continue
                 reward, clear, incoming = True, 0, 0
-            else:
+            elif not cheap:
                 # A half-cleared camp is cheaper than its original design HP.
                 remaining_hp, incoming = 0, 0
                 for camp in objective.camps:
@@ -167,6 +175,7 @@ def choose_group(metadata, me, respawns, current, team, enemies):
             score = (travel + capture) * 100 / max(1, value) - 15
         if score < best_score:
             best, best_score = objective, score
+    stalled = False
     return best
 
 

@@ -418,6 +418,43 @@ def apply(src: Path, change: str) -> None:
              "        if (max(0, objective.incoming * clear * 0.55 - heal_rate * clear) > hp_budget\n"
              "                and (objective.spawns & seen).is_empty()):\n"
              "            continue\n")
+    elif change == "cheapretry":
+        # The stalls dangerskip fixes, without changing a single choice on a map
+        # that does not stall. LOCAL's cached camp stats cost v93 64 gems because
+        # cheaper scoring let the exact pass score more camps before its fuel
+        # cut-off; so the cheap path runs only after a call that fuel cut short.
+        # choose_group marks itself stalled on entry and clears the mark on
+        # return, so a Replan leaves it set, and the next call by the same
+        # champion is the cheap one: unseen groups the exact pass would reject on
+        # their design values are dropped in the first pass (01the-farm: Vendetta
+        # rejected every group and never returned), and visible groups are
+        # scored on design values instead of re-adding every live camp's health
+        # (01yellow-brick-road: two groups of 30 camps, 0.43M fuel each).
+        s = src / "strategy.py"
+        edit(s, "def choose_group(metadata, me, respawns, current, team, enemies):\n    now = bc.round_number()\n",
+             "# Set while a choose_group call is running; a fuel Replan leaves it set, and\n"
+             "# the same champion's next call then takes the cheap path.\n"
+             "stalled = False\n\n"
+             "def choose_group(metadata, me, respawns, current, team, enemies):\n"
+             "    global stalled\n"
+             "    cheap, stalled = stalled, True\n"
+             "    now = bc.round_number()\n")
+        edit(s, "    capture = bc.constants.CAPTURE_TIME\n    ranked = []\n",
+             "    capture = bc.constants.CAPTURE_TIME\n    ranked = []\n"
+             "    seen = bc.vision.visible_tiles() if cheap else None\n")
+        edit(s, "        if objective.monolith or respawns.get(handle, 0) > now:\n            continue\n        travel = 10000\n",
+             "        if objective.monolith or respawns.get(handle, 0) > now:\n            continue\n"
+             "        if cheap:\n"
+             "            # The exact pass would reject this unseen group on these same values.\n"
+             "            clear = objective.hp / (damage * (min(objective.count, 3) if splash else 1) + helper_dps)\n"
+             "            if (max(0, objective.incoming * clear * 0.55 - heal_rate * clear) > hp_budget\n"
+             "                    and (objective.spawns & seen).is_empty()):\n"
+             "                continue\n"
+             "        travel = 10000\n")
+        edit(s, "                reward, clear, incoming = True, 0, 0\n            else:\n",
+             "                reward, clear, incoming = True, 0, 0\n            elif not cheap:\n")
+        edit(s, "            best, best_score = objective, score\n    return best\n",
+             "            best, best_score = objective, score\n    stalled = False\n    return best\n")
     elif change == "reroll2":
         # A second, different decision-neutral perturbation, for an independent
         # re-roll when "reroll" has already been used in the selection.

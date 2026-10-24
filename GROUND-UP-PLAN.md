@@ -3561,3 +3561,63 @@ Keepers on the `db_base` maps and sides (no submission; v97 was live):
 Games last 105-187 rounds longer before the opponent reaches 1,000. A lean in
 v97's favour; five games resolve nothing, and the opponent may have resubmitted
 since the afternoon.
+
+## CLOUD: where v97's champion-turns go, and the turns fuel takes
+
+Brief item 1. `analysis/mktimelog.py` builds a logger from any Python bot: it
+labels every champion-turn with the branch of `play_turn` that ended it, and
+notes whether the turn hit a camp or a champion. `analysis/timeprofile.py`
+reads the labels back out of a bench folder. v97's twin (`gs93_bh`), 160 games
+on all 40 maps against `gs93_bh` and `gs_strong` (tag `tl97`):
+
+    hit a camp       8.8%     (the top five teams: 16.5-17.9%)
+    hit a champion   4.6%
+
+    travel 22.3   dead 14.9   escort 11.6   approach 11.1   bank 8.7
+    combat 8.6    capture 3.8 disengage 3.6  channel 3.0     retreat 2.4
+    idle 1.2      cut short by fuel 6.3
+
+A second run with event counters (40 games, 20 maps, tag `tl97b`): 70
+objective choices per 1,000 champion-turns, 17.8 of them dropped on arrival
+because the camp was respawning and 1.8 because an ally held it; the travel
+spent on those dropped trips is 8.7% of all champion-turns.
+
+**Fuel is the leak a fix can remove outright.** The 6.3% sits on a few maps:
+
+    01yellow-brick-road 100%   01the-farm 35%   01big-world 18%   01islands 15%
+    00lanes 7%                 every other map: median 1.1%
+
+`gs97_fuelprobe` records the innermost frames each time `turn.Replan` fires.
+On 01big-world and 01islands it is one call: `choose_group` →
+`nav.field_from` → `layers_from`, the travel field for a champion with a dash
+(a walking flood plus up to eight jump layers). `gs97_fuelcost` measured each
+phase of `choose_group`: one `DistanceField` flood costs about 0.8M fuel on
+01big-world, a third of a Python turn; a crystal holder's two floods cost
+1.0-1.2M; a dash holder's nine never finished inside one turn, so the
+champion stood still and retried from scratch the next turn. The first
+ranking pass costs about 30k fuel per group (1.2-1.5M for the 46 groups a
+dash champion reaches on 01islands); about a third of that is the per-tile
+distance loop.
+
+On 01the-farm the stall is elsewhere. `gs97_rejprobe` tallied why the exact
+pass rejects candidates: Vendetta called `choose_group` 1,597 times in 1,600
+rounds, rejected 21,059 candidates as too dangerous to clear alone, and scored
+none. Scoring all 28 groups exactly costs more than a turn, so `choose_group`
+never returned, the rally fallback (`choose_cooperative`) never ran, and one
+of three champions did nothing all game: 29% of our champion-turns there.
+
+Two fixes, both the same choices whenever fuel is not short:
+
+- **`fieldresume`**: the finished flood layers stay in a module global keyed
+  by origin and mobility, and the next turn resumes the flood where it
+  stopped. Six probe games (`frprobe`): turns lost to fuel 11-18% → 3.2% on
+  01big-world, 16-18% → 1.9% on 01islands.
+- **`dangerskip`**: the exact pass rejects an unseen group on its design
+  values, which the first pass already has, so the first pass drops it there.
+  The exact pass sees the same survivors in the same order.
+
+With the Python port of the party rule (`party`, gs_cpp_party's rule: fires on
+00contest and 00stampede), they make `gs97_fp`. The C++ candidate's +39.5 gems
+against v93 came almost entirely from three maps (01yellow-brick-road +876,
+00contest +775, 00stampede +497 a game; the other 37 maps net slightly
+negative), and these fixes aim at the same three without leaving Python.
