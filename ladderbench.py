@@ -63,8 +63,12 @@ CAMBC = Path.home() / "Library" / "Python" / "3.9" / "bin" / "cambc"
 # 20:02Z v93 went back up as version 96.
 # Then, at 23:21Z, version 97: v93 plus Bruiser over Power and a safe heal-recall
 # below 60% health, after passing the 90% test over 640 unselected games.
-RANKED_BOT = "v97_submit"
-RESTORE_REFERENCE = ROOT / "v97.zip"
+# Since then CLOUD uploaded v100 (version 105, 08:53Z on the 24th) and v101 = v100
+# plus lad_race (version 106, 12:44Z). v101_submit.zip is rebuilt from
+# ws/bots/v101_submit with `cambc bundle`; its sha256 (596edc37...) matches the
+# upload CLOUD recorded, byte for byte.
+RANKED_BOT = "v101_submit"
+RESTORE_REFERENCE = ROOT / "v101_submit.zip"
 OUR_TEAM = "Milk and Potatoes"
 RESULTS = WS / "bench" / "ladder"
 
