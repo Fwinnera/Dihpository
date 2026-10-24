@@ -455,6 +455,70 @@ def apply(src: Path, change: str) -> None:
              "                reward, clear, incoming = True, 0, 0\n            elif not cheap:\n")
         edit(s, "            best, best_score = objective, score\n    return best\n",
              "            best, best_score = objective, score\n    stalled = False\n    return best\n")
+    elif change == "monogate":
+        # After raidN: raid only where monoliths hold at least RAID_SHARE of the
+        # map's gems. raid900 was +26.0 gems where they hold half or more, -35.0
+        # at 25-50% and neutral below. The share is read from the map at the
+        # start of the game, so the rule carries to unseen maps.
+        st = src / "strategy.py"
+        edit(st, "        if (objective.monolith and now < config.RAID_ROUND) or respawns.get(handle, 0) > now:\n",
+             "        if (objective.monolith and (now < config.RAID_ROUND or monolith_share() < config.RAID_SHARE)) or respawns.get(handle, 0) > now:\n")
+        edit(st, "def prepare(groups):\n",
+             "mono_share = None\n\n"
+             "def monolith_share():\n"
+             "    \"\"\"The share of the map's gems held by monolith groups, computed once.\"\"\"\n"
+             "    global mono_share\n"
+             "    if mono_share is None:\n"
+             "        total = mono = 0\n"
+             "        for g in gm.camp_groups():\n"
+             "            gems = g.gem_value()\n"
+             "            total += gems\n"
+             "            if any(c.is_monolith() for c in g.camps()):\n"
+             "                mono += gems\n"
+             "        mono_share = mono / max(1, total)\n"
+             "    return mono_share\n\n"
+             "def prepare(groups):\n")
+        cfg.write_text(cfg.read_text() + "# Raid only where monolith groups hold at least RAID_SHARE of the gems.\nRAID_SHARE = 0.5\n")
+    elif change == "crystalfund":
+        # On maps where some groups need a teleport crystal (01islands,
+        # 00ambush), a champion that has used its crystal walks back to a world
+        # of one or two groups and idles there: 21-31% of champion-turns on
+        # 01islands, Varg 1,290 of 1,700 rounds on 00ambush, nearly always with
+        # under 50 gold, because the shop spent everything on shards once a
+        # crystal was in hand. A champion holding a crystal on such a map now
+        # keeps the price of the next one, and an idle champion without one that
+        # can afford it recalls to buy it (the 150-gold shopping recall missed it).
+        b = src / "bot.py"
+        edit(b, "        build = config.BUILDS.get(me.champion_name(), config.DEFAULT_BUILD)\n"
+                "        for _ in range(min(40, me.gold_count() // 30)):\n",
+             "        build = config.BUILDS.get(me.champion_name(), config.DEFAULT_BUILD)\n"
+             "        # Keep the next crystal's price while this one is unused.\n"
+             "        reserve = (bc.ConsumableType.TP_CRYSTAL.cost()\n"
+             "                   if nav.needs_crystal() and self.holds_crystal(me) else 0)\n"
+             "        for _ in range(min(40, max(0, me.gold_count() - reserve) // 30)):\n")
+        edit(b, "            count = min(5 - self.purchase_index % 5, me.gold_count() // 30)\n",
+             "            count = min(5 - self.purchase_index % 5, max(0, me.gold_count() - reserve) // 30)\n"
+             "            if count <= 0:\n"
+             "                break\n")
+        edit(b, "    def recall_safe(self, me, enemies, camps):\n",
+             "    def holds_crystal(self, me):\n"
+             "        return any(c.kind() == bc.ConsumableType.TP_CRYSTAL and c.count() for c in me.consumables())\n\n"
+             "    def recall_safe(self, me, enemies, camps):\n")
+        edit(b, "            elif me.gold_count() >= 150 and self.recall_safe(me, enemies, []):\n"
+                "                turn.check()\n"
+                "                me.recall()\n"
+                "            return\n",
+             "            elif me.gold_count() >= 150 and self.recall_safe(me, enemies, []):\n"
+             "                turn.check()\n"
+             "                me.recall()\n"
+             "            elif (nav.needs_crystal() and not self.holds_crystal(me)\n"
+             "                    and me.gold_count() >= bc.ConsumableType.TP_CRYSTAL.cost()\n"
+             "                    and not gm.spawn_region(bc.Team.ALLY).is_set(me.position())\n"
+             "                    and self.recall_safe(me, enemies, [])):\n"
+             "                # Nothing reachable to farm: fetch the crystal that opens the rest.\n"
+             "                turn.check()\n"
+             "                me.recall()\n"
+             "            return\n")
     elif change == "reroll2":
         # A second, different decision-neutral perturbation, for an independent
         # re-roll when "reroll" has already been used in the selection.
