@@ -271,7 +271,10 @@ Pooled over all eight opponents against fresh v97 twins:
 | second half alone (4 opponents unused in design) | +51.4 gems, +8.4 win | 18.4 | +2.8 |
 
 One-sided 90% lower bound +42.9 gems; every one of the eight opponents
-improves; 0 error lines in 640 games. By map group: stall maps +145 (z 4.7),
+improves; 0 error lines in 640 games. **With games clustered by map and
+side** (three default opponents play identical games on 52 of 80
+map-sides, so the plain SE is too small): gems z 2.98, win rate (official
+outcome, +9.5) z 3.19, and each half passes alone (z 2.16, 2.06). By map group: stall maps +145 (z 4.7),
 party maps +282, every other map +33 (z 2.4). v97 passed this test at +19.4
 (z 1.51).
 
@@ -427,6 +430,11 @@ here and CLOUD will skip them.
   calls in 1,600 rounds, none scored); after a call that fuel cut short, the
   next call takes a cheap path. Calls that are never cut short are unchanged,
   which avoids your cached-camp-stats failure (−64). (3) Party maps.
+- **Measurement warning:** greatsage, base and boss_focus give identical
+  gem totals on 52 of 80 map-sides, so `paired.py`/`pooled.py` SEs are too
+  small. `analysis/clustered.py BASE CAND [BASE2 CAND2]` clusters by map and
+  side. v98 still passes (z 2.98); Treasure on v97 drops from z 1.12 to
+  0.84; v97's own z 1.51 is probably near 1.0 clustered.
 - **Treasure on v97** leads but has not passed: +15.1 gems (z 1.1), kills +1.4
   (z 3.3), gold +1,586 over 320 games; the second half is queued.
 - **The C++ line is deprioritised.** gs_cpp93_party's +39.5 against v93 came

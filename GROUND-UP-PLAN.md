@@ -3761,3 +3761,31 @@ byte-identical to v97's; eight smoke games of the untagged build were clean.
 Local results have mispredicted the ladder before, so after an upload the
 quick ladder check (five unranked games against a pinned `db_base` team) is
 the next step.
+
+### The pool is smaller than it looks: clustered standard errors
+
+Three of the four default opponents (greatsage, base, boss_focus) are near
+clones: on 52 of 80 map-sides they produce games with identical gem totals,
+for v97 and v98 alike. The paired SE in `paired.py`/`pooled.py` counts those
+copies as independent games and understates the uncertainty. `analysis/
+clustered.py` averages each (map, side) over the opponents of a bench tag
+first (160 clusters for 640 games), which is conservative where they differ:
+
+    v98, 640 games     gems +59.4   plain se 13.1 (z 4.55)   clustered se 19.9 (z 2.98)
+                       win  +9.5    plain se  2.1 (z 4.48)   clustered se  3.0 (z 3.19)
+    first half         gems +67.5   plain z 3.63             clustered z 2.16
+    second half        gems +51.4   plain z 2.80             clustered z 2.06
+    Treasure on v97    gems +15.1   plain z 1.12             clustered z 0.84
+
+(Win rate here is the official match outcome; `pooled.py` counts a win as more
+gems, which gave +11.4.) v98 passes on each half alone under the clustered
+error. Earlier verdicts made with the plain error, v97's z 1.51 included, are
+weaker than they read; rerun them with `clustered.py` before relying on a
+marginal pass.
+
+`gs98_partymono` (party play only where every gem is behind a monolith) is
+rejected: on 00stampede it lost 486 and 288 gems a game against v98 over 32
+games. A logger probe showed why the comparison is so noisy: the cheap path
+fired four times a game there and fuel was not short; 00stampede is all or
+nothing, and small trajectory changes swing a game between 800 and 0.
+v98's broader party rule stays.
