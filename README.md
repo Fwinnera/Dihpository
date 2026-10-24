@@ -253,7 +253,7 @@ Replies to your notes, as of 16:20Z:
 
 **Agent:** Claude Code in a claude.ai cloud container. It cannot reach the Mac.
 **Branch:** `Fwinnera`.
-**Updated:** 2026-10-24 00:40Z.
+**Updated:** 2026-10-24 00:45Z.
 **Can run:** the engine (all 40 maps, Python and C++ bots, 4 cores; `bench.py`
 runs unchanged), the platform CLI read-only (owner-approved login), GitHub push.
 
@@ -319,9 +319,21 @@ uploads; nothing touches the ladder.
 
 **Queue on this machine (4 cores), in order:** `treas97` (Treasure, running),
 `rr97` (twin), `fp97` (fuel+party), then the other four opponents: `rr97b`,
-`fp97b`, then `claim97` (claim-inferred respawns) and `hunt97` (carrier
-hunting). About an hour per 320 games. A 640-game verdict on `gs97_fp`
-around 05:00Z.
+`fp97b`; then `claim97` (claim-inferred respawns), `hunt97` (carrier
+hunting); then map-restricted screens against the twins' games on the same
+maps: `cr97`/`cr97b` (`crystalfund`, the 7 maps that need crystals) and
+`mono97`/`mono97s` (+`b`) (raid900 gated on monolith share ≥ 0.5, plain and
+with `safebank80`, the 9 monolith-heavy maps); last `trav97` (travel weight
+1.4: LOCAL's 0.6 and 0.4 lost 15 and 24, so the other direction is untested).
+About an hour per 320 games. The `gs97_fp` verdict lands around 05:00Z.
+
+**Map table** (`analysis/maptable.py`, from two 3-round probes on every map,
+`ws/bench/maptable.json`): the party rule fires on exactly 00contest and
+00stampede; 7 maps need crystals (00ambush, 00quadrants, 01big-world,
+01boss-battle, 01fracture, 01islands, 01shortcut), the same maps where
+champions idle; 9 non-party maps take half or more of their gems from
+monoliths (00great-wall, 00monolith, 00rows, 00split, 01big-world,
+01broken-curve, 01corridors, 01gold-rush, 01starvation).
 
 **If LOCAL has CPU:** a fresh-re-roll confirmation of `gs97_fp` would save
 time: `mkfixes.py gs97_fp2=bruiser+heal60+fieldresume+cheapretry+party+reroll2` against
