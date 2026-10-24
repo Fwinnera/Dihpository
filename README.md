@@ -285,10 +285,14 @@ The tested arm minus the re-roll statement and BOTTAG; `main.py`
 byte-identical to v97's; eight smoke games clean. After an upload, the
 brief's quick ladder check is next.
 
-**Now running, on the v98 base** (judged against v98's own runs): `pm98`
-(party only on all-monolith maps: 00stampede was −22.6 a game under the
-party rule), then Treasure, claim-inferred respawns, carrier hunting,
-crystalfund, the gated monolith raid and travel weight 1.4.
+**Now running, on the v98 base** (judged against v98's own runs `fp97`/`fp97b`
+with `clustered.py`), on four *distinct* opponents (`greatsage`, `colleague`,
+`seelie_t04`, `gs_dis075`; `base` and `boss_focus` mostly replay greatsage):
+`t98` Treasure, `c98` claim-inferred respawns, `h98` carrier hunting, then
+`cr98` crystalfund (7 crystal maps), `m98`/`ms98` gated monolith raid (9
+monolith-heavy maps), `tr98` travel weight 1.4. About 40 minutes per 320
+games. `pm98` (party only on all-monolith maps) is rejected: −486 and −288 a
+game on 00stampede.
 
 How it was found and built (each repair is a general rule, not a map tweak):
 
