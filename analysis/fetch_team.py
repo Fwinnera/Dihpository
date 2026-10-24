@@ -32,18 +32,23 @@ def main() -> int:
     ap.add_argument("team")
     ap.add_argument("out")
     ap.add_argument("--count", type=int, default=60)
+    ap.add_argument("--kind", default="ranked", choices=("ranked", "unranked"))
+    ap.add_argument("--since", help="only matches created at or after this ISO time, e.g. 2026-10-24T08:50")
     a = ap.parse_args()
     # Absolute, because cambc runs from ws/ and would resolve a relative path there.
     out = Path(a.out).resolve()
     (out / "summaries").mkdir(parents=True, exist_ok=True)
     matches, cursor = [], None
     while len(matches) < a.count:
-        args = ["matches", "list", "--team", a.team, "--kind", "ranked", "--limit", "50", "--json"]
+        args = ["matches", "list", "--team", a.team, "--kind", a.kind, "--limit", "50", "--json"]
         if cursor:
             args += ["--cursor", cursor]
         d = json.loads(cambc(*args))
         batch = d.get("matches", [])
-        matches += [m for m in batch if m.get("status") == "finished"]
+        matches += [m for m in batch if m.get("status") == "finished"
+                    and (not a.since or m["createdAt"] >= a.since)]
+        if a.since and batch and min(m["createdAt"] for m in batch) < a.since:
+            break
         cursor = d.get("nextCursor")
         if not batch or not cursor:
             break

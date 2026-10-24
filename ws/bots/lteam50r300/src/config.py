@@ -1,0 +1,44 @@
+"""Tuning shared by the controller, economy and combat planner."""
+import cambc as bc
+
+BANK_GEMS = 24
+RETREAT_HEALTH = 0.30
+CARRIER_RETREAT_HEALTH = 0.43
+HEAL_MIN_MISSING = 120
+SHOP_GOLD = 150
+SHOP_INTERVAL = 70
+
+# Leave a fight when our side's health-times-strength within DISENGAGE_RADIUS
+# falls below DISENGAGE_RATIO of theirs, and stay out until it recovers past the
+# ratio plus DISENGAGE_HYSTERESIS. Rebuilding all 15,225 ladder kills found 14.6
+# fights a game at 8% odds or worse, because retreat counted health and camps
+# only: a champion stayed in a lost fight until 30% health and, at move speed 1
+# like everyone else, could not get out from there.
+DISENGAGE_RATIO = 0.5
+DISENGAGE_HYSTERESIS = 0.2
+DISENGAGE_RADIUS = 5
+DEBUG = False
+PRIORITY = {bc.ChampionType.WILLOW: 50, bc.ChampionType.RYTH: 40, bc.ChampionType.VARG: 30,
+            bc.ChampionType.MARCELLA: 30, bc.ChampionType.VENDETTA: 20}
+I = bc.ItemType
+# Each entry completes one emblem. Duplicate passives do not stack, so the
+# permanent late-game purchase is Power rather than another Monster emblem.
+DEFAULT_BUILD = (I.JUNGLE_SHARD_OF_STRENGTH, I.MONSTER_SHARD_OF_STRENGTH,
+                 I.DURABILITY_SHARD_OF_HEALTH)
+BUILDS = {bc.ChampionType.WILLOW: (I.JUNGLE_SHARD_OF_FOCUS,
+          I.DURABILITY_SHARD_OF_HEALTH, I.POWER_SHARD_OF_FOCUS)}
+# Recall to heal below HEAL_RECALL of max health when recall is safe.
+HEAL_RECALL = 0.6
+# Monolith raids: eligible from RAID_ROUND, costed for 1 + RAID_ASSUME raiders
+# (or more if more have claimed it), and a claimed raid pulls teammates in.
+RAID_ROUND = 900
+RAID_ASSUME = 2
+RAID_PULL = 40
+# Raid only where monolith groups hold at least RAID_SHARE of the gems.
+RAID_SHARE = 0.5
+# Break an enemy altar lock rather than walk more than LOCK_BREAK tiles further to a free altar.
+LOCK_BREAK = 6
+# Team jobs: on a map where this champion would reject at least TEAM_SHARE
+# of the gems alone, those groups are costed for several raiders from TEAM_ROUND.
+TEAM_SHARE = 0.5
+TEAM_ROUND = 300

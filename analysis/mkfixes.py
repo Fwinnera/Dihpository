@@ -619,6 +619,46 @@ def apply(src: Path, change: str) -> None:
              "            # The enemy reaches this unseen group first: likely taken on arrival.\n"
              "            value *= config.CONTEST_KEEP\n")
         cfg.write_text(cfg.read_text() + f"# Value kept for an unseen group the enemy reaches before we can.\nCONTEST_KEEP = {int(change[len('contest'):]) / 100}\n")
+    elif re.fullmatch(r"teamjob(\d+)", change):
+        # From v100's own ladder losses: on 01elk_arena the only gem group (72
+        # gems, 5,520 health) is rejected by every lone champion's risk test, so
+        # we farm gold-only elk while the winner clears it 15 times a game; on
+        # 00swirl every gem group is big and lone farmers are picked off (29-53
+        # deaths a game). When most of the map's gems sit in groups this
+        # champion would reject alone, those groups are costed as a team job --
+        # time and hits shared, a claimed job pulling teammates in -- exactly as
+        # the monolith raid is. The share is re-read every 100 rounds against a
+        # full-health budget, so it switches off as items arrive.
+        st = src / "strategy.py"
+        edit(st, "    # Bound Python work before asking the native pathfinder for exact costs.\n",
+             "    global team_cache\n"
+             "    if team_cache is None or now - team_cache[0] >= 100:\n"
+             "        full_budget, rejected, total = me.max_health() * 0.8, 0, 0\n"
+             "        for o in metadata:\n"
+             "            if o.gems <= 0 or o.monolith:\n"
+             "                continue\n"
+             "            c = o.hp / (damage * (min(o.count, 3) if splash else 1) + helper_dps)\n"
+             "            total += o.gems\n"
+             "            if o.incoming * c * 0.55 - heal_rate * c > full_budget:\n"
+             "                rejected += o.gems\n"
+             "        team_cache = (now, total > 0 and rejected >= config.TEAM_SHARE * total)\n"
+             "    team_mode = team_cache[1] and now >= config.TEAM_ROUND\n"
+             "    # Bound Python work before asking the native pathfinder for exact costs.\n")
+        edit(st, "def choose_group(metadata, me, respawns, current, team, enemies):\n",
+             "team_cache = None\n\ndef choose_group(metadata, me, respawns, current, team, enemies):\n")
+        edit(st, "        raiders = 1 + max(claimed.get(handle, 0), config.RAID_ASSUME) if objective.monolith else 1\n",
+             "        # A gem group this champion would reject alone, on a team map, is a team job.\n"
+             "        objective.job = (team_mode and objective.gems > 0 and not objective.monolith\n"
+             "                         and objective.incoming * clear * 0.55 - heal_rate * clear > hp_budget)\n"
+             "        raiders = 1 + max(claimed.get(handle, 0), config.RAID_ASSUME) if objective.monolith or objective.job else 1\n")
+        edit(st, "        if objective.monolith:\n            # Pull teammates into a claimed raid instead of steering them off it.\n",
+             "        if objective.monolith or objective.job:\n            # Pull teammates into a claimed raid instead of steering them off it.\n")
+        edit(st, "        raiders = 1 + max(claimed.get(objective.handle, 0), config.RAID_ASSUME) if objective.monolith else 1\n",
+             "        raiders = 1 + max(claimed.get(objective.handle, 0), config.RAID_ASSUME) if objective.monolith or getattr(objective, 'job', False) else 1\n")
+        share, rnd = int(change[len("teamjob"):]), 0
+        cfg.write_text(cfg.read_text() + f"# Team jobs: on a map where this champion would reject at least TEAM_SHARE\n# of the gems alone, those groups are costed for several raiders from TEAM_ROUND.\nTEAM_SHARE = {share / 100}\nTEAM_ROUND = 0\n")
+    elif re.fullmatch(r"teamround(\d+)", change):
+        edit(cfg, "TEAM_ROUND = 0\n", f"TEAM_ROUND = {int(change[len('teamround'):])}\n")
     elif change == "reroll2":
         # A second, different decision-neutral perturbation, for an independent
         # re-roll when "reroll" has already been used in the selection.

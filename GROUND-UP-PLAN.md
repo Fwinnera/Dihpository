@@ -4028,3 +4028,45 @@ of 80, gem margin +293 a game (clustered by map z 6.6), maps won from both
 sides 20, lost from both 1 (01concentrated-wealth). Against the
 camp-cache-only bot: 53 of 80, +212. The ladder check against stronger teams
 (above) shows far less, so local head-to-heads overstate what the ladder pays.
+
+## LOCAL: v100 replicated independently; its ladder losses autopsied
+
+**Replication.** v100 and v97 rebuilt from their `mkfixes` recipes with
+`reroll2` on both, four distinct opponents, 320 games: **gems +113.3
+(clustered z 4.57), win rate +14.7 (z 3.63), deaths -1.09**. CLOUD's v100 is
+confirmed on a second machine.
+
+**Why the ladder check was flat.** CLOUD's 20-game check used islands, swirl,
+elk arena, quadrants and yellow brick road. v100's gains come from the stall,
+party, monolith and lock maps, and those five are exactly where we lose.
+
+**Loss autopsy** (`analysis/autopsy.py`): v100's 45 games since 08:53Z (40
+unranked including other teams' scrims, 5 ranked), 11 won and 34 lost. Each
+summary holds both teams, so a lost game shows what the winner did on the same
+map at the same time:
+
+    per lost game         us     winner
+    gold earned         4,018    10,711
+    emblems held         22.9      66.5
+    kills / deaths    6.1/18.8  15.6/8.5
+    time hitting camps   9.4%     17.4%
+    clears / deposits  41.7/13.0  72.4/34.6
+    zero-gem pickups      41%      27.5%
+
+- **01elk_arena**: its only gem group is #0 (72 gems, 5,520 health); the
+  other 28 give gold. The winners cleared #0 44 times in three games; we
+  managed about three, farming gold-only elk instead. Locally v100 clears #0
+  13-15 times a game and wins, so the ladder failure is the opponent taking
+  and holding it, not our solo risk test.
+- **00swirl**: every gem group is big (2,760-10,200 health). Against strong
+  teams we die 29-53 times a game, almost all to champions, spread through the
+  game; against weaker ones 6-8 and we win.
+- **01hooks**: 75-100% zero-gem pickups; the winner clears 2.3 times as many
+  camps.
+
+The common thread is opponent strength: in lost games the winner has 2.7x our
+gold and three times our emblems. Local opponents do not reproduce that, which
+is why local screens of fights and contested camps mislead. Candidates being
+screened on v100: a contested-camp discount (`lct50`, `lct70`) and team jobs
+on heavy gem groups (`lteam50`), plus a head to head of team jobs against
+v100 itself (`h2h_team_v100`).

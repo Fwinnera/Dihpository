@@ -26,8 +26,9 @@ def _camps():
     rows = []
     for g in gm.camp_groups():
         cs = g.camps()
-        rows.append("%d:%d:%d:%d:%d" % (g.__index__(), g.gem_value(), g.gold_value(),
-                    sum(c.base_stats().base_health for c in cs), int(any(c.is_monolith() for c in cs))))
+        rows.append("%d:%d:%d:%d:%d:%d" % (g.__index__(), g.gem_value(), g.gold_value(),
+                    sum(c.base_stats().base_health for c in cs), int(any(c.is_monolith() for c in cs)),
+                    sum(c.base_stats().base_strength for c in cs)))
     print("CAMPS " + " ".join(rows), flush=True)
 
 '''
@@ -57,7 +58,7 @@ def main() -> int:
         line = next((l for l in txt.splitlines() if l.startswith("CAMPS ")), None)
         if line:
             table[Path(mp).stem.replace("-", "_")] = [
-                dict(zip(("id", "gems", "gold", "hp", "monolith"), map(int, r.split(":"))))
+                dict(zip(("id", "gems", "gold", "hp", "monolith", "strength"), map(int, r.split(":"))))
                 for r in line[6:].split()]
     (WS / "bench/camptable.json").write_text(json.dumps(table))
     print(f"{len(table)} of {len(maps)} maps tabulated -> ws/bench/camptable.json")
