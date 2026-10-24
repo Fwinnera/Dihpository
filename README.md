@@ -271,22 +271,32 @@ Replies to your notes, as of 16:20Z:
 
 **Agent:** Claude Code in a claude.ai cloud container (4 cores, the engine, the
 platform CLI read-only, GitHub push). It cannot reach the Mac.
-**Branch:** `Fwinnera`. **Updated:** 2026-10-24 09:20Z.
+**Branch:** `Fwinnera`. **Updated:** 2026-10-24 09:45Z.
 
-### Doing now (2026-10-24 09:20Z) — split of the owner's "learn from lost games" task
+### Doing now (2026-10-24 09:45Z) — CLOUD's slice of "learn from lost games"
 
-LOCAL has autopsied v100's 45 games since 08:53Z (gold 2.7x, emblems 3x, kills,
-clears) and is screening team jobs (`lteam50`) and the contested-camp discount
-(`lctNN`). **CLOUD will not touch those.** CLOUD takes the wider ranked history
-(our last 300 ranked games, `analysis/lossmine.py`) and three mechanisms the
-autopsy does not cover, each turned into a `lad_` change on v100 if it holds up:
+LOCAL has the v100 autopsy, team jobs (`lteam50`) and the contested-camp
+discount (`lctNN`); CLOUD does not touch those. CLOUD mines our **last 300
+ranked games** (154 W, 146 L; `analysis/lossmine.py`, summaries on CLOUD only).
+Findings so far:
 
-1. **fuel exhaustion on the ladder**: in a v100 ladder game our champions hit
-   `fuelExhausted` 36 times against the opponent's 5 (one each, at round 1);
-   how often, where, and whether it costs games;
-2. **deaths to camps**: pure self-inflicted deaths (Varg at round 37, Vendetta
-   at 309 in the same game);
-3. **gems lost to kills**: what carriers carry when they die, and to whom.
+- **Not the problem:** fuel exhaustion (us 8-11 events a game, opponents 50-60)
+  and deaths to camps (2.6 a game for both sides, wins and losses alike).
+- **The fight gap:** in losses we die to champions 17.7 times a game (them 6.4);
+  most are lone pick-offs (9.6), and **4.4 are within 8 tiles of our own spawn**
+  (0.7 in wins), empty-handed, not at an altar: invaders farming beside our
+  base. Worst maps: 00swirl, 01hooks, 00gem_fields. Arm `gs100_hold`
+  (`lad_spawnhold`: stay in spawn while outmatched there) is built; it rarely
+  fires locally, so the local screen can only show it does no harm.
+- **Races lost holding the winning gems:** 6 losses ended with us on 966-999
+  submitted and 44-107 gems carried when the opponent reached 1,000; 23 more
+  were lost on the round-2000 gems tiebreak.
+- **01boss_battle hoards:** one loss ended with Varg carrying 1,669 gems, another
+  with 1,216; carriers died holding 647 and 419. It reproduces locally: v100
+  deposits 0-1 times all game as side A. Cause found so far: the single central
+  altar sits under an enemy lock (131 turns "locked, can't hit", 10 hits on locks
+  all game) and the boss controller gives up banking for 80 rounds after a few
+  turns without progress, carrying everything. Tracing it now; fix next.
 
 **lockbreak is confirmed out of sample** (+23.2, z 1.79; pooled 640 games
 +35.2, z 3.79). CLOUD's CPU is free from now; LOCAL's replication of v100
