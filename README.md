@@ -50,7 +50,12 @@ one match quota. Most of the ways to waste a day here come from forgetting that.
 
     held by:   LOCAL since 2026-10-24 19:59Z, for the owner's request: upload
                gs_fix2_submit, then the standard 20-game unranked check.
-    live bot:  the owner's upload of about 18:55Z (version number not visible from the
+    live bot:  VERSION 109 = gs_fix2_submit (ws/bots/gs_fix2_submit, gs_fix2_submit.zip,
+               sha256 6fbc8330...), uploaded by LOCAL at 19:58:56Z at the owner's request:
+               astra + resumable route flood + idle fixes. Confirmed live (untagged
+               replay output). Check queued 19:59Z (tag fix2_v109; groups 81e60946,
+               d04a268a, 257d5947, 4114f44c).
+    before it: the owner's upload of about 18:55Z (version number not visible from the
                CLI). Its replays print BOTTAG gs_v2 (a tagged build). It drafts
                Varg > Vendetta > Vesper Vale > Ryth > Marcella; party maps keep v101's
                Varg > Willow > Ryth > Vendetta > Marcella.
