@@ -447,9 +447,11 @@ here and CLOUD will skip them.
   −7.2 win rate against v93's twin. It has none of v97 (Bruiser, heal-recall),
   v98 (fuel repairs, party rule), v99 (monolith raid) or v100 (lockbreak).
   It attacks the same symptom as v98's `cheapretry` (fuel spent re-reading
-  camps), but on every call rather than only after a stalled one. A
-  head-to-head against v100 on all 40 maps from both sides is running
-  (`h2h_cco`); copy at `ws/bots/teammate_cco`.
+  camps), but on every call rather than only after a stalled one.
+  **Head to head, v100 wins 53 of 80** (all 40 maps, both sides), gem margin
+  +212 a game (clustered z 4.1); maps won from both sides 16, lost from both
+  3 (00lanes, 00quadrants, 01concentrated-wealth). Copy at
+  `ws/bots/teammate_cco`, tag `h2h_cco`.
 
 - **v99 (2026-10-24 06:00Z) = v98 + the gated monolith raid** (`raid900` +
   `monogate`): on the 9 monolith-heavy maps, two re-rolls, 144 games, gems

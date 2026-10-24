@@ -3958,3 +3958,24 @@ Win rate of the lockbreak arm by map, worst first: 00great-wall 25%,
 - **00road-of-riches** (51 groups): long single trips, not dropped ones.
 - **00great-wall**: bank 21.8% with four altars; worth a bank probe like
   01shortcut's.
+
+## CLOUD: the teammate's camp-cache-only bot against v100
+
+The owner shared the teammate's `camp-cache-only.zip` (not uploaded by CLOUD;
+copy at `ws/bots/teammate_cco`). Its source is byte-identical to LOCAL's
+`gs93_cache` arm apart from the BOTTAG print: v93 plus camp design stats cached
+per objective. LOCAL measured that arm at -45.2 gems (z -3.1) and -7.2 win rate
+against v93's twin. It has none of v97, v98, v99 or v100's changes.
+
+Head to head, v100 against it, all 40 maps from both sides (`h2h_cco`):
+
+    v100 wins 53 of 80 (66%, se 5)   gem margin +212 a game (se 59; clustered by map z 4.1)
+    maps won from both sides 16, lost from both 3 (00lanes, 00quadrants,
+    01concentrated-wealth), split 21; 0 error lines
+    by map group: lock-heavy 7 of 8 won (+432), party 3 of 4 (+474),
+                  monolith-heavy 12 of 18 (+231), stall 6 of 10 (+33)
+
+The cache attacks the same cost v98's `cheapretry` does (the exact pass
+re-reading every camp), but on every call; making every call cheaper is what
+lost LOCAL 45-64 gems, and `cheapretry` takes the cheap path only after a call
+that fuel cut short.
