@@ -442,8 +442,7 @@ def apply(src: Path, change: str) -> None:
         edit(s, "    capture = bc.constants.CAPTURE_TIME\n    ranked = []\n",
              "    capture = bc.constants.CAPTURE_TIME\n    ranked = []\n"
              "    seen = bc.vision.visible_tiles() if cheap else None\n")
-        edit(s, "        if objective.monolith or respawns.get(handle, 0) > now:\n            continue\n        travel = 10000\n",
-             "        if objective.monolith or respawns.get(handle, 0) > now:\n            continue\n"
+        edit(s, "        travel = 10000\n",
              "        if cheap:\n"
              "            # The exact pass would reject this unseen group on these same values.\n"
              "            clear = objective.hp / (damage * (min(objective.count, 3) if splash else 1) + helper_dps)\n"
