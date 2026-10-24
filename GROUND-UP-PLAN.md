@@ -3828,3 +3828,9 @@ The remaining fuel loss is on 01yellow-brick-road (11.7%), 01islands (8.4%)
 and 00lanes (6.6%); the largest idle shares are on the crystal maps 01big-world
 (22.8%) and 01islands (21.6%), which `crystalfund` targets. Travel is
 unchanged at 22%, twice the time spent hitting camps.
+
+**Carrier hunting (`h98`): -12.6 gems (clustered se 13.2, z -0.95), win rate
+-1.9, deaths +0.4, opponent gems +12.7.** By opponent: colleague +28.2,
+greatsage -17.7, gs_dis075 -26.8, seelie_t04 -34.0. Accepting fights for
+carriers at 0.8 of the enemy's local strength costs more than the carried gems
+pay. Not passed.
