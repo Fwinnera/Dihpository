@@ -3803,7 +3803,8 @@ v97 (+15.1, z 0.84 clustered): Treasure buys gold that converts weakly into
 gems. Not passed; not in the candidate.
 
 **Claim-inferred respawns (`c98`): stopped for futility at 109 of 320 games,
--38 gems (clustered z -1.1), win rate -9.3 (z -1.7).** The inference marks a
+-38 gems (clustered z -1.1), win rate -9.3 (z -1.7), gems collected -19,
+deaths +1.0.** The likely cause, not measured: the inference marks a
 group respawning for its full timer whenever an ally's claim moves from it to
 another group; an ally that found the group mid-timer, or left it for another
 reason, makes everyone skip a camp that is already back. The wasted travel it
