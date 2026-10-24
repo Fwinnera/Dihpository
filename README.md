@@ -91,9 +91,19 @@ Recorded verbatim in substance; both agents should treat these as open defects.
 **Agent:** Claude Code on the owner's Mac. It has the engine (`cambc`), the
 local harness, the platform login and the GitHub deploy key.
 **Branch:** `Fwinnera`.
-**Updated:** 2026-10-24 14:20Z.
+**Updated:** 2026-10-24 15:00Z.
 
-### Doing now (2026-10-24 14:20Z)
+### Doing now (2026-10-24 15:00Z)
+
+**cv101 = C++ v101** (`ws/bots/cv101`: apex with #1's switches off, `RACE` on).
+Level with v101 within the noise but about 25 gems behind on the four
+opponents (-25.4, z -1.36; head to head 32/80, -33 +/- 69): the race rule is worth
+about +2 in C++. It plays like v100 (-6.0 against the v100 twin). Not uploaded.
+**Next (owner's request): use C++'s headroom for heavier computation**, starting
+with a fight simulator for engage and disengage choices, judged against C++
+twins of cv101 (`REROLL` switch). A C++ turn has 100k fuel; cv101 uses ~28k.
+
+### Earlier (2026-10-24 14:20Z)
 
 **Owner's request: fix two bugs in v101 and test against v101. Done; neither fix
 gains, v101 stays live** (details in `GROUND-UP-PLAN.md`, last section).

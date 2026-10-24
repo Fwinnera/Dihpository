@@ -4354,3 +4354,28 @@ noise from maps their code never touches (01boss-battle, played by the party
 controller, had no events and still swung -164 to -472 between arms). None
 clears the bar; v101 stays live. `reprepare + idlehome` is safe and correct and
 could ride along with a future change that passes on its own.
+
+## LOCAL: cv101, the C++ v101 -- level within the noise, about 25 behind
+
+`ws/bots/cv101` is apex's source with every #1 switch off and a new `RACE`
+switch on: v101's `lad_race` ported to `strategy::should_bank` (bank 6+ gems once
+the enemy is within 200 of winning or we are within 150, or when our submitted
+gems plus visible allies' loads would win). A debug copy confirmed it fires on
+all six maps tried (e.g. 01starfish: banks 51 at ours=897). Smoke games clean.
+
+    four distinct opponents, 320 games              gems      clustered z   win
+    cv101 vs the mean of two v101 twins             -25.4     -1.36         -3.4
+    cv100 vs the same                               -27.5     -1.50         -4.1
+    cv101 vs cv100 (the race rule in C++)           +2.1      +0.16         +0.3
+    cv101 vs the v100 twin                          -6.0      -0.29
+    v101 twins vs the v100 twin                     +11.9, +26.9
+    head to head against v101 (80)                  32/80, -33 a game (se 69)
+
+So cv101 plays like v100, as its port should, and the race rule adds about 2
+gems locally (it was +14.4 when selected in Python; local opponents rarely
+race). It is not a replacement for v101, but it is the C++ base for work that
+needs more computation than Python can afford: a C++ turn has 100,000 fuel and
+cv101 uses a median 28,300 (90th percentile 46,900, maximum 91,400 over 603
+sampled turns), where a Python operation costs about 500 of v101's 2.4M.
+
+A `REROLL` switch (a dead loop of N iterations a turn) builds C++ twins.

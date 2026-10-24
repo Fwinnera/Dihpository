@@ -104,6 +104,20 @@ inline bool should_bank(bool enemies_seen, int altar_distance) {
     if (!gems) return false;
     const auto now = static_cast<std::int64_t>(bc::round_number());
     const auto ticks = (gems + 9) / 10;
+    if (config::RACE) {
+        // The race (v101's lad_race): gems carried when the game ends are worth
+        // nothing. Bank RACE_MIN or more once either side nears the win line, and
+        // whenever our submitted gems plus the loads of visible allies would win.
+        const auto ours = static_cast<std::int64_t>(bc::global_submitted_gems(bc::team::ally));
+        const auto theirs = static_cast<std::int64_t>(bc::global_submitted_gems(bc::team::enemy));
+        const auto line = static_cast<std::int64_t>(bc::constants::winning_gems);
+        if (gems >= config::RACE_MIN && (theirs >= line - config::RACE_ENEMY || ours >= line - config::RACE_OURS))
+            return true;
+        auto carried = gems;
+        for (const auto& ally : bc::champions(bc::team::ally))
+            if (!same(ally, me) && ally.is_alive() && ally.is_visible()) carried += ally.gem_count();
+        if (ours + carried >= line) return true;
+    }
     const bool wins = static_cast<std::int64_t>(bc::global_submitted_gems(bc::team::ally)) + gems >=
                       static_cast<std::int64_t>(bc::constants::winning_gems);
     if (config::finisher(me.champion_name())) {

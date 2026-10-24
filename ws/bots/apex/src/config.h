@@ -21,6 +21,9 @@ inline constexpr bool HOR_TANK = true;
 inline constexpr bool RAIDS = true;
 // Break a nearby enemy altar lock rather than walk far to a free altar (v100's lockbreak).
 inline constexpr bool LOCK_BREAK_ON = true;
+// Endgame banking (v101's lad_race): bank RACE_MIN+ gems once the enemy is within
+// RACE_ENEMY of winning or we are within RACE_OURS, or when visible loads would win.
+inline constexpr bool RACE = true;
 
 inline constexpr int BANK_GEMS = 24;
 inline constexpr double RETREAT_HEALTH = 0.30;
@@ -45,6 +48,9 @@ inline constexpr int RAID_ASSUME = 2;
 inline constexpr double RAID_PULL = 40;
 // Break an enemy altar lock rather than walk more than LOCK_BREAK tiles further to a free altar.
 inline constexpr std::int64_t LOCK_BREAK = 6;
+inline constexpr std::int64_t RACE_MIN = 6;
+inline constexpr std::int64_t RACE_ENEMY = 200;
+inline constexpr std::int64_t RACE_OURS = 150;
 // Prism deposits at PRISM_CAP gems, or when the game would otherwise end within
 // PRISM_END_MARGIN rounds of its arrival and channel. #1's Prism peaks at a
 // median 196 gems and makes 82% of its deposits in the last 50 rounds.
@@ -57,6 +63,9 @@ inline constexpr std::int64_t PRISM_ENEMY_MARGIN = 300;
 inline constexpr double TANK_RETREAT_HEALTH = 0.15;
 inline constexpr double TANK_SHIELD_HEALTH = 0.90;
 inline constexpr bool DEBUG = false;
+// Decision-neutral re-roll for twins: burn this many loop iterations a turn, which
+// moves every fuel suspension and so re-rolls trajectories without changing a choice.
+inline constexpr int REROLL = 0;
 
 inline bool tank(bc::champion_type type) { return HOR_TANK && type == bc::champion_type::heart_of_ruin; }
 inline bool finisher(bc::champion_type type) { return PRISM_FINISHER && type == bc::champion_type::prism; }

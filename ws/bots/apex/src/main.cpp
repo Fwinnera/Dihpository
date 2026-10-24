@@ -28,6 +28,10 @@ int main() {
             } else {
                 if (!bot) bot = create_bot();
                 turn::begin();
+                if constexpr (config::REROLL > 0) {
+                    volatile int sink = 0;
+                    for (int i = 0; i < config::REROLL; ++i) sink = sink + i;
+                }
                 bot->play_turn();
                 nav::finish_turn();
             }
