@@ -518,6 +518,21 @@ def apply(src: Path, change: str) -> None:
              "                turn.check()\n"
              "                me.recall()\n"
              "            return\n")
+    elif change == "partymono":
+        # After party: play as a party only where every gem sits behind a
+        # monolith (00contest), where solo play cannot score at all. On a map
+        # whose gems are behind heavy packs instead (00stampede), v97's rally
+        # fallback already clears them: v97 won side A 800-0 three times in four
+        # where the party lost 160-320.
+        edit(src / "policy.py",
+             "        camps = g.camps()\n"
+             "        if (not any(c.is_monolith() for c in camps)\n"
+             "                and sum(c.base_stats().base_strength for c in camps) <= SOLO_STRENGTH):\n"
+             "            return False\n",
+             "        if not any(c.is_monolith() for c in g.camps()):\n"
+             "            return False\n")
+        edit(src / "policy.py", '    """Every gem sits behind a monolith or a pack that kills a lone farmer."""\n',
+             '    """Every gem sits behind a monolith."""\n')
     elif change == "reroll2":
         # A second, different decision-neutral perturbation, for an independent
         # re-roll when "reroll" has already been used in the selection.
