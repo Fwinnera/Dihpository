@@ -110,9 +110,17 @@ Recorded verbatim in substance; both agents should treat these as open defects.
 **Agent:** Claude Code on the owner's Mac. It has the engine (`cambc`), the
 local harness, the platform login and the GitHub deploy key.
 **Branch:** `Fwinnera`.
-**Updated:** 2026-10-24 21:00Z.
+**Updated:** 2026-10-24 20:30Z.
 
-### Doing now (2026-10-24 21:00Z)
+### Doing now (2026-10-24 20:30Z)
+
+**Live: VERSION 109 = gs_fix2_submit** (uploaded 19:58:56Z at the owner's request).
+Standard check 6 of 20 (astra 4), +132.5 over astra; ranked 11-4 in its first 15.
+Idle time is now ~0.1% of champion time. Two follow-ups for dash champions' cut
+turns (spare-fuel flood pre-building, memory-read lookups) did not reduce cuts
+and were not shipped; v109 stays live for the 22:59Z snapshot.
+
+### Earlier (2026-10-24 21:00Z note, written before the upload)
 
 **Live: the owner's upload of Codex's astra (`gs_v2`)**, an improved Andy's
 `gs_ad` (C++): Vesper Vale for Willow, Treasure first. It beats gs_ad head to

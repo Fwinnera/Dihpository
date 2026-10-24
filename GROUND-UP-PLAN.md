@@ -4514,3 +4514,29 @@ games. Paired with astra: +132.5 gems (se 65.1), 12 better, 5 worse, 3 same; gol
 +1,051, camp damage +26%, farming share of alive rounds 9.6% -> 13.1%, deposits
 +5.8, deaths +0.9. 01islands, a stall map, rose in all four games (70 -> 357,
 659 -> 1,021, 117 -> 994, 797 -> 1,025).
+
+**After v109 (owner: "further improve").** A logging copy of v109 on all 40 maps
+against greatsage and v101 (80 games): idle time is now about 0.1% of champion
+time (left: 01boss-battle's party controller, a little of 01islands). Champions
+spend 27-34% travelling, 9-13% dead, 16-21% farming. Our mass deaths on 00swirl
+and 01elk-arena are a ladder-strength effect: locally v109 wins 00swirl 100%
+(19.9 deaths to the opponents' 42.4), so the local pool cannot test it.
+
+Vendetta and Vesper Vale still lose ~50 turns a game each to fuel cuts (three
+times the others). Two attempts, neither shipped:
+- `gs_ad_fix3` spends a turn's spare fuel (median 72k of 100k unused) pre-building
+  the next route flood from where the champion stands, with a raised check floor
+  (`turn::floor_fuel`) so it cannot run the turn dry. Cuts 12,213 -> 12,336: the
+  flood is not where they are lost.
+- Breadcrumbs put 1,059 of ~1,780 dash-champion cuts (six big maps) in
+  choose_group's exact scoring pass, not the flood. `bitboard::is_set` and
+  `distance_field::get` are engine calls, so `gs_ad_fix4` exports each layer once
+  (`export_linear_buffer`; a bitboard exports one bit per tile, row-major, LSB
+  first -- not one byte as one SDK comment says) and reads memory. Self-check: 0
+  mismatches in 28,762 lookups. But cuts 12,694 -> 14,005: the export guard cut
+  walking champions' turns, and the dash champions' cuts barely moved, so lookups
+  are not their bottleneck either. Worth under 3% of two champions' turns; below
+  what the local pool resolves.
+
+Ranked since v109 went live (19:59Z): 11 wins, 4 losses in 15 games (astra: 16-14
+in 30). v109 stays live for the 22:59Z snapshot.
