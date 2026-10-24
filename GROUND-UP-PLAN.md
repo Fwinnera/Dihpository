@@ -3915,3 +3915,9 @@ games (2 games a map):
     00reverse-spiral  bank 13.2% -> 11.0%   both won both
 
 Screening on v99 (`lk99` against the fresh v99 twin `r299`, 320 games).
+
+**v99's fresh twin against v98's runs** (`r299`: v99 + reroll2, four distinct
+opponents, 320 games): all maps +5.2 gems (clustered z 0.39); on the 9
+monolith-heavy maps +63.8 (a third replicate of the raid's gain, after +57.7
+and +65.2); on every other map -11.8 (se 13.2), i.e. v99 plays like v98 off
+the monolith maps, as designed.
