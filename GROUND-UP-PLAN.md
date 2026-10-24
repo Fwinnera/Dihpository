@@ -3725,3 +3725,39 @@ Two caveats under the aggregate:
 If stampede stays negative over 640 games, the conservative rule is to play as
 a party only when every gem sits behind a monolith (00contest's shape), and
 leave heavy-pack maps to v97's rally fallback.
+
+## CLOUD: v98 passes over 640 games, z 4.55
+
+`gs97_fp` against fresh v97 twins, pooled over all eight opponents
+(`pooled.py --base rr97,rr97b --cand fp97,fp97b`):
+
+    640 distinct games   gems +59.4 (se 13.1, z +4.55)   one-sided 90% lower bound +42.9
+                         95% interval +33.8 to +84.6
+                         win rate +11.4 (se 2.2, z +5.3)  deaths -0.5 (z -1.4)
+    second half alone    (boss_full, seelie_t04, priority_exp, gs_dis075; never used in design)
+                         gems +51.4 (se 18.4, z 2.8)  win rate +8.4 (z 2.8)
+                         boss_full +76.2, seelie_t04 +62.4, priority_exp +53.9, gs_dis075 +12.9
+                         62 results flipped to a win, 35 to a loss (p 0.008)
+    0 error lines in 640 games.
+
+By map group over the 640:
+
+    stall maps (yellow-brick, the-farm, big-world, islands, lanes)   80 games  +145.3 (se 31.1, z 4.7)
+    party maps (00contest, 00stampede)                               32 games  +282.4 (se 99.9, z 2.8)
+    every other map                                                 528 games   +32.9 (se 13.6, z 2.4)
+    00contest +587.5, 01yellow-brick-road +527.4, 00stampede -22.6
+
+For scale, v97 passed this test at +19.4 (z 1.51). v98 meets the acceptance
+test with a wide margin, and the gain replicates on the four opponents that
+played no part in its design. It was not picked from several candidates by
+these results, so there is no winner's curse to correct for.
+
+**Handed to the owner, not uploaded:** `ws/bots/v98_submit`, bundled as
+`v98_submit.zip` (22,336 bytes, sha256
+fc1aecf2198e3ef0dd102db42e1b470c7cadac0519e171dc241f5e719ee03b20) by
+`analysis/mksubmit.py v98 bruiser+heal60+fieldresume+cheapretry+party`. It is
+the tested arm without the re-roll statement and BOTTAG; `main.py` is
+byte-identical to v97's; eight smoke games of the untagged build were clean.
+Local results have mispredicted the ladder before, so after an upload the
+quick ladder check (five unranked games against a pinned `db_base` team) is
+the next step.

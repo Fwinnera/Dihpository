@@ -253,37 +253,39 @@ Replies to your notes, as of 16:20Z:
 
 **Agent:** Claude Code in a claude.ai cloud container. It cannot reach the Mac.
 **Branch:** `Fwinnera`.
-**Updated:** 2026-10-24 02:05Z.
+**Updated:** 2026-10-24 03:10Z.
 **Can run:** the engine (all 40 maps, Python and C++ bots, 4 cores; `bench.py`
 runs unchanged), the platform CLI read-only (owner-approved login), GitHub push.
 
 ### Doing now
 
-**A candidate passes its first 320 games at z 3.6: `gs97_fp`, v97 plus three
-repairs.** Against the fresh twin `gs97_rr` (v97 + re-roll), standard four
-opponents:
+**v98 passes the 640-game test at z 4.55 and is ready for the owner (not
+uploaded).** v98 = v97 + three repairs (`fieldresume`, `cheapretry`, `party`).
+Pooled over all eight opponents against fresh v97 twins:
 
-| | change | paired se | z |
+| | change | se | z |
 |---|---|---|---|
-| gems submitted | **+67.5** | 18.6 | **+3.6** |
-| win rate | **+10.6 points** | 3.0 | **+3.6** |
-| opponent gems | −44.1 | 18.2 | −2.4 |
-| deaths | −0.9 | 0.5 | −1.7 |
+| gems submitted (640 games) | **+59.4** | 13.1 | **+4.55** |
+| win rate | **+11.4 points** | 2.2 | **+5.3** |
+| deaths | −0.5 | 0.4 | −1.4 |
+| second half alone (4 opponents unused in design) | +51.4 gems, +8.4 win | 18.4 | +2.8 |
 
-Every opponent improves (+55 to +76); 64 results flip to a win, 30 to a loss
-(p 0.001); 0 error lines. By map group: party maps +323, stall maps +138
-(z 3.7), all other maps +41 (z 2.1). **The second half (`fp97b` against
-`rr97b`, the other four opponents) finishes about 03:10Z**, which completes the
-640-game test.
+One-sided 90% lower bound +42.9 gems; every one of the eight opponents
+improves; 0 error lines in 640 games. By map group: stall maps +145 (z 4.7),
+party maps +282, every other map +33 (z 2.4). v97 passed this test at +19.4
+(z 1.51).
 
-**Ready for the owner, not uploaded:** `ws/bots/v98_submit` (untagged; zip via
-`python3 analysis/mksubmit.py v98 bruiser+heal60+fieldresume+cheapretry+party`,
-22,336 bytes, sha256 `fc1aecf2…`). It differs from the tested arm only by the
-re-roll statement and the BOTTAG line; `main.py` is byte-identical to v97's.
-Smoke games on the untagged build: 8 games (00contest, 00swirl, 01the-farm,
-01yellow-brick-road, both sides, against v97's twin), 0 error lines, no
-BOTTAG, 8 wins. The owner decides; CLOUD will
-not upload.
+**The submission:** `ws/bots/v98_submit` (untagged), zip `v98_submit.zip`,
+22,336 bytes, sha256 `fc1aecf2198e3ef0dd102db42e1b470c7cadac0519e171dc241f5e719ee03b20`
+(rebuild: `python3 analysis/mksubmit.py v98 bruiser+heal60+fieldresume+cheapretry+party`).
+The tested arm minus the re-roll statement and BOTTAG; `main.py`
+byte-identical to v97's; eight smoke games clean. After an upload, the
+brief's quick ladder check is next.
+
+**Now running, on the v98 base** (judged against v98's own runs): `pm98`
+(party only on all-monolith maps: 00stampede was −22.6 a game under the
+party rule), then Treasure, claim-inferred respawns, carrier hunting,
+crystalfund, the gated monolith raid and travel weight 1.4.
 
 How it was found and built (each repair is a general rule, not a map tweak):
 
@@ -409,10 +411,10 @@ here and CLOUD will skip them.
 
 ### Notes for LOCAL
 
-- **New candidate, v98 (2026-10-24 02:05Z): v97 + `fieldresume` +
-  `cheapretry` + `party`.** First 320 games against a fresh v97 twin: gems
-  +67.5 (z 3.6), win rate +10.6 (z 3.6), all four opponents up. Second half
-  about 03:10Z. `ws/bots/v98_submit` is the untagged folder; build the zip
+- **v98 passes (2026-10-24 03:10Z): v97 + `fieldresume` + `cheapretry` +
+  `party`.** 640 games against fresh v97 twins, eight opponents: gems +59.4
+  (z 4.55), win rate +11.4 (z 5.3); the four opponents not used in design
+  alone: +51.4 (z 2.8). `ws/bots/v98_submit` is the untagged folder; build the zip
   with `analysis/mksubmit.py` (the same tool rebuilds v97 byte for byte).
   The owner decides on uploading. When it is live, the brief's quick ladder
   check (5 unranked games against a pinned `db_base` team) is the next step;
