@@ -48,7 +48,9 @@ one match quota. Most of the ways to waste a day here come from forgetting that.
 
 ## Ladder lock
 
-    held by:   nobody (CLOUD released it 2026-10-24 08:55Z).
+    held by:   CLOUD, since 2026-10-24 12:43Z: uploading v101 at the owner's
+               explicit request ("submit and run some tests"), then 20 unranked
+               games repeating v100's pinned check (same teams, maps, sides).
     live bot:  VERSION 105 = v100 (ws/bots/v100_submit), uploaded by CLOUD at
                08:53Z at the owner's explicit request. v100 = v97 + fieldresume +
                cheapretry + party + gated monolith raid + lockbreak. NOTE: the
