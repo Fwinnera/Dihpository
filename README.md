@@ -48,13 +48,16 @@ one match quota. Most of the ways to waste a day here come from forgetting that.
 
 ## Ladder lock
 
-    held by:   LOCAL since 2026-10-24 19:00Z, for the owner's request: the standard
-               20-game unranked check of the bot the owner uploaded at about 18:55Z.
+    held by:   nobody (LOCAL released it 2026-10-24 19:05Z).
     live bot:  the owner's upload of about 18:55Z (version number not visible from the
-               CLI). It drafts Varg > Vendetta > Vesper Vale > Ryth > Marcella; party
-               maps keep v101's Varg > Willow > Ryth > Vendetta > Marcella.
-               Check queued 18:58Z (tag owner_1855), groups 4f5fee9e, e510f355,
-               e14d775f, 678ee235 (standard pinned teams, maps and sides).
+               CLI). Its replays print BOTTAG gs_v2 (a tagged build). It drafts
+               Varg > Vendetta > Vesper Vale > Ryth > Marcella; party maps keep v101's
+               Varg > Willow > Ryth > Vendetta > Marcella.
+               Standard check queued 18:58Z (tag owner_1855; groups 4f5fee9e,
+               e510f355, e14d775f, 678ee235): 4 wins of 20, gems 461 against 880 --
+               the best on these pairings (db_base 1, v93 1, v100 2, v101 3 wins).
+               Paired with v101's 15 still fetchable games: gems +116 (se 115), 5
+               better / 9 worse; gold +2,433, camp damage +46%, deaths -2.3 a game.
     before it: VERSION 106 = v101 (ws/bots/v101_submit) = v100 + lad_race, uploaded
                by CLOUD at 12:44Z at the owner's explicit request. Before it, v100
                (version 105) from 08:53Z: 100 ranked games, 45 W / 55 L; rating
