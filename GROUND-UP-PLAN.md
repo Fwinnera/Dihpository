@@ -4070,3 +4070,9 @@ is why local screens of fights and contested camps mislead. Candidates being
 screened on v100: a contested-camp discount (`lct50`, `lct70`) and team jobs
 on heavy gem groups (`lteam50`), plus a head to head of team jobs against
 v100 itself (`h2h_team_v100`).
+**lockbreak's confirmation (final):** on the four opponents it was not screened
+on (boss_full, priority_exp, base, boss_focus), a fresh re-roll pair
+(`gs99_lock_rr` against `gs99_rr`), 320 games: gems +23.2 (clustered se 13.0,
+z +1.79), win rate +1.2. Screen and confirmation pooled, 640 games: **gems
++35.2 (clustered z 3.79), win rate +5.2 (z 2.03)**. The confirmation is about
+half the screen's +47.1, the winner's curse at work, and still positive.

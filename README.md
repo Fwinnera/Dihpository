@@ -309,7 +309,7 @@ smoke games (v100: 8 of 8 won, including 01shortcut 1028-354 and 1027-0).
 | v97 (live) | v93 + Bruiser + heal-recall 60% | your 640-game pass, +19.4 (plain z 1.51) |
 | **v98** | v97 + `fieldresume` + `cheapretry` + `party` | 640 games, 8 opponents, vs fresh v97 twins: **gems +59.4, win +9.5** (official outcome); clustered z 2.98 (plain 4.55); each half alone z 2.16 / 2.06; every opponent up |
 | **v99** | v98 + `raid900` + `monogate` | on the 9 monolith-heavy maps, three replicates: +57.7, +65.2, +63.8; pooled 144 games **+61.5, z 2.22**, win +2.1; off those maps v99 plays like v98 (−11.8, se 13.2). ≈ +14 a game pool-wide |
-| **v100** | v99 + `lockbreak` | screen, 4 distinct opponents, 320 games vs fresh v99 twin: **gems +47.1 (z 3.57), win +9.1 (z 2.90)**, opponent gems −85; confirmation on the other 4 opponents with a fresh re-roll pair: **+29.2 (z 1.88) at 145 of 320**, running (tags `rr99c`, `lkc99`) |
+| **v100** | v99 + `lockbreak` | screen, 4 distinct opponents, 320 games vs fresh v99 twin: **gems +47.1 (z 3.57), win +9.1 (z 2.90)**, opponent gems −85; confirmation on the other 4 opponents with a fresh re-roll pair: **+23.2 (z 1.79)**; pooled 640 games **+35.2 (z 3.79), win +5.2 (z 2.03)** |
 
 Head to head against v100, all 40 maps from both sides: the teammate's
 `camp-cache-only` bot loses 27-53 (v100 +212 gems a game, z 4.1); v93
