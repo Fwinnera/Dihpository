@@ -322,8 +322,10 @@ fixes.
 
 **Running on CLOUD (four distinct opponents, against v100's own runs):**
 `race100` (`lad_race`: bank when ours + visible allies' loads would win, and
-bank 6+ gems once either side is within 200/150 of winning), `boss100`
-(`lad_bossbank`, on the three BossBot maps), then `hold100` (`lad_spawnhold`).
+bank 6+ gems once either side is within 200/150 of winning): **+11.9 gems
+(clustered z 0.97), win +1.6** over 320 games; second half queued (`race100b`).
+`boss100` (`lad_bossbank`): **rejected**, 01boss-battle wins 7 -> 3. `hold100`
+(`lad_spawnhold`): running.
 Arms: `ws/bots/gs100_race`, `gs100_boss`, `gs100_hold` (all v100 + change +
 reroll2; baseline tag `lk99`).
 

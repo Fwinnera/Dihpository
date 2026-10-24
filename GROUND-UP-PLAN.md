@@ -4156,5 +4156,9 @@ Changes on v100 (`mkfixes`, `lad_` prefix), each against v100's own runs
                    320 games: gems +11.9 (clustered z 0.97), win +1.6, flips 25 to a win / 20 to a loss
                    (local opponents rarely race; second half on the other four opponents queued)
     lad_bossbank   the boss controller keeps its own patience counter; carriers
-                   of 50+ gems retry after 15 rounds, not 80 (running)
+                   of 50+ gems retry after 15 rounds, not 80
+                   REJECTED: 01boss-battle 8 games, gems -202, wins 7 -> 3; the opponent,
+                   which used to score 0 there, now holds the single deposit tile and
+                   scores 1,000+. 00contest unchanged, 00stampede +13 (noise). The
+                   hoarding needs a deposit timed to the boss's death, not persistence.
     lad_spawnhold  stay in spawn while invaders outmatch us there (queued)
