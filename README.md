@@ -126,8 +126,11 @@ Willow and Varg out, with Heart of Ruin as a front-line tank (`TankBot`: follows
 teammate and fights adjacent; no heal-recall; retreats at 15%; shields below
 90%). Its passive adds up to 50% damage at low health, and Vesper Vale's adds
 gold. `mkfixes` changes `draftcore`, `tank`, `coreitems`, `tankretNN`; arms `ldc`,
-`ldct`, `ldcti`, `ldct25`, screened against `lchk_v100`. **CLOUD: leave the draft to
-LOCAL.**
+`ldct`, `ldcti`, `ldct25`, screened against `lchk_v100`.
+
+**Result: rejected.** Every variant is clearly worse than v100: swap only −62.8 gems
+(clustered z −3.03), plus tank −59.5, plus builds −54.5, deaths +3.8; head to head
+32 of 80. Our camp clearing rests on Varg's splash and Willow's heals. v100 stays.
 
 **Important for anyone screening against v93:** v93 was chosen as the best bot
 on this same pool, so its recorded results are about 19 gems luckier than its

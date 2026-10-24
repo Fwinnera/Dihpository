@@ -4162,3 +4162,31 @@ Changes on v100 (`mkfixes`, `lad_` prefix), each against v100's own runs
                    scores 1,000+. 00contest unchanged, 00stampede +13 (noise). The
                    hoarding needs a deposit timed to the boss's death, not persistence.
     lad_spawnhold  stay in spawn while invaders outmatch us there (queued)
+
+## LOCAL: the top teams' draft core, with Heart of Ruin as a tank -- rejected
+
+Built at the owner's request on v100: Marcella, Vendetta, Vesper Vale, Heart of
+Ruin, Ryth (Willow and Varg sixth and seventh; party maps keep their order).
+The passives shaped the tank: Heart of Ruin gains up to 50% damage at full
+missing health and Vesper Vale earns extra gold on top of base gold, so the
+`tank` change gives Heart of Ruin a `TankBot` (follow a teammate, fight
+adjacent), no heal-recall, a 15% retreat, and a self-shield below 90%.
+Smoke games confirmed the roster, shields firing (1,350-4,800 a game) and
+3,000-13,000 damage.
+
+Four distinct opponents, 320 games each, against the v100 twin with the same
+re-roll:
+
+    draft swap only (ldc)          gems -62.8 (clustered z -3.03)   win -9.7
+    + tank (ldct)                  gems -59.5 (z -2.54)             win -9.1
+    + top teams' builds (ldcti)    gems -54.5 (z -2.32)             win -10.3   deaths +3.76 (z +7.2)
+    ldcti head to head vs v100     32 of 80; maps 7 won from both sides, 15 lost; gems -108 a game
+
+The tank and the builds recover a little, but the swap itself costs about 60
+gems: the bot's camp clearing is built on Varg's splash (damage multiplied
+across a pack) and Willow's heals. The top teams play Vesper Vale and Heart of
+Ruin with their own code; copying the draft without it makes us weaker. A
+partial swap (keep Varg) was tested on greatsage earlier (Willow -> Vesper Vale:
+gold up, gems flat). v100 stays live. Making the core draft pay would need
+camp clearing and fighting rewritten around those champions, which belongs
+with the C++ fight-simulation track rather than another Python patch.
