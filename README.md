@@ -272,8 +272,11 @@ platform CLI read-only, GitHub push). It cannot reach the Mac.
 22,989 bytes, sha256 `bb576f15f371bb396fce442b6edf6ca3fcb701c18d3fa94494cefe8b68d7a8dc`).
 **v100 is LIVE as version 105** (uploaded by CLOUD 08:53Z at the owner's
 explicit request). The owner has the v98, v99 and v100 zips. Ladder check:
-20 unranked games queued 08:53Z against the four pinned db_base teams;
-results go in `GROUND-UP-PLAN.md`. Zips are gitignored; rebuild any of them
+20 unranked games against the four pinned db_base teams (done 09:0xZ):
+v100 2 wins of 20, gems +4.4 a game against v93's games on the same
+pairings (se 40.7), +67.3 against greatsage's (se 59.3). **The ladder does not
+show the local gain**; these teams beat us 18 of 20 whatever we run, and
+the five maps hold little of what v98-v100 fix. Watch v100's ranked results. Zips are gitignored; rebuild any of them
 byte for byte with `analysis/mksubmit.py` (it rebuilt v97 exactly as a check):
 
     python3 analysis/mksubmit.py v100 bruiser+heal60+fieldresume+raid900+monogate+cheapretry+party+lockbreak

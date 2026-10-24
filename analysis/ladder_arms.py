@@ -46,7 +46,9 @@ def fetch(out: Path, specs: list[str]) -> None:
     out.mkdir(parents=True, exist_ok=True)
     listing = json.loads(cambc(["matches", "list", "--team", "me", "--kind", "unranked",
                                 "--limit", "100", "--json"]).stdout)
-    index = []
+    # Keep the other arms already fetched into this folder; replace only these.
+    old = out / "index.json"
+    index = [r for r in json.loads(old.read_text()) if r["arm"] not in arms] if old.exists() else []
     for arm, prefixes in arms.items():
         for m in listing["matches"]:
             if not any(m["groupId"].startswith(p) for p in prefixes):
@@ -62,7 +64,7 @@ def fetch(out: Path, specs: list[str]) -> None:
             index.append({"arm": arm, "match": mid, "map": m["map"], "opp": them["name"], "side": us["side"]})
             time.sleep(1)
     (out / "index.json").write_text(json.dumps(index, indent=1))
-    print(f"{len(index)} games in {out}")
+    print(f"{len(index)} games in {out} ({sum(r['arm'] in arms for r in index)} fetched now)")
 
 
 def increases(runs: list[dict]) -> int:

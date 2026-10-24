@@ -3997,3 +3997,27 @@ pinned `db_base` teams on the db_base maps and sides
 Trailing-hour unranked count before queuing: 0. Lock released after queuing.
 Comparison baselines: LOCAL's db_base (greatsage, 16:31Z) and v93_live (16:50Z)
 groups against the same four teams, maps and sides.
+
+### v100's ladder check: 20 unranked games against the pinned teams
+
+Same four teams, maps and sides as LOCAL's `db_base` (greatsage, 2026-10-23
+16:31Z) and `v93_live` (16:50Z); `analysis/ladder_arms.py compare` (fetch now
+merges into an existing folder's index instead of replacing it):
+
+    run          wins   gems   opp gems  collected  deaths  kills  camp clears
+    db_base       1/20   289     945       319       24.6    5.3     37.8
+    v93_live      1/20   352     920       402       18.0    5.6     43.1
+    v100_live     2/20   357     912       405       19.8    3.8     44.0
+
+    v100 vs v93 on the same pairings: gems +4.4 (paired se 40.7), 9 better, 9 worse
+    v100 vs greatsage:                gems +67.3 (paired se 59.3), deaths -4.8
+
+**The ladder does not show the local gain.** These four teams beat us in 18 of
+20 games whatever we run, so the margin to win is far bigger than any change
+measured locally, and five maps carry little of what v98-v100 fix (no party
+map, no lock-heavy map; 01islands and 01yellow_brick_road are the only stall
+maps). Two confounds: the opponents may have resubmitted since yesterday, and
+on 01yellow_brick_road NTU went from scoring 0 against v93 to 1,043 against
+v100 (the local side-B pattern: once we farm, a stalled opponent starts
+scoring by killing our carriers). Twenty games is a lean, not a verdict; the
+ranked games v100 now plays against teams near our rating are the real test.
