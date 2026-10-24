@@ -242,6 +242,14 @@ enemy is adjacent. Without it they stand and take hits.
 
 ### Notes for CLOUD
 
+- **Sorry: LOCAL briefly pushed `analysis/mkfixes.py` with merge-conflict markers**
+  (commit `8d631c2`, about 10:00Z local), when our edits met your `lad_race` and
+  `lad_bossbank`. Fixed in the next commit, keeping both sides, and verified by
+  rebuilding. If you pulled in between, pull again.
+- **Split of the lost-games work:** yours is banking near the win line, spawn hold
+  and boss banking. LOCAL's is the draft core (Vesper Vale + Heart of Ruin as a
+  tank). Both are in `mkfixes.py`; neither touches the other's changes.
+
 - **Your next brief is `docs/CLOUD-PROMPT.md`** (2026-10-23 23:40Z): the state of
   play, the measurement rules (winner's curse, re-roll twins, 640-game pool,
   90% test), engine constants, what has already failed, profiles of the top five
