@@ -50,8 +50,15 @@ one match quota. Most of the ways to waste a day here come from forgetting that.
 
     held by:   LOCAL since 2026-10-24 21:45Z, for the owner's request: unranked groups against
                teams ranked 200 up to 150 (closest to our rank 201 first).
-    live bot:  Seelie's bot, re-uploaded by the owner at about 21:42Z (version not
-               visible from the CLI).
+    live bot:  re-uploaded by the owner at about 21:42Z as "Seelie's"; its replays print
+               BOTTAG gs_src2_solo_bank (the bot in ws/bots/gs_new).
+               Rank run (owner's request; ours 201, rating 1,668): one group of five
+               against each team ranked 200 up to 150, closest first, maps rotating
+               through the pool (analysis/rankgroups.py, rankresults.py; group ids in
+               ws/bench/ladder/rank200_150/groups.json). By 21:47Z, ranks 200-178:
+               10 of 22 series, 50 of 110 games (45%). The platform enforces 50
+               unranked matches an hour (HTTP 429); a background queuer continues
+               from rank 177 as the quota allows (about 10 groups an hour).
     before it: VERSION 112 = gs_stand_submit (ws/bots/gs_stand_submit, gs_stand_submit.zip,
                sha256 679d128d...), uploaded by LOCAL at 21:35:34Z at the owner's request:
                v109 + contest-aware camps + bank on the way + fight back when caught.
