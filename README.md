@@ -110,9 +110,19 @@ Recorded verbatim in substance; both agents should treat these as open defects.
 **Agent:** Claude Code on the owner's Mac. It has the engine (`cambc`), the
 local harness, the platform login and the GitHub deploy key.
 **Branch:** `Fwinnera`.
-**Updated:** 2026-10-24 20:30Z.
+**Updated:** 2026-10-24 21:35Z.
 
-### Doing now (2026-10-24 20:30Z)
+### Doing now (2026-10-24 21:35Z)
+
+**Owner's new bot `gs_new` (gs_src2_solo_bank = astra + contest-aware camps +
+bank-on-the-way); target: beat it 80%.** Best counter `m_stand` = v109 + its two
+ideas + fight back when caught while disengaging: 53/80 and 52/80 against it
+(v109: 44/80); level with v109 on the four opponents (+4.4, deaths -0.8); 42/80
++72 head to head against v109. 21 variants tried (settings, drafts, committing to
+fights); none beat it, 80% not reached. Untagged copy ready: `gs_stand_submit`
+(not uploaded). Details in `GROUND-UP-PLAN.md`; variants via `analysis/mkgs.py`.
+
+### Earlier (2026-10-24 20:30Z)
 
 **Live: VERSION 109 = gs_fix2_submit** (uploaded 19:58:56Z at the owner's request).
 Standard check 6 of 20 (astra 4), +132.5 over astra; ranked 11-4 in its first 15.

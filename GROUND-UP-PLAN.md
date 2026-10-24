@@ -4540,3 +4540,38 @@ times the others). Two attempts, neither shipped:
 
 Ranked since v109 went live (19:59Z): 11 wins, 4 losses in 15 games (astra: 16-14
 in 30). v109 stays live for the 22:59Z snapshot.
+
+## LOCAL: the owner's "newest and greatest" bot (gs_src2_solo_bank) and a counter
+
+`ws/bots/gs_new` (BOTTAG gs_src2_solo_bank) is astra plus two ideas: choose a camp
+it can start hitting before a visible enemy can reach it (the old score breaks
+ties), and with 16+ gems bank first when the altar is a strictly shorter walk
+than the next camp (not when leaving a monolith or mid-fight). It lacks v109's
+big-map fixes. Owner's target: a bot that beats it at least 80% of the time.
+
+Head to head against it, 80 games each (C++ against C++ runs ~80 games a minute):
+
+    v109 (gs_ad_fix2)                                44/80  +32
+    gs_merge = v109 + its two ideas                  44/80  +83
+    m_fb   = merge + melee hit the weakest adjacent while disengaging   47/80
+    m_stand = m_fb + a ranged champion with an enemy adjacent shoots back
+              instead of running                     53/80 +129; re-roll 52/80 +147
+    m_stand2 = stand + the same on the low-health retreat               49/80
+    m_d35  = merge, disengage at 0.35                43/80
+    on m_stand: retreat 20%/40% 46/38, carrier retreat 30% 50, heal-recall 45%/75%
+              39/37, disengage 0.40/0.65 44/49, chase at even/1.35 strength 52/47,
+              chase from 9 tiles 48; draft with Willow/Heart of Ruin/Ren fifth 37/35/43,
+              Marcella third 50; stand and fight when caught (adjacent / within 2) 41/44
+
+Why fighting back: games between these near-mirrors are decided by fights (our
+wins: kills 16.8 to 8.8; losses 9.1 to 18.2), and 95% of our deaths (609 of 642,
+40 games) came in the retreat state, a median 4 rounds after starting to run, at
+a median 26% health, mostly after disengaging. Speeds are equal and melee
+champions move and hit in one turn, so running hands a pursuer free hits.
+
+m_stand elsewhere: four distinct opponents against the two v109 baselines +4.4
+gems (z +0.28), win -1.1, deaths -0.80 (z -1.74); head to head against v109 42/80,
++72 (se 48), deaths 15.3 against 16.9. So it is v109's level in general and better
+against the owner's bot; 80% was not reached (best 65-66%, 21 variants tried).
+`ws/bots/gs_stand_submit` / `gs_stand_submit.zip` (37,302 bytes, sha256 679d128d...)
+is it untagged; smoke against base 1000-200, no crashes, no ERROR lines. Not uploaded.
