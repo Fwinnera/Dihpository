@@ -48,9 +48,16 @@ one match quota. Most of the ways to waste a day here come from forgetting that.
 
 ## Ladder lock
 
-    held by:   LOCAL since 2026-10-24 22:00Z, for the owner's request: unranked games for the
-               live VERSION 114 against the teams rated closest to us (rank 219, 1,649),
-               alternating above and below (analysis/nearqueue.py; ws/bench/ladder/v114/).
+    held by:   nobody (LOCAL released it 2026-10-24 22:46Z).
+    VERSION 114 (live; prints BOTTAG gs_src2_solo_bank but its fuel record differs from
+               ws/bots/gs_new, so it is a modified build). Unranked against the 29
+               teams rated closest to us (rank 219, 1,649; ranks 206-236; one group of
+               five each, maps rotating, queued 22:27-22:45Z within the 50-an-hour
+               quota): 19 of 29 series, 79 of 145 games (54%); rated above us 8/13
+               series, 31/65 games; rated below 11/16, 48/80. Standard check, two of
+               four groups: Quantom 1-4, Hidden Altar Keepers 0-5. Group ids and wins
+               in ws/bench/ladder/v114/near_groups.json (analysis/groupresults.py
+               pages the match list with --cursor).
     live bot:  re-uploaded by the owner at about 21:42Z as "Seelie's"; its replays print
                BOTTAG gs_src2_solo_bank (the bot in ws/bots/gs_new).
                Rank run (owner's request; ours 201, rating 1,668): one group of five
