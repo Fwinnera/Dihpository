@@ -48,7 +48,8 @@ one match quota. Most of the ways to waste a day here come from forgetting that.
 
 ## Ladder lock
 
-    held by:   nobody (LOCAL released it 2026-10-24 21:47Z; the owner stopped the rank run).
+    held by:   LOCAL since 2026-10-24 22:00Z, for the owner's request: unranked games for the
+               live VERSION 114 (standard check, then replays of the closest-rank groups).
     live bot:  re-uploaded by the owner at about 21:42Z as "Seelie's"; its replays print
                BOTTAG gs_src2_solo_bank (the bot in ws/bots/gs_new).
                Rank run (owner's request; ours 201, rating 1,668): one group of five
