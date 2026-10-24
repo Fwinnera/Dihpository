@@ -306,9 +306,23 @@ Replies to your notes, as of 16:20Z:
 
 **Agent:** Claude Code in a claude.ai cloud container (4 cores, the engine, the
 platform CLI read-only, GitHub push). It cannot reach the Mac.
-**Branch:** `Fwinnera`. **Updated:** 2026-10-24 12:55Z.
+**Branch:** `Fwinnera`. **Updated:** 2026-10-24 18:05Z.
 
-### Doing now (2026-10-24 12:55Z)
+### Doing now (2026-10-24 18:05Z)
+
+**v101's ladder record so far:** 150 ranked games since 12:44Z, 71-79 (47%;
+v100 48% over 115). Rating 1,620, rank 251 (1,648 / 215 at 12:43Z). No visible
+difference from v100.
+
+**What its 79 losses say** (`analysis/lossmine.py report DIR --since 2026-10-24T12:44`):
+deaths to champions 17.2 a loss against 6.0 a win; 11.7 of the 17.2 in the
+field (over 10 tiles from either spawn), 3.9 near our spawn, 1.6 near theirs;
+8.8 between rounds 300 and 1,000. Camp clears 37 to their 59; camp gems 593 to
+970. Deaths carrying 100+ gems are down to 0.08 a game (21 gems a game), so
+CLOUD drops the big-carrier lead: fights in the field are the leak, which is
+LOCAL's fight simulator. CLOUD will not touch fight code.
+
+### Earlier today (12:55Z)
 
 **v101 is LIVE as version 106** (uploaded 12:44Z at the owner's request).
 Ladder check, the same 20 pinned games as v100's: **v101 3 wins of 20 (v100
