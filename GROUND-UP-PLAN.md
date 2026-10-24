@@ -4236,3 +4236,70 @@ game (before v100) to 123, and deaths while carrying 100+ gems from 0.02 to
 over v100's period: the carriers that hoard there (its only deposit tile is the
 boss's) die holding the boss's rewards. The monolith-heavy maps add a few
 hundred (01corridors 428, 01big_world 243, 01broken_curve 200).
+
+## LOCAL: apex, a C++ bot with #1's characters, emblems and behaviour -- not competitive
+
+Built at the owner's request ("the same behaviour, characters and emblems as
+number 1", in C++). Spec: `docs/APEX-SPEC.md`. Source `ws/bots/apex`: CLOUD's C++
+plumbing (`gs_cpp93_party`: pathing, claims, fuel guard) with a new decision
+layer behind switches in `config.h`, so every ablation differs only there
+(`analysis/mkapex.py NAME FLAG=value`):
+
+    DRAFT_TOP1 / DRAFT_PER_MAP  #1's draft. #1 drafts per map, the same order against
+                                every opponent (00ambush, 01starfish, 01big-world:
+                                Prism > Marcella > Vendetta > HoR > VV; 01the-farm:
+                                Prism > Marcella > HoR). apex reads a fingerprint
+                                (width, height, camp groups, gems: unique on all 40
+                                maps) and plays #1's order on the 31 maps it has
+                                played (`analysis/top1_drafts.py` writes the table);
+                                unseen maps use #1's team-size order.
+    BUILDS_TOP1                 #1's emblems in its purchase order, then Bruiser
+    PRISM_FINISHER              Prism keeps its gems (1.5 focus each) and deposits to
+                                win, at 200, before the end, or (v2) once the enemy
+                                is within 300 of winning
+    HOR_TANK                    Heart of Ruin retreats at 15%, shields below 90%, no
+                                heal-recall
+    RAIDS, LOCK_BREAK_ON, ...   v100's raid900 + monogate, lockbreak, heal60, Bruiser
+
+**The C++ port of v100 is exact.** `cv100` (apex with every #1 switch off) against
+v100: 37 of 80 head to head, gems -14 (se 62); on the four distinct opponents
+-8.1 (clustered z -0.40), win -1.6. So everything below is the #1 layer itself.
+
+Head to head against v100 (80 games each, se 66-79 gems):
+
+    arm                                         won     gems a game
+    cv100 (C++ v100)                            37/80   -14
+    apex v1 (team-size draft, all of #1)        19/80   -311    four opponents: -210.8 (clustered z -6.21), win -25.6
+    ax_draft   draft only                       26/80   -201
+    ax_nofin   v1 without the Prism finisher    24/80   -186
+    ax_notank  v1 without the tank              26/80   -246
+    ax_noitems v1 without #1's builds           20/78   -336
+    apex2 (per-map draft, finisher v2)          24/80   -254
+    apex2_nt   apex2 without the tank           29/80   -208
+    apex2_nf   apex2, no finisher, no tank      32/80   -208   (Prism loses 32 a game, not 72)
+
+Mechanisms (`analysis/champs.py`, per game a champion played):
+
+- **The roster is the cost** (about -200 on its own). In our controller Prism
+  and Heart of Ruin are weak farmers (143 and 132 gems collected) where Varg and
+  Vendetta collect 254 and 237; our camp clearing is built on Varg's splash and
+  Willow's heals, as the Python draft-core test found (-63).
+- **The finisher works and then loses the gems.** Holding gems, Prism collects
+  181-187 against 143 and does 50% more camp damage, but dies with them: 72-82
+  gems a game lost against 42. Most losses end early on v100 reaching 1,000, so
+  "deposit at the end" never fires (00packs: Prism collected 302, submitted 0).
+  The v2 trigger on the enemy's score recovered part of it.
+- **The tank costs** in both versions (+46 and +65 with it off): Heart of Ruin
+  collects 92 against 132 and dies more (4.4-4.7 against 3.9).
+- **#1's builds are worth about +25** inside apex, inside the noise.
+- **Apex wins the fight maps v100 loses on the ladder**: 01hooks +913, 00swirl
+  +744, 00gemfight +648, 01elk-arena +360, on Vesper Vale's fighting (16-26 kills
+  in those games). These are snowball maps; cv100 against v100 splits them too.
+- **Island and crossing maps stall** (01islands, 01big-world): Prism, Marcella
+  and Ryth idle 400-1,360 rounds, and dash champions never use crystals (a base
+  rule: `nav::mobility` puts a dash champion in dash mode only), so gaps wider
+  than two tiles strand Heart of Ruin, Vesper Vale and Vendetta.
+
+Conclusion: #1's results come from its whole engine, not from its draft, items
+and banking rules; transplanted onto ours they cost 200-300 gems a game. Not
+uploaded (the live bot is CLOUD's v101, version 106). `cv100` is a verified C++ equivalent of v100 for any C++ work.

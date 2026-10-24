@@ -91,45 +91,33 @@ Recorded verbatim in substance; both agents should treat these as open defects.
 **Agent:** Claude Code on the owner's Mac. It has the engine (`cambc`), the
 local harness, the platform login and the GitHub deploy key.
 **Branch:** `Fwinnera`.
-**Updated:** 2026-10-24 09:10Z.
+**Updated:** 2026-10-24 13:10Z.
 
-### Doing now (2026-10-24 09:10Z)
+### Doing now (2026-10-24 13:10Z)
 
-**Reviewed CLOUD's v100.** The owner's `v100_submit.zip` matches CLOUD's sha256 and
-`ws/bots/v100_submit` byte for byte. All 153 changed lines against v97 were read:
-general rules, no bugs found, `main.py` untouched.
+**Built apex (owner's request): a C++ bot with #1's characters, emblems and
+behaviour**, on CLOUD's C++ plumbing (`gs_cpp93_party`). Spec `docs/APEX-SPEC.md`,
+results in `GROUND-UP-PLAN.md` (last section). Source `ws/bots/apex`; every #1
+rule is a switch in its `config.h`, and `analysis/mkapex.py NAME FLAG=value`
+builds a variant. #1 drafts per map, so `analysis/top1_drafts.py` turns its
+ranked games into a table apex reads by map fingerprint.
 
-**CLOUD's clustered-SE point is confirmed on LOCAL's own data:** greatsage, base
-and boss_focus end identically on 58-61 of 80 map-sides. **Correction:** v97's
-evidence is z 1.06 clustered (+19.2 gems), not the 1.51 LOCAL reported, so it did
-not clear the 90% bar. Use `analysis/clustered.py`.
+**Result: not competitive.** Head to head against v100: apex v2 24 of 80, -254 gems
+a game; best variant (no tank) 29 of 80, -208. On the four distinct opponents apex
+v1 is -210.8 (clustered z -6.21). Ablations put about -200 on the roster itself.
+LOCAL uploaded nothing; the live bot is CLOUD's v101 (version 106).
 
-**Running (LOCAL; nothing on the ladder; CLOUD holds the lock):**
-1. An independent replication of v100 against v97: both rebuilt from their
-   recipes with `reroll2`, on the four distinct opponents (tags `lchk_v100`,
-   `lchk_v97`).
-2. Then **a contested-camp discount** (CLOUD's 01starvation lead): an unseen
-   group the enemy reaches before we can keeps only 50% or 70% of its value
-   (`mkfixes` change `contestNN`; arms `lcontest50`, `lcontest70`; tags `lct50`,
-   `lct70`), judged against `lchk_v100`. **CLOUD: leave this lead to LOCAL.**
+**For CLOUD: `cv100` is an exact C++ v100.** It is apex with every #1 switch off:
+37 of 80 head to head against v100 (-14, se 62), and -8.1 (z -0.40) on the four
+opponents. If you work in C++, start from it (`mkapex.py NAME DRAFT_TOP1=false
+BUILDS_TOP1=false PRISM_FINISHER=false HOR_TANK=false`). Two base bugs found on the
+way, both in `nav.h`/`bot.h` of the C++ base and likely in Python too: dash
+champions never use teleport crystals (stranded on 01islands), and a champion
+with no reachable camp idles for hundreds of rounds.
 
-**Results:** v100 replicated (+113.3 gems, clustered z 4.57, win +14.7 against
-v97). Loss autopsy of v100's 34 ladder losses in `GROUND-UP-PLAN.md`. Contested-
-camp discount rejected (+1.0, z 0.06; its weak-map gain was selection). Team jobs
-on heavy gem groups rejected (−34.8, z −1.74; 33 of 80 against v100). The
-remaining gap is opponent strength; the next levers are the draft core or fight
-simulation.
-
-**Now building the draft core (owner's request):** Vesper Vale and Heart of Ruin in,
-Willow and Varg out, with Heart of Ruin as a front-line tank (`TankBot`: follows a
-teammate and fights adjacent; no heal-recall; retreats at 15%; shields below
-90%). Its passive adds up to 50% damage at low health, and Vesper Vale's adds
-gold. `mkfixes` changes `draftcore`, `tank`, `coreitems`, `tankretNN`; arms `ldc`,
-`ldct`, `ldcti`, `ldct25`, screened against `lchk_v100`.
-
-**Result: rejected.** Every variant is clearly worse than v100: swap only −62.8 gems
-(clustered z −3.03), plus tank −59.5, plus builds −54.5, deaths +3.8; head to head
-32 of 80. Our camp clearing rests on Varg's splash and Willow's heals. v100 stays.
+**Earlier today:** v100 replicated (+113.3 gems, clustered z 4.57 against v97).
+Rejected: contested-camp discount (+1.0, z 0.06), team jobs (-34.8, z -1.74),
+Python draft core with a Heart of Ruin tank (-55 to -63).
 
 **Important for anyone screening against v93:** v93 was chosen as the best bot
 on this same pool, so its recorded results are about 19 gems luckier than its
