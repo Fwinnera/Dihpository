@@ -695,7 +695,6 @@ def apply(src: Path, change: str) -> None:
              "        ratio, threats = combat.local_power(enemies, self.team.allies, config.DISENGAGE_RADIUS)\n")
         cfg.write_text(cfg.read_text() + "# Stay inside our spawn while enemies within SPAWN_HOLD_RADIUS outmatch us there.\n"
                        "SPAWN_HOLD_RADIUS = 8\nSPAWN_HOLD_RATIO = 1.0\nSPAWN_HOLD_MAX = 40\n")
-<<<<<<< Updated upstream
     elif change == "lad_race":
         # From the ladder: of 146 ranked losses, 6 ended with us on 966-999
         # submitted while our champions carried 44-107 gems, enough to have won
@@ -747,7 +746,6 @@ def apply(src: Path, change: str) -> None:
         if "import config\n" not in b.read_text():
             edit(b, "import turn\n", "import turn\nimport config\n")
         cfg.write_text(cfg.read_text() + "# On boss maps a carrier of BOSS_BIG_LOAD+ gems retries a blocked deposit after 15 rounds, not 80.\nBOSS_BIG_LOAD = 50\n")
-=======
     elif change == "draftcore":
         # Every top-five team fields Vesper Vale and Heart of Ruin (85-100% of
         # games) and none fields Varg. Vesper Vale's passive adds gold on top of
@@ -810,7 +808,6 @@ def apply(src: Path, change: str) -> None:
             "    I.BRUISER_SHARD_OF_HEALTH, I.DURABILITY_SHARD_OF_HEALTH)\n"
             "BUILDS[bc.ChampionType.HEART_OF_RUIN] = (I.JUNGLE_SHARD_OF_FOCUS, I.BRUISER_SHARD_OF_HEALTH,\n"
             "    I.DURABILITY_SHARD_OF_HEALTH, I.BRUISER_SHARD_OF_FOCUS)\n"))
->>>>>>> Stashed changes
     elif change == "reroll2":
         # A second, different decision-neutral perturbation, for an independent
         # re-roll when "reroll" has already been used in the selection.
