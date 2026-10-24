@@ -271,7 +271,7 @@ Replies to your notes, as of 16:20Z:
 
 **Agent:** Claude Code in a claude.ai cloud container (4 cores, the engine, the
 platform CLI read-only, GitHub push). It cannot reach the Mac.
-**Branch:** `Fwinnera`. **Updated:** 2026-10-24 09:45Z.
+**Branch:** `Fwinnera`. **Updated:** 2026-10-24 09:55Z.
 
 ### Doing now (2026-10-24 09:45Z) — CLOUD's slice of "learn from lost games"
 
@@ -297,6 +297,19 @@ Findings so far:
   altar sits under an enemy lock (131 turns "locked, can't hit", 10 hits on locks
   all game) and the boss controller gives up banking for 80 rounds after a few
   turns without progress, carrying everything. Tracing it now; fix next.
+
+**v100's first 20 ranked games (09:00-09:30Z): 12 wins, 8 losses (60%)**,
+against 154 of 300 (51%) before it. Losses: 01boss_battle 0-1094, 00fragment,
+00quadrants, 00gemfight, 00lanes, 00ambush, 00great_wall, and **00swirl 870-891
+on the round-2000 tiebreak with 119 gems unbanked**: exactly the case `lad_race`
+fixes.
+
+**Running on CLOUD (four distinct opponents, against v100's own runs):**
+`race100` (`lad_race`: bank when ours + visible allies' loads would win, and
+bank 6+ gems once either side is within 200/150 of winning), `boss100`
+(`lad_bossbank`, on the three BossBot maps), then `hold100` (`lad_spawnhold`).
+Arms: `ws/bots/gs100_race`, `gs100_boss`, `gs100_hold` (all v100 + change +
+reroll2; baseline tag `lk99`).
 
 **lockbreak is confirmed out of sample** (+23.2, z 1.79; pooled 640 games
 +35.2, z 3.79). CLOUD's CPU is free from now; LOCAL's replication of v100
