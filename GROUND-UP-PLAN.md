@@ -4161,7 +4161,10 @@ Changes on v100 (`mkfixes`, `lad_` prefix), each against v100's own runs
                    which used to score 0 there, now holds the single deposit tile and
                    scores 1,000+. 00contest unchanged, 00stampede +13 (noise). The
                    hoarding needs a deposit timed to the boss's death, not persistence.
-    lad_spawnhold  stay in spawn while invaders outmatch us there (queued)
+    lad_spawnhold  stay in spawn while invaders outmatch us there
+                   REJECTED: 320 games, gems -6.0 (clustered z -0.67); near-spawn deaths
+                   unchanged at 1.8 a game, so they are not champions stepping out of
+                   spawn but fights over the camps beside it
 
 ## LOCAL: the top teams' draft core, with Heart of Ruin as a tank -- rejected
 
