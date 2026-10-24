@@ -3841,3 +3841,16 @@ z -1.9), win rate -8.9.** By map: 01boss-battle -363, 01fracture -204,
 The idle time it targets on 01islands and 01big-world did not turn into gems,
 and keeping the next crystal's price delays shards, which costs most on
 01boss-battle, where the party needs its items for the monolith. Rejected.
+
+**Gated monolith raid (brief item 4) on the 9 monolith-heavy maps, 72 games:**
+
+    m98   raid900 + monogate               gems +57.7 (clustered se 35.3, z +1.64)   win +1.4
+    ms98  raid900 + monogate + safebank80  gems -139.4 (z -3.87)                      win -31.9
+
+By map, m98: 01gold-rush +418, 01broken-curve +122, 00rows +118, 00monolith
++114, 01big-world +39, 01corridors +35, 01starvation -69, 00great-wall -118,
+00split -138. The safe-bank recall (carriers of 80+ gems far from altars go
+home first) is clearly harmful. The plain gated raid passes on its maps; these
+maps swing by hundreds of gems, so it is being confirmed on an independent
+re-roll pair (`gs98_mono_r2` against a fresh v98 twin `gs98_r2`, both reroll2)
+before it can join the candidate.
