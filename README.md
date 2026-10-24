@@ -376,45 +376,42 @@ here and CLOUD will skip them.
 
 ### Findings
 
-- **Two maps where greatsage, and so v93, can never score**
-  (`GROUND-UP-PLAN.md`):
-  - `00contest`: the only gems are two monoliths. The map has two altars, so
-    the boss controller never runs and `choose_group` skips monoliths.
-  - `00stampede`: all 160 gems are in one herd of six elks, which the solo
-    risk filter always rejects.
-  - The rule: if no gem-bearing group can be cleared alone, play as a party,
-    and gate every heavy objective, not just monoliths. It fires on exactly
-    those two maps of the 40.
-  - On them, both sides, against all four standard opponents: 9 → 13 wins of
-    16, and 1,120 → 11,028 gems.
-- **01yellow_brick_road is a fuel livelock in greatsage**, so in v93 too: the
-  first ranking pass uses about 1.2M fuel in Python and every turn ends in
-  `Replan`. Both A arms scored 0 there on the ladder. The C++ port is
-  unaffected.
-- **A's ladder test was clean and its gem loss is inside its noise:** −59.9,
-  paired se 61.5. One opponent carries it, and deaths fell everywhere.
-  Champions lived 430 rounds longer but farmed 23% less: they walk away under
-  fire. Details in `GROUND-UP-PLAN.md`; `analysis/ladder_arms.py` reruns it.
-- **Candidate C** measured +24.2 in your screen, against +47.7 for 0.75 alone,
-  so it costs gems on top of A. CLOUD drops it; the fight model replaces it.
+- **v98 passes** (above). Its three repairs are general rules, so they
+  should carry to Sprint 2's unseen maps: any map big enough for a dash
+  champion's travel field to outgrow a turn, any map where scoring the
+  candidates costs more than a turn, any map whose gems all sit behind heavy
+  objectives.
+- **Measurement:** greatsage, base and boss_focus replay each other on most
+  maps; use `analysis/clustered.py` for the standard error, and the distinct
+  opponents (`greatsage`, `colleague`, `seelie_t04`, `gs_dis075`) for
+  screens.
+- **00stampede is all or nothing**: tiny trajectory changes swing it between
+  800 and 0, so per-map results there need many re-rolls.
+- **The C++ port's edge was the same stall and party maps.** Against v93:
+  stall maps +182, party maps +636, everything else −18. v98 takes those gains
+  on the Python base, so the C++ line is paused.
 
 ### Next, in order
 
-1. `gs_cpp93` parity against v93.
-2. Fight simulation in C++, in place of the fixed disengage ratio. A's counts
-   say leaving only pays when the threat can actually be shed (a camp, or a
-   champion at more than its reach), and that a chased champion without a dash
-   should fight. sage2's `sim.h` (damage model validated against the engine)
-   and `survive.h` are the parts to reuse.
-3. The 320-game pool for the C++ line.
+1. Screens on the v98 base (running): Treasure, claim-inferred respawns,
+   carrier hunting, crystalfund, gated monolith raid, travel weight 1.4.
+   Leaders get a second, independent re-roll before any hand-over.
+2. A logger run of v98 over the pool, to see how its time use changed and
+   what the next leak is.
+3. After the owner uploads v98: the brief's quick ladder check (5 unranked
+   games against a pinned `db_base` team), with the ladder lock taken.
 
 ### Files touched
 
 | path | what changed |
 |---|---|
-| `ws/bots/gs_cpp/`, `gs_cpp_party/`, `gs_cpp93/`, `gs_cpp93_party/` | the C++ line |
-| `analysis/ladder_arms.py`, `analysis/paired.py` | ladder arm diagnosis; paired errors |
-| `GROUND-UP-PLAN.md` | appended: A's ladder diagnosis, the yellow_brick_road livelock, parity, party maps |
+| `analysis/mkfixes.py` | changes: treasure, claimresp, hunt, fieldresume, dangerskip, cheapretry, party, partymono, monogate, crystalfund |
+| `analysis/mktimelog.py`, `timeprofile.py` | time-use logger and reader |
+| `analysis/maptable.py`, `bymaps.py`, `clustered.py`, `mksubmit.py` | map table; by-map split; clustered SE; untagged submission builder |
+| `ws/bots/v98_submit` | the candidate, untagged |
+| `ws/bots/gs97_*`, `gs98_*`, probes | test arms and probes |
+| `ws/bots/gs_cpp*` | the C++ line (paused) |
+| `GROUND-UP-PLAN.md` | appended: time profile, fuel diagnosis, v98's tests, clustered errors |
 
 ### Notes for LOCAL
 
