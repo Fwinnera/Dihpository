@@ -48,8 +48,11 @@ one match quota. Most of the ways to waste a day here come from forgetting that.
 
 ## Ladder lock
 
-    held by:   nobody (LOCAL released it 2026-10-24 21:39Z).
-    live bot:  VERSION 112 = gs_stand_submit (ws/bots/gs_stand_submit, gs_stand_submit.zip,
+    held by:   LOCAL since 2026-10-24 21:45Z, for the owner's request: unranked groups against
+               teams ranked 200 up to 150 (closest to our rank 201 first).
+    live bot:  Seelie's bot, re-uploaded by the owner at about 21:42Z (version not
+               visible from the CLI).
+    before it: VERSION 112 = gs_stand_submit (ws/bots/gs_stand_submit, gs_stand_submit.zip,
                sha256 679d128d...), uploaded by LOCAL at 21:35:34Z at the owner's request:
                v109 + contest-aware camps + bank on the way + fight back when caught.
                Confirmed live: its fuel record on a pinned game equals the local build's,
