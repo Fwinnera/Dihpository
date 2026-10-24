@@ -253,14 +253,37 @@ Replies to your notes, as of 16:20Z:
 
 **Agent:** Claude Code in a claude.ai cloud container. It cannot reach the Mac.
 **Branch:** `Fwinnera`.
-**Updated:** 2026-10-24 00:45Z.
+**Updated:** 2026-10-24 02:05Z.
 **Can run:** the engine (all 40 maps, Python and C++ bots, 4 cores; `bench.py`
 runs unchanged), the platform CLI read-only (owner-approved login), GitHub push.
 
 ### Doing now
 
-**Working LOCAL's brief (`f68d47a4-CLOUD-PROMPT.md`) on the v97 base.** No
-uploads; nothing touches the ladder.
+**A candidate passes its first 320 games at z 3.6: `gs97_fp`, v97 plus three
+repairs.** Against the fresh twin `gs97_rr` (v97 + re-roll), standard four
+opponents:
+
+| | change | paired se | z |
+|---|---|---|---|
+| gems submitted | **+67.5** | 18.6 | **+3.6** |
+| win rate | **+10.6 points** | 3.0 | **+3.6** |
+| opponent gems | −44.1 | 18.2 | −2.4 |
+| deaths | −0.9 | 0.5 | −1.7 |
+
+Every opponent improves (+55 to +76); 64 results flip to a win, 30 to a loss
+(p 0.001); 0 error lines. By map group: party maps +323, stall maps +138
+(z 3.7), all other maps +41 (z 2.1). **The second half (`fp97b` against
+`rr97b`, the other four opponents) finishes about 03:10Z**, which completes the
+640-game test.
+
+**Ready for the owner, not uploaded:** `ws/bots/v98_submit` (untagged; zip via
+`python3 analysis/mksubmit.py v98 bruiser+heal60+fieldresume+cheapretry+party`,
+22,336 bytes, sha256 `fc1aecf2…`). It differs from the tested arm only by the
+re-roll statement and the BOTTAG line; `main.py` is byte-identical to v97's.
+Smoke games on the untagged build are running. The owner decides; CLOUD will
+not upload.
+
+How it was found and built (each repair is a general rule, not a map tweak):
 
 1. **Where champion-turns go (brief item 1): done.** `analysis/mktimelog.py`
    builds a logger, `analysis/timeprofile.py` reads it. v97 over 200 games
@@ -383,6 +406,28 @@ here and CLOUD will skip them.
 | `GROUND-UP-PLAN.md` | appended: A's ladder diagnosis, the yellow_brick_road livelock, parity, party maps |
 
 ### Notes for LOCAL
+
+- **New candidate, v98 (2026-10-24 02:05Z): v97 + `fieldresume` +
+  `cheapretry` + `party`.** First 320 games against a fresh v97 twin: gems
+  +67.5 (z 3.6), win rate +10.6 (z 3.6), all four opponents up. Second half
+  about 03:10Z. `ws/bots/v98_submit` is the untagged folder; build the zip
+  with `analysis/mksubmit.py` (the same tool rebuilds v97 byte for byte).
+  The owner decides on uploading. When it is live, the brief's quick ladder
+  check (5 unranked games against a pinned `db_base` team) is the next step;
+  01yellow-brick-road is in that map set and v97 scores 0 there.
+- **What the three repairs fix**, from the time profile and three probes:
+  (1) a dash champion's travel field (9 floods, ~0.8M fuel each on big maps)
+  never finished inside one turn; it now resumes across turns. (2)
+  `choose_group` could spend a whole turn rejecting dangerous groups or
+  re-adding 30 camps' health and never return (Vendetta on 01the-farm: 1,597
+  calls in 1,600 rounds, none scored); after a call that fuel cut short, the
+  next call takes a cheap path. Calls that are never cut short are unchanged,
+  which avoids your cached-camp-stats failure (−64). (3) Party maps.
+- **Treasure on v97** leads but has not passed: +15.1 gems (z 1.1), kills +1.4
+  (z 3.3), gold +1,586 over 320 games; the second half is queued.
+- **The C++ line is deprioritised.** gs_cpp93_party's +39.5 against v93 came
+  from the same stall and party maps (+182 and +636), with the other maps at
+  −18; v98 gets those gains on the proven Python base.
 
 - **Audit of your v93 ladder test** (`db_base` 16:31Z against `v93_live`
   16:50Z), via `analysis/ladder_arms.py`:
