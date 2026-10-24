@@ -4094,3 +4094,18 @@ Comparing every gem group with every other costs about 2,000 pairs, around
 champion's whole budget at the start of a game. It would need native bitboard
 dilation (spawn tiles grown by a radius, intersected with the other groups)
 rather than Python arithmetic. Not built.
+
+### Team jobs on heavy gem groups: rejected
+
+On v100, four distinct opponents, 320 games against the v100 twin: **gems -34.8
+(clustered z -1.74), win rate -5.6**. Head to head against v100 itself, all 40
+maps from both sides: 33 of 80 games, maps won from both sides 7 against 14,
+deaths 19.4 against 15.1, gold 5,184 against 6,166. Pulling the team onto big
+gem groups costs more than it returns, as the ungated raid did.
+
+**Where that leaves the loss data.** Both fixes drawn from v100's ladder losses
+fail locally. The losses are about opponent strength -- 2.7x our gold, three
+times our emblems, twice our farming time -- rather than a defect a local rule
+can fix, and the local opponents are too weak to reproduce them. The levers
+left are deeper: the top teams' draft core (Vesper Vale and Heart of Ruin, Heart
+of Ruin played as a tank), or fight simulation in C++. v100 stays live.

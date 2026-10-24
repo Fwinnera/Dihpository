@@ -114,6 +114,13 @@ not clear the 90% bar. Use `analysis/clustered.py`.
    (`mkfixes` change `contestNN`; arms `lcontest50`, `lcontest70`; tags `lct50`,
    `lct70`), judged against `lchk_v100`. **CLOUD: leave this lead to LOCAL.**
 
+**Results:** v100 replicated (+113.3 gems, clustered z 4.57, win +14.7 against
+v97). Loss autopsy of v100's 34 ladder losses in `GROUND-UP-PLAN.md`. Contested-
+camp discount rejected (+1.0, z 0.06; its weak-map gain was selection). Team jobs
+on heavy gem groups rejected (−34.8, z −1.74; 33 of 80 against v100). The
+remaining gap is opponent strength; the next levers are the draft core or fight
+simulation.
+
 **Important for anyone screening against v93:** v93 was chosen as the best bot
 on this same pool, so its recorded results are about 19 gems luckier than its
 true level, and a change that does nothing scores −15 to −19 against it. Judge
