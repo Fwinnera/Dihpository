@@ -533,6 +533,39 @@ def apply(src: Path, change: str) -> None:
              "            return False\n")
         edit(src / "policy.py", '    """Every gem sits behind a monolith or a pack that kills a lone farmer."""\n',
              '    """Every gem sits behind a monolith."""\n')
+    elif change == "cheaper":
+        # After cheapretry: a cheaper cheap path. v98 still lost 38% of turns to
+        # fuel on 01yellow-brick-road and 5-10% on 01islands and 00lanes
+        # (gs98_fuelprobe): the cheap call still looped over every spawn tile
+        # in the first pass and read every tile of every candidate in the exact
+        # pass. On the cheap path only: box distances in the first pass, at most
+        # six sample tiles a group in the exact pass, and a clean give-up to the
+        # rally fallback when fuel runs low with nothing chosen. (Scoring on the
+        # walking flood alone was tried and dropped: on 01islands it hid every
+        # group behind a dash gap, and idle rose from 15% to 24%.) Calls that
+        # fuel never cut short are unchanged.
+        s = src / "strategy.py"
+        edit(s, "        self.monolith = any(c.is_monolith() for c in self.camps)\n",
+             "        self.monolith = any(c.is_monolith() for c in self.camps)\n"
+             "        # Cheap-path summaries: a bounding box and at most six sample tiles.\n"
+             "        xs = [x for x, _ in self.coords] or [0]\n"
+             "        ys = [y for _, y in self.coords] or [0]\n"
+             "        self.box = (min(xs), max(xs), min(ys), max(ys))\n"
+             "        self.sample = self.positions[::max(1, -(-self.count // 6))]\n")
+        edit(s, "        for px, py in objective.coords:\n",
+             "        for px, py in (() if cheap else objective.coords):\n")
+        edit(s, "            if gap < travel:\n                travel = gap\n",
+             "            if gap < travel:\n                travel = gap\n"
+             "        if cheap:\n"
+             "            x0, x1, y0, y1 = objective.box\n"
+             "            dx = x0 - x if x < x0 else (x - x1 if x > x1 else 0)\n"
+             "            dy = y0 - y if y < y0 else (y - y1 if y > y1 else 0)\n"
+             "            travel = dx if dx > dy else dy\n")
+        edit(s, "        positions = [p for p in objective.positions if reached.is_set(p)]\n",
+             "        positions = [p for p in (objective.sample if cheap else objective.positions) if reached.is_set(p)]\n")
+        edit(s, "        if best is not None and bc.fuel_remaining() < 950_000:\n            break\n",
+             "        if best is not None and bc.fuel_remaining() < 950_000:\n            break\n"
+             "        if cheap and bc.fuel_remaining() < 500_000:\n            break\n")
     elif change == "reroll2":
         # A second, different decision-neutral perturbation, for an independent
         # re-roll when "reroll" has already been used in the selection.
