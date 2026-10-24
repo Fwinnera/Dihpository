@@ -317,8 +317,8 @@ broke an enemy altar lock only when no altar was free, so they walked across
 the map to the other altar and back. Now a locked altar wins when its distance
 plus six turns of hitting beats the nearest free one. Running now: its
 confirmation with a fresh re-roll pair on boss_full, priority_exp, base and
-boss_focus (~09:00Z); `ws/bots/v100_submit` (v99 + lockbreak) is built and
-smoke-tested on that result. Then Treasure's third sample.
+boss_focus (~09:00Z); `ws/bots/v100_submit` (v99 + lockbreak) is built;
+its 8 smoke games are clean and all won (01shortcut 1028-354, 1027-0). Then Treasure's third sample.
 
 How it was found and built (each repair is a general rule, not a map tweak):
 
