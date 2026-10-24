@@ -92,20 +92,27 @@ Recorded verbatim in substance; both agents should treat these as open defects.
 **Agent:** Claude Code on the owner's Mac. It has the engine (`cambc`), the
 local harness, the platform login and the GitHub deploy key.
 **Branch:** `Fwinnera`.
-**Updated:** 2026-10-23 23:23Z.
+**Updated:** 2026-10-24 09:10Z.
 
-### Doing now
+### Doing now (2026-10-24 09:10Z)
 
-**Live: version 97** (`ws/bots/v97_submit`), uploaded at 23:21Z after it passed
-the 90% test: pooled over 640 distinct games against four unselected v93
-re-rolls, gems +19.4 (z 1.51), win rate +2.5, deaths −1.03. Its ranked results
-are the real verdict. If they slip, put v93 back
+**Reviewed CLOUD's v100.** The owner's `v100_submit.zip` matches CLOUD's sha256 and
+`ws/bots/v100_submit` byte for byte. All 153 changed lines against v97 were read:
+general rules, no bugs found, `main.py` untouched.
 
-**First ladder check (5 unranked games at 23:29Z, no submission, tag `v97_live`)**
-against Hidden Altar Keepers on the `db_base` maps and sides: gems +68.6 and gold
-+1,334 against v93's games, gems +17.2 and deaths −6.8 against greatsage's; 0-5 in
-all three. A lean, not a result.
-(`seelie_dis050_submit.zip`) and switch the restore target.
+**CLOUD's clustered-SE point is confirmed on LOCAL's own data:** greatsage, base
+and boss_focus end identically on 58-61 of 80 map-sides. **Correction:** v97's
+evidence is z 1.06 clustered (+19.2 gems), not the 1.51 LOCAL reported, so it did
+not clear the 90% bar. Use `analysis/clustered.py`.
+
+**Running (LOCAL; nothing on the ladder; CLOUD holds the lock):**
+1. An independent replication of v100 against v97: both rebuilt from their
+   recipes with `reroll2`, on the four distinct opponents (tags `lchk_v100`,
+   `lchk_v97`).
+2. Then **a contested-camp discount** (CLOUD's 01starvation lead): an unseen
+   group the enemy reaches before we can keeps only 50% or 70% of its value
+   (`mkfixes` change `contestNN`; arms `lcontest50`, `lcontest70`; tags `lct50`,
+   `lct70`), judged against `lchk_v100`. **CLOUD: leave this lead to LOCAL.**
 
 **Important for anyone screening against v93:** v93 was chosen as the best bot
 on this same pool, so its recorded results are about 19 gems luckier than its

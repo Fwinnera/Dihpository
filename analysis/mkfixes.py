@@ -592,6 +592,33 @@ def apply(src: Path, change: str) -> None:
              "            goals = bc.Bitboard()\n"
              "        if not goals.is_empty():\n")
         cfg.write_text(cfg.read_text() + "# Break an enemy altar lock rather than walk more than LOCK_BREAK tiles further to a free altar.\nLOCK_BREAK = 6\n")
+    elif re.fullmatch(r"contest(\d+)", change):
+        # CLOUD's v98 profile: on 01starvation 23% of turns are walks that end at
+        # a camp found respawning -- taken by the enemy first. An unseen group the
+        # enemy can reach sooner than we can is likely gone on arrival, so its
+        # value is discounted. Visible groups are judged on what we see.
+        st = src / "strategy.py"
+        edit(st, "def prepare(groups):\n",
+             "enemy_field = None\n\n"
+             "def enemy_distance(objective):\n"
+             "    \"\"\"Walking distance from the enemy spawn to a group, from one flood a game.\"\"\"\n"
+             "    global enemy_field\n"
+             "    if enemy_field is None:\n"
+             "        walls = nav.static_walls()\n"
+             "        field, reached = bc.DistanceField(), bc.Bitboard()\n"
+             "        field.compute(walls, gm.spawn_region(bc.Team.ENEMY) & ~walls, reached)\n"
+             "        enemy_field = field\n"
+             "    d = getattr(objective, 'enemy_d', None)\n"
+             "    if d is None:\n"
+             "        d = objective.enemy_d = min(enemy_field.get(p) for p in objective.positions)\n"
+             "    return d\n\n"
+             "def prepare(groups):\n")
+        edit(st, "        travel = min(field.get(p) for p in positions)\n        reward = False\n",
+             "        travel = min(field.get(p) for p in positions)\n        reward = False\n"
+             "        if (objective.spawns & visible).is_empty() and enemy_distance(objective) < travel:\n"
+             "            # The enemy reaches this unseen group first: likely taken on arrival.\n"
+             "            value *= config.CONTEST_KEEP\n")
+        cfg.write_text(cfg.read_text() + f"# Value kept for an unseen group the enemy reaches before we can.\nCONTEST_KEEP = {int(change[len('contest'):]) / 100}\n")
     elif change == "reroll2":
         # A second, different decision-neutral perturbation, for an independent
         # re-roll when "reroll" has already been used in the selection.
