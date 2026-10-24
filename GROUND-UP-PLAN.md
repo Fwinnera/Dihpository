@@ -4021,3 +4021,10 @@ on 01yellow_brick_road NTU went from scoring 0 against v93 to 1,043 against
 v100 (the local side-B pattern: once we farm, a stalled opponent starts
 scoring by killing our carriers). Twenty games is a lean, not a verdict; the
 ranked games v100 now plays against teams near our rating are the real test.
+
+Local head to head, v100 against v93 (the owner's second upload, identical to
+`seelie_dis050_submit`), all 40 maps from both sides (`h2h_v93`): v100 wins 59
+of 80, gem margin +293 a game (clustered by map z 6.6), maps won from both
+sides 20, lost from both 1 (01concentrated-wealth). Against the
+camp-cache-only bot: 53 of 80, +212. The ladder check against stronger teams
+(above) shows far less, so local head-to-heads overstate what the ladder pays.

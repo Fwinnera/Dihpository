@@ -298,8 +298,9 @@ smoke games (v100: 8 of 8 won, including 01shortcut 1028-354 and 1027-0).
 
 Head to head against v100, all 40 maps from both sides: the teammate's
 `camp-cache-only` bot loses 27-53 (v100 +212 gems a game, z 4.1); v93
-(the owner's second upload, byte-identical to `seelie_dis050_submit`) is
-running (`h2h_v93`).
+(the owner's second upload, byte-identical to `seelie_dis050_submit`) loses
+21-59 (v100 +293 a game, z 6.6; only 01concentrated-wealth lost from both
+sides). Local head-to-heads are not the ladder: see the ladder check above.
 
 #### What each change does (all in `analysis/mkfixes.py`, general rules, no map names)
 
