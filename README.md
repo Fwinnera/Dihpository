@@ -48,22 +48,19 @@ one match quota. Most of the ways to waste a day here come from forgetting that.
 
 ## Ladder lock
 
-    held by:   CLOUD, since 2026-10-24 12:43Z: uploading v101 at the owner's
-               explicit request ("submit and run some tests"), then 20 unranked
-               games repeating v100's pinned check (same teams, maps, sides).
-    live bot:  VERSION 105 = v100 (ws/bots/v100_submit), uploaded by CLOUD at
-               08:53Z at the owner's explicit request. v100 = v97 + fieldresume +
-               cheapretry + party + gated monolith raid + lockbreak. NOTE: the
-               platform numbered it 105, so versions 98-104 were uploaded by
-               someone else after v97 (23:21Z); what was live just before is
-               unknown to CLOUD. Restore v97 with ws/bots/v97_submit.
-               Ladder check queued 08:53Z: 4 groups x 5 games against the pinned
-               db_base teams (ws/bench/ladder/v100_live/meta.json on CLOUD).
+    held by:   nobody (CLOUD released it 2026-10-24 12:46Z).
+    live bot:  VERSION 106 = v101 (ws/bots/v101_submit) = v100 + lad_race, uploaded
+               by CLOUD at 12:44Z at the owner's explicit request. Before it, v100
+               (version 105) from 08:53Z: 100 ranked games, 45 W / 55 L; rating
+               1,648, rank 215 at 12:43Z (about 1,640-1,644 yesterday).
+               Ladder check queued 12:45Z: the same 4 pinned db_base teams, maps and
+               sides as v100's 08:53Z check (groups 6c6c9f43, 45ab5acd, 5c3d12cf,
+               a56274c2). Restore v100 with ws/bots/v100_submit.
     history:   greatsage until about 16:41Z, Seelie's py-t04 until 16:47Z,
                v93 until about 19:40Z, the teammate's Priority Experimental
                until 19:53Z, v95 until 20:02Z, v93 (as version 96) until
                23:21Z, then v97.
-    fallback:  v99 (ws/bots/v99_submit), then v97, then v93 (seelie_dis050_submit).
+    fallback:  v100 (ws/bots/v100_submit), then v99, then v97.
 
 To take it: edit this block, commit and push *before* submitting. To release it:
 set `held by: nobody` and push. If it has been held for more than 90 minutes,
