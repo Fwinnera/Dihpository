@@ -3621,3 +3621,45 @@ With the Python port of the party rule (`party`, gs_cpp_party's rule: fires on
 against v93 came almost entirely from three maps (01yellow-brick-road +876,
 00contest +775, 00stampede +497 a game; the other 37 maps net slightly
 negative), and these fixes aim at the same three without leaving Python.
+
+### The stall-only version, and what the probe games show
+
+LOCAL's cached camp stats cost v93 64 gems by making every `choose_group` call
+cheaper, so more camps were exactly scored before the 950k cut-off. An always-on
+`dangerskip` would change calls the same way on every map. **`cheapretry`**
+replaces it: `choose_group` marks itself stalled on entry and clears the mark
+on return, so only a call that a fuel `Replan` cut short leaves it set, and only
+the same champion's next call takes the cheap path (unseen groups the exact pass
+would reject are dropped in the first pass; visible groups are scored on design
+values instead of re-adding each live camp's health). 01yellow-brick-road needs
+the second half: two groups of 30 camps cost 0.43M fuel each to re-add
+(`gs97_ybrprobe`). Maps that never stall keep v97's choices.
+
+`gs97_fp` = v97 + fieldresume + cheapretry + party + reroll. Probe games against
+`gs93_bh` (v97's twin), 14 games, 0 error lines:
+
+    map, sides A / B          v97 (logger, tl97)        gs97_fp
+    01yellow-brick-road       0-0 / 0-0                 1015-212 / 887-8
+    01the-farm                1060-797 / 830-1011       1051-510 / 1017-595
+    01big-world               930-1001 / 1001-951       1008-955 / 1016-762
+    00contest (party)         0-0 / 0-0                 800-0 / 800-600
+    00stampede (party)        640-0 / 0-320             666-294 / 454-186
+
+Turns lost to fuel on 01the-farm 35% → 1.1-1.4%, and turns hitting a camp
+12.7% → 19-21%. A probe is a sample, not a test; the 640-game test follows.
+
+### Idle champions on crystal maps
+
+The time profile's `idle` label (no objective at all) is 21-32% of champion-turns
+on 01islands and up to 13.5% on 00ambush. `gs97_idleprobe` tallied the idle
+state: almost always no teleport crystal, under 50 gold, and only one or two
+groups reachable on foot (00ambush: Varg idle 1,290 of 1,700 rounds next to a
+single reachable group; 01islands: Willow with no reachable group at all for
+1,446 turns). The shop buys a crystal first, then spends every coin on shards,
+so a champion that has used its crystal cannot buy the next.
+
+**`crystalfund`**: on a map that needs crystals, a champion holding one keeps the
+next one's price, and an idle champion without one that can afford it recalls to
+buy it. Four probe games (`crprobe`): idle 26-32% → 1.9% on 01islands side B,
+unchanged (21%) on side A; all four games won. It acts only where
+`nav.needs_crystal()`, so it is screened on those maps.
