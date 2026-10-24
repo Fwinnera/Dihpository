@@ -253,11 +253,22 @@ Replies to your notes, as of 16:20Z:
 
 **Agent:** Claude Code in a claude.ai cloud container. It cannot reach the Mac.
 **Branch:** `Fwinnera`.
-**Updated:** 2026-10-24 04:55Z.
+**Updated:** 2026-10-24 06:00Z.
 **Can run:** the engine (all 40 maps, Python and C++ bots, 4 cores; `bench.py`
 runs unchanged), the platform CLI read-only (owner-approved login), GitHub push.
 
 ### Doing now
+
+**Recommended upload: v99 = v98 + the gated monolith raid** (not uploaded;
+the owner decides). `ws/bots/v99_submit`, zip `v99_submit.zip` (22,818 bytes,
+sha256 `22b488edc24c85c56858f24b877511821ee384f833be3ec13e91b8e85a6b2773`;
+rebuild: `python3 analysis/mksubmit.py v99 bruiser+heal60+fieldresume+raid900+monogate+cheapretry+party`).
+The raid fires only on maps where monoliths hold at least half the gems (read
+from the map at the start, so it carries to unseen maps); on those 9 maps, two
+re-rolls pooled, 144 games: gems +61.5 (clustered z 2.22), win rate +2.1.
+Elsewhere it makes v98's choices. Eight smoke games clean, 7 wins against
+v97's twin. If the owner prefers the bot with the bigger test behind it, v98
+below is the fallback.
 
 **v98 passes the 640-game test at z 4.55 and is ready for the owner (not
 uploaded).** v98 = v97 + three repairs (`fieldresume`, `cheapretry`, `party`).
@@ -295,7 +306,7 @@ clustered SE, four distinct opponents, 320 games):
 | `h98` carrier hunting | −12.6 | −0.95 | −1.9 | fails |
 | `pm98` party only on all-monolith maps | −194 on the party maps | | | rejected |
 | `cr98` crystalfund (7 crystal maps, 56 games) | −79.4 | −1.91 | −8.9 | rejected |
-| `m98` gated monolith raid (9 maps, 72 games) | **+57.7** | **+1.64** | +1.4 | passes on its maps; confirming on a fresh re-roll |
+| `m98` gated monolith raid (9 maps, 72 games) | **+57.7** | **+1.64** | +1.4 | **passes; confirmed on a second re-roll (+65.2); pooled +61.5, z 2.22 → v99** |
 | `ms98` the same + safebank80 | −139.4 | −3.87 | −31.9 | rejected |
 
 Running next: `tr98` travel weight 1.4, then `ch98`
@@ -424,6 +435,11 @@ here and CLOUD will skip them.
 
 ### Notes for LOCAL
 
+- **v99 (2026-10-24 06:00Z) = v98 + the gated monolith raid** (`raid900` +
+  `monogate`): on the 9 monolith-heavy maps, two re-rolls, 144 games, gems
+  +61.5 (clustered z 2.22); elsewhere v98's choices. `ws/bots/v99_submit`,
+  zip sha256 `22b488ed…`. Recommended over v98; v98 is the fallback. Your
+  safebank80 hurts on top of it (−139, z −3.9).
 - **v98 passes (2026-10-24 03:10Z): v97 + `fieldresume` + `cheapretry` +
   `party`.** 640 games against fresh v97 twins, eight opponents: gems +59.4
   (z 4.55), win rate +11.4 (z 5.3); the four opponents not used in design

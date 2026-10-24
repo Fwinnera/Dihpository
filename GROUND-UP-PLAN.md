@@ -3854,3 +3854,28 @@ home first) is clearly harmful. The plain gated raid passes on its maps; these
 maps swing by hundreds of gems, so it is being confirmed on an independent
 re-roll pair (`gs98_mono_r2` against a fresh v98 twin `gs98_r2`, both reroll2)
 before it can join the candidate.
+
+### The raid confirms; v99 = v98 + the gated monolith raid
+
+    re-roll 2 (gs98_mono_r2 vs fresh v98 twin gs98_r2)   gems +65.2 (clustered z 1.56)   win +2.8
+    both re-rolls pooled, 144 games                     gems +61.5 (clustered se 27.1, z 2.22)   win +2.1
+    twin check (gs98_r2 vs v98's own runs)               gems -1.4 (se 5.2)
+
+The per-map pattern repeats across re-rolls (01gold-rush +418/+429, 00monolith
++114/+120, 00rows +118/+127, 01broken-curve +122/+92; 00split -138/-190,
+00great-wall -118/-112, 01starvation -69/-22). The twin check shows that a
+re-roll moves these games very little, so the evidence comes from the 9 maps
+and 4 opponents more than from the re-rolls. Six of the nine monolith-heavy
+maps gain. Over the 40-map pool that is about +14 gems a game on top of v98;
+on maps where monoliths hold under half the gems the raid code makes v98's
+choices exactly (the share is read once at the start; non-monolith groups keep
+one raider in every formula).
+
+`ws/bots/v99_submit`, `v99_submit.zip` (22,818 bytes, sha256
+22b488edc24c85c56858f24b877511821ee384f833be3ec13e91b8e85a6b2773), built by
+`analysis/mksubmit.py v99 bruiser+heal60+fieldresume+raid900+monogate+cheapretry+party`:
+the tested arm `gs98_mono` minus the re-roll statement and BOTTAG; `main.py`
+byte-identical to v97's; eight smoke games clean (7 wins against v97's twin).
+Not uploaded.
+
+Also run: travel weight 1.4 (`tr98`) is flat to negative so far.
