@@ -695,6 +695,57 @@ def apply(src: Path, change: str) -> None:
              "        ratio, threats = combat.local_power(enemies, self.team.allies, config.DISENGAGE_RADIUS)\n")
         cfg.write_text(cfg.read_text() + "# Stay inside our spawn while enemies within SPAWN_HOLD_RADIUS outmatch us there.\n"
                        "SPAWN_HOLD_RADIUS = 8\nSPAWN_HOLD_RATIO = 1.0\nSPAWN_HOLD_MAX = 40\n")
+    elif change == "lad_race":
+        # From the ladder: of 146 ranked losses, 6 ended with us on 966-999
+        # submitted while our champions carried 44-107 gems, enough to have won
+        # had they been deposited first, and 23 more went to the round-2000
+        # tiebreak, where carried gems count for nothing. should_bank only
+        # checked whether this champion's own load would win. Now a champion also
+        # banks when our submitted gems plus the loads of the allies it can see
+        # would win, and banks anything of RACE_MIN gems or more once the enemy is
+        # within RACE_ENEMY of winning or we are within RACE_OURS.
+        s = src / "strategy.py"
+        edit(s, "    ticks = (gems + 9) // 10\n    return (gems >= config.BANK_GEMS\n",
+             "    ticks = (gems + 9) // 10\n"
+             "    ours = bc.global_submitted_gems(bc.Team.ALLY)\n"
+             "    theirs = bc.global_submitted_gems(bc.Team.ENEMY)\n"
+             "    # The race: gems carried when the game ends are worth nothing.\n"
+             "    if gems >= config.RACE_MIN and (theirs >= bc.constants.WINNING_GEMS - config.RACE_ENEMY\n"
+             "                                    or ours >= bc.constants.WINNING_GEMS - config.RACE_OURS):\n"
+             "        return True\n"
+             "    carried = gems\n"
+             "    for ally in bc.champions(bc.Team.ALLY):\n"
+             "        if ally != me and ally.is_alive() and ally.is_visible():\n"
+             "            carried += ally.gem_count()\n"
+             "    if ours + carried >= bc.constants.WINNING_GEMS:\n"
+             "        return True\n"
+             "    return (gems >= config.BANK_GEMS\n")
+        cfg.write_text(cfg.read_text() + "# Endgame banking: bank RACE_MIN+ gems once either side is this close to winning.\n"
+                       "RACE_MIN = 6\nRACE_ENEMY = 200\nRACE_OURS = 150\n")
+    elif change == "lad_bossbank":
+        # From the ladder: on 01boss_battle our carriers ended games holding 1,669
+        # and 1,216 gems and died holding 647 and 419. The only tile in reach of
+        # its altar is the monolith's own spawn tile, so a carrier waits beside
+        # it; BossBot.bank then counted that as no progress, ticking the same
+        # Progress object Bot.bank also ticks (twice a turn, so it gave up after
+        # six turns), and abandoned banking for 80 rounds, farming with
+        # everything on board. Now the boss controller keeps its own counter, and
+        # a carrier of BOSS_BIG_LOAD gems or more retries after 15 rounds rather
+        # than 80.
+        b = src / "boss.py"
+        edit(b, "        self.bank_progress = Progress()\n        self.bank_retry_at = 0\n",
+             "        self.bank_progress = Progress()\n        self.boss_progress = Progress()\n        self.bank_retry_at = 0\n")
+        edit(b, "            if not self.bank_progress.blocked(signature):\n"
+                "                return super().bank(me, enemies, camps)\n"
+                "            self.bank_retry_at = now + 80\n"
+                "            self.bank_progress.reset()\n",
+             "            if not self.boss_progress.blocked(signature):\n"
+             "                return super().bank(me, enemies, camps)\n"
+             "            self.bank_retry_at = now + (15 if me.gem_count() >= config.BOSS_BIG_LOAD else 80)\n"
+             "            self.boss_progress.reset()\n")
+        if "import config\n" not in b.read_text():
+            edit(b, "import turn\n", "import turn\nimport config\n")
+        cfg.write_text(cfg.read_text() + "# On boss maps a carrier of BOSS_BIG_LOAD+ gems retries a blocked deposit after 15 rounds, not 80.\nBOSS_BIG_LOAD = 50\n")
     elif change == "reroll2":
         # A second, different decision-neutral perturbation, for an independent
         # re-roll when "reroll" has already been used in the selection.
