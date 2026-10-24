@@ -4505,3 +4505,12 @@ it is the comparison, not the fix. Against that twin the fix is 40 of 80 (-32),
 `ws/bots/gs_fix2_submit` is gs_ad_fix2 untagged (`gs_fix2_submit.zip`, 28,073
 bytes, sha256 6fbc8330...); smoke game against base on 00contest 1000-0, no
 crashes, no ERROR lines. Not uploaded.
+
+**Uploaded (owner's request): version 109 = gs_fix2_submit, 19:58:56Z.**
+Confirmed live from the untagged replay output. Standard unranked check (four
+pinned teams x 01islands, 00swirl, 01elk_arena, 00quadrants, 01yellow_brick_road):
+6 wins of 20, gems 594 against 828 -- astra had 4, v101 3, v100 2 on the same
+games. Paired with astra: +132.5 gems (se 65.1), 12 better, 5 worse, 3 same; gold
++1,051, camp damage +26%, farming share of alive rounds 9.6% -> 13.1%, deposits
++5.8, deaths +0.9. 01islands, a stall map, rose in all four games (70 -> 357,
+659 -> 1,021, 117 -> 994, 797 -> 1,025).
