@@ -695,6 +695,7 @@ def apply(src: Path, change: str) -> None:
              "        ratio, threats = combat.local_power(enemies, self.team.allies, config.DISENGAGE_RADIUS)\n")
         cfg.write_text(cfg.read_text() + "# Stay inside our spawn while enemies within SPAWN_HOLD_RADIUS outmatch us there.\n"
                        "SPAWN_HOLD_RADIUS = 8\nSPAWN_HOLD_RATIO = 1.0\nSPAWN_HOLD_MAX = 40\n")
+<<<<<<< Updated upstream
     elif change == "lad_race":
         # From the ladder: of 146 ranked losses, 6 ended with us on 966-999
         # submitted while our champions carried 44-107 gems, enough to have won
@@ -746,6 +747,70 @@ def apply(src: Path, change: str) -> None:
         if "import config\n" not in b.read_text():
             edit(b, "import turn\n", "import turn\nimport config\n")
         cfg.write_text(cfg.read_text() + "# On boss maps a carrier of BOSS_BIG_LOAD+ gems retries a blocked deposit after 15 rounds, not 80.\nBOSS_BIG_LOAD = 50\n")
+=======
+    elif change == "draftcore":
+        # Every top-five team fields Vesper Vale and Heart of Ruin (85-100% of
+        # games) and none fields Varg. Vesper Vale's passive adds gold on top of
+        # base gold; Heart of Ruin's adds up to 50% damage at full missing health.
+        # Party maps keep their own order in draft.py.
+        r = src / "roster.py"
+        rt = r.read_text()
+        new_order = ("DRAFT_ORDER = (bc.ChampionDraft.MARCELLA, bc.ChampionDraft.VENDETTA, "
+                     "bc.ChampionDraft.VESPER_VALE, bc.ChampionDraft.HEART_OF_RUIN, bc.ChampionDraft.RYTH, "
+                     "bc.ChampionDraft.WILLOW, bc.ChampionDraft.VARG, bc.ChampionDraft.TAVI, "
+                     "bc.ChampionDraft.CASSI_AND_ISSAC, bc.ChampionDraft.REN, bc.ChampionDraft.STELLAR, "
+                     "bc.ChampionDraft.PRISM)")
+        lines = rt.split("\n")
+        hits = [i for i, l in enumerate(lines) if l.startswith("DRAFT_ORDER = (")]
+        if len(hits) != 1:
+            sys.exit("roster.py: DRAFT_ORDER line not found exactly once")
+        lines[hits[0]] = ("# The top teams' core: Vesper Vale and Heart of Ruin in, Willow and Varg\n"
+                          "# down to sixth and seventh.\n" + new_order)
+        r.write_text("\n".join(lines))
+    elif change == "tank":
+        # Heart of Ruin as the front line. Its passive grows its damage as it loses
+        # health, so the generic thresholds -- heal-recall at 60%, retreat at 30%,
+        # self-shield only below 70% -- throw away what makes it strong. It follows
+        # a teammate to its camp and fights adjacent to the target, as Willow's
+        # escort does from three tiles.
+        es = src / "escort.py"
+        et = es.read_text()
+        if et.count("3 if leader.is_visible() else 1") != 2:
+            sys.exit("escort.py: expected two escort ranges")
+        et = et.replace("3 if leader.is_visible() else 1", "self.reach if leader.is_visible() else 1")
+        et = et.replace("class EscortBot(Bot):\n", "class EscortBot(Bot):\n    reach = 3\n\n", 1)
+        et = et.rstrip("\n") + ("\n\n\nclass TankBot(EscortBot):\n"
+              "    \"\"\"Heart of Ruin: follow a teammate to its camp and fight adjacent to the target.\"\"\"\n"
+              "    reach = 1\n")
+        es.write_text(et)
+        edit(src / "policy.py", "    if bc.me().champion_name() == bc.ChampionType.WILLOW:\n",
+             "    if bc.me().champion_name() == bc.ChampionType.HEART_OF_RUIN:\n"
+             "        from escort import TankBot\n"
+             "        return TankBot()\n"
+             "    if bc.me().champion_name() == bc.ChampionType.WILLOW:\n")
+        edit(src / "bot.py", "        threshold = config.CARRIER_RETREAT_HEALTH if me.gem_count() else config.RETREAT_HEALTH\n",
+             "        threshold = config.CARRIER_RETREAT_HEALTH if me.gem_count() else config.RETREAT_HEALTH\n"
+             "        if me.champion_name() == bc.ChampionType.HEART_OF_RUIN and not me.gem_count():\n"
+             "            # Its damage grows as its health falls; it leaves late.\n"
+             "            threshold = config.TANK_RETREAT_HEALTH\n")
+        edit(src / "bot.py", "        if (not at_spawn and me.health() < me.max_health() * config.HEAL_RECALL\n",
+             "        if (not at_spawn and me.champion_name() != bc.ChampionType.HEART_OF_RUIN\n"
+             "                and me.health() < me.max_health() * config.HEAL_RECALL\n")
+        edit(src / "combat.py", "            if incoming and me.health() < me.max_health() * 0.70 and distance(me.position(), position) <= 4:\n",
+             "            low = 0.90 if me.champion_name() == bc.ChampionType.HEART_OF_RUIN else 0.70\n"
+             "            if incoming and me.health() < me.max_health() * low and distance(me.position(), position) <= 4:\n")
+        cfg.write_text(cfg.read_text() + "# Heart of Ruin retreats only below this share of its health when not carrying.\nTANK_RETREAT_HEALTH = 0.15\n")
+    elif re.fullmatch(r"tankret(\d+)", change):
+        edit(cfg, "TANK_RETREAT_HEALTH = 0.15\n", f"TANK_RETREAT_HEALTH = {int(change[len('tankret'):]) / 100}\n")
+    elif change == "coreitems":
+        # The top teams' builds for the two core champions, in purchase order.
+        cfg.write_text(cfg.read_text() + (
+            "# Vesper Vale and Heart of Ruin, as the top teams build them.\n"
+            "BUILDS[bc.ChampionType.VESPER_VALE] = (I.JUNGLE_SHARD_OF_STRENGTH, I.BRUISER_SHARD_OF_STRENGTH,\n"
+            "    I.BRUISER_SHARD_OF_HEALTH, I.DURABILITY_SHARD_OF_HEALTH)\n"
+            "BUILDS[bc.ChampionType.HEART_OF_RUIN] = (I.JUNGLE_SHARD_OF_FOCUS, I.BRUISER_SHARD_OF_HEALTH,\n"
+            "    I.DURABILITY_SHARD_OF_HEALTH, I.BRUISER_SHARD_OF_FOCUS)\n"))
+>>>>>>> Stashed changes
     elif change == "reroll2":
         # A second, different decision-neutral perturbation, for an independent
         # re-roll when "reroll" has already been used in the selection.

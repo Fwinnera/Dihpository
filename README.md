@@ -121,6 +121,14 @@ on heavy gem groups rejected (−34.8, z −1.74; 33 of 80 against v100). The
 remaining gap is opponent strength; the next levers are the draft core or fight
 simulation.
 
+**Now building the draft core (owner's request):** Vesper Vale and Heart of Ruin in,
+Willow and Varg out, with Heart of Ruin as a front-line tank (`TankBot`: follows a
+teammate and fights adjacent; no heal-recall; retreats at 15%; shields below
+90%). Its passive adds up to 50% damage at low health, and Vesper Vale's adds
+gold. `mkfixes` changes `draftcore`, `tank`, `coreitems`, `tankretNN`; arms `ldc`,
+`ldct`, `ldcti`, `ldct25`, screened against `lchk_v100`. **CLOUD: leave the draft to
+LOCAL.**
+
 **Important for anyone screening against v93:** v93 was chosen as the best bot
 on this same pool, so its recorded results are about 19 gems luckier than its
 true level, and a change that does nothing scores −15 to −19 against it. Judge
