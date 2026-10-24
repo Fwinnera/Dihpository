@@ -566,6 +566,32 @@ def apply(src: Path, change: str) -> None:
         edit(s, "        if best is not None and bc.fuel_remaining() < 950_000:\n            break\n",
              "        if best is not None and bc.fuel_remaining() < 950_000:\n            break\n"
              "        if cheap and bc.fuel_remaining() < 500_000:\n            break\n")
+    elif change == "lockbreak":
+        # Both teams lock every altar they pass, and a lock takes five hits to
+        # clear. bank() broke an enemy lock only when no altar at all was free;
+        # otherwise it walked to the nearest free altar, however far. On
+        # 01shortcut (two altars) champions spent 30-38% of their turns in bank,
+        # 811 bank-turns beside a locked altar for 17 deposits, then 45+ tiles
+        # towards the other one (gs98_bankprobe). Now a locked altar wins when
+        # its distance plus LOCK_BREAK turns of hitting is less than the nearest
+        # free altar's; once the lock falls, our own lock (finish_turn) goes on
+        # it, which does not block us.
+        b = src / "bot.py"
+        edit(b, "        goals, locked = bc.Bitboard(), bc.Bitboard()\n",
+             "        goals, locked = bc.Bitboard(), bc.Bitboard()\n"
+             "        near_free = near_locked = 10000\n")
+        edit(b, "                locked |= nav.around(altar, bc.constants.SUBMIT_GEMS_RANGE)\n",
+             "                locked |= nav.around(altar, bc.constants.SUBMIT_GEMS_RANGE)\n"
+             "                near_locked = min(near_locked, nav.distance(me.position(), altar))\n")
+        edit(b, "                goals |= nav.around(altar, bc.constants.SUBMIT_GEMS_RANGE)\n"
+                "        if not goals.is_empty():\n",
+             "                goals |= nav.around(altar, bc.constants.SUBMIT_GEMS_RANGE)\n"
+             "                near_free = min(near_free, nav.distance(me.position(), altar))\n"
+             "        # A locked altar close by beats a free one far away: five hits clear a lock.\n"
+             "        if not locked.is_empty() and near_locked + config.LOCK_BREAK < near_free:\n"
+             "            goals = bc.Bitboard()\n"
+             "        if not goals.is_empty():\n")
+        cfg.write_text(cfg.read_text() + "# Break an enemy altar lock rather than walk more than LOCK_BREAK tiles further to a free altar.\nLOCK_BREAK = 6\n")
     elif change == "reroll2":
         # A second, different decision-neutral perturbation, for an independent
         # re-roll when "reroll" has already been used in the selection.
