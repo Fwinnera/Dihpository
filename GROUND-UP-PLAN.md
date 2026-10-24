@@ -4109,3 +4109,52 @@ times our emblems, twice our farming time -- rather than a defect a local rule
 can fix, and the local opponents are too weak to reproduce them. The levers
 left are deeper: the top teams' draft core (Vesper Vale and Heart of Ruin, Heart
 of Ruin played as a tank), or fight simulation in C++. v100 stays live.
+
+## CLOUD: learning from 300 ranked games (the owner's "use the games we lost")
+
+`analysis/lossmine.py` downloads the platform's summaries of our last N ranked
+games and counts, per side, gems from camps and kills, gems lost, deaths by
+cause, kills, deposits, fuel exhaustions, camp clears and pace. Over 300 games
+(2026-10-23 22:50Z to 2026-10-24 09:00Z, 154 W, 146 L; versions v97, 98-104
+uploaded by others, and v100):
+
+    per game            our losses: us / them    our wins: us / them
+    gems from camps            582 / 959              885 / 523
+    gems from kills             46 / 102              115 / 38
+    deaths to champions        17.7 / 6.4             7.9 / 21.1
+    kills                       6.0 / 17.7            19.4 / 7.9
+    deposits                   13.7 / 34.3            24.3 / 16.4
+    deaths to camps             2.6 / 2.8             2.4 / 3.0
+    fuel exhaustions           11.0 / 59.8            7.8 / 50.4
+    earned gold              4,385 / 8,076          7,991 / 4,312
+
+Fuel and camp deaths do not separate wins from losses. The fight does. With
+spawn and altar positions from a probe (`ws/bots/probe_spawn`;
+`ws/bench/spawns.txt`): in losses most of our deaths are in our own half, 9.6
+of 17.7 are lone pick-offs, and **4.4 a game are within 8 tiles of our own
+spawn** (0.7 in wins), nearly all empty-handed (mean 3.7 gems) and away from
+altars. They cluster on 00swirl, 01hooks and 00gem_fields.
+
+**Lost races.** In 6 of the 146 losses we were on 966-999 with 44-107 gems
+carried when the opponent reached 1,000; 23 more went to the round-2000 gems
+tiebreak. One of v100's own first 8 ranked losses is one: 00swirl 870-891 at
+round 2000 with 119 gems unbanked.
+
+**01boss_battle hoarding.** Carriers ended two losses holding 1,669 and 1,216
+gems. Locally v100 deposits 0-1 times a game there as side A. A probe of the
+altar's surroundings (`ws/bots/probe_altar`) shows why: the altar sits in a
+wall line ringed by holes, and the only tile in reach is the monolith's own
+spawn tile. A traced carrier stops three tiles short, the boss controller
+counts that as no progress (ticking a `Progress` that `Bot.bank` also ticks, so
+twice a turn) and abandons banking for 80 rounds while carrying everything.
+
+Changes on v100 (`mkfixes`, `lad_` prefix), each against v100's own runs
+(`lk99`, four distinct opponents):
+
+    lad_race       bank when ours + visible allies' loads would win; bank 6+
+                   gems once either side is within 200 / 150 of winning
+                   320 games: gems +11.9 (clustered z 0.97), win +1.6, flips 25 to a win / 20 to a loss
+                   (local opponents rarely race; second half on the other four opponents queued)
+    lad_bossbank   the boss controller keeps its own patience counter; carriers
+                   of 50+ gems retry after 15 rounds, not 80 (running)
+    lad_spawnhold  stay in spawn while invaders outmatch us there (queued)
