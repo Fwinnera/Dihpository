@@ -4076,3 +4076,21 @@ on (boss_full, priority_exp, base, boss_focus), a fresh re-roll pair
 z +1.79), win rate +1.2. Screen and confirmation pooled, 640 games: **gems
 +35.2 (clustered z 3.79), win rate +5.2 (z 2.03)**. The confirmation is about
 half the screen's +47.1, the winner's curse at work, and still positive.
+
+### Contested-camp discount: flat, and its weak-map gain was selection
+
+On v100, four distinct opponents, 320 games against the v100 twin with the
+same re-roll: keep 50% **+1.0 gems (clustered z 0.06)**, keep 70% **-12.3
+(z -0.78)**. On the four weakest maps CLOUD listed (starvation, road of
+riches, great wall, fracture) both showed about +57 gems and +9 to +16 win
+rate in 32 games -- but those maps were chosen because they were the weakest,
+and no general gate reproduces the gain (monolith share >= 0.4: +1; >= 0.5:
++9, z 0.3). Rejected.
+
+### A cluster term (prefer camps near other camps) is parked on fuel
+
+Comparing every gem group with every other costs about 2,000 pairs, around
+13,000 Python operations at roughly 1,500 fuel each -- some eight turns of a
+champion's whole budget at the start of a game. It would need native bitboard
+dilation (spawn tiles grown by a radius, intersected with the other groups)
+rather than Python arithmetic. Not built.
