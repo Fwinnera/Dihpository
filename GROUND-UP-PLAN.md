@@ -3705,3 +3705,23 @@ path once and moves on. A logger run of `gs97_fp` on the full pool would show it
 `analysis/mksubmit.py v98 bruiser+heal60+fieldresume+cheapretry+party`. They
 differ from the tested arm only by the decision-neutral re-roll statement and
 the BOTTAG line; `main.py` is byte-identical to v97's. Not uploaded.
+
+### v98 game by game on the party and stall maps (first half)
+
+Two caveats under the aggregate:
+
+- **01yellow-brick-road:** v97 scores 0 from both sides; it "wins" every side-B
+  game 0-0 on the last tiebreak (Team B). v98 averages about 440 gems there,
+  wins every side-A game (607-22, 1019-0), and loses every side-B game
+  (180-596, 444-449, 477-723, 183-412) with 10-17 deaths: once we farm, the
+  opponent kills our carriers and banks their gems. Same win count, 4 of 8.
+- **00stampede:** the party rule is mixed. Side A: v97 wins 800-0 in three of
+  four (the rally fallback clears the herd), v98 loses 160-320 in three of
+  four. Side B: v98 better (906-214 against 640-0). Net about -54 gems over
+  eight games, inside the noise, but not the +497 the C++ port showed against
+  v93. 00contest, where every gem is behind a monolith and solo play cannot
+  score, gains about +575.
+
+If stampede stays negative over 640 games, the conservative rule is to play as
+a party only when every gem sits behind a monolith (00contest's shape), and
+leave heavy-pack maps to v97's rally fallback.
