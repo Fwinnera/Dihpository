@@ -3789,3 +3789,15 @@ games. A logger probe showed why the comparison is so noisy: the cheap path
 fired four times a game there and fuel was not short; 00stampede is all or
 nothing, and small trajectory changes swing a game between 800 and 0.
 v98's broader party rule stays.
+
+## CLOUD: screens on the v98 base
+
+Each arm is v98 + one change + reroll, judged against v98's own runs
+(`fp97`, `fp97b`) with `clustered.py`, on four distinct opponents (greatsage,
+colleague, seelie_t04, gs_dis075), 320 games.
+
+**Treasure first (`t98`): +13.3 gems (clustered se 14.8, z 0.90), win rate
++0.6, gold +1,381, kills +0.5, deaths -0.4.** By opponent: seelie_t04 +40.5,
+colleague +24.0, gs_dis075 +13.1, greatsage -24.4. The same small lean as on
+v97 (+15.1, z 0.84 clustered): Treasure buys gold that converts weakly into
+gems. Not passed; not in the candidate.
