@@ -50,7 +50,14 @@ one match quota. Most of the ways to waste a day here come from forgetting that.
 
     held by:   LOCAL since 2026-10-24 21:36Z, for the owner's request: upload
                gs_stand_submit, then the standard 20-game unranked check.
-    live bot:  VERSION 109 = gs_fix2_submit (ws/bots/gs_fix2_submit, gs_fix2_submit.zip,
+    live bot:  VERSION 112 = gs_stand_submit (ws/bots/gs_stand_submit, gs_stand_submit.zip,
+               sha256 679d128d...), uploaded by LOCAL at 21:35:34Z at the owner's request:
+               v109 + contest-aware camps + bank on the way + fight back when caught.
+               Confirmed live: its fuel record on a pinned game equals the local build's,
+               turn for turn (analysis/fuelprint.py). Versions 110-111 were uploaded by
+               someone else between 19:58Z and 21:35Z. Check queued 21:36Z (tag
+               stand_v112; groups 64ab9ed8, 9372fd01, 007aace5, 2ddbad31).
+    before it: VERSION 109 = gs_fix2_submit (ws/bots/gs_fix2_submit, gs_fix2_submit.zip,
                sha256 6fbc8330...), uploaded by LOCAL at 19:58:56Z at the owner's request:
                astra + resumable route flood + idle fixes. Confirmed live (untagged
                replay output). Check queued 19:59Z (tag fix2_v109; groups 81e60946,
