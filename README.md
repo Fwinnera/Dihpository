@@ -48,7 +48,8 @@ one match quota. Most of the ways to waste a day here come from forgetting that.
 
 ## Ladder lock
 
-    held by:   nobody (LOCAL released it 2026-10-24 22:46Z).
+    held by:   LOCAL since 2026-10-25 22:21Z: uploading omr_submit at the owner's request, then the
+               standard 20-game check.
     VERSION 114 (live; prints BOTTAG gs_src2_solo_bank but its fuel record differs from
                ws/bots/gs_new, so it is a modified build). Unranked against the 29
                teams rated closest to us (rank 219, 1,649; ranks 206-236; one group of
