@@ -48,8 +48,21 @@ one match quota. Most of the ways to waste a day here come from forgetting that.
 
 ## Ladder lock
 
-    held by:   LOCAL since 2026-10-25 22:21Z: uploading omr_submit at the owner's request, then the
-               standard 20-game check.
+    held by:   nobody (LOCAL released it 2026-10-25 22:30Z).
+    VERSION 117 = omr_submit (ws/bots/omr_submit, ws/omr_submit.zip, 34,810 bytes,
+               sha256 6a0baa7a...), uploaded by LOCAL at 22:21Z at the owner's request:
+               per map-side policy bot (omni, 42 arms), 77/80 locally against the
+               owner's gs_src2_c1_eqsoft. Versions 115-116 were uploaded by someone else.
+               Confirmed live: its fuel record on 01islands a vs Quantom equals the local
+               build's (first 120 of 120 figures). Standard check queued 22:22Z (tag
+               omr_v117; groups d4d55169, 414cca1b, ffaf2038, 985029dc): 5 wins of 20,
+               gems 521 against 914, 0 faults (v112 6 / 534-839, v109 6 / 594-828,
+               astra 4). By group: Quantom 1-4, Hidden Altar Keepers 1-4, slop 2-3,
+               NTU 1-4. Won 01islands a 3/4, 01yellow_brick_road a 2/4; lost every
+               00swirl b (0-68 gems, arm 21) and 00quadrants b (arm 29); 01elk_arena a
+               (arm 22, Tavi draft) 0 gems against two teams. The table was tuned only
+               against gs_src2_c1_eqsoft; these teams are stronger.
+               Fallback: v112 (ws/bots/gs_stand_submit) or v109 (ws/bots/gs_fix2_submit).
     VERSION 114 (live; prints BOTTAG gs_src2_solo_bank but its fuel record differs from
                ws/bots/gs_new, so it is a modified build). Unranked against the 29
                teams rated closest to us (rank 219, 1,649; ranks 206-236; one group of

@@ -4710,4 +4710,14 @@ changing any other arm's games. 480 games: 0 faults, 0 ERROR lines.
 Limits: the table is tuned to this opponent. A small change to gs_eq keeps it at
 93-96%; a larger one (101-iteration spin, ~1,000 fuel a turn) drops it to 71%.
 Against other opponents it is no worse than b_tbd. Unknown maps play arm 0
-(b_tbd). Not uploaded.
+(b_tbd).
+
+**Uploaded as version 117 (owner's request, 22:21Z).** Live build confirmed by fuel
+record. Standard 20-game check (Quantom, Hidden Altar Keepers, slop, NTU; 01islands
+a, 00swirl b, 01elk_arena a, 00quadrants b, 01yellow_brick_road a): 5 of 20, gems
+521 against 914 (v112 6 / 534-839, v109 6 / 594-828, astra 4). Wins: 01islands a
+3/4, 01yellow_brick_road a 2/4. 00swirl b lost all four with 0-68 gems (arm 21,
+shop every 40 rounds), 00quadrants b all four (arm 29), 01elk_arena a 0 gems
+against two teams (arm 22, Tavi fourth). The per-map choices were made only
+against gs_src2_c1_eqsoft; against stronger, different teams they are not better
+than one fixed bot, and on 00swirl b and 01elk_arena a likely worse.
