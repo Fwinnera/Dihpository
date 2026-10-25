@@ -48,7 +48,8 @@ one match quota. Most of the ways to waste a day here come from forgetting that.
 
 ## Ladder lock
 
-    held by:   nobody (LOCAL released it 2026-10-25 22:30Z).
+    held by:   LOCAL since 2026-10-25 22:26Z: 20 unranked games for v117 against the teams rated
+               closest to us (owner's request).
     VERSION 117 = omr_submit (ws/bots/omr_submit, ws/omr_submit.zip, 34,810 bytes,
                sha256 6a0baa7a...), uploaded by LOCAL at 22:21Z at the owner's request:
                per map-side policy bot (omni, 42 arms), 77/80 locally against the
