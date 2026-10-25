@@ -4721,3 +4721,12 @@ shop every 40 rounds), 00quadrants b all four (arm 29), 01elk_arena a 0 gems
 against two teams (arm 22, Tavi fourth). The per-map choices were made only
 against gs_src2_c1_eqsoft; against stronger, different teams they are not better
 than one fixed bot, and on 00swirl b and 01elk_arena a likely worse.
+
+**v117 against the four teams rated closest to us (owner's request, 22:27Z).** One
+group of five each (ranks 214-218, ratings 1,662-1,665; ours 1,662), 20 different
+maps: 5 of 20, no series won (1-4, 1-4, 1-4, 2-3), gems 613 against 844. v114 against
+the 29 closest teams won 54% of games; v117 25% here (20 games, so about +-10
+points). With the standard check (5/20) that is 10 of 40 on the ladder. The table
+picked per map-side what beats gs_src2_c1_eqsoft; it does not transfer to the
+field, and on several map-sides (00stampede b 0 gems, 00gemfight a 119) it is
+clearly worse than a fixed bot.

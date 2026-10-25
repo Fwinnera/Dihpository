@@ -48,8 +48,14 @@ one match quota. Most of the ways to waste a day here come from forgetting that.
 
 ## Ladder lock
 
-    held by:   LOCAL since 2026-10-25 22:26Z: 20 unranked games for v117 against the teams rated
-               closest to us (owner's request).
+    held by:   nobody (LOCAL released it 2026-10-25 22:35Z).
+    v117 near-rating check (owner's request, queued 22:27Z; ours rank 217, 1,662):
+               one group of five against each of the four closest teams, 20 different
+               maps, sides a,b,a,b,a (ws/bench/ladder/omr_v117_near/groups.json).
+               5 of 20 games, 0 of 4 series: Teto Territory (218) 1-4, :3 <3 (216) 1-4,
+               Dirty Coding (215) 1-4, Antifreeze (214) 2-3; gems 613 against 844,
+               0 faults. v114 against the 29 closest teams: 79/145 (54%). v117 looks
+               worse on the ladder than v114, despite 77/80 against gs_src2_c1_eqsoft.
     VERSION 117 = omr_submit (ws/bots/omr_submit, ws/omr_submit.zip, 34,810 bytes,
                sha256 6a0baa7a...), uploaded by LOCAL at 22:21Z at the owner's request:
                per map-side policy bot (omni, 42 arms), 77/80 locally against the
