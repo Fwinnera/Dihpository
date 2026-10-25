@@ -4623,3 +4623,20 @@ gs_src2_solo_bank 53/80; against v109 37/80 (+29) and astra 36/80 (-23), inside
 mirror noise; four opponents +9.8 gems (z +0.56), win -1.7. `ws/bots/gs_tbd_submit`
 / `gs_tbd_submit.zip` (37,305 bytes, sha256 80f31754...) is it untagged; smoke
 1000-0 against base, no crashes, no ERROR lines. Not uploaded.
+
+**Team fighting in the opening (owner's request) -- did not beat b_tbd.** Two
+designs on b_tbd, all head to head against gs_src2_c1_eqsoft over the 80 map-sides:
+
+- Squads (`ws/bots/sq_base`, bot.h `squad_follow`): by draft slot, slot 0 leads 3 and
+  4, slot 1 leads 2 (four: two pairs; three: 0 leads 2). Until SQUAD_ROUNDS a
+  follower takes its leader's claimed camp, hits its camps, stays within 2 tiles,
+  catches up beyond 12. Debug run: slots follow the draft; followers spend 17-59%
+  of rounds 0-300 in squad states. Results: 200 rounds 37/80, 300 43/80, 500
+  40/80, whole game 40/80. They win more early fights (ahead in kills at round
+  600 in 41-49 games) but convert fewer (e.g. 32/49): followers stop farming their
+  own camps and the economy falls behind.
+- Assist (`as10`, `as14`, `as10e`): solo farming kept; join an enemy within 4 of a
+  teammate when it is within 10/14 of us (healthy, under 22 gems). 46, 43, 45 of 80.
+
+b_tbd (53-54 of 80, 67%) stays the best counter. Every grouping change traded
+farming for fights and lost on balance against this opponent.
