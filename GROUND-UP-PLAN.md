@@ -4640,3 +4640,74 @@ designs on b_tbd, all head to head against gs_src2_c1_eqsoft over the 80 map-sid
 
 b_tbd (53-54 of 80, 67%) stays the best counter. Every grouping change traded
 farming for fights and lost on balance against this opponent.
+
+## Per map-side policy against gs_src2_c1_eqsoft: 77 of 80 (2026-10-25)
+
+Owner: "get that win rate up ... rewrite the whole thing if you have to."
+
+**Why tuning stalled at 67%.** Logging every champion for 400 rounds on all 80
+map-sides (b_tbd against gs_eq) showed wins and losses are mirror images: whoever
+gets about twice the kills wins, and early fights are even (2.7 kills each by
+round 300). a third of early deaths are 1v1 duels; another third happen while we
+outnumber them locally. Engine facts behind it (champion designs dumped in a
+match): all cooldowns are 8 rounds, everyone moves 1 tile, Vendetta 1000 hp / 70
+strength, Varg 1000 / 40, so Varg loses every duel with Vendetta and cannot
+escape. Scheduling priority does not order the two teams (+1000 and -1000
+replayed identical games), and in b_tbd it was never set at all: set_priority
+sits behind a round-1 turn::check that always throws.
+
+**The lever: outcomes are fixed per map-side, and differ by behaviour.** The match
+seed is fixed per map, so a game is decided by the two builds, the map and the
+side; any code change re-deals it, and some map-sides come out the same way under
+small perturbations (01the-farm A: -560 three times). Across the 33 variants
+already measured, every map-side was won by some variant. Examples of mechanisms:
+- 01the-farm A: two of our three champions stood at spawn all game. choose_group
+  rejected every group ("expected damage above budget") but scanned each group's
+  tiles first, ran out of fuel and gave up the turn, every turn (strategy.h:209,
+  found by recording the source line of each turn::check throw). Both bots do it:
+  side A stalls two champions, side B one, so B always wins. Skipping the scan for
+  rejected unseen groups wins 01the-farm A -- but costs 11 wins of 80 overall
+  (43, 41 vs 54): the stall was helping elsewhere (letting a champion with no safe
+  camp wait instead of joining a cooperative raid: forcing the fallback instead
+  cost 16, 36/38).
+- 01hooks B: four assist variants all win by exactly +1012.
+
+**omni.** `ws/bots/omni`: b_tbd with 42 arms as runtime switches (`pol.h`), one
+arm per map-side from `policy_table.h`. Two traps found on the way: (1) the map
+lookup itself (a camp-group scan on the first turn) delays the opening and cost
+about 7 wins until it was made part of every screened build; (2) the re-roll spin
+costs ~10 fuel an iteration every turn, so large spins are not decision-neutral
+(validation re-rolls of 333-407 iterations scored 51-54 where small ones scored
+66-68). Fast start (less opening work, same decisions) lost 7 wins too: any change
+to opening timing re-deals the game.
+
+**Selection.** Stage one: every arm at four own re-roll seeds (42 x 4 x 80 games);
+leave-one-seed-out 60.8/80. Stage two: replay the leading candidates of the 28
+contested map-sides on four more seeds (600 games). The deciding screen: every arm
+unperturbed (as submitted) against gs_eq and four re-rolled gs_eq builds (3, 7,
+19, 37 iterations; 16,800 games); per map-side the arm with most wins, own-seed
+record as tie-break (`analysis/pick_robust.py`). Leave-one-opponent-out: 78, 79,
+78, 72, 68 of 80 (arm 0 alone 38-44). Arms used most: 29 (Jungle build + assist)
+21 map-sides, 21 (shop every 40 rounds) 8, 12 (ally retreat) 7, 41 (Jungle, no
+party controller) 6.
+
+**Result, `omr_submit` (untagged), all 40 maps x both sides:**
+
+    exact gs_src2_c1_eqsoft        77/80  (96%)  +510 gems a game
+    gs_eq re-rolls never used in selection:
+      5 iterations                 77/80
+      11 iterations                76/80
+      53 iterations                75/80
+      101 iterations               57/80  (71%)
+    gs_src2_solo_bank (gs_new)     71/80          b_tbd 53/80
+    v109 (gs_ad_fix2)              41/80          b_tbd 37/80
+    astra (gs_ad_astra)            42/80          b_tbd 36/80
+
+The arm-9/11/12 fall-back read enemies killed earlier in the same turn ("Unit is
+not in vision", 6 caught errors in 320 games); a liveness check fixed it without
+changing any other arm's games. 480 games: 0 faults, 0 ERROR lines.
+
+Limits: the table is tuned to this opponent. A small change to gs_eq keeps it at
+93-96%; a larger one (101-iteration spin, ~1,000 fuel a turn) drops it to 71%.
+Against other opponents it is no worse than b_tbd. Unknown maps play arm 0
+(b_tbd). Not uploaded.

@@ -142,11 +142,23 @@ Recorded verbatim in substance; both agents should treat these as open defects.
 **Agent:** Claude Code on the owner's Mac. It has the engine (`cambc`), the
 local harness, the platform login and the GitHub deploy key.
 **Branch:** `Fwinnera`.
-**Updated:** 2026-10-24 21:35Z.
+**Updated:** 2026-10-25 22:30Z.
 
-### Doing now (2026-10-24 21:35Z)
+### Doing now (2026-10-25 22:30Z)
 
-**2026-10-25, owner's gs_src2_c1_eqsoft (`ws/bots/gs_eq`), target 80%:** best is
+**Owner's gs_src2_c1_eqsoft (`ws/bots/gs_eq`): 80% reached with a per map-side
+bot.** `ws/bots/omni` carries 42 measured behaviours ("arms": builds, assist,
+ally retreat, squads, cohesion, retreat/disengage/bank/heal levels, the
+01the-farm stall fix, solo play on party maps...) as switches and plays one per
+map and side from `policy_table.h` (maps told apart by width, height, camp groups
+and gems: unique on all 40). `omr_submit` (untagged; `ws/omr_submit.zip`, 34,810
+bytes, sha256 6a0baa7a...) against the exact gs_eq: **77/80 (96%)**; against
+held-out re-rolled copies of gs_eq 77, 76, 75 and 57 of 80; against gs_new 71/80;
+v109 41/80 and astra 42/80 (b_tbd: 37, 36). 0 faults, 0 ERROR lines in 480 games.
+Not uploaded. Weak spot: an opponent changed more than a little (re-roll of 101
+iterations: 57/80, 71%). Details: `GROUND-UP-PLAN.md`, last section.
+
+**Earlier on 2026-10-25, owner's gs_src2_c1_eqsoft (`ws/bots/gs_eq`), target 80%:** best is
 `b_tbd` (m_stand + Treasure > Bruiser > Durability) at 54 and 53 of 80 (67%) over all
 40 maps x both sides; 20+ variants tried. Three maps are decided by the side and ~35
 are coin flips against this near-copy, so 80% was not reached. Untagged copy ready:
