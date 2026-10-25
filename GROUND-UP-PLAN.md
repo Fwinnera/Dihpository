@@ -4589,3 +4589,37 @@ Lucky Lock Pickers, Claude wrote everything and Preyas, so someone on our team
 was benchmarking versions. By group (best of five), v112 lost all four: 2-3
 Nanyang, 2-3 slop, 1-4 Hidden Altar Keepers, 1-4 Quantom. v109 won one (slop
 3-2, Nanyang 2-3, Quantom 1-4, Hidden Altar Keepers 0-5); astra none.
+
+## LOCAL: the owner's gs_src2_c1_eqsoft and the 80% target -- best 67%
+
+`ws/bots/gs_eq` (BOTTAG gs_src2_c1_eqsoft) = gs_src2_solo_bank + bank on an equal
+walk at 20+ gems + "trailing hold" (when the enemy leads by 40+ submitted gems on a
+light map -- no monolith, total camp strength <= 370 -- do not chase beyond 4
+tiles unless killable/interrupt/defending). Owner's bar: beat it 80% over every
+map and both sides.
+
+All results are head to head over the 80 map-sides (40 maps x 2 sides):
+
+    m_stand 51   gs_merge 45   v109 45   gs_src2_solo_bank 35
+    on m_stand -- emblems: Jungle>Treasure>Durability 50, Bruiser>Treasure>Durability
+      46, Durability>Treasure>Jungle 44, Jungle>Bruiser>Durability 41,
+      Treasure>Bruiser>Durability (b_tbd) 54 and re-roll 53; shop at 120 gold 45,
+      every 40 rounds 48; fall back toward a healthy teammate (range 8 / 12) 50 / 49,
+      stay beside one 42; cohesion (prefer camps near teammates) 48 / 50 / 48;
+      Tavi fifth / fourth 44 / 46, Cassi & Issac fifth 44; b_tbd + fall-back 42
+
+What decides these games (analysis/snowball.py): the kill lead at round 300 --
+ahead 31/35 won, level 9/15, behind 11/30 -- after ~5.4 champion kills a game in
+the first 300 rounds (median round 148), evenly split. Pooling 19 variants by
+map-side (1,520 games): 58.6% overall; three maps are set by the side (00stampede,
+01elk-arena, 01the-farm: e.g. the-farm A 0/19, B 19/19), 00split and
+01boss-battle nearly so; only 00ambush and 01islands are won 80%+ from both
+sides; ~35 maps are coin flips won ~58%. 80% would need ~83% of the coin flips
+against a near-copy of our own code.
+
+Best candidate b_tbd (m_stand + Treasure > Bruiser > Durability): against
+gs_src2_c1_eqsoft 54 and 53 of 80 (67%), +157/+168 gems; against
+gs_src2_solo_bank 53/80; against v109 37/80 (+29) and astra 36/80 (-23), inside
+mirror noise; four opponents +9.8 gems (z +0.56), win -1.7. `ws/bots/gs_tbd_submit`
+/ `gs_tbd_submit.zip` (37,305 bytes, sha256 80f31754...) is it untagged; smoke
+1000-0 against base, no crashes, no ERROR lines. Not uploaded.

@@ -146,6 +146,13 @@ local harness, the platform login and the GitHub deploy key.
 
 ### Doing now (2026-10-24 21:35Z)
 
+**2026-10-25, owner's gs_src2_c1_eqsoft (`ws/bots/gs_eq`), target 80%:** best is
+`b_tbd` (m_stand + Treasure > Bruiser > Durability) at 54 and 53 of 80 (67%) over all
+40 maps x both sides; 20+ variants tried. Three maps are decided by the side and ~35
+are coin flips against this near-copy, so 80% was not reached. Untagged copy ready:
+`gs_tbd_submit` (not uploaded). Details: `GROUND-UP-PLAN.md`, last section.
+
+
 **Owner's new bot `gs_new` (gs_src2_solo_bank = astra + contest-aware camps +
 bank-on-the-way); target: beat it 80%.** Best counter `m_stand` = v109 + its two
 ideas + fight back when caught while disengaging: 53/80 and 52/80 against it

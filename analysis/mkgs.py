@@ -21,7 +21,8 @@ def main() -> None:
         shutil.rmtree(out)
     shutil.copytree(BOTS / base / "src", out / "src")
     for e in edits:
-        fname, rest = ("config.h", e) if ":" not in e.split("=>")[0] else e.split(":", 1)
+        m = re.match(r"^([\w./]+\.(?:h|cpp)):", e)
+        fname, rest = (m.group(1), e[m.end():]) if m else ("config.h", e)
         old, new = rest.split("=>", 1)
         p = out / "src" / fname
         t = p.read_text()
