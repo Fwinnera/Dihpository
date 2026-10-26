@@ -176,6 +176,10 @@ Hunter > Bruiser > Durability) 228, 217, 231 over three re-rolls (54%); head to
 head against b_tbd 79, 69, 79 of 140, +48 gems; against v112 +40 gems (b_tbd -48).
 Next_Trial + Hunter 202, 197. Prospector 214 and Monster 213 level on b_tbd;
 Capture 195 and Skirmish 188 worse. Not uploaded.
+Building on Hunter (eight variants, two runs each, same 420-game set): no change
+beats it. Hunter > Monster > Durability 216, ranged champions opening with Monster
+218 / Treasure 216 / Prospector 215, Hunter > Bruiser > Monster 209, Prospector in
+slot 2 or 3 197-204. e_b_hun (Hunter > Bruiser > Durability for all) stays best.
 
 ### Earlier (2026-10-26 21:10Z)
 

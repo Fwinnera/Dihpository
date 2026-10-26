@@ -4778,3 +4778,20 @@ b_tbd + Hunter (`ws/bots/e_b_hun`) against plain b_tbd: 79, 69, 79 of 140 (+48, 
 59 (-23, -73). Hunter's +50 gold a kill pays for itself because kills decide these
 games; Treasure now gives only +10%. Capture and Skirmish cost more stats than
 they return here.
+
+Building on Hunter (owner's request): eight builds on e_b_hun, each with a re-roll
+twin (spin 37), against the same three opponents (totals of 420; e_b_hun 228, 217,
+231, mean 225):
+
+    ranged (Vesper Vale, Tavi, Stellar, Prism, Cassi) open with Monster   223, 212
+    ranged open with Treasure                                              226, 206
+    Hunter > Monster > Durability                                          207, 225
+    ranged open with Prospector                                            224, 206
+    Hunter > Bruiser > Monster                                             213, 204
+    Hunter > Prospector > Monster                                          204, 203
+    Hunter > Bruiser > Prospector                                          202, 203
+    Hunter > Prospector > Durability                                       197, 197
+
+Replacing Bruiser or Durability costs more than Prospector's cluster bonus or
+Monster's camp damage returns; a different opener for the ranged champion is level
+at best. Hunter > Bruiser > Durability for every champion stays the build.
