@@ -4795,3 +4795,12 @@ twin (spin 37), against the same three opponents (totals of 420; e_b_hun 228, 21
 Replacing Bruiser or Durability costs more than Prospector's cluster bonus or
 Monster's camp damage returns; a different opener for the ranged champion is level
 at best. Hunter > Bruiser > Durability for every champion stays the build.
+
+**Version 126 = hun_submit (b_tbd + Hunter), uploaded 2026-10-26 22:45Z.** Added
+Next_Trial's two stale-camp turn::check guards first: b_tbd-family builds logged
+"Unit is not in vision" on the new map 00vault (5-8 a run), Next_Trial none; with the
+guards 0 in 420 games, and 223/420 (in line with e_b_hun's 217-231). Live build
+confirmed by fuel record (120/120). Standard check 5/20, gems 551 against 831 (best
+gem margin of v109-v126 except v109); against the four teams rated closest (ranks
+238-242) 13/20 and 3 of 4 series, gems 786 against 599. The one series lost was on
+five 02-maps (Narla's Gang 1-4; its one win was 0-0 on 02the_pack).

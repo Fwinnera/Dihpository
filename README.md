@@ -48,8 +48,23 @@ one match quota. Most of the ways to waste a day here come from forgetting that.
 
 ## Ladder lock
 
-    held by:   LOCAL since 2026-10-26 22:44Z: uploading hun_submit (b_tbd + Hunter) at the owner's request,
-               then the standard check and 20 near-rated games.
+    held by:   nobody (LOCAL released it 2026-10-26 23:00Z).
+    VERSION 126 = hun_submit (ws/bots/hun_submit, ws/hun_submit.zip, 37,300 bytes, sha256
+               a0170af9...), uploaded by LOCAL at 22:45Z at the owner's request: b_tbd with
+               Hunter > Bruiser > Durability (engine 2.0.0) + Next_Trial's two stale-camp
+               turn::check guards (b_tbd logged "Unit is not in vision" on 00vault without
+               them). Local: 223/420 against b_tbd, Next_Trial, v112; 0 faults, 0 ERROR.
+               Live before it: v121 ("v116 + 2 stale-camp guards", = Next_Trial); 118-125
+               are a teammate's Sprint 3 experiments. Confirmed live: fuel record on 00anvil
+               a vs ExCode equals local hun_submit, 120 of 120 figures; untagged.
+               Standard check (groups f41685bc, 40b93e78, 0c5fd213, 33f93bb6): 5 of 20, 1
+               series (slop 3-2; Quantom 1-4, HAK 0-5, NTU 1-4), gems 551 against 831
+               (v117 5 / 521-914, v112 6 / 534-839, v109 6 / 594-828).
+               Near-rated (ours rank 241, 1,653; ranks 238-242): 13 of 20, 3 of 4 series
+               (ExCode 4-1, not adgato 4-1, SonTang27 4-1, Narla's Gang 1-4 on five 02-maps),
+               gems 786 against 599 (v117 near check 5/20, 0 series). Group ids and maps in
+               ws/bench/ladder/hun_v126/groups.json. Fallback: v121 (`cambc submissions
+               activate 121`).
     v117 near-rating check (owner's request, queued 22:27Z; ours rank 217, 1,662):
                one group of five against each of the four closest teams, 20 different
                maps, sides a,b,a,b,a (ws/bench/ladder/omr_v117_near/groups.json).
