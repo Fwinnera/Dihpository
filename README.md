@@ -165,7 +165,19 @@ local harness, the platform login and the GitHub deploy key.
 **Branch:** `Fwinnera`.
 **Updated:** 2026-10-25 22:30Z.
 
-### Doing now (2026-10-26 21:10Z)
+### Doing now (2026-10-26 22:40Z)
+
+**New emblems on engine 2.0.0 (owner's request): Hunter replaces Treasure.** Ten
+variants, the first emblem Treasure -> Capture / Hunter / Prospector / Skirmish /
+Monster, on b_tbd and on Next_Trial, each against b_tbd, Next_Trial and v112 over
+the 70 maps x both sides (420 games a variant; `analysis/emblems.py`). Bases:
+b_tbd 219 and 206 (re-roll), Next_Trial 184. Best: `ws/bots/e_b_hun` (b_tbd with
+Hunter > Bruiser > Durability) 228, 217, 231 over three re-rolls (54%); head to
+head against b_tbd 79, 69, 79 of 140, +48 gems; against v112 +40 gems (b_tbd -48).
+Next_Trial + Hunter 202, 197. Prospector 214 and Monster 213 level on b_tbd;
+Capture 195 and Skirmish 188 worse. Not uploaded.
+
+### Earlier (2026-10-26 21:10Z)
 
 **Engine 2.0.0 (Patch 2.0.0, 25 Oct) is what the platform runs; local was 1.0.3
 until now.** Every local result from before this note used the old rules

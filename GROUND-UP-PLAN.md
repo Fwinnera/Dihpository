@@ -4759,3 +4759,22 @@ By map set (old 40 / new 30): Next_Trial vs b_tbd 34% / 47% (-195 / -39 gems),
 vs v112 38% / 48% (-142 / +39); b_tbd vs v112 50% / 43%. b_tbd and v112 are level;
 both beat Next_Trial, but only on the old maps. On the new maps the three are close.
 None of the builds use the new emblems yet.
+
+### New emblems on engine 2.0.0 (2026-10-26)
+
+The first emblem of each base's build replaced by one of the new or changed families;
+each variant against b_tbd, Next_Trial and v112 on all 140 map-sides (a base against
+itself counts 70/140). Totals of 420:
+
+    base b_tbd (Treasure > Bruiser > Durability)   219, re-roll 206
+      Hunter      228, re-rolls 217 and 231   (old maps 54%, new 55%)
+      Prospector  214     Monster  213     Capture  195     Skirmish  188
+    base Next_Trial (Treasure > Jungle > Durability)   184
+      Hunter      202, re-roll 197     Capture 194     Prospector 191
+      Monster     185     Skirmish 177
+
+b_tbd + Hunter (`ws/bots/e_b_hun`) against plain b_tbd: 79, 69, 79 of 140 (+48, +8,
++89 gems); against v112 68, 72, 74 of 140 (+14, +35, +72) where b_tbd scored 66 and
+59 (-23, -73). Hunter's +50 gold a kill pays for itself because kills decide these
+games; Treasure now gives only +10%. Capture and Skirmish cost more stats than
+they return here.
