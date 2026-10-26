@@ -4730,3 +4730,32 @@ points). With the standard check (5/20) that is 10 of 40 on the ladder. The tabl
 picked per map-side what beats gs_src2_c1_eqsoft; it does not transfer to the
 field, and on several map-sides (00stampede b 0 gems, 00gemfight a 119) it is
 clearly worse than a fixed bot.
+
+## Engine 2.0.0 and the 70-map pool (2026-10-26)
+
+Patch 2.0.0 (25 Oct, "Sprint 3"): Vesper Vale strength 55 -> 45, Varg 40 -> 45, Ryth
+and Marcella +4.5 strength a shard (was 5), Marcella +14 focus a shard (15), Willow
+focus 140, Tavi stun 1.6 x focus, Ren stun 1.1 x focus, Cassi focus 100, Issac 45
+strength, Stellar +8.5 focus a shard, Prism +65 health a shard, Heart of Ruin +3
+strength / +10 focus a shard. Treasure Emblem gold +20% -> +10%; Monster Emblem camp
+damage +10% -> +15%. New families: Tribute (tribute time -33%), Capture (capture 5 ->
+3 turns), Prospector (+25% cluster gold and gems), Hunter (+50 gold a kill), Skirmish
+(+5% damage to champions), Greed (25 shards give 35 shards of stats), Collectors (+1%
+damage per unique family). Draft first-turn fuel x10. Engine 2.0.0 / CLI 4.0.0;
+items 42 -> 84 types (`get_item_enum(family, stat, shard)`); camp capture state API.
+
+Our local engine stayed at 1.0.3 until 2026-10-26 21:00Z, so everything measured
+from 25 Oct onward (including omr's 77/80) was played under the old rules; that is
+part of why v117 did not carry its local result to the ladder. The map pool also
+grew from 40 to 70 maps (10 new 00-maps, 15 02-maps, 5 adgato_gemcombat maps).
+
+First measurement on engine 2.0.0, 70 maps x both sides:
+
+    Next_Trial vs b_tbd     55/140 (39%)  -128 gems (95% -210 to -48)
+    Next_Trial vs v112      59/140 (42%)   -64 (95% -159 to +29)
+    b_tbd      vs v112      66/140 (47%)   -23 (95% -94 to +48)
+
+By map set (old 40 / new 30): Next_Trial vs b_tbd 34% / 47% (-195 / -39 gems),
+vs v112 38% / 48% (-142 / +39); b_tbd vs v112 50% / 43%. b_tbd and v112 are level;
+both beat Next_Trial, but only on the old maps. On the new maps the three are close.
+None of the builds use the new emblems yet.

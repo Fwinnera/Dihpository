@@ -165,7 +165,29 @@ local harness, the platform login and the GitHub deploy key.
 **Branch:** `Fwinnera`.
 **Updated:** 2026-10-25 22:30Z.
 
-### Doing now (2026-10-25 22:30Z)
+### Doing now (2026-10-26 21:10Z)
+
+**Engine 2.0.0 (Patch 2.0.0, 25 Oct) is what the platform runs; local was 1.0.3
+until now.** Every local result from before this note used the old rules
+(Vesper Vale 55 strength, Treasure Emblem +20% gold, no new emblems). Local is
+now cambc 4.0.0 / engine 2.0.0 (`pip install --user cambc==4.0.0`; SDK and cmake
+copied from a scratch `cambc init`; old SDK kept outside the repo), and `ws/maps`
+holds the full 70-map pool (`cambc maps pull`: 30 new maps). Rebuild any bot
+before testing (`rm -rf bots/X/.cambc`). New CLI: `cambc submissions list` /
+`cambc submissions activate N` switch the live version without re-uploading.
+
+Round robin on engine 2.0.0, 70 maps x both sides (140 games a pairing):
+
+    Next_Trial vs b_tbd     55/140 (39%)  -128 gems (95% -210 to -48)
+    Next_Trial vs v112      59/140 (42%)   -64 (-159 to +29)
+    b_tbd      vs v112      66/140 (47%)   -23 (-94 to +48)
+    old 40 maps / new 30:   Next_Trial vs b_tbd 34% / 47%; vs v112 38% / 48%;
+                            b_tbd vs v112 50% / 43%
+
+Next_Trial (owner's, `ws/bots/next_trial`) = gs_src2_c1_eqsoft + two turn::check
+calls in the camp-target comparators; on the old engine it played as gs_eq.
+
+### Earlier (2026-10-25 22:30Z)
 
 **Owner's gs_src2_c1_eqsoft (`ws/bots/gs_eq`): 80% reached with a per map-side
 bot.** `ws/bots/omni` carries 42 measured behaviours ("arms": builds, assist,
