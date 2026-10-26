@@ -48,7 +48,8 @@ one match quota. Most of the ways to waste a day here come from forgetting that.
 
 ## Ladder lock
 
-    held by:   nobody (LOCAL released it 2026-10-25 22:35Z).
+    held by:   LOCAL since 2026-10-26 22:44Z: uploading hun_submit (b_tbd + Hunter) at the owner's request,
+               then the standard check and 20 near-rated games.
     v117 near-rating check (owner's request, queued 22:27Z; ours rank 217, 1,662):
                one group of five against each of the four closest teams, 20 different
                maps, sides a,b,a,b,a (ws/bench/ladder/omr_v117_near/groups.json).
