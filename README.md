@@ -48,8 +48,14 @@ one match quota. Most of the ways to waste a day here come from forgetting that.
 
 ## Ladder lock
 
-    held by:   LOCAL since 2026-11-02 16:58Z: re-activating version 126 (hun_submit) at
-               the owner's request, replacing v121.
+    held by:   nobody (LOCAL released it 2026-11-02 17:16Z).
+    2026-11-02: VERSION 126 re-activated at 17:02Z by LOCAL at the owner's request,
+               replacing v121 (pinned since 12:42Z). Confirmed live: fuel record on
+               01starvation a equals local hun_submit, 120 of 120 (v121: 8 of 120). Why:
+               against ten local opponents nobody was tuned on (five draft like near-rated
+               ladder teams) hun_submit won 58% of 1,720 games and v121 52%; on the ladder
+               v126 performed 1685 against v121's 1656 in the 24 h after it replaced v126
+               (GROUND-UP-PLAN.md, "Held-out check").
     VERSION 126 = hun_submit (ws/bots/hun_submit, ws/hun_submit.zip, 37,300 bytes, sha256
                a0170af9...), uploaded by LOCAL at 22:45Z at the owner's request: b_tbd with
                Hunter > Bruiser > Durability (engine 2.0.0) + Next_Trial's two stale-camp

@@ -45,6 +45,14 @@ def sources(which):
             f = WS / "bench/top1/summaries" / f"{m['matchId']}.json"
             if f.exists():
                 yield f, "teamA" if me["side"] == "a" else "teamB", me["result"] == "win"
+    elif which.startswith("fetch:"):
+        # fetch_team.py output: fetch:FOLDER:TEAM NAME, the folder under ws/bench.
+        folder, team = which[len("fetch:"):].split(":", 1)
+        for m in json.loads((WS / "bench" / folder / "matches.json").read_text()):
+            me = next((t for t in m["teams"] if t["name"] == team), None)
+            f = WS / "bench" / folder / "summaries" / f"{m['matchId']}.json"
+            if me and f.exists():
+                yield f, "teamA" if me["side"] == "a" else "teamB", me["result"] == "win"
     elif which.startswith("bench:"):
         # Local bench games: <opponent>__<map>__<A|B>.json, the side being ours.
         for f in sorted((WS / "bench" / which[len("bench:"):]).glob("*__*__*.json")):

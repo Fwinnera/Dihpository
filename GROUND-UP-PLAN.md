@@ -4804,3 +4804,33 @@ confirmed by fuel record (120/120). Standard check 5/20, gems 551 against 831 (b
 gem margin of v109-v126 except v109); against the four teams rated closest (ranks
 238-242) 13/20 and 3 of 4 series, gems 786 against 599. The one series lost was on
 five 02-maps (Narla's Gang 1-4; its one win was 0-0 on 02the_pack).
+
+## Held-out check: do local gains reach other teams' bots? (2026-11-02)
+
+Every local opponent so far drafts Varg > Vendetta > Vesper Vale > Ryth > Marcella,
+and champions are not exclusive (4,309 of 4,495 ladder games share one), so every
+local game was a mirror draft. Near-rated ladder teams (current rating 1650-1850:
+975 rosters, 60 teams) field Vesper Vale 76%, Marcella 67%, Ryth 63%, Vendetta 61%,
+Heart of Ruin 56%, Tavi 29%, Varg 20%; first pick Vesper Vale or Heart of Ruin, 24%
+each. `ws/bots/f_*` copy j_hjt (`_h`) or next_trial (`_n`) with the field's commonest
+orders (Heart of Ruin, Vesper Vale, Tavi first; Varg + casters).
+
+Held-out panel, nobody picked on it: the five f_* drafts, e_n_mon, e_b_cap, e_n_pro,
+omr_submit (v117) and m_stand. Games won of 1,720 (field drafts alone, of 860):
+
+    j_hjt                 1008  59%   (564)
+    hun_submit = v126     1004  58%   (551)
+    next_trial = v121      898  52%   (498)   0 faults, 0 engine codes in all three
+
+- j_hjt's +16 over v126 on the selection panel (both re-rolls) is a tie here, +4: it
+  was specific to b_tbd/next_trial/v112. The hun line's edge over v121 holds against
+  all ten opponents (+6 points).
+- Ladder (opponents' current ratings): v126 performed 1685 (263/525), v121 1656 in the
+  24 h after it replaced v126 (356/700) and 1629 overall -- about half of the local +8
+  points. By family it agrees on old, big, new-00 and adgato maps and reverses on the
+  02 maps (1582 against 1648).
+- Tavi first (`t_hjt` = j_hjt, `f_tavi_n` = next_trial): on the three-bot panel 317
+  and 309 of 516 against 284 and 226, but against the four other field drafts 482 and
+  457 of 688 against 494 and 433. It counters our Varg roster, not the field.
+- Rule from here: screen on the field-draft panel as well as b_tbd/next_trial/v112,
+  and expect about half of a local edge on the ladder.
