@@ -48,7 +48,8 @@ one match quota. Most of the ways to waste a day here come from forgetting that.
 
 ## Ladder lock
 
-    held by:   nobody (LOCAL released it 2026-10-26 23:00Z).
+    held by:   LOCAL since 2026-11-02 16:58Z: re-activating version 126 (hun_submit) at
+               the owner's request, replacing v121.
     VERSION 126 = hun_submit (ws/bots/hun_submit, ws/hun_submit.zip, 37,300 bytes, sha256
                a0170af9...), uploaded by LOCAL at 22:45Z at the owner's request: b_tbd with
                Hunter > Bruiser > Durability (engine 2.0.0) + Next_Trial's two stale-camp
