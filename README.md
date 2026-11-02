@@ -48,7 +48,8 @@ one match quota. Most of the ways to waste a day here come from forgetting that.
 
 ## Ladder lock
 
-    held by:   nobody (LOCAL released it 2026-11-02 17:16Z).
+    held by:   LOCAL (since 2026-11-02 22:58Z): uploading and activating tfd50_submit
+               (group-aware camp choice) at the owner's request.
     2026-11-02: VERSION 126 re-activated at 17:02Z by LOCAL at the owner's request,
                replacing v121 (pinned since 12:42Z). Confirmed live: fuel record on
                01starvation a equals local hun_submit, 120 of 120 (v121: 8 of 120). Why:
