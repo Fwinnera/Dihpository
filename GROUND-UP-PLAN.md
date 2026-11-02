@@ -4834,3 +4834,158 @@ omr_submit (v117) and m_stand. Games won of 1,720 (field drafts alone, of 860):
   457 of 688 against 494 and 433. It counters our Varg roster, not the field.
 - Rule from here: screen on the field-draft panel as well as b_tbd/next_trial/v112,
   and expect about half of a local edge on the ladder.
+
+## The top two against us, and copying their settings (2026-11-02)
+
+80 recent ranked games each (`ws/bench/top_mite`, `top_fish`, `us_v121`;
+`analysis/study_team.py fetch:FOLDER:TEAM`). Games end at 1,000 submitted gems.
+
+                                   Mite (#1)   Fish (#2)   us (v121)
+    median game length, rounds         904         890        1304
+    gems submitted by round 400        204         311         139
+    gems submitted by round 800        577         677         340
+    share of champion-rounds farming  16.5%       18.0%       11.2%
+    gold spent on items by round 300  1360        1294         629
+    healing + shielding done         13530       14283        6569
+    deaths a game                       12          12          15
+
+Both draft Heart of Ruin + Vendetta + Marcella or Vesper Vale + Cassi & Issac; no
+Varg. Mite opens Monster emblems on its carries and stacks Bruiser late. Settings
+copied onto j_hjt, against our three bots and the five field drafts (of 1,376;
+j_hjt 848): Monster-first emblems (`x_mon`) 806, shop at 90 gold every 45 rounds
+(`x_shop`) 820, Vesper Vale first (`x_vv1`) 831. Their edge is in how the
+champions spend their time, not in these settings.
+
+## The rebuild, step 1: where the time goes, and group-aware camp choice (2026-11-02)
+
+The owner asked for the farming rebuild. Tools are in `analysis/rebuild/` (see its
+README); the camp table for all 86 maps is `ws/bench/camps86.json`.
+
+**A per-round profiler.** `p_hjt` is j_hjt plus one stdout line per champion turn
+naming the branch of `play_turn` that decided it (`mkprof.py`). 344 games (every map,
+both sides, against f_hor_h and f_vv_h), share of champion-rounds:
+
+    travel 27.8%   dead 14.2%   bank (walking) 10.4%   combat 10.0%   farm 8.9%
+    approach 6.3%  capture 5.3%  party maps 5.0%  retreat 3.1%  recalling 3.0%  other 6%
+
+- **Most walking is walking back out.** A champion goes home about nine times a game
+  (death 9.8, recall after a retreat 15.8, shop recall 12.1, heal recall 9.2 for the
+  team), and each trip ends with about 35 rounds of walking from spawn to the next
+  camp: about 1,650 champion-rounds a game, roughly 80% of all travel.
+- Two bugs seen in single games: a banking decision taken where the altar was close
+  survives a recall (00corners: 49 rounds from spawn to bank 19 gems); a heal recall
+  105 rounds from home on 01starvation. Pricing trips home by the walk back (`tf2`,
+  below) still lost, and the top teams go home *more* often than we do (healing
+  spikes: 8.2-8.7 non-death trips per 1,000 rounds for Mite and Fish, 6.2 for us),
+  while dying less (2.2-2.3 against 2.7). Recalling early is cheap insurance.
+
+**The opening is where we fall behind.** By round 100, before deaths or shopping
+matter (ladder summaries, `curve.py` / `early.py`):
+
+                                  Mite     Fish     us (v121)
+    team camp damage by round 100  8,843    9,444    4,748
+    team gold earned by round 100    416      438      180
+    camp clears before round 100     5.8      4.8      4.1
+    rounds hitting a camp, 1-100   18-29%   16-33%   12-21%  (per champion)
+
+The same champion hits camps twice as often on their team: Vendetta 29% of rounds
+1-100 against our 15%, Vesper Vale 29-33% against 19%. Fighting is the same (4-6%).
+
+**They farm together.** A clear is "shared" when another champion of the team dealt
+camp damage in the three rounds before it and none in the two after (`shared.py`):
+
+    clears before round 150   solo   1 helper   2   3+     whole game: solo
+    Mite                      36%     30%      17%  18%                 45%
+    Fish                      29%     22%      19%  29%                 38%
+    us (v121)                 56%     29%      11%   4%                 69%
+
+Their openings, game by game: the whole team clears the best big camp beside spawn
+first (00monolith round 20, 22 gems + 130 gold, five champions; 03showdown round 30,
+71 gems, five), splits up for small camps, and comes back when it respawns. Ours
+walk alone to 0-strength gold camps in mid-map, because `choose_group` prices every
+camp for one champion: the strength-60 camps next to our spawn fail its damage
+budget solo, and an ally's claim was a penalty (+5 or +20).
+
+**tf1 = j_hjt + group-aware camp choice** (`mkjoin.py`, `config::JOIN`):
+teammates whose claim is a group add their damage to its clear time and take their
+share of its hits; a joiner is credited value x (its share of the damage)^0.5; camp
+damage taken costs 25 rounds per full health bar (`DMG_COST`, the walk home to heal
+it); a visible teammate counts only if it is at most 8 steps further from the group
+than we are. The ally-claim penalty is gone (monolith raids unchanged).
+
+Panel: b_tbd, next_trial, gs_stand_submit and the five field drafts, 86 maps x 2
+sides, of 1,376 (re-rolls are the same code plus a 37-step dummy loop a turn):
+
+                    b_tbd next_tr gs_stand f_hor_h f_hor_n f_vv_h f_tavi_n f_cast_n  total
+    j_hjt             100     99      85     108     119    123     70      144     848
+    j_hjt re-roll      88    101      82      99     109    116     74      145     814
+    tf1                97     98      97     114     124    122    107      147     906
+    tf1 re-roll        94    107      92     112     127    122     92      153     899
+
+tf1 averages 902.5 against j_hjt's 831: **+72 games, +5.2 points of win rate**, on
+both rolls; gem margin positive against every opponent. Mechanism: shared early
+clears 49-50% against 43-44%, early gold 253-260 against 206-220 by round 100,
+deaths 12.5 against 14.4 a game in the profile (13.1-15.3 against 15.0-17.9 on the
+panel) while the opponents die more. Opening hit share is unchanged (14.5%): the
+group walks further, to bigger camps, and it is the fights it now wins that pay.
+f_tavi_n is the noisy pairing: 62-67 of its 172 games change winner between any
+two variants.
+
+**What in tf1 matters** (same panel, of 1,376; one roll each unless noted; a single
+roll's total has a standard deviation of about 14 games, from the re-roll pairs):
+
+    tf1 (credit share^0.5, damage cost 25)       906 / 899 (re-roll)
+    credit for joining: share^0 (full)  886     share^1 (pure share)   856
+    damage cost per health bar:  0  821   50  939   75  925   100  916   150  876
+    teammate distance slack 16 (not 8)           906, game for game identical to tf1
+    tf1 + own-half opening (`tf3`)               905 (better on 6 of 8, f_tavi_n 83)
+    tf1 + trips home priced by the walk (`tf2`)  872
+
+The damage cost is most of it: without it the change is worth about -10 against
+j_hjt; at 50 it is worth about +100. It does not change grouping (shared clears are
+the same at 0, 25 and 50); it keeps champions healthy. A solo champion passes on
+camps that hit hard unless help is on the way, and fights start at higher health:
+our deaths fall (against next_trial 14.5, 13.0, 12.2 a game at 0, 25, 50), the
+opponents' rise, and the gold lead grows. A full bar is about 40 rounds of recall and
+walk back, so 50 is close to its real price.
+
+**tfd50 = j_hjt + group-aware camp choice at damage cost 50** (`ws/bots/tfd50`;
+`analysis/rebuild/mkvariant.sh tfd50 50`). Three rolls on the panel: 939, 923, 938
+(mean 933, against j_hjt's 831: **+102 games of 1,376, +7.4 points**). The damage
+cost without the group pricing (`tfw50`, JOIN off) is 891, so both parts count.
+
+Held out (five opponents nobody tuned on, of 860; j_hjt and hun_submit from the
+earlier held-out run):
+
+                    e_n_mon e_b_cap e_n_pro omr_submit m_stand  total
+    j_hjt              87      90      96       85        86     444  52%
+    hun_submit (v126)  99      93      97       88        76     453  53%
+    tf1               101     110     103       97        95     506  59%
+    tfd50             102     104     107      101        96     510  59%
+
+Gem margin larger than v126's against all five. On the cost-50 base, every
+follow-up tested lost: own-half opening 896, opening rush (the whole team prices the
+first camp together, so it converges on one) 891, Cassi & Issac fifth 880, Mite's
+draft (Vesper Vale, Vendetta, Heart of Ruin, Marcella, Cassi & Issac) 787. The top
+teams' roster still does not pay on our engine.
+
+Also on the cost-50 base: heal-recall at 70% 909, at 50% 894 (60% stays). Head to
+head against hun_submit (v126, live), all 86 maps from both sides: 90 of 172, gem
+margin +79 a game (95% -10 to +168), deaths 14.2 against 15.4 -- a mirror, so a weak
+signal either way.
+
+**Ladder candidate.** `ws/bots/tfd50_submit` (identical to tfd50, untagged;
+`ws/tfd50_submit.zip`, 30,269 bytes, sha256 dfe53085...); six smoke games on six maps
+against six opponents, 5 won, no crashes, no ERROR lines. Not uploaded: that needs the
+owner. Expect about half the local edge on the ladder (+3 to +4 points of win rate).
+
+**Next steps for the rebuild, in order of what the data says is left.**
+1. Opening tempo: the same champion still hits camps in only 14% of rounds 1-100
+   against 26-33% on the top teams; the grouping did not move it. The group walks
+   to bigger camps; their whole team takes the best big camp *beside* spawn first.
+   The rush tried here priced the whole team on every camp and picked the largest
+   one (26 tiles out, strength 140); a version capped to camps near spawn is next.
+2. Fights: deaths are now the largest single loss (12-13% of champion time; 83%
+   happen while already retreating). Price health in engagement the way the damage
+   cost prices it in farming.
+3. Party and monolith maps run `BossBot`, untouched by any of this.
