@@ -48,8 +48,24 @@ one match quota. Most of the ways to waste a day here come from forgetting that.
 
 ## Ladder lock
 
-    held by:   LOCAL (since 2026-11-02 22:58Z): uploading and activating tfd50_submit
-               (group-aware camp choice) at the owner's request.
+    held by:   nobody (LOCAL released it 2026-11-02 23:16Z).
+    2026-11-02: VERSION 137 = tfd50_submit (ws/bots/tfd50_submit, ws/tfd50_submit.zip,
+               30,269 bytes, sha256 dfe53085...), uploaded by LOCAL at 22:59Z at the
+               owner's request and pinned at 23:01Z, replacing v126. It is j_hjt (v126 with
+               Jungle > Treasure > Durability emblems) plus group-aware camp choice:
+               teammates bound for a group share its clear time and its hits, and camp
+               damage costs 50 rounds per health bar (GROUND-UP-PLAN.md, "The rebuild,
+               step 1"). Local, of 1,376 games on b_tbd, Next_Trial, v112 and the five
+               field drafts: 933 (mean of three rolls) against v126's 819 and j_hjt's 831.
+               Held out: 510 of 860 against v126's 453. Head to head with v126: 90 of 172.
+               Confirmed live: the fuel record of the 23:10Z ranked game on 00dunes b
+               (vs Teto Territory) equals local tfd50_submit for 120 of 120 figures after
+               the first four (v126: 14). On side b the platform's first four figures (the
+               draft budgets) differ from any local run's, so compare from the fifth.
+               Fallback: v126 (`cambc submissions activate 126`).
+               NOTE: `cambc submit` switched the team to "follow newest ready version";
+               LOCAL re-pinned 137 at 23:01Z. Pin again after any upload, or the trial
+               goes live.
     2026-11-02: VERSION 126 re-activated at 17:02Z by LOCAL at the owner's request,
                replacing v121 (pinned since 12:42Z). Confirmed live: fuel record on
                01starvation a equals local hun_submit, 120 of 120 (v121: 8 of 120). Why:
