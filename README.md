@@ -56,12 +56,17 @@ both, and `analysis/rebuild/screen.sh` now compresses each pairing after scoring
 
 ## Ladder lock
 
-    held by:   LOCAL since 2026-11-03 11:50Z (owner: "lets carry on working on it, we need to be
-               above 200"). Unranked groups against ten teams ranked 176-228, v140 first as the
-               baseline, then candidates made live one at a time (ws/bench/lab/, analysis/rebuild/lab.py).
-               LIVE since 12:58Z: VERSION 147 = rl_submit (v140 + capture rewards routed to Vesper Vale
-               and Marcella, analysis/rebuild/mkrole.py). Versions 141-146 were lab candidates.
-               Fallback: v140 (`cambc submissions activate 140`; a re-activation rebuilds, 2-15 min).
+    held by:   nobody (LOCAL released it 2026-11-03 16:52Z).
+    2026-11-03: VERSION 155 = ab3_submit (ws/bots/ab3_submit) is LIVE and is the team's entry for
+               the International Qualifiers (deadline 23:59Z). It is v140 + capture rewards routed
+               to Vesper Vale and Marcella + focus fire by threat + the 03homonoliths spawn attack +
+               earlier self-shields (also while retreating) + stun value for Ryth/Marcella + ranged
+               dash escape (GROUND-UP-PLAN.md, "Toward rank 200"). Lab 48 of 100 (v140's line
+               22 of 50 on set 1); ranked since 15:03Z 29 of 50, performance 1,731. Versions
+               141-154 were lab candidates. Fallbacks: v152 (sh), v147 (rl), v140. Re-activating a
+               version rebuilds it (2-15 min today); selecting another cancels a pending build.
+               Everyone: take the lock before uploading, and remember `cambc submit` switches the
+               team to follow-newest -- re-pin with `cambc submissions activate N`.
     2026-11-03: VERSION 140 = cHG_submit (ws/bots/cHG_submit, ws/cHG_submit.zip, 31,829 bytes,
                sha256 bd00c40f...), uploaded by LOCAL and pinned at 04:12Z (owner's overnight
                permission). It is m4 (v138) with Hunter > Durability > Jungle emblems and gold

@@ -5545,3 +5545,38 @@ instead of idling -- spawn heals 100% a round) 91 against ab3, 82 against sh.
 round favours the 240-health gold clusters beside spawn while the opponents walk straight to
 the gem groups. A value of gold that depends on how long the map's gems take to win
 (1,000 / supply) is the open question, not testable inside the lab's noise today.
+
+**ab3 on the lab: 23 + 25 = 48 of 100**, the best arm (sh 47, sgA 45, ab2 43, gp120 42, rl 41,
+tf 41, cb 33); paired flips rl -> ab3 +18 / -11, sh -> ab3 +8 / -7. Its lab games where we
+banked under 200 gems are blowouts in fights (19-51 deaths) except 00lost_world: about 200
+gems sit in non-attacking clusters around the central altar (21 gems for 360 health) and
+the opponent banks 300 by round 160 while we clear nothing until round 164 and then a gold
+camp -- with early gold weighted like gems a 60-gold camp scores three times a 21-gem
+cluster. sgA's flips against sh are scattered (+9 / -13); the gold question stays open.
+
+## Rank-200 push: where it stands (2026-11-03, 16:50Z)
+
+**Live and entered for the International Qualifiers (deadline 23:59Z): VERSION 155 = ab3**
+(`ws/bots/ab3_submit`): v140 + capture rewards routed to Vesper Vale and Marcella (rl,
+`mkrole.py`), focus fire on the enemy with the most strength per health (tf), the
+03homonoliths spawn attack (sp, `mkspawn.py`), self-shields raised at 95% health and while
+retreating, stun value for Ryth's area hit and Marcella's enhanced attack, and ranged
+champions dashing away from an adjacent enemy.
+
+Ranked performance: v140 1,671 over 230 games; everything since rl (110 games) 1,687; since
+tfs went live at 15:03Z (tfs, sh, ab2, sgA, ab3) **29 of 50, 1,731**. Rating 1,689, rank
+241 at 16:50Z (1,640 and rank 284 at 11:42Z). Rank 200 needs about 1,753.
+
+What carried over to the ladder: the economy mechanism (team gold +23% against teams ranked
+176-228) and the map fix (03homonoliths won on the ladder at 15:21Z). What did not: draft
+changes (Heart of Ruin anywhere), caution (ec, sq, sv), group play, and every local
+refinement inside +-10%. The lab (100 games an arm against fixed opponents) resolves about
++-7 games; ranked batches of five against one team are noisier still.
+
+Open, in order of what the data says is left:
+1. **Fights against the 1,700+ teams.** Per champion we die about twice as often as the same
+   champion of theirs; lab losses are mostly blowouts (19-51 deaths).
+2. **Gold against gems in the opening** (00lost_world, 03membrane, 00pilgrimage): we take
+   43-48% gold-only camps before round 150 against their 33%. Needs a test bed whose
+   opponents race gems; our local bots share the gold habit.
+3. A lab with more teams near our own rating, to resolve smaller differences.
