@@ -56,7 +56,8 @@ both, and `analysis/rebuild/screen.sh` now compresses each pairing after scoring
 
 ## Ladder lock
 
-    held by:   nobody (LOCAL released it 2026-11-03 01:36Z).
+    held by:   LOCAL (since 2026-11-03 04:08Z): uploading and activating cHG_submit (m4 +
+               Hunter > Durability > Jungle + early gold weight 1.0) at the owner's request.
     2026-11-03: VERSION 138 = m4_submit (ws/bots/m4_submit, ws/m4_submit.zip, 31,831 bytes,
                sha256 f1d1d42e...), uploaded by LOCAL and pinned at 01:22Z (the owner gave
                overnight permission to push and test), replacing v137. It is v137 plus map
