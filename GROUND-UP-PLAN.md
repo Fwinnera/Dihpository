@@ -5276,3 +5276,10 @@ gs_mix_camp and gs_eq for a fair three-roll comparison. **Ladder 06:36Z:** v140 
 rolls are 238, 236, 231 (235); panel 1,017, 999, 1,004 (mean 1,007, -21); held out 586 (-18).
 Its first roll was luck; dropped. cHG (v140) stays the best version. Next on cHG: own-half
 opening (h1), late power shards always strength (h2), bank at 30 gems (h3).
+
+**More on cHG** (panel / gs_mix_camp + gs_eq; cHG 1,028 / 235): own-half opening 1,016 / 227,
+late power shards always strength **878 / 192**, bank at 30 gems 1,022 / 224. The late-shard
+rule (health or strength by the marginal health x damage product) is worth about 150 games;
+since passives do not stack but different families do, testing a fourth emblem (Monster,
++15% camp damage: h4) and a fifth (Treasure: h5) before the power shards. **Ladder 07:08Z:**
+v140 50 of 85 (performance 1,705), v137 1,698; rating 1,687, rank 244.
