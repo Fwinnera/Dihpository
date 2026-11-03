@@ -5155,3 +5155,7 @@ gold-weight screens.
 **Early gold weight** (gems + gold x w before round 500; outcome, m4 mean 967): w 0.3 (m4)
 967, 0.6 **979**, 1.0 **992**. Rising with w, in line with the top teams farming gold
 early. Queued: gw10 held out and re-rolled, then w 1.5 and 2.0.
+
+**Hunter > Durability > Jungle, confirmed small:** panel 998, 972, 959 (mean 976, +9; ahead
+of m4 on every paired roll), held out **565** of 860 against m4's 547 (+18). Queued: the
+combination with the early gold weight 1.0 (cHG), after gw10's held-out run and re-rolls.
