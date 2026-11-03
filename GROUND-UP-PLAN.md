@@ -5193,3 +5193,10 @@ team to follow-newest -- so the ranked games from about 01:40Z to 04:12Z are gs_
 
 Next on cHG (prefix s4): how long and how strongly gold should count -- gold x (now < 800 ?
 1.0 : 0.25) c1, (now < 300 ? 1.0) c2, weight 0.8 c3, 1.3 c4, late weight 0.5 c5.
+
+**Gold timing on cHG** (of 1,376, outcome; cHG mean 1,028): boost until round 800 1,012,
+until 300 1,024, weight 0.8 1,031, weight 1.3 1,011, late weight 0.5 1,002. cHG's (1.0
+until round 500, then 0.25) stands. **v140's first 15 ranked games:** 6 won (TheHappyFIts
+1-4, DARK%HUNTER 3-2, Quantcoders 2-3), performance 1,567 -- too few to read (about +-100).
+Next on cHG: more aggression (within 5 at odds 0.95, d1), shop at 100 gold every 50 rounds
+(d2), damage cost 40 (d3) and 65 (d4).
