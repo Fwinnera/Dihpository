@@ -5521,3 +5521,14 @@ rl 25, tf 26, sh 26, ab2 22.
 a round outside monoliths; 1.0 elsewhere): one 03membrane smoke game against sh 1,002-322.
 Uploaded as v154 for the lab -- the local panel cannot judge it, since our own bots share
 the gold habit.
+
+**sgA on the lab: 25 + 20 = 45 of 100** (sh 47, ab2 43): the gem-race gold weight makes no
+measurable difference. In the first 150 rounds 43-48% of our clears are gold-only against
+the opponents' 33-34%, and they collect about 64 gems a lost game in that window to our 35.
+Every rl-line arm sits at 41-47 of 100; the lab cannot separate them. Rating 1,680, rank 252
+at 16:16Z; rank 200 needs 1,753.
+
+**ab3 uploaded as v155** (all three ability fixes) to be the steady live version if its lab
+holds. Shop trips: with rl, Vesper Vale visits the shop 8.2 times per 1,000 rounds (v140 5.1),
+each voluntary trip about 40 rounds; st = ab3 + a 150-gold shop recall only when below 75%
+health (a heal too), else at 300.
