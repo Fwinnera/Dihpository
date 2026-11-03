@@ -5493,3 +5493,9 @@ gold-only camps on our side (0g/40-120 gold) because v140 counts early gold like
 (v137/v138 counted it 0.3): 8 gems banked by round 220. Testing on tfs: gw3 (early gold 0.3
 everywhere) and gwA (0.3 where the map regrows at least four gems a round outside monoliths,
 else 1.0).
+
+**sh on the lab: 26 + 21 = 47 of 100**, the best arm (rl 41, tf 41, gp120 42, cb 33; set 2's
+21 against 15-20 for the others). Live as v152 since 15:13Z. gw3 / gwA (early gold 0.3)
+lose locally to tfs 79 and 76 of 172 -- self-play rewards the gold weighting; not uploaded.
+Next on sh: ab, where Ryth's area stun and Marcella's stunning enhanced attack are valued
+for the enemy damage the stun prevents.
