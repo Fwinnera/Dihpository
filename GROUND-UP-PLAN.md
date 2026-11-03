@@ -5135,3 +5135,14 @@ matters. bHJ and m4 on the held-out opponents next.
 65 (1,709) -- inside the noise (about +-60 each), and v138 met stronger teams (mean 1,657
 against 1,627). On the maps the fixes touch v138 went 2 of 5 (00anvil and 03homonoliths
 lost, 02the_pack 1-1, 01elk_arena won), v137 1 of 6.
+
+**Held out** (of 860, outcome): v137 519, m3 537, **m4 547, bHJ 547**. The Hunter emblem's
+panel gain (+14) does not carry; Hunter pays on kills, which the ladder's strong teams
+give us fewer of than the local opponents do. bHJ_submit is built and smoke-tested
+(`ws/bHJ_submit.zip`, 31,833 bytes, sha256 d793c2c6...; 4 of 6 smoke games won, no
+faults) but parked: v138 (m4) stays live.
+
+**Gold per early clear.** Before round 200 the top teams' clears pay 63 gold on average
+against our 43 (their most common early clear is a 40-gold cluster; ours a 7-gem one),
+and they have the sixth body; together about twice our gold by round 200. Testing the
+early gold weight (gems + gold x 0.3 before round 500) at 0.6 and 1.0 (gw6, gw10).
