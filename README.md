@@ -48,8 +48,19 @@ one match quota. Most of the ways to waste a day here come from forgetting that.
 
 ## Ladder lock
 
-    held by:   LOCAL (since 2026-11-03 01:13Z): uploading and activating m4_submit (v137 +
-               map fixes) at the owner's request (overnight testing, permission given).
+    held by:   nobody (LOCAL released it 2026-11-03 01:36Z).
+    2026-11-03: VERSION 138 = m4_submit (ws/bots/m4_submit, ws/m4_submit.zip, 31,831 bytes,
+               sha256 f1d1d42e...), uploaded by LOCAL and pinned at 01:22Z (the owner gave
+               overnight permission to push and test), replacing v137. It is v137 plus map
+               fixes (analysis/rebuild/mkmaps.py): break into an altar walled in by camps
+               (02the-pack), scale the party gate to three-pick rosters on maps where every
+               gem is behind a heavy group (03homonoliths), and on maps with under 20 gems
+               value gems far above gold and bank each capture (03one-gem). Local, of 1,376
+               (three rolls, engine outcome): 967 against v137's 952; 03one-gem, 02the-pack
+               and 03homonoliths 48, 45, 48 of 48 against 8, 14, 28. Confirmed live: the
+               01:30Z ranked game on 01big-world a (vs the_crimson_society) equals local
+               m4_submit for 120 of 120 figures after the draft (v137: 24). Check with
+               `analysis/rebuild/fuelcheck.sh SINCE BOT [OTHER]`. Fallback: v137.
     2026-11-02: VERSION 137 = tfd50_submit (ws/bots/tfd50_submit, ws/tfd50_submit.zip,
                30,269 bytes, sha256 dfe53085...), uploaded by LOCAL at 22:59Z at the
                owner's request and pinned at 23:01Z, replacing v126. It is j_hjt (v126 with
