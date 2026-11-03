@@ -5146,3 +5146,8 @@ faults) but parked: v138 (m4) stays live.
 against our 43 (their most common early clear is a 40-gold cluster; ours a 7-gem one),
 and they have the sixth body; together about twice our gold by round 200. Testing the
 early gold weight (gems + gold x 0.3 before round 500) at 0.6 and 1.0 (gw6, gw10).
+
+**Hunter orders, continued** (outcome; m4 mean 967): Hunter > Durability > Jungle **998**
+(best first roll tonight, gem margin ahead on all eight opponents), Hunter > Jungle >
+Monster 942, Jungle > Hunter > Bruiser 949. bHDJ held out and re-rolled after the
+gold-weight screens.
