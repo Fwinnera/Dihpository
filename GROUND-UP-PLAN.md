@@ -5388,3 +5388,17 @@ within 3 tiles collects it if it carries gold, else a Marcella if it carries gem
 teammate standing on it steps off. First smoke game (02cuts): Marcella captured 801 gems and
 earned 3,208 gold; team gold 7,019 against v140's 3,882. Local: head to head with v140
 **100 of 172 (58%)**, panel + gs_mix_camp 1,169 against 1,142 (+27). Uploaded as v147.
+
+**rl on the ladder.** Lab set 1: **25 of 50** (v140 22). In those games team gold is 6,223
+against v140's 5,070 (opponents 5,867 / 6,099): our Vesper Vale earns 2,098 gold per 1,000
+rounds instead of 777, kills 2.7 instead of 0.8 and dies 2.2 instead of 3.1 -- the bonus
+makes it the team's carry. Ranked: **9 of the first 10** (5-0 against yuri, who had beaten
+v140 0-48 on 00oasis); rating 1,710, rank 227 at 13:20Z (1,640, rank 284 at 11:42Z). Lab set
+2 (the other maps, no v140 baseline): 16 of 50 -- the losses are fights (3-23, 26-52, 4-41),
+and in lost games the opponents buy 60-90% more shards and do 13-15k shielding (Heart of
+Ruin) to our 5k.
+
+Refinements, local, one roll (head to head of 172 against v140 / rl; panel + gs_mix_camp of
+1,548, v140 1,142, rl 1,169): rl2 (reward to the larger bonus) 99 / -, 1,161; rlM (Marcella
+third) 87 / -, 1,154; rl3 (Vesper Vale and Marcella value groups with their bonus) 88 / 86,
+1,193; rl5 (collector range 5) 91 / 87, 1,161. All within the noise of rl.
