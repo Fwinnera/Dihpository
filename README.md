@@ -56,7 +56,8 @@ both, and `analysis/rebuild/screen.sh` now compresses each pairing after scoring
 
 ## Ladder lock
 
-    held by:   nobody (LOCAL released it 2026-11-03 16:52Z).
+    held by:   LOCAL since 2026-11-03 16:58Z (owner: "work on it more"). More lab candidates on
+               ab3; the version pinned at 22:30Z at the latest is the qualifier entry.
     2026-11-03: VERSION 155 = ab3_submit (ws/bots/ab3_submit) is LIVE and is the team's entry for
                the International Qualifiers (deadline 23:59Z). It is v140 + capture rewards routed
                to Vesper Vale and Marcella + focus fire by threat + the 03homonoliths spawn attack +
