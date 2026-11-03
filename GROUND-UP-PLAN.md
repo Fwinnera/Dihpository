@@ -5200,3 +5200,10 @@ until round 500, then 0.25) stands. **v140's first 15 ranked games:** 6 won (The
 1-4, DARK%HUNTER 3-2, Quantcoders 2-3), performance 1,567 -- too few to read (about +-100).
 Next on cHG: more aggression (within 5 at odds 0.95, d1), shop at 100 gold every 50 rounds
 (d2), damage cost 40 (d3) and 65 (d4).
+
+**Settings re-checked on cHG** (of 1,376, outcome; cHG mean 1,028): engage within 5 tiles at
+any odds and at odds 0.95 beyond **1,058** (d1, best roll yet; on m4 the same change tied,
+966 against 967 -- with Hunter's 50 gold a kill, fights pay more); shop at 100 gold every
+50 rounds 1,009; damage cost 40 1,003, 65 1,022. d1 held out and re-rolled next, then its
+halves (within 5 only, d5; odds 0.95 only, d6). **Ladder 05:01Z:** v140 9 of 20
+(performance 1,604); rating 1,633, rank 290.
