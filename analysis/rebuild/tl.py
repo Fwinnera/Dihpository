@@ -4,7 +4,7 @@ import re, sys, zipfile
 from pathlib import Path
 TYPES = ["ryth", "vesper_vale", "vendetta", "cassi", "issac", "stellar", "prism", "marcella",
          "willow", "ren", "varg", "tavi", "heart_of_ruin"]
-PF = re.compile(r"PF (\d+) (\d+) ([a-z-]+) (-?\d+) (-?\d+) (\d+(?:\.\d+)?) (\d+(?:\.\d+)?) (\d+) (\d+) (-?\d+)(?=\n|PF|$)")
+PF = re.compile(r"PF (\d+) (\d+) ([a-z-]+) (-?\d+) (-?\d+) (\d+(?:\.\d+)?) (\d+(?:\.\d+)?) (\d+) (\d+) (-?\d+)((?: \d+)*)(?=\n|PF|$)")
 d, side, champ = Path(sys.argv[1]), sys.argv[2], sys.argv[3]
 mx = int(sys.argv[4]) if len(sys.argv) > 4 else 10**9
 out = zipfile.ZipFile(next(d.glob("*.repl26a"))).read(f"team-{side.lower()}.stdout").decode("utf8", "replace").replace("\x00", "")

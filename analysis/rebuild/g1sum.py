@@ -6,6 +6,7 @@ BENCH = Path("/Users/faeezaullyar/Claude/battlecode/ws/bench")
 CANDS = sys.argv[1].split(",")
 OPPS = sys.argv[2].split(",")
 prefix = sys.argv[3] if len(sys.argv) > 3 else "g1"
+OUTCOME = len(sys.argv) > 4 and sys.argv[4] == "outcome"
 tot = {c: [0, 0, 0] for c in CANDS}  # wins, games, gem margin sum
 faults = {c: 0 for c in CANDS}; codes = {c: 0 for c in CANDS}
 print(f"{'opponent':12}" + "".join(f"{c:>16}" for c in CANDS))
@@ -19,7 +20,7 @@ for o in OPPS:
             us, them = ("teamA", "teamB") if s == "A" else ("teamB", "teamA")
             d = json.loads(f.read_text())
             g = {k["team"]: int(k["submittedGems"]) for k in d["teams"]}
-            w += g[us] > g[them]; gm += g[us] - g[them]
+            w += (d["match"].get("outcome") == us) if OUTCOME else (g[us] > g[them]); gm += g[us] - g[them]
             faults[c] += d["diagnostics"]["botFaults"][us]
             codes[c] += len(d["diagnostics"].get("codes") or [])
         tot[c][0] += w; tot[c][1] += len(fs); tot[c][2] += gm

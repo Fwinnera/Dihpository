@@ -17,7 +17,7 @@ from pathlib import Path
 TYPES = ["ryth", "vesper_vale", "vendetta", "cassi", "issac", "stellar", "prism", "marcella",
          "willow", "ren", "varg", "tavi", "heart_of_ruin"]
 
-PF = re.compile(r"PF (\d+) (\d+) ([a-z-]+) (-?\d+) (-?\d+) (\d+(?:\.\d+)?) (\d+(?:\.\d+)?) (\d+) (\d+) (-?\d+)(?=\n|PF|$)")
+PF = re.compile(r"PF (\d+) (\d+) ([a-z-]+) (-?\d+) (-?\d+) (\d+(?:\.\d+)?) (\d+(?:\.\d+)?) (\d+) (\d+) (-?\d+)((?: \d+)*)(?=\n|PF|$)")
 args = [a for a in sys.argv[1:] if not a.startswith("--")]
 run = Path(args[0])
 bot = args[1] if len(args) > 1 else "p_hjt"
@@ -45,7 +45,7 @@ def games():
             if int(p[1]) >= len(TYPES):
                 continue
             rows.append((int(p[0]), TYPES[int(p[1])], p[2], int(p[3]), int(p[4]), float(p[5]), float(p[6]),
-                         int(p[7]), int(p[8]), int(p[9])))
+                         int(p[7]), int(p[8]), int(p[9]), tuple(int(x) for x in p[10].split())))
         other = "B" if side == "A" else "A"
         yield opp, mp, side, gems.get(side, 0), gems.get(other, 0), rows
 

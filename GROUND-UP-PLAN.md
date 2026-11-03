@@ -4989,3 +4989,76 @@ owner. Expect about half the local edge on the ladder (+3 to +4 points of win ra
    happen while already retreating). Price health in engagement the way the damage
    cost prices it in farming.
 3. Party and monolith maps run `BossBot`, untouched by any of this.
+
+## The rebuild, step 2: deaths, and the maps we cannot play (2026-11-03)
+
+**Deaths, with the local odds** (`mkprofx.py` adds enemies within 6 and allies within 5
+to each profiler line; `deaths2.py`). About 70 retreat or disengage episodes a game, 20
+of which end in death within 15 rounds. Alone they are deadly: retreating with two
+enemies near and no ally within 5, 60% die; with three or more, 74%; with two allies
+beside, 23-36%. Fight changes on v137 (of 1,376; v137's mean 933): engage enemies within
+4 only at 0.8 odds 761, disengage at 0.65 921, retreat at 40%/50% 878, fall back toward a
+healthy teammate 879. The opening rush capped at 16 tiles (o1: the whole team takes the
+near big camp first, as Mite does on 00corners) 926. None beats v137.
+
+**Ties are broken on earned gold** ("tied on gems, more gold earned"): all 1,026 tied
+local games whose gold differed went to the team with more. Win counts by gems alone
+score every tie as a loss; `g1sum.py ... outcome` now counts the engine's result.
+
+**The maps we lose.** 1,195 ranked games (Nov 1-2), 50% won overall:
+03one_gem 0/8, 02gift_wrapping 1/11, 03homonoliths 1/8, 01big_world 1/17, 00gemfight
+1/10, 03reef 1/10, 00breadcrumbs 3/13. On four of them the profiler shows a plain bug:
+
+- **Contested capture, contester out of sight** (02gift-wrapping, 01yellow-brick-road,
+  00breadcrumbs, 00the-line): a champion standing on a won reward never reads
+  `camp_group::capture_state()`. When an enemy holds the far side of a walled group the
+  capture stays contested all game: on 02gift-wrapping Varg held group 0 from round 86
+  to 2,000 with no enemy visible; 50-79% of all champion time on two maps.
+- **Altar walled in by camps** (02the-pack): the map's only altar sits inside a ring of
+  48 wolves (192 gems). 4,347 failed bank calls a game; the dash-crossing search burns
+  each turn's fuel, so nothing else runs.
+- **Three-pick party maps** (03homonoliths: two 600-gem monolith groups): the party
+  controller waits for four champions together and the roster has three.
+- **One-gem maps** (03one-gem: one 7-gem group on the whole map): an 80-gold camp
+  outscored it, and a 7-gem bag waited for 24 to bank.
+
+**m3 = v137 + the four fixes** (`mkmaps.py`; each behind a switch): walk round a group
+contested three rounds with no enemy in sight; when stuck banking for three rounds within
+8 steps of an altar sealed by camps, hit the nearest camp beside it (never a monolith or
+anything above strength 60); on maps where every gem is behind a heavy group, the party
+gate needs min(4, roster); under 50 gems on the whole map, gems are worth 30 and any bag
+is banked. The first version (m1) lost 68 games elsewhere: the sealed-altar check ran two
+floods on every banking turn (01big-world 75% -> 31%), the gem test excluded monoliths,
+the party gate fired on 00anvil (a monolith beside other gems), and chasing a *visible*
+contester cost 01yellow-brick-road. Narrowed as above, on 12 maps x 3 opponents x 2 sides:
+03one-gem 0/6 -> 6/6, 02the-pack 1/6 -> 6/6, 03homonoliths 3/6 -> 6/6 (1,000 gems to 0).
+Full panel, of 1,376, three rolls each (by gems / by the engine's outcome, ties on gold):
+
+                    rolls (gems)        mean   rolls (outcome)      mean
+    v137 (tfd50)    939  923  938       933    956  942  957        952
+    m3              967  944  942       951    969  945  945        953
+
+Held out (of 860; outcome): v126 466, v137 519, **m3 537 (62%)**. By gems alone m3 looks
++18 on the panel; by outcome it ties, because the fixes mostly turn ties that v137 often
+won on gold into gem wins. Locally that is all they can show: our own opponents share
+the bugs. On the ladder the opponents score on these maps: the eight maps the fixes
+touch were 88 of our last 1,195 ranked games, 32 won (36%).
+
+**Which of m3's fixes pay**, per map over three rolls each (48 games a map, outcome):
+03one-gem 8 -> 48, 02the-pack 14 -> 45, 03homonoliths 28 -> 48, 00monolith +8; but
+01yellow-brick-road 27 -> 4, 00crater 33 -> 18, 00breadcrumbs 30 -> 18, 03ultrastarvation
+21 -> 10. The contested-capture walk breaks 01yellow-brick-road and 00breadcrumbs (we win
+01yellow_brick_road 13 of 14 on the ladder by holding contested groups; 02gift_wrapping's
+ladder losses are to teams that score 1,000, not stalemates), and 03ultrastarvation (36
+gems) is not a one-gem map. **m4 = v137 + breach + party size + one-gem rule under 20
+gems**, no contested-capture change.
+
+**Ladder losses on maps without a local bug** (17 recent losses, summaries): 00gemfight is
+lost in fights (0-1 kills against 12-17; we bank 28-90 of the ~210 gems we collect);
+01big_world, 02cuts and 03reef are lost on farming speed (by round 300 the winners have
+1.5-3x our camp damage and gold; on 02cuts v137 does 11,900 damage by round 300 against
+their 15,000-31,000 because four champions walk 41 tiles to one camp). An opening radius
+on m3 (before round 100/150, camps beyond 18/14 steps of spawn cost 2/3 rounds a step):
+941 and 940 against m3's mean 951. Not kept; 02cuts' walls make straight-line distance a
+poor guide. On 01big-world nothing is stranded: 35-54% of every champion's time is
+travel between islands.

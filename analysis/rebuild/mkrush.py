@@ -3,13 +3,15 @@
 teammates within RUSH_NEAR that have no target yet count as joiners for every group,
 so the first claim is priced for the whole team and the rest converge on it.
 
-    mkrush.py BOTDIR [RUSH_ROUNDS=60] [RUSH_NEAR=4]
+    mkrush.py BOTDIR [RUSH_ROUNDS=60] [RUSH_NEAR=4] [RUSH_DIST=1000]
+
+RUSH_DIST caps the rush to groups within that many steps (straight line) of us.
 """
 import sys
 from pathlib import Path
 
 src = Path(sys.argv[1]) / "src"
-opts = {"RUSH_ROUNDS": "60", "RUSH_NEAR": "4"}
+opts = {"RUSH_ROUNDS": "60", "RUSH_NEAR": "4", "RUSH_DIST": "1000"}
 for a in sys.argv[2:]:
     k, v = a.split("=", 1)
     assert k in opts, k
@@ -33,6 +35,7 @@ patch("config.h", [(
     "// if the teammates within RUSH_NEAR will come too.\n"
     f"inline constexpr std::int64_t RUSH_ROUNDS = {opts['RUSH_ROUNDS']};\n"
     f"inline constexpr int RUSH_NEAR = {opts['RUSH_NEAR']};\n"
+    f"inline constexpr int RUSH_DIST = {opts['RUSH_DIST']};\n"
     "inline constexpr int JOIN_SLACK = ",
 )])
 
@@ -57,14 +60,17 @@ patch("strategy.h", [
      "            if (jt != joined.end()) {\n                join_dps = jt->second.first;\n                join_n = jt->second.second;\n            }\n        }\n",
      "        if (!objective->monolith) {\n            const auto jt = joined.find(handle);\n"
      "            if (jt != joined.end()) {\n                join_dps = jt->second.first;\n                join_n = jt->second.second;\n            }\n"
-     "            join_dps += rush_dps;\n            join_n += rush_n;\n        }\n"),
+     "            if (travel <= config::RUSH_DIST) {\n                join_dps += rush_dps;\n                join_n += rush_n;\n            }\n        }\n"),
     # exact pass
     ("            // row.clear used every joiner; rescale to the ones that will be there.\n"
      "            const auto jt = joined.find(objective->handle);\n"
      "            const double all = jt == joined.end() ? 0 : jt->second.first;\n",
-     "            join_dps += rush_dps;\n            join_n += rush_n;\n"
+     "            int cheb = 10000;\n"
+     "            for (const auto& [px, py] : objective->coords) cheb = std::min(cheb, std::max(std::abs(x - px), std::abs(y - py)));\n"
+     "            const double rushed = cheb <= config::RUSH_DIST ? rush_dps : 0;\n"
+     "            join_dps += rushed;\n            if (rushed > 0) join_n += rush_n;\n"
      "            // row.clear used every joiner; rescale to the ones that will be there.\n"
      "            const auto jt = joined.find(objective->handle);\n"
-     "            const double all = (jt == joined.end() ? 0 : jt->second.first) + rush_dps;\n"),
+     "            const double all = (jt == joined.end() ? 0 : jt->second.first) + rushed;\n"),
 ])
 print("patched", src, opts)
