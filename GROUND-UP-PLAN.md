@@ -5231,3 +5231,15 @@ of 1,376 over v137, +85 of 860 held out) does not show in its early gold here (7
 economy changes may exploit how they play. Decision at about 60 games: if v140 is still
 clearly behind, re-pin v137 and alternate the two by the hour, so that time of night does
 not decide the comparison.
+
+**e1 (carrier odds), re-rolled:** 1,059, 1,032, 1,025 (mean 1,039), held out 598 (-6); e2
+(d1 + carrier odds) 1,057 on one roll. The aggression tweaks on cHG are all about +11 here
+with mixed held-out results: none uploaded. **Ladder 05:52Z:** v140 26 of 50 (performance
+1,647, up from 1,595 at 40 games); rating 1,645, rank 275. v140 stays.
+
+**Version 139 was not an accident:** Andy shipped gs_mix_camp at 01:32:56Z (branch AD,
+commit ac01517, "Ship the group-aware camp choice on the eqsoft base, which beat both
+gs_src2_c1_eqsoft and tfd50 head to head"); LOCAL replaced it with v140 at 04:12Z without
+knowing. README corrected; the owner decides which line stays live. gs_mix_camp (pulled
+from AD into ws/bots/gs_mix_camp) and its base gs_eq are now local opponents built
+differently from ours: screening v137, m4, cHG, d1 and e1 against both (prefix x1).
