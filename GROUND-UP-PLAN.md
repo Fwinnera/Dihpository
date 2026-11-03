@@ -5098,3 +5098,11 @@ from about 70% health ten rounds before, with two enemies within 6 and 0.4-0.5 a
 within 5; 42% and 41% of those deaths begin with a fight the champion chose. Testing fights
 only with cover for them (`mkcover.py`: no pursuit without a teammate within 5 unless one
 hit kills; fV Vesper Vale, fVV both).
+
+**Willow in Ryth's slot ties once re-rolled:** 981, 969, 953 (mean 968) against m4's 990,
+958, 954 (mean 967). Ryth stays. **Disk:** the screens filled the disk at 01:57Z (`ws/bench`
+206 GB); the older bench summaries are now gzipped (see README) and every screen compresses
+its pairings. The cover screen is re-running; then three emblem orders on m4, since group
+play now wins more fights and Hunter pays 50 gold a kill: Hunter > Bruiser > Durability
+(v126's), Hunter > Jungle > Durability, Jungle > Hunter > Durability (m4's is Jungle >
+Treasure > Durability).
