@@ -5532,3 +5532,16 @@ at 16:16Z; rank 200 needs 1,753.
 holds. Shop trips: with rl, Vesper Vale visits the shop 8.2 times per 1,000 rounds (v140 5.1),
 each voluntary trip about 40 rounds; st = ab3 + a 150-gold shop recall only when below 75%
 health (a heal too), else at 300.
+
+**ab3 live as v155 from 16:23Z.** Set 1: 23 of 50 (set 2 waiting on the quota). Across the rl
+line set 1 averages 24.5 of 50 (rl 25, tf 26, sh 26, ab2 22, sgA 25, ab3 23) against v140's
+22. Also level locally and not uploaded: st (shop recall at 150 gold only when below 75%
+health, else 300) 84 of 172 against ab3; sd (a hurt champion on spawn hits an enemy in reach
+instead of idling -- spawn heals 100% a round) 91 against ab3, 82 against sh.
+
+**Openings that never farm** (camp damage by round 100, ours against theirs, ranked + lab):
+00road_of_riches 240 / 3,145, 00pilgrimage 912 / 3,940, 02guardians 1,270 / 5,155, 00rows
+960 / 13,110. On 00pilgrimage every gem is 40-50 tiles from both spawns; our camp value per
+round favours the 240-health gold clusters beside spawn while the opponents walk straight to
+the gem groups. A value of gold that depends on how long the map's gems take to win
+(1,000 / supply) is the open question, not testable inside the lab's noise today.
