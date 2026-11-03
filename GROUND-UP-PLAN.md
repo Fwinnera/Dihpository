@@ -5258,3 +5258,9 @@ boss attempts from round 450 1,028 / 236; monolith raids from 700 1,015 / 229, f
 1,038 / 237. Unchanged. **Ladder 06:15Z:** v140 32 of 60 (performance 1,659), v137 1,695
 over 65; rating 1,651, rank 275. Next: Tavi (shops away from home) and Willow in Ryth's
 slot on cHG (dT2, dW2), since the economy now matters more.
+
+**Fourth pick on cHG** (panel / gs_mix_camp + gs_eq, outcome; cHG 1,028 / 238): Tavi 1,035 /
+242, Willow 1,041 / 231. Within the noise; Ryth stays. **Ladder 06:25Z:** v140 35 of 65
+(performance 1,665), v137 40 of 65 (1,699); rating 1,655, rank 272. Next on cHG: the capped
+opening rush (rC, RUSH_DIST 16) and Cassi & Issac fifth (ciC), both tied or lost on older
+bases but possibly compounding with the new economy.
