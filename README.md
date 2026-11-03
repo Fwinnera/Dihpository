@@ -56,8 +56,8 @@ both, and `analysis/rebuild/screen.sh` now compresses each pairing after scoring
 
 ## Ladder lock
 
-    held by:   LOCAL since 2026-11-03 21:48Z (owner: "Test es_best now"): es_best (the ES tuner's six
-               settings) is uploaded for a 100-game lab test; v155 is re-pinned by 23:15Z if it loses.
+    held by:   nobody (LOCAL released it 2026-11-03 22:02Z). es_best (v159) lost its lab test, 42 of 100
+               against v155's 48; v155 re-pinned at 22:01Z.
                VERSION 155 (ab3) is live, PINNED and
                the qualifier entry; evening candidates v156-v158 (dg, ab3v, ab4) were level on the lab.
                Rank 215, rating 1,728 at 19:22Z. Please do not upload before 23:59Z without the owner.

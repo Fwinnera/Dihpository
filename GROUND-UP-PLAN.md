@@ -5676,3 +5676,14 @@ early raider bk2, gs_mix_camp and v140; ab6b (the 20-round retry alone) 4 of 6, 
 ab3, but on all party maps 28 of 42 against ab3's 31, banking less on both chokepoint maps.
 None is ready; v155 stays. The chokepoint altar needs a plan to *hold* the tile (one banker
 on it, others feeding it), which our own bots do not test because they rarely contest it.
+
+## es_best on the ladder lab (2026-11-03, 21:49-22:01Z)
+
+Owner: "Test es_best now". es_best (the ES tuner's six settings, `docs/RL-PLAN.md`, "Level 1,
+first run"; local league 70.7% against ab3's 67.3%, head to head 96 of 172) went live as
+v159 at 21:52Z. Rule fixed beforehand: keep it only with at least 50 of 100 lab wins (ab3 48)
+and a paired gem margin against ab3 of zero or better. **Result: 24 + 18 = 42 of 100**;
+margin against ab3 +33 on set 1 (z 0.5), -105 on set 2 (z -1.1). Rejected; **v155 re-pinned and
+live again at 22:01Z** as the qualifier entry. The tuner's local gain did not carry over, as
+with every refinement today: its league is our own pool, and the next run needs held-out
+opponents or a fitness that includes the lab.
