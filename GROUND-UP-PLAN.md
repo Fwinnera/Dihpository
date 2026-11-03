@@ -5617,3 +5617,25 @@ thresholds.
 -5 and -141 -- level. **The danger table** (688 games, 3.2 million turns; `docs/RL-PLAN.md`,
 "First experiment") drives ab5 = ab4 + withdraw above a 50% chance of dying within 15
 rounds: level locally (88 against ab3, 82 against ab4). ab4 uploaded as v158 for the lab.
+
+**ab4 on the lab: 29 + 17 = 46 of 100**; against ab3 by gem margin +114 on set 1 (z 2.0), -145
+on set 2 (z -1.6). ab3v (49) and ab4 (46) both beat ab3 on set 1 and lose on set 2: pooled,
+ab3 (48, margin -70) is level with both and has the longest ranked record, so **v155 = ab3
+was re-selected and pinned at 19:09Z as the qualifier entry.** Fuel exhaustion is unchanged
+by the evening's code (17-20 a 1,000 rounds, no faults).
+
+**00lost_world, locally:** our bots open on gold-only camps (first clear round 41); Andy's
+gs_mix_camp takes the central 21- and 14-gem clusters from round 45 and beats ab3 from both
+sides, as the ladder teams do. ab3A (gem-race gold weight) takes the centre from round 44
+and wins from side A (1,021-575) but not B, and is worse against gs_mix_camp over all maps
+(115 of 172 against ab3's 132). ab3C (early gold 0.3 only on the 15 maps where most gems are
+in non-attacking clusters): on those maps 19 of 30 against gs_mix_camp where ab3 wins 22,
+16 against v140 (17), 16 against sh (15) -- no gain. The gold-weighting question is closed
+for now.
+
+## Standing at 19:22Z
+
+**Rank 215, rating 1,728** (1,686 and rank 248 at 18:17Z; 1,640 and rank 284 at 11:42Z).
+Ranked performance: v140 1,678 over 230 games; the rl line 1,710 over 190; since tfs went
+live at 15:03Z **75 of 130, 1,738**. Rank 200 needs about 1,753. v155 (ab3) is live, pinned
+and entered; nothing more goes up tonight.
