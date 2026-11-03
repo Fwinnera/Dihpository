@@ -5217,3 +5217,17 @@ with odds 0.75 against enemies carrying 15+ gems (a kill now pays 150 gold plus 
 **d6 (odds 0.95 only), re-rolled:** 1,041, 1,030, 1,020 (mean 1,030, +2), held out 594 (-10):
 a wash. **e1 = d6 + odds 0.75 against enemies carrying 15+ gems: 1,059** on its first roll.
 Running e1 held out and re-rolled, and e2 = d1 + the same carrier odds.
+
+**Ladder check of v140 at 05:40Z** (`fetcheras.py`, medians per ranked game):
+
+                    games  won   gold@100  gold@300  camp dmg@300  kills  deaths  submitted
+    v137 (23:10-01:20)  65   40       243       782        15,430      9    11.0     1,003
+    gs_mix_camp         75   35       220       782        13,680      6    11.0       857
+    v140 (from 04:19)   40   18       270       789        14,098      8     9.5       744
+
+v140 performs 1,595 against v137's 1,701 (about 1.5 standard errors). Its local edge (+76
+of 1,376 over v137, +85 of 860 held out) does not show in its early gold here (789 by round
+300 against 782), and it submits fewer gems. Our local opponents are all our own code; the
+economy changes may exploit how they play. Decision at about 60 games: if v140 is still
+clearly behind, re-pin v137 and alternate the two by the hour, so that time of night does
+not decide the comparison.
