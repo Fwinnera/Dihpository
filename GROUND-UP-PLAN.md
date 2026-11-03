@@ -5183,3 +5183,13 @@ where m4 scored 102, 95, 99). They compound: valuing gold like gems before round
 champions to gold camps first, Hunter adds 50 gold a kill, and the shards arrive earlier.
 `ws/bots/cHG_submit` (untagged), `ws/cHG_submit.zip` 31,829 bytes, sha256 bd00c40f...;
 eight smoke games, 6 won, no crashes or ERROR lines.
+
+**VERSION 140 = cHG_submit, live and pinned 04:12Z;** the 04:20Z ranked game on 00eight a
+matches local cHG for 112 of 120 fuel figures (m4: 9). **Version 139 ("gs_mix_camp",
+another account, 01:32:56Z) had gone live by accident** -- `cambc submit` switches the
+team to follow-newest -- so the ranked games from about 01:40Z to 04:12Z are gs_mix_camp's:
+35 of 75, performance 1,649 (v137 1,706 over 65; v138 played one group, 2 of 5). Rating
+1,663 at 02:14Z, 1,638 at 04:15Z.
+
+Next on cHG (prefix s4): how long and how strongly gold should count -- gold x (now < 800 ?
+1.0 : 0.25) c1, (now < 300 ? 1.0) c2, weight 0.8 c3, 1.3 c4, late weight 0.5 c5.
