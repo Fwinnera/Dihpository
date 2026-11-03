@@ -5702,3 +5702,30 @@ and fighting's -66.9 (deaths within 20 rounds 40%, 43%, 56%), best under every t
 every champion type; one state cell in about a hundred favours another response, as chance
 gives. Our deaths are decided before the danger state; details in `docs/RL-PLAN.md`, "Second
 experiment".
+
+## Where our champions die: deep in enemy territory (2026-11-03, 22:45Z)
+
+From v155's lab summaries (ab3, ab3_s2, sh, sh_s2: about 115 games against teams ranked
+176-228):
+
+- **Deaths a game:** ours 13.5 to champions and 1.9 to camps; theirs 8.8 and 1.5. Camps are not
+  the gap. In our losses we die about 18 times to their 6.
+- **Where (relative to the victim's own spawn):** our champions die in the enemy half or spawn
+  area **5.1 times a game against their 1.65**, and 1.5 times a game within 8 tiles of the
+  enemy spawn, which heals 100% a round. 539 of these 601 deaths are to champions. The victims
+  are the melee champions: Vendetta 181, Varg 143, Ryth 117. 02arena, 00swirl, 03shrines,
+  03membrane, 00oasis and 01hooks lead for deaths near their spawn. Team-fight clustering is
+  the same for both sides (63% of deaths with no teammate dying within 12 rounds).
+- **Items are not the cause.** The field builds Vesper Vale and Vendetta about 2:1 strength to
+  health with Bruiser emblems, and Marcella with a third of her shards in Focus (her damage
+  spell is 2 x Focus). We build about 1:1 by the health x strength rule, with Power emblems and
+  no Focus. For the same shards the product comes out level; our Vesper Vale, twice as rich,
+  has the larger one. Base stats read from the engine (`ws/bots/probe_items`): Varg 1,000 HP,
+  45 strength, 100 Focus (shield 2.5 x Focus); Vendetta 1,000 / 70; Vesper Vale 1,000 / 45,
+  range 3; Ryth 1,200 / 45 (area hit 1 x Focus, 1-round stun).
+
+Next: profile v155 locally (`ws/bots/p_ab3`, built by `analysis/rebuild/mkprof2.py`, the ab3-line
+version of mkprof.py; run with `drrun.sh`) to find which branch (farm, travel, a chase in
+combat, escort) takes the melee champions into the enemy half before they die. Then make a
+contained fix, such as no chase past the middle toward the enemy spawn, and screen it locally
+and on the lab.
