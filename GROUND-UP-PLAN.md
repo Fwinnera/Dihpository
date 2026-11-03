@@ -5164,3 +5164,22 @@ combination with the early gold weight 1.0 (cHG), after gw10's held-out run and 
 **561** (+14). Weight 1.5 973, 2.0 964 (one roll each): the gain peaks near 1.0. The
 combination with Hunter > Durability > Jungle (cHG) is screening, then held out and
 re-rolled; if it holds it becomes v139.
+
+## v139 candidate: both small gains together are a large one (2026-11-03)
+
+**cHG = m4 + Hunter > Durability > Jungle emblems + early gold weight 1.0** (two lines:
+`config::build` and the raw value in `strategy::choose_group`). Of 1,376, engine outcome:
+
+                    rolls                 mean     held out (of 860)
+    v137 (tfd50)    956   942   957        952        519
+    m4 (v138)       990   958   954        967        547
+    bHDJ            998   972   959        976        565
+    gw10            992   975   959        975        561
+    **cHG**        1030  1017  1036       1028        604 (70%)
+
+Apart the two changes add 8-9 on the panel and 14-18 held out; together +60 and +57, ahead
+of m4 against every panel and held-out opponent (against the Tavi draft 110, 107, 114
+where m4 scored 102, 95, 99). They compound: valuing gold like gems before round 500 sends
+champions to gold camps first, Hunter adds 50 gold a kill, and the shards arrive earlier.
+`ws/bots/cHG_submit` (untagged), `ws/cHG_submit.zip` 31,829 bytes, sha256 bd00c40f...;
+eight smoke games, 6 won, no crashes or ERROR lines.
