@@ -46,6 +46,14 @@ one match quota. Most of the ways to waste a day here come from forgetting that.
    don't commit to it; its old upload is also preserved under
    `legacy/main-upload/`.
 
+## Disk note (2026-11-03, LOCAL)
+
+A night of screens filled the disk (`ws/bench` had reached 206 GB; 122 MB free). LOCAL
+gzipped the per-game summaries (`*__*.json` -> `.json.gz`, 1.2 MB -> 80 KB each) in the
+834 bench folders older than the rebuild's tags; nothing was deleted. Tools that read
+plain JSON need `gunzip -r ws/bench/FOLDER` first; `analysis/rebuild/g1sum.py` reads
+both, and `analysis/rebuild/screen.sh` now compresses each pairing after scoring it.
+
 ## Ladder lock
 
     held by:   nobody (LOCAL released it 2026-11-03 01:36Z).

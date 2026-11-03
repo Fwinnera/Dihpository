@@ -1,5 +1,5 @@
 """Summarise the held-out screen: wins per candidate per opponent, faults and engine codes."""
-import json, sys
+import gzip, json, sys
 from pathlib import Path
 
 BENCH = Path("/Users/faeezaullyar/Claude/battlecode/ws/bench")
@@ -13,12 +13,13 @@ print(f"{'opponent':12}" + "".join(f"{c:>16}" for c in CANDS))
 for o in OPPS:
     cells = []
     for c in CANDS:
-        fs = list((BENCH / f"{prefix}_{c}_vs_{o}").glob("*__*__*.json"))
+        folder = BENCH / f"{prefix}_{c}_vs_{o}"
+        fs = list(folder.glob("*__*__*.json")) + list(folder.glob("*__*__*.json.gz"))
         w = gm = 0
         for f in fs:
-            s = f.stem.split("__")[2]
+            s = f.name.split("__")[2].split(".")[0]
             us, them = ("teamA", "teamB") if s == "A" else ("teamB", "teamA")
-            d = json.loads(f.read_text())
+            d = json.loads(gzip.open(f).read() if f.suffix == ".gz" else f.read_text())
             g = {k["team"]: int(k["submittedGems"]) for k in d["teams"]}
             w += (d["match"].get("outcome") == us) if OUTCOME else (g[us] > g[them]); gm += g[us] - g[them]
             faults[c] += d["diagnostics"]["botFaults"][us]

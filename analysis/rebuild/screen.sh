@@ -11,6 +11,8 @@ for c in $cands; do
     tag="${prefix}_${c}_vs_${o}"
     python3 bench.py "$c" --opponents "$o" --tag "$tag" --jobs 11 > /dev/null 2>&1
     echo "$(date +%H:%M) $c vs $o: $(python3 -I analysis/h2h.py "$tag" 2>&1 | grep 'games won' | head -1)" >> "$log"
+    # Summaries are 1.2 MB of JSON each and gzip to 80 KB: a night of screens filled the disk.
+    find "ws/bench/$tag" -type f -name "*__*.json" -print0 | xargs -0 -n 64 -P 6 gzip -q 2>/dev/null || true
   done
 done
 echo "$(date +%H:%M) done $cands" >> "$log"
