@@ -5597,3 +5597,18 @@ strength than we bring costs 150 more, `mkdg.py`) 88; rt (retreat at 40% / carri
 ab3A (ab3 + gwA's gold weight) 82. **dg on the lab: 23 + 19 = 42 of 100** (ab3 48): not
 kept; v155 re-selected at 18:09Z. Next: ab3v = ab3 + rl3's bonus-aware camp value (Vesper
 Vale counts 33% more gold, Marcella 2 gold a gem).
+
+Local, of 172 against each (ab3's sum over sh, rl, v140, gs_mix_camp, b_tbd, next_trial,
+f_hor_h: 818): ab3v (Vesper Vale / Marcella value groups by their bonus) 843, ab3 93 head to
+head; ab4 (spawn defence: a hurt champion on spawn hits an enemy in reach; disengage at 0.55
+so one against two equal enemies leaves) 827, 96 head to head; dg 819; ab3A 781; rt 767.
+ab3v uploaded as v157 for the lab. Lab ranking by gem margin over both sets (100 games):
+ab3 -70, sh -82, rl -112, gp120 -112, sgA -125, ab2 -125, tf -176, cb -231; wins ab3 48,
+sh 47. Ranked since tfs went live (15:03Z): 51 of 95, performance 1,706 (v140 1,674).
+
+**First learned component (`analysis/rebuild/dzfit.py`):** `ws/bots/dzlog` (ab3 + one line
+per living turn: health, strength, enemy health and strength within 6, allies within 5,
+steps from home; one line per dead turn) collects data over 688 local games; the fitter
+turns it into a 720-cell table of P(death within 15 rounds | state), shrunk toward its
+health x enemies parent, for a retreat rule driven by measured danger instead of fixed
+thresholds.
