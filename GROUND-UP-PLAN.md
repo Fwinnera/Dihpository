@@ -5252,3 +5252,9 @@ aggression tweaks add nothing against these two. Next on cHG, timings set before
 economy got faster: boss attempts from round 450 instead of 650 (p1), monolith raids from
 round 700 (p2) or 1,100 (p3) instead of 900; screened on the panel plus gs_mix_camp and gs_eq
 (prefix s5).
+
+**Timings on cHG** (panel of 1,376 / gs_mix_camp + gs_eq of 344, outcome; cHG 1,028 / 238):
+boss attempts from round 450 1,028 / 236; monolith raids from 700 1,015 / 229, from 1,100
+1,038 / 237. Unchanged. **Ladder 06:15Z:** v140 32 of 60 (performance 1,659), v137 1,695
+over 65; rating 1,651, rank 275. Next: Tavi (shops away from home) and Willow in Ryth's
+slot on cHG (dT2, dW2), since the economy now matters more.
