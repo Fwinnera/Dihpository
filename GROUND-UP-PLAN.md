@@ -5264,3 +5264,10 @@ slot on cHG (dT2, dW2), since the economy now matters more.
 (performance 1,665), v137 40 of 65 (1,699); rating 1,655, rank 272. Next on cHG: the capped
 opening rush (rC, RUSH_DIST 16) and Cassi & Issac fifth (ciC), both tied or lost on older
 bases but possibly compounding with the new economy.
+
+**Rush and Cassi & Issac on cHG** (panel / gs_mix_camp + gs_eq, outcome; cHG 1,028 / 238):
+capped opening rush (rC) 1,017 / **252**; Cassi & Issac fifth 986 / 229. The rush is the
+first change tonight that does better against the differently built bots than on the
+own-code panel: re-rolling it on all ten, running it held out, and re-rolling cHG against
+gs_mix_camp and gs_eq for a fair three-roll comparison. **Ladder 06:36Z:** v140 40 of 70
+(performance 1,689) against v137's 1,702; rating 1,670, rank 256.
