@@ -5125,3 +5125,13 @@ fights. Both winners re-rolling (bHJ_r37/_r71, bJH_r37/_r71) after the aggressio
 at odds 0.95 954, both 966. The thresholds stand (within 4 at any odds, else 1.15).
 Queued after the emblem re-rolls: Hunter > Jungle > Bruiser, Hunter > Jungle > Monster,
 Jungle > Hunter > Bruiser, Hunter > Durability > Jungle.
+
+**Hunter emblems, re-rolled** (of 1,376, outcome): Hunter > Jungle > Durability 995, 981, 968
+(mean **981**, +14 on m4's 967, ahead of m4 on every paired roll; +15 by gems); Jungle >
+Hunter > Durability 992, 974, 960 (975); Hunter > Jungle > Bruiser 948. Durability third
+matters. bHJ and m4 on the held-out opponents next.
+
+**Ladder at 02:58Z:** rank 267, 1,657. v138 22 of 45 (performance 1,649) against v137 40 of
+65 (1,709) -- inside the noise (about +-60 each), and v138 met stronger teams (mean 1,657
+against 1,627). On the maps the fixes touch v138 went 2 of 5 (00anvil and 03homonoliths
+lost, 02the_pack 1-1, 01elk_arena won), v137 1 of 6.
