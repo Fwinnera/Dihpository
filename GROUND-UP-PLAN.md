@@ -5639,3 +5639,13 @@ for now.
 Ranked performance: v140 1,678 over 230 games; the rl line 1,710 over 190; since tfs went
 live at 15:03Z **75 of 130, 1,738**. Rank 200 needs about 1,753. v155 (ab3) is live, pinned
 and entered; nothing more goes up tonight.
+
+**Party maps are the weak bucket on the ladder** (since 15:03Z: party maps 4 of 11, cluster
+maps 9 of 14, the rest 45 of 75). 00anvil 0 of 4 tonight: its one altar sits beside a
+200-gem monolith (respawn 150) and two 21-gem clusters; the opponents bank the clusters by
+round 22 and clear the monolith three or four times (camp damage 88-123k to our 39-49k).
+Locally ab3 wins 13 of 14 party games against gs_mix_camp, so our bench cannot see it. Two
+contained fixes (BossBot runs only on party maps: their other 158 games are identical to ab3's,
+game for game): bk2 (boss attempts from round 150 after one emblem, not 650 after two) and bg
+(party scoring counts gold 0.15, not 0.4) are both worse on party maps locally (bk2 12 / 7 / 4
+of 14 against gs_mix_camp / v140 / sh, bg 8 / 8 / 7, where ab3 scores 13 / 10 / 8). Not kept.
