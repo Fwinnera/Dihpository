@@ -5115,3 +5115,8 @@ instead of 4 (g1), at even odds instead of 1.15 (g2), both (g3).
 
 **Ladder at 02:14Z:** rank 263, rating 1,663. v138 13 of 25 (performance 1,667); v137 40 of
 65 (1,704); v126 86 of 170 (1,634).
+
+**Emblem orders on m4** (of 1,376, outcome; m4 mean 967): Hunter > Jungle > Durability
+**995**, Jungle > Hunter > Durability **992**, Hunter > Bruiser > Durability (v126's) 955.
+Replacing Treasure (+10% gold) with Hunter (+50 gold a kill) pays once group play wins the
+fights. Both winners re-rolling (bHJ_r37/_r71, bJH_r37/_r71) after the aggression screen.
