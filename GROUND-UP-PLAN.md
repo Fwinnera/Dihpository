@@ -5106,3 +5106,12 @@ its pairings. The cover screen is re-running; then three emblem orders on m4, si
 play now wins more fights and Hunter pays 50 gold a kill: Hunter > Bruiser > Durability
 (v126's), Hunter > Jungle > Durability, Jungle > Hunter > Durability (m4's is Jungle >
 Treasure > Durability).
+
+**Fights with cover only, re-run:** Vesper Vale held back 895, Vesper Vale and Vendetta
+703 (m4 967). The fights our carries start pay for their deaths, at least against these
+opponents; with requiring odds for close fights (761) that closes the "fight less"
+direction. Testing more aggression (`mkaggro.py`): engage at any odds within 5 tiles
+instead of 4 (g1), at even odds instead of 1.15 (g2), both (g3).
+
+**Ladder at 02:14Z:** rank 263, rating 1,663. v138 13 of 25 (performance 1,667); v137 40 of
+65 (1,704); v126 86 of 170 (1,634).
