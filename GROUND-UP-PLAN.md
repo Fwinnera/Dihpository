@@ -5243,3 +5243,12 @@ gs_src2_c1_eqsoft and tfd50 head to head"); LOCAL replaced it with v140 at 04:12
 knowing. README corrected; the owner decides which line stays live. gs_mix_camp (pulled
 from AD into ws/bots/gs_mix_camp) and its base gs_eq are now local opponents built
 differently from ours: screening v137, m4, cHG, d1 and e1 against both (prefix x1).
+
+**Cross-check against bots built differently** (gs_mix_camp = Andy's v139, and its base
+gs_eq; 344 games each, outcome): v137 218 (63%), m4 225, **cHG 238 (69%)**, d1 236, e1 238.
+cHG leads v137 by about 6 points here too, as on the own-code panel (+5.5): its gain is not
+a self-play artefact. Head to head with gs_mix_camp, cHG 113 of 172 (66%), v137 104. The
+aggression tweaks add nothing against these two. Next on cHG, timings set before the
+economy got faster: boss attempts from round 450 instead of 650 (p1), monolith raids from
+round 700 (p2) or 1,100 (p3) instead of 900; screened on the panel plus gs_mix_camp and gs_eq
+(prefix s5).
