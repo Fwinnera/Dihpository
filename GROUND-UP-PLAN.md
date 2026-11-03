@@ -5271,3 +5271,8 @@ first change tonight that does better against the differently built bots than on
 own-code panel: re-rolling it on all ten, running it held out, and re-rolling cHG against
 gs_mix_camp and gs_eq for a fair three-roll comparison. **Ladder 06:36Z:** v140 40 of 70
 (performance 1,689) against v137's 1,702; rating 1,670, rank 256.
+
+**The rush, re-rolled:** against gs_mix_camp + gs_eq 252, 238, 231 (mean 240) where cHG's three
+rolls are 238, 236, 231 (235); panel 1,017, 999, 1,004 (mean 1,007, -21); held out 586 (-18).
+Its first roll was luck; dropped. cHG (v140) stays the best version. Next on cHG: own-half
+opening (h1), late power shards always strength (h2), bank at 30 gems (h3).
