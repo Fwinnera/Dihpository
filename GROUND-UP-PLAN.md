@@ -5456,3 +5456,25 @@ hits it forever: strong teams take theirs, then ours (1,200 to 0; v140 0 of 3 ra
 eligible at once, is attacked from a spawn tile in range, and a champion on spawn with a camp
 in range attacks instead of waiting to heal. Against rl on 03homonoliths: 1,200-0 from both
 sides (rounds 956 and 767).
+
+**tf on the lab: 26 + 15 = 41 of 100** (rl 41, gp120 42): level. tf stays live; **tfs = tf +
+sp** (v151) is the next upload, since sp's change is confined to 03homonoliths. Ranked while
+live: rl 17 of 30 in all, gp120 5 of 15, cb 2 of 5, tf 2 of 5 so far. Rating 1,674 (rank 255)
+at 14:52Z: the rl line looks like a ~1,690 bot on the ladder, against v140's 1,658.
+
+Rejected locally: dV (Heart of Ruin in Varg's slot) 69 of 172 against tfs, 74 against rl --
+our code plays Varg far better than Heart of Ruin; bk (on maps where every gem is behind a
+heavy group, boss attempts from round 150 after one emblem instead of 650 after two) 1 of 4
+against tfs on 00stampede and 00contest.
+
+**Champion abilities, read from the engine** (`ws/bots/probe_items`; kind / cooldown / range /
+modifier / radius / duration; every cooldown is 8 rounds): Varg attack reset + self-shield
+(2.5 x focus, 5 rounds); Vendetta and Vesper Vale attack reset + dash 2 (no landing effect);
+Ryth area hit (range 4, radius 1, 1-round stun, blocks movement) + attack reset; Marcella
+attack reset with a stunning enhanced attack + damage spell (2 x, range 4); Heart of Ruin
+shield (1.5 x) + dash 2 landing for 1.5 x damage and a 1-round stun in radius 1; Tavi attack
+reset + stun (1.6 x); Stellar damage (2 x) + area hit (1.4 x); Ren stun (1.1 x) + dash; Prism
+stun (1.5 x) + area hit. Per champion in rl's lab games their Marcella deals 9,500 champion
+damage per 1,000 rounds to ours 4,800 (ours is busy collecting and banking: the price of rl),
+and their Varg shields 7,200 to ours 3,900: **sh** raises Varg's shield at 95% health instead
+of 70% (head to head with tfs 86 of 172, rl 103).
