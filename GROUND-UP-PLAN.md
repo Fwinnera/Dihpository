@@ -5288,3 +5288,39 @@ v140 50 of 85 (performance 1,705), v137 1,698; rating 1,687, rank 244.
 (+15% camp damage) before the power shards **1,038 / 245** (h4, +10 on both); plus a fifth,
 Treasure, 1,016 / 229. h4 held out and re-rolled next. **Ladder 07:19Z:** v140 52 of 90
 (performance 1,701); rating 1,684, rank 242.
+
+**h4 (fourth emblem Monster), re-rolled:** panel 1,038, 1,011, 1,031 (mean 1,027), against
+gs_mix_camp + gs_eq 245, 236, 234 (mean 238), held out 602: level with cHG (1,028 / 235 / 604).
+
+## Morning summary (2026-11-03, 07:35Z)
+
+**Live: VERSION 140 = cHG_submit**, pinned since 04:12Z: m4 (v137's group-aware camp choice +
+the map fixes) with Hunter > Durability > Jungle emblems and gold valued like gems in camp
+choice before round 500. Ladder over its first 100 ranked games: 56 won, performance 1,691
+(v137 1,698 over 65; Andy's gs_mix_camp 1,641 over 75). Rating 1,678, rank 249, from 1,615
+(rank 305) when the rebuild started last night.
+
+**Local evidence for cHG** (outcome): panel 1,028 of 1,376 (v137 952), held out 604 of 860
+(v137 519), against Andy's two bots 235 of 344 (v137 218; head to head with gs_mix_camp 66%).
+**But the ladder shows little of it:** v140 and v137 perform about the same. Our local
+opponents are our own code or close relatives, and small local gains (+10-30) have not been
+visible on the ladder; only the larger steps were.
+
+**Tried overnight on cHG and not better** (each one or three rolls on ten opponents): gold
+timing and weight, shopping cadence, damage cost, aggression (within 5 tiles, odds 0.95,
+carrier odds), boss and raid timings, Tavi / Willow / Cassi & Issac in the draft, the capped
+opening rush, the own-half opening, bigger bags, strength-only late shards (much worse), and
+a fourth (Monster) or fifth (Treasure) emblem. **First-roll leads above +25 vanished on
+re-roll four times;** always re-roll before believing one.
+
+**For the owner to decide:**
+1. Which line stays live: v140 (ours) or Andy's gs_mix_camp (v139, shipped 01:32Z on branch
+   AD, replaced by LOCAL at 04:12Z without knowing it was deliberate). See README.
+2. The next structural step. What the data says is left: (a) fights against strong teams
+   (00gemfight: we lose 0-1 kills to 12-17); (b) farming speed on big maps (01big_world,
+   02cuts, 03reef: the winners have 1.5-3x our camp damage by round 300); (c) a local test
+   that predicts the ladder -- more opponents built unlike ours, or ladder A/B testing with
+   enough games (about 150 per version for +-50 rating).
+
+Tools for all of this are in `analysis/rebuild/` (README there); `fuelcheck.sh` confirms
+the live build, `ladderperf.py` and `fetcheras.py` measure versions on the ladder.
