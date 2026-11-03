@@ -66,12 +66,16 @@ both, and `analysis/rebuild/screen.sh` now compresses each pairing after scoring
                candidate"). Confirmed live: the 04:20Z ranked game on 00eight a (vs
                TheHappyFIts) equals local cHG_submit for 112 of 120 fuel figures after the draft
                (m4: 9). Fallback: v138 (`cambc submissions activate 138`) or v137.
-    NOTE: VERSION 139 ("gs_mix_camp", another account, uploaded 01:32:56Z) went live by
-               accident: `cambc submit` switches the team to follow-newest, overriding LOCAL's
-               01:22Z pin of v138. Ranked games from about 01:40Z to 04:12Z are gs_mix_camp's:
-               35 of 75, performance 1,649 (v137 1,706 over 65; v138 played one group). After
-               ANY upload, run `cambc submissions activate N` for the version that should be
-               live.
+    NOTE: VERSION 139 = gs_mix_camp, shipped by Andy at 01:32:56Z (branch AD, commit ac01517:
+               "Ship the group-aware camp choice on the eqsoft base, which beat both
+               gs_src2_c1_eqsoft and tfd50 head to head"), replacing LOCAL's v138 about ten
+               minutes after it was pinned; the lock was not taken. LOCAL first misread it as an
+               accidental follow-newest switch and replaced it with v140 at 04:12Z without
+               knowing it was intended. Ranked games about 01:40Z-04:12Z are gs_mix_camp's: 35
+               of 75, performance 1,652 (v137 1,698 over 65; v140 1,647 over its first 50).
+               OWNER: please decide which line stays live; LOCAL will not switch again before
+               then. Everyone: take the lock before uploading, and after any upload run
+               `cambc submissions activate N` for the version meant to be live.
     2026-11-03: VERSION 138 = m4_submit (ws/bots/m4_submit, ws/m4_submit.zip, 31,831 bytes,
                sha256 f1d1d42e...), uploaded by LOCAL and pinned at 01:22Z (the owner gave
                overnight permission to push and test), replacing v137. It is v137 plus map
