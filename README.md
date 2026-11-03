@@ -56,9 +56,12 @@ both, and `analysis/rebuild/screen.sh` now compresses each pairing after scoring
 
 ## Ladder lock
 
-    held by:   LOCAL since 2026-11-03 12:35Z (owner: "lets carry on working on it, we need to be
+    held by:   LOCAL since 2026-11-03 11:50Z (owner: "lets carry on working on it, we need to be
                above 200"). Unranked groups against ten teams ranked 176-228, v140 first as the
                baseline, then candidates made live one at a time (ws/bench/lab/, analysis/rebuild/lab.py).
+               LIVE since 12:58Z: VERSION 147 = rl_submit (v140 + capture rewards routed to Vesper Vale
+               and Marcella, analysis/rebuild/mkrole.py). Versions 141-146 were lab candidates.
+               Fallback: v140 (`cambc submissions activate 140`; a re-activation rebuilds, 2-15 min).
     2026-11-03: VERSION 140 = cHG_submit (ws/bots/cHG_submit, ws/cHG_submit.zip, 31,829 bytes,
                sha256 bd00c40f...), uploaded by LOCAL and pinned at 04:12Z (owner's overnight
                permission). It is m4 (v138) with Hunter > Durability > Jungle emblems and gold
