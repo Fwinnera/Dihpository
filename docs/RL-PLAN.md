@@ -66,3 +66,21 @@ Start with level 1 straight after the qualifier deadline: build the tuner, run i
 a league, and test its best vector on the ladder lab. If it finds gains that survive the lab,
 build level 2's fight model next, since fights are where we lose most (our champions die about
 twice as often as the same champions of the 1,700+ teams).
+
+## First experiment (2026-11-03 evening): a learned danger table
+
+`ws/bots/dzlog` (ab3 plus one log line per living turn) played 688 local games (3.2 million
+champion turns); `analysis/rebuild/dzfit.py` turned them into a 720-cell table of the chance
+of dying within 15 rounds, by health band, local odds (total health x total strength, ours
+against theirs), enemies within 6, allies within 5 and distance from home. The table is
+sharp: 3% above 75% health against 62% below 20%; 16% with one enemy near against 43% with
+three; 45-76% at 35-75% health when heavily outgunned -- states where the fixed thresholds
+keep fighting. **ab5 = ab4 + withdraw when the table says more than 50%**: level locally (88
+of 172 against ab3, 82 against ab4) and worse in its smoke games (40 deaths on 00oasis).
+
+Why it did not help is the useful part: the table measures danger *under the current
+policy*, and most of our deaths already happen while withdrawing, so "this state is
+dangerous" does not mean "withdrawing from it is safer". Deciding *what to do* needs the
+outcome of each choice, which is exactly what on-policy learning (level 1's tuner, or level
+3's self-play) measures and logged data cannot. The table is still worth keeping as an input
+feature for a learned policy.

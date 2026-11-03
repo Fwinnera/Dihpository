@@ -5612,3 +5612,8 @@ steps from home; one line per dead turn) collects data over 688 local games; the
 turns it into a 720-cell table of P(death within 15 rounds | state), shrunk toward its
 health x enemies parent, for a retreat rule driven by measured danger instead of fixed
 thresholds.
+
+**ab3v on the lab: 29 + 20 = 49 of 100** (ab3 48): set 1 +6 wins and +127 gems a game, set 2
+-5 and -141 -- level. **The danger table** (688 games, 3.2 million turns; `docs/RL-PLAN.md`,
+"First experiment") drives ab5 = ab4 + withdraw above a 50% chance of dying within 15
+rounds: level locally (88 against ab3, 82 against ab4). ab4 uploaded as v158 for the lab.
