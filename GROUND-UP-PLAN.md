@@ -5159,3 +5159,8 @@ early. Queued: gw10 held out and re-rolled, then w 1.5 and 2.0.
 **Hunter > Durability > Jungle, confirmed small:** panel 998, 972, 959 (mean 976, +9; ahead
 of m4 on every paired roll), held out **565** of 860 against m4's 547 (+18). Queued: the
 combination with the early gold weight 1.0 (cHG), after gw10's held-out run and re-rolls.
+
+**Early gold weight 1.0, confirmed small:** panel 992, 975, 959 (mean 975, +8), held out
+**561** (+14). Weight 1.5 973, 2.0 964 (one roll each): the gain peaks near 1.0. The
+combination with Hunter > Durability > Jungle (cHG) is screening, then held out and
+re-rolled; if it holds it becomes v139.
