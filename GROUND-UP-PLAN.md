@@ -5151,3 +5151,7 @@ early gold weight (gems + gold x 0.3 before round 500) at 0.6 and 1.0 (gw6, gw10
 (best first roll tonight, gem margin ahead on all eight opponents), Hunter > Jungle >
 Monster 942, Jungle > Hunter > Bruiser 949. bHDJ held out and re-rolled after the
 gold-weight screens.
+
+**Early gold weight** (gems + gold x w before round 500; outcome, m4 mean 967): w 0.3 (m4)
+967, 0.6 **979**, 1.0 **992**. Rising with w, in line with the top teams farming gold
+early. Queued: gw10 held out and re-rolled, then w 1.5 and 2.0.
