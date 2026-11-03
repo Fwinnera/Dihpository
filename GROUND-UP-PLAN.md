@@ -5207,3 +5207,9 @@ any odds and at odds 0.95 beyond **1,058** (d1, best roll yet; on m4 the same ch
 50 rounds 1,009; damage cost 40 1,003, 65 1,022. d1 held out and re-rolled next, then its
 halves (within 5 only, d5; odds 0.95 only, d6). **Ladder 05:01Z:** v140 9 of 20
 (performance 1,604); rating 1,633, rank 290.
+
+**d1 (cHG + engage within 5 at any odds, 0.95 beyond), re-rolled:** 1,058, 1,030, 1,030
+(mean 1,039, +11 on cHG), held out 618 against cHG's 604 (+14). Just under the bar on both;
+not uploaded over v140's 20 ladder games. Its halves, one roll each: within 5 only (d5)
+1,022, odds 0.95 only (d6) **1,041**. Re-rolling d6 and running it held out; also e1 = d6
+with odds 0.75 against enemies carrying 15+ gems (a kill now pays 150 gold plus the bag).
