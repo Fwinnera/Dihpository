@@ -5324,3 +5324,46 @@ re-roll four times;** always re-roll before believing one.
 
 Tools for all of this are in `analysis/rebuild/` (README there); `fuelcheck.sh` confirms
 the live build, `ladderperf.py` and `fetcheras.py` measure versions on the ladder.
+
+## Toward rank 200: ladder tests against real teams (2026-11-03, from 11:40Z)
+
+The owner: "lets carry on working on it, we need to be above 200". At 11:42Z we were rank
+284 (rating 1,640); rank 200 needed 1,749. Over all 220 of v140's ranked games: 110 won,
+performance 1,658 (its first 100 were 1,696, the next 120 were 1,627). v137 1,681 over 70,
+Andy's gs_mix_camp 1,633 over 80: the whole line sits near 1,660.
+
+**Where v140 loses** (`analysis/rebuild/ladcmp.py ws/bench/ladder_v140`, all 220 summaries):
+in the 110 lost games the opponent has 33% more gold by round 100 (312 against 235), 36%
+more by 300, and ends with 6,366 against 3,408; they collect 1,060 gems to our 580 and
+kill us 12 times to our 3. Won games are the mirror image. Camp damage by round 100 is
+level (4,162 against 4,757): the gap is early kills (0.9 against 0.3 by round 100) and
+camp clears (5.0 against 4.1). Per champion over all games, our Vesper Vale kills 374 and
+dies 692 times (theirs kills 2.25 and dies 1.75 per 1,000 rounds against our 1.37 and
+3.05); every champion of ours dies more than the same champion of theirs. Early fights
+(before round 300) by matchup: our Vendetta against Marcella 22-43 and Ryth 9-35, our
+Vesper Vale against Heart of Ruin 5-29 and Marcella 15-37. Altar locks cost 10 gold (not
+a factor); fuel exhaustion is 18 events a game (not a factor).
+
+**A ladder lab.** Unranked match groups play the live version against a chosen team on
+five chosen maps, and the quota is **50 groups an hour** (`match-groups quota` counts
+groups, not matches: 250 games). `analysis/rebuild/lab.py` queues one group against each
+of ten teams ranked 176-228 (ratings 1,708-1,777: the band we must beat), fifty distinct
+maps, sides alternating; later arms replay the same opponent versions (`--source-group`).
+`labtest.py` makes a version live for an arm. Selecting a version queues a platform
+build, which took 5-6 minutes today; selecting another cancels a pending build, so
+candidates go live one at a time and also play the ranked games that fall in their
+window.
+
+    arm (set 1, 50 games)                                  won
+    v140                                                    22
+    e1 (odds 0.95, 0.75 against carriers of 15+ gems; v142) 22   (12 games flipped each way)
+
+Between near-identical versions about a quarter of the games change winner, so an arm
+needs about 100 games to show a +10-point difference; set 2 (`--set 2`: the other 36 maps
+and 14 of set 1's with sides swapped) doubles it.
+
+In the lab losses the opponents (nearly all Heart of Ruin + Vesper Vale + Marcella + Ryth +
+Vendetta) win by massacre: 0-54 kills on 02arena, 2-46 on 01hooks, 3-36 on 00eight. On
+03fan our four champions walk to the central altar's gold camps and die there at rounds
+38-53 with no camp cleared; on 00the_line and 01hooks the first deaths are deep in the
+middle or on the enemy's side.
