@@ -5649,3 +5649,30 @@ contained fixes (BossBot runs only on party maps: their other 158 games are iden
 game for game): bk2 (boss attempts from round 150 after one emblem, not 650 after two) and bg
 (party scoring counts gold 0.15, not 0.4) are both worse on party maps locally (bk2 12 / 7 / 4
 of 14 against gs_mix_camp / v140 / sh, bg 8 / 8 / 7, where ab3 scores 13 / 10 / 8). Not kept.
+
+## Unranked diagnostics with v155 (2026-11-03, 19:45-20:25Z)
+
+Owner: "keep v155 running" and "run unranked games and iron it out". v155 itself, live, played
+its ten weakest maps against eight teams ranked 185-228 (`analysis/rebuild/diag.py`; 80 games,
+35 won; `ws/bench/diag/d1.json`):
+
+    03homonoliths 8/8 (the spawn fix holds)   00contest 6/8   00stampede 5/8   00swirl 4/8
+    03showdown 4/8   00ambush 3/8   02guardians 3/8   00anvil 1/8   01boss_battle 1/8
+    adgato_gemcombat4 0/8 (434-917 gems against about 1,015; kills 1-6 against 12-18)
+
+**01boss_battle: we collect but never bank** (0-12 gems submitted in 7 of 8 games while
+holding 100-200 a champion). Its only altar can be reached from **one tile** (8 of the 9
+tiles in submit range are wall; `ws/bots/bbdbg`, a debug build that logs each bank call):
+our carriers stand two tiles away while an enemy holds the tile, BossBot marks the deposit
+blocked after three idle turns and gives up for 80 rounds, and the cycle repeats. Our deaths
+there: 79 to camps and 43 to champions in 8 games, 21 of the camp deaths within 5 of the altar,
+beside its 400-strength monolith. **02guardians' altar has two open tiles** (7 of 9 walled);
+00anvil and 03showdown have open altars and are lost on monolith control.
+
+Fixes tried, all on ab3 and confined to party maps (their other 158 games per opponent are
+identical to ab3's): ab6 (a carrier facing a taken altar tile attacks the enemy on it, and
+BossBot retries a blocked deposit after 20 rounds, not 80) 2 of 6 on 01boss-battle against
+early raider bk2, gs_mix_camp and v140; ab6b (the 20-round retry alone) 4 of 6, the same as
+ab3, but on all party maps 28 of 42 against ab3's 31, banking less on both chokepoint maps.
+None is ready; v155 stays. The chokepoint altar needs a plan to *hold* the tile (one banker
+on it, others feeding it), which our own bots do not test because they rarely contest it.
