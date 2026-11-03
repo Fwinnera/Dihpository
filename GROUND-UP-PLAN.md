@@ -5510,3 +5510,14 @@ deaths and 12 kills against ab2's 10 and 1). Local (head to head of 172 with sh 
 v140; panel + gs_mix_camp, sh 1,197): ab 84 / 88 / 97 / 115, 1,209; ab2 85 / 88 / 105 / 100,
 1,198. Paired lab flips, tf -> sh: 18 games gained, 12 lost (+6 net; about 18% by chance).
 ab2 uploaded as v153 for the lab.
+
+**ab2 on the lab: 22 + 21 = 43 of 100** (sh 47). Ranked since rl first went live: 37 of 80,
+performance 1,657 (v140 1,670 over 230); tfs/sh/ab2 since 15:03Z 10 of 20 (1,673). The fix
+for 03homonoliths shows on the ladder: the 15:21Z ranked game there was won. Lab totals of
+100 for the rl line: sh 47, ab2 43, gp120 42, rl 41, tf 41, cb 33; set 1 alone (v140 22):
+rl 25, tf 26, sh 26, ab2 22.
+
+**sgA = sh + gwA's gold weighting** (early gold 0.3 where the map regrows four or more gems
+a round outside monoliths; 1.0 elsewhere): one 03membrane smoke game against sh 1,002-322.
+Uploaded as v154 for the lab -- the local panel cannot judge it, since our own bots share
+the gold habit.
