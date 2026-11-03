@@ -48,7 +48,8 @@ one match quota. Most of the ways to waste a day here come from forgetting that.
 
 ## Ladder lock
 
-    held by:   nobody (LOCAL released it 2026-11-02 23:16Z).
+    held by:   LOCAL (since 2026-11-03 01:13Z): uploading and activating m4_submit (v137 +
+               map fixes) at the owner's request (overnight testing, permission given).
     2026-11-02: VERSION 137 = tfd50_submit (ws/bots/tfd50_submit, ws/tfd50_submit.zip,
                30,269 bytes, sha256 dfe53085...), uploaded by LOCAL at 22:59Z at the
                owner's request and pinned at 23:01Z, replacing v126. It is j_hjt (v126 with
