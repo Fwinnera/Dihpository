@@ -5436,3 +5436,23 @@ Also level locally: cbG (cb + Greed for Vesper Vale and Marcella) 109 / 89 / 86 
 dz (cb + avoid groups within 6 of where we died, for 120 rounds) 98 / 93 / 84 / cb 87.
 Next on rl: rlx = Ryth's shop counts the strength its bonus health gives (+1 per 100),
 Capture (3-turn captures) as the collectors' fourth emblem, Greed for them late.
+
+**More refinements, local (head to head with v140 / rl, of 172; panel + gs_mix_camp, rl 1,169):**
+rlx (Ryth's shop counts its health-to-strength passive; Capture as the collectors' fourth
+emblem; Greed late for them) 93 / 81, 1,163; pz (Prospector > Hunter > Durability for every
+champion on the 13 maps where at least half the gems are in non-attacking clusters) 96 / 81 --
+on those maps 11 of 26 against rl and 12 of 26 against v140, where rl scores 16: worse; tf
+(focus fire on the enemy with the most strength per point of health instead of the fewest
+hits to kill) 92 / 92, **1,198**. tf is on the lab next.
+
+**Lab losses with rl, first 200 rounds (100 games):** we die 183 times and kill 103; we die
+first in 64 games. Varg dies 42 times and kills 12; Vendetta 50 and 33.
+
+**03homonoliths: the monolith beside our spawn.** Each team's 600-gem monolith group is two
+tiles from its spawn, and the spawn heals 100% a round, so a champion on a spawn tile in range
+hits it forever: strong teams take theirs, then ours (1,200 to 0; v140 0 of 3 ranked, rl 0 of
+1 lab). BossBot waited for round 650 (and sat healing on spawn whenever hurt). **sp**
+(`mkspawn.py`, on rl): on party maps a gated group with a camp in reach of a spawn tile is
+eligible at once, is attacked from a spawn tile in range, and a champion on spawn with a camp
+in range attacks instead of waiting to heal. Against rl on 03homonoliths: 1,200-0 from both
+sides (rounds 956 and 767).
