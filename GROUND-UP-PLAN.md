@@ -5580,3 +5580,20 @@ Open, in order of what the data says is left:
    43-48% gold-only camps before round 150 against their 33%. Needs a test bed whose
    opponents race gems; our local bots share the gold habit.
 3. A lab with more teams near our own rating, to resolve smaller differences.
+
+## Evening, after "work on it more" (2026-11-03, from 17:37Z)
+
+Lock taken again; the version pinned by 22:30Z is the qualifier entry. `docs/RL-PLAN.md`
+answers the owner's reinforcement-learning question (constraints, three levels, the
+self-play trap); level 1, an evolution-strategies tuner over the decision constants, is
+proposed as its own session.
+
+**Gem margin, paired by team and map** (`analysis/rebuild/labmargin.py`), carries more than
+win counts: rl - v140 on set 1 +138 gems a game (z 1.9); ab3 - rl -100 on set 1 but +184 on
+set 2 (z 2.2); cb - rl -182 (z -2.2).
+
+Local, against ab3 (of 172): dg (a group whose surroundings hold more enemy health x
+strength than we bring costs 150 more, `mkdg.py`) 88; rt (retreat at 40% / carriers 50%) 80;
+ab3A (ab3 + gwA's gold weight) 82. **dg on the lab: 23 + 19 = 42 of 100** (ab3 48): not
+kept; v155 re-selected at 18:09Z. Next: ab3v = ab3 + rl3's bonus-aware camp value (Vesper
+Vale counts 33% more gold, Marcella 2 gold a gem).
