@@ -5213,3 +5213,7 @@ halves (within 5 only, d5; odds 0.95 only, d6). **Ladder 05:01Z:** v140 9 of 20
 not uploaded over v140's 20 ladder games. Its halves, one roll each: within 5 only (d5)
 1,022, odds 0.95 only (d6) **1,041**. Re-rolling d6 and running it held out; also e1 = d6
 with odds 0.75 against enemies carrying 15+ gems (a kill now pays 150 gold plus the bag).
+
+**d6 (odds 0.95 only), re-rolled:** 1,041, 1,030, 1,020 (mean 1,030, +2), held out 594 (-10):
+a wash. **e1 = d6 + odds 0.75 against enemies carrying 15+ gems: 1,059** on its first roll.
+Running e1 held out and re-rolled, and e2 = d1 + the same carrier odds.
