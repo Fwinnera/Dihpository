@@ -5062,3 +5062,26 @@ on m3 (before round 100/150, camps beyond 18/14 steps of spawn cost 2/3 rounds a
 941 and 940 against m3's mean 951. Not kept; 02cuts' walls make straight-line distance a
 poor guide. On 01big-world nothing is stranded: 35-54% of every champion's time is
 travel between islands.
+
+## Overnight: v138 live, settings re-checked, per-champion output (2026-11-03)
+
+**v138 = m4_submit**, uploaded and pinned 01:22Z with the owner's overnight permission;
+the 01:30Z ranked game on 01big-world a matches local m4 for 120 of 120 fuel figures after
+the draft (`analysis/rebuild/fuelcheck.sh`).
+
+**Settings re-checked on m4** (of 1,376, engine outcome; m4's three-roll mean 967): damage
+cost 60 964, bank at 30 gems 961, at 18 969, shop at 100 gold every 50 rounds 945, at 250
+gold 951, joining credit share^0.35 911. All inside m4's own spread or worse; the tuned
+values stand on the new engine.
+
+**The opening variants never made the opening faster.** Median gold by round 300 (174
+games each against b_tbd, f_hor_h, f_vv_h): m4 892, capped rush 850, opening radius 845 and
+911, v137 888; camp damage by round 300 11,500-12,600 for all. Ladder winners on the maps
+we lose have 1.5-3x that. Whatever makes their openings fast, it is not which camp comes
+first.
+
+**Per champion (m4, five-pick maps, per 1,000 rounds):** Vendetta 1,155 gold and 16,800
+camp damage, Varg 1,021 / 16,400, Vesper Vale 866 / 13,200, Marcella 835 / 11,100, Ryth
+621 / 11,200 (first camp hit at a median round 48). Mite's Vesper Vale and Vendetta each
+do about 31,000 camp damage per 1,000 rounds. Screening Tavi, Willow and Heart of Ruin in
+Ryth's slot (`dT`, `dW`, `dH`).
