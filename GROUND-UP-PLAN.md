@@ -5402,3 +5402,24 @@ Refinements, local, one roll (head to head of 172 against v140 / rl; panel + gs_
 1,548, v140 1,142, rl 1,169): rl2 (reward to the larger bonus) 99 / -, 1,161; rlM (Marcella
 third) 87 / -, 1,154; rl3 (Vesper Vale and Marcella value groups with their bonus) 88 / 86,
 1,193; rl5 (collector range 5) 91 / 87, 1,161. All within the noise of rl.
+
+**Early group play** (`mkgroup.py`, on rl): before round N a champion without an objective
+takes the group claimed by the lowest-slot living teammate, so the team farms and meets
+the enemy together. Local, one roll (head to head with v140 / rl / gp120, of 172; panel +
+gs_mix_camp, rl 1,169): gp80 108 / 87 / 76, 1,173; **gp120 102 / 96 / -, 1,144**; gp160
+98 / 91 / 96, 1,156; gp250 98 / 82 / -, 1,166. gp120 (v148) on the lab: set 1 22 of 50,
+set 2 20 of 50 -- 42 of 100 against rl's 41: level. Also level with rl: rlT (Treasure for
+Vesper Vale and Marcella) 103 / 85, 1,172; rlVM (Vesper Vale and Marcella drafted second
+and third) 88 / 83, 1,173; gpH (Heart of Ruin for Ryth) 89 / 83.
+
+**cb = gp120 + rl3's bonus-aware camp value + rlT's Treasure:** head to head with v140
+**114 of 172 (66%)**, rl 99 (58%), gp120 83; panel + gs_mix_camp 1,185. Uploaded as v149.
+
+**Item table, read from the engine** (`ws/bots/probe_items`, `item_type::info()`): every
+shard is 1 point of its stat for 30 gold; five combine into an emblem of 5 points plus a
+passive (Monster +15% camp damage, Durability -10% damage taken, Treasure +10% gold,
+Jungle -30% camp damage, Home recall 3 turns, Tribute -33% tribute time, Capture 3-turn
+capture, Prospector +25% cluster rewards, Hunter +50 gold a kill, Skirmish +5% champion
+damage, Collectors +1% damage a family), or Power 6 points, or Bruiser 5 + 1 + 1. **Greed
+combines 25 shards (750 gold) into 35 points**: 17% more stats than five Power emblems.
+cbG = cb with Vesper Vale and Marcella stacking Greed instead of Power.
