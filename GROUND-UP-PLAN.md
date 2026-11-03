@@ -5499,3 +5499,14 @@ else 1.0).
 lose locally to tfs 79 and 76 of 172 -- self-play rewards the gold weighting; not uploaded.
 Next on sh: ab, where Ryth's area stun and Marcella's stunning enhanced attack are valued
 for the enemy damage the stun prevents.
+
+**Ability use, on sh.** ab: Ryth's area stun and Marcella's stunning enhanced attack are
+valued for the enemy damage the stun prevents (strength x 0.8 per stunned enemy). ab2 = ab +
+a ready self-shield is raised while retreating or disengaging from champions within 4 (a
+shield does not use the move; Varg in one 00oasis smoke game shielded 18,500 and died once,
+sh's Varg 5,750 and 13 times). ab3 = ab2 + a ranged champion with an enemy adjacent dashes
+away when its dash is ready instead of standing to shoot back (one smoke game: Vesper Vale 3
+deaths and 12 kills against ab2's 10 and 1). Local (head to head of 172 with sh / tfs / rl /
+v140; panel + gs_mix_camp, sh 1,197): ab 84 / 88 / 97 / 115, 1,209; ab2 85 / 88 / 105 / 100,
+1,198. Paired lab flips, tf -> sh: 18 games gained, 12 lost (+6 net; about 18% by chance).
+ab2 uploaded as v153 for the lab.
