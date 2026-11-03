@@ -56,8 +56,22 @@ both, and `analysis/rebuild/screen.sh` now compresses each pairing after scoring
 
 ## Ladder lock
 
-    held by:   LOCAL (since 2026-11-03 04:08Z): uploading and activating cHG_submit (m4 +
-               Hunter > Durability > Jungle + early gold weight 1.0) at the owner's request.
+    held by:   nobody (LOCAL released it 2026-11-03 04:24Z).
+    2026-11-03: VERSION 140 = cHG_submit (ws/bots/cHG_submit, ws/cHG_submit.zip, 31,829 bytes,
+               sha256 bd00c40f...), uploaded by LOCAL and pinned at 04:12Z (owner's overnight
+               permission). It is m4 (v138) with Hunter > Durability > Jungle emblems and gold
+               valued like gems in camp choice before round 500 (two lines). Local, of 1,376
+               (three rolls, outcome): 1,030, 1,017, 1,036 (mean 1,028) against m4's 967 and
+               v137's 952; held out 604 of 860 against m4's 547 (GROUND-UP-PLAN.md, "v139
+               candidate"). Confirmed live: the 04:20Z ranked game on 00eight a (vs
+               TheHappyFIts) equals local cHG_submit for 112 of 120 fuel figures after the draft
+               (m4: 9). Fallback: v138 (`cambc submissions activate 138`) or v137.
+    NOTE: VERSION 139 ("gs_mix_camp", another account, uploaded 01:32:56Z) went live by
+               accident: `cambc submit` switches the team to follow-newest, overriding LOCAL's
+               01:22Z pin of v138. Ranked games from about 01:40Z to 04:12Z are gs_mix_camp's:
+               35 of 75, performance 1,649 (v137 1,706 over 65; v138 played one group). After
+               ANY upload, run `cambc submissions activate N` for the version that should be
+               live.
     2026-11-03: VERSION 138 = m4_submit (ws/bots/m4_submit, ws/m4_submit.zip, 31,831 bytes,
                sha256 f1d1d42e...), uploaded by LOCAL and pinned at 01:22Z (the owner gave
                overnight permission to push and test), replacing v137. It is v137 plus map
