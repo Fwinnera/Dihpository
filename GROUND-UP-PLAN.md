@@ -5283,3 +5283,8 @@ rule (health or strength by the marginal health x damage product) is worth about
 since passives do not stack but different families do, testing a fourth emblem (Monster,
 +15% camp damage: h4) and a fifth (Treasure: h5) before the power shards. **Ladder 07:08Z:**
 v140 50 of 85 (performance 1,705), v137 1,698; rating 1,687, rank 244.
+
+**Extra emblems on cHG** (panel / gs_mix_camp + gs_eq; cHG 1,028 / 235): fourth emblem Monster
+(+15% camp damage) before the power shards **1,038 / 245** (h4, +10 on both); plus a fifth,
+Treasure, 1,016 / 229. h4 held out and re-rolled next. **Ladder 07:19Z:** v140 52 of 90
+(performance 1,701); rating 1,684, rank 242.
