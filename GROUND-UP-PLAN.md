@@ -5729,3 +5729,49 @@ version of mkprof.py; run with `drrun.sh`) to find which branch (farm, travel, a
 combat, escort) takes the melee champions into the enemy half before they die. Then make a
 contained fix, such as no chase past the middle toward the enemy spawn, and screen it locally
 and on the lab.
+
+## Home field rejected; the real gap is at home; 00lost_world's chase loop (2026-11-03, 23:00Z-00:10Z)
+
+**Profiled v155** (`ws/bots/p_ab3` via `mkprof2.py`; 516 local games against gs_mix_camp, gs_eq
+and sh; `analysis/rebuild/deepwhy.py`): our deaths past the middle (3.2 a game) start with
+a full-health crossing (travel 41%, a chase in combat 29%). Champions then spend a median 33
+rounds there, fight in 30% of their turns (6% in our half) and die retreating (81%).
+
+**Home field (`mkhf.py`), all three variants are worse or level.** Of 172 against v155, with the
+panel (sh, rl, cHG, gs_mix_camp, b_tbd, next_trial, f_hor_h; v155 818) in brackets:
+- hf, past the middle: no fight just because an enemy is within 4; no chase within 5 of their
+  spawn; retreat and disengage earlier with depth. **55** (714).
+- hfC, the combat parts only: 60 (709).
+- hfR, the retreat parts only: 82 (800).
+
+Holding back in enemy territory costs fights we win.
+
+**Re-read by territory, the gap is at home.** Lab deaths to champions a game, both teams, by
+where on the map from our side (ab3 and sh arms, 114 games):
+
+    zone          our spawn  our half  middle  their half  their spawn
+    our deaths       2.92      4.00     5.10      3.26        1.41
+    their deaths     0.61      1.09     2.18      2.41        2.48
+
+In their territory the trade is even; in ours we die about four times for every kill. Deaths
+near our spawn are quick (median 1,200 damage in the last 10 rounds, 5-8 tiles out, 2.3 enemies
+credited; 24% within 20 rounds of respawning). Both teams credit 2.7 champions a kill: they do
+not fight in bigger groups, they win more of the fights (13.5 kills a game to our 8.1).
+
+**Maps lost regardless of version** (lab, 12 arms, 1,198 games; each map is always against the
+same team): fight blowouts (00swirl, 00dunes, 00breadcrumbs, 00interlock; party maps with the
+party session) and gem races lost with few deaths (00lost_world 65-1,005 banked, 03contours,
+02tangle, 00quadrants, 00expanse, 01islands, 02cuts, 01fracture). **00lost_world** is a gem
+fountain: about 168 gems of harmless clusters around the central altar, respawning every 50
+rounds, 13-19 steps from both spawns. On the ladder our team does **no camp damage in the first
+150 rounds** (Vendetta's first camp hit at round 315) while dealing 585-1,560 champion damage a
+champion; Rusty Epee's Marcella and Ryth fight as much and still collect 91 and 126 gems by
+round 150. Profiled locally, every champion flips between travel and combat every 1-5 rounds
+for 50+ rounds, stuck short of the clusters: the combat branch walks toward any enemy within 4,
+so the farm branch never runs.
+
+**fc (`mkfc.py`, "farm, don't chase"):** attack an enemy in reach as before, but step toward
+one out of reach only when the chase pays: a kill with what is ready, a deposit to interrupt,
+an enemy that can already hit us (fcN drops this one), or local odds of 1.15. Smoke games
+against v155: 00lost_world won 1,013-428 (fcN 1,006-243); 00oasis lost 110-1,030 (fcN 188-1,006).
+Screen running.
