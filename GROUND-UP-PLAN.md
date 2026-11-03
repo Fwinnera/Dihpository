@@ -5120,3 +5120,8 @@ instead of 4 (g1), at even odds instead of 1.15 (g2), both (g3).
 **995**, Jungle > Hunter > Durability **992**, Hunter > Bruiser > Durability (v126's) 955.
 Replacing Treasure (+10% gold) with Hunter (+50 gold a kill) pays once group play wins the
 fights. Both winners re-rolling (bHJ_r37/_r71, bJH_r37/_r71) after the aggression screen.
+
+**More aggression does not help either** (m4 967): engage at any odds within 5 tiles 947,
+at odds 0.95 954, both 966. The thresholds stand (within 4 at any odds, else 1.15).
+Queued after the emblem re-rolls: Hunter > Jungle > Bruiser, Hunter > Jungle > Monster,
+Jungle > Hunter > Bruiser, Hunter > Durability > Jungle.
