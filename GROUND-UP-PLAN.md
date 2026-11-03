@@ -5478,3 +5478,18 @@ stun (1.5 x) + area hit. Per champion in rl's lab games their Marcella deals 9,5
 damage per 1,000 rounds to ours 4,800 (ours is busy collecting and banking: the price of rl),
 and their Varg shields 7,200 to ours 3,900: **sh** raises Varg's shield at 95% health instead
 of 70% (head to head with tfs 86 of 172, rl 103).
+
+**Ranked since rl first went live (60 games): 27 won, performance 1,648** (rl's first 25:
+1,787; the next 35, across gp120, cb, rl again and tf: 1,545) against v140's 1,670 over 230.
+Five-game batches against one opponent make 60 games worth about +-50. Lab set 1 per team:
+rl 25 and tf 26 against v140's 22, most of it against Shinshilachki (0 -> 2-3 of 5); the
+group-play arms (gp120, cb) fall against Memory? (5 -> 2). On death, our champions drop 124
+gems a lost game to the enemy's 52 (48 and 127 in won games).
+
+**03membrane: gold weighted like gems loses a gem race.** v140 lost all 5 ranked games there.
+The opponent farms the central gem groups (18 gems, 14-gem clusters around the altar) and
+banks every 10-20 rounds (about 300 gems by round 220, 1,000 by round 650); ours farms the
+gold-only camps on our side (0g/40-120 gold) because v140 counts early gold like gems
+(v137/v138 counted it 0.3): 8 gems banked by round 220. Testing on tfs: gw3 (early gold 0.3
+everywhere) and gwA (0.3 where the map regrows at least four gems a round outside monoliths,
+else 1.0).
