@@ -5085,3 +5085,16 @@ camp damage, Varg 1,021 / 16,400, Vesper Vale 866 / 13,200, Marcella 835 / 11,10
 621 / 11,200 (first camp hit at a median round 48). Mite's Vesper Vale and Vendetta each
 do about 31,000 camp damage per 1,000 rounds. Screening Tavi, Willow and Heart of Ruin in
 Ryth's slot (`dT`, `dW`, `dH`).
+
+**Ryth's slot** (fourth pick; of 1,376, outcome; m4 mean 967): Willow 981, Tavi 972, Heart
+of Ruin 847. Willow (the escort controller healing the champion it follows) re-rolling.
+
+**Ladder so far** (`analysis/rebuild/ladderperf.py`, opponents' current ratings): v126 86 of
+170 (50.6%), performance 1,636; **v137 40 of 65 (61.5%), performance 1,706**; v138 4 of 10
+at 01:47Z. Rating 1,615 (rank 305) at v137's upload, 1,653 (rank 272) now.
+
+**Who dies, and how** (`p2_tfd50` profile): Vesper Vale 3.6 deaths a game and Vendetta 3.5,
+from about 70% health ten rounds before, with two enemies within 6 and 0.4-0.5 allies
+within 5; 42% and 41% of those deaths begin with a fight the champion chose. Testing fights
+only with cover for them (`mkcover.py`: no pursuit without a teammate within 5 unless one
+hit kills; fV Vesper Vale, fVV both).
