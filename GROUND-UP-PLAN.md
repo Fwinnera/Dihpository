@@ -5367,3 +5367,24 @@ Vendetta) win by massacre: 0-54 kills on 02arena, 2-46 on 01hooks, 3-36 on 00eig
 03fan our four champions walk to the central altar's gold camps and die there at rounds
 38-53 with no camp cleared; on 00the_line and 01hooks the first deaths are deep in the
 middle or on the enemy's side.
+
+**Lab, set 1 (50 games each, same opponents' versions, maps and sides):** v140 22, e1 22,
+dH (Heart of Ruin for Vesper Vale; local panel 955 against 1,029) 17, ec (before round 150
+step away from fights below even odds, `mkearly.py`; local 992) 21, sq (fight odds by the
+square law, `mksquare.py`: one champion against two equal enemies scored 0.5 and stayed;
+local 1,034, head to head with v140 90 of 172) 18. Local, one roll each, of 1,376 (v140
+1,029 by gems): sv (disengage 0.75 + Vesper Vale needs cover) 954, h2 (own half before
+round 150 unless a teammate shares the group) 1,011, jA0 (full credit for joining) 981,
+bz (Bruiser instead of Power late) 1,014, dM (Marcella third) 1,026. Nothing here beats
+v140; the local panel and the lab agree on direction where both ran.
+
+**Who collects a reward.** A group's gold and gems go to the champion that captures it
+(`camp_group::gold_value()` / `gem_value()` are capture rewards). Vesper Vale gains 33% more
+of every gold gain and Marcella 2 gold per gem she tributes, but the collector protocol gives
+a reward to the claimer standing on it, else the lowest slot -- Varg. On v140's ladder games
+our Vesper Vale earned 571 gold per 1,000 rounds (theirs 999) and our Marcella 621 (theirs
+1,055). **rl** (`mkrole.py`): among the teammates claiming a group, a visible Vesper Vale
+within 3 tiles collects it if it carries gold, else a Marcella if it carries gems, and a
+teammate standing on it steps off. First smoke game (02cuts): Marcella captured 801 gems and
+earned 3,208 gold; team gold 7,019 against v140's 3,882. Local: head to head with v140
+**100 of 172 (58%)**, panel + gs_mix_camp 1,169 against 1,142 (+27). Uploaded as v147.
