@@ -5423,3 +5423,16 @@ capture, Prospector +25% cluster rewards, Hunter +50 gold a kill, Skirmish +5% c
 damage, Collectors +1% damage a family), or Power 6 points, or Bruiser 5 + 1 + 1. **Greed
 combines 25 shards (750 gold) into 35 points**: 17% more stats than five Power emblems.
 cbG = cb with Vesper Vale and Marcella stacking Greed instead of Power.
+
+**cb on the lab: 17 + 16 = 33 of 100** (rl 25 + 16 = 41, gp120 22 + 20 = 42). The best local
+candidate of the day (66% head to head with v140, 58% with rl) is the worst on the ladder
+lab; Treasure as Vesper Vale's second emblem delays Durability and Jungle on the champion
+that now fights most. Ranked while live: rl 16 of 25, gp120 5 of 15. **rl re-selected at
+14:16Z.** Lesson for the rest of the day: refinements inside +-10% locally are coin flips
+on the ladder; only a mechanism that moves the economy (rl: +23% team gold against these
+teams) has carried over.
+
+Also level locally: cbG (cb + Greed for Vesper Vale and Marcella) 109 / 89 / 86 / cb 90;
+dz (cb + avoid groups within 6 of where we died, for 120 rounds) 98 / 93 / 84 / cb 87.
+Next on rl: rlx = Ryth's shop counts the strength its bonus health gives (+1 per 100),
+Capture (3-turn captures) as the collectors' fourth emblem, Greed for them late.
