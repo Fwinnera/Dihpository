@@ -5687,3 +5687,18 @@ margin against ab3 +33 on set 1 (z 0.5), -105 on set 2 (z -1.1). Rejected; **v15
 live again at 22:01Z** as the qualifier entry. The tuner's local gain did not carry over, as
 with every refinement today: its league is our own pool, and the next run needs held-out
 opponents or a fitness that includes the lab.
+
+## Toward the UK qualifier: the plan and the danger-response bandit (2026-11-03, from 22:10Z)
+
+Owner, 22:10Z: "thats international qualifiers we are uk we have till the 10th, lets improve
+our bot as much as we can". `docs/UK-PLAN.md` sets the week's protocol (mechanisms, not
+retunes; level locally, then a long live window with the lab and ranked games together) and
+five workstreams. Party maps are being worked in their own session.
+
+**Workstream 1, the danger response learned on-policy: closed, no change.** An exploration
+build (`mkdr.py` MODE 1) drew a random response in every danger state over 1,376 local games
+(113,396 episodes; `drfit.py`): the ordinary rule scores -43.8 against falling back's -49.6
+and fighting's -66.9 (deaths within 20 rounds 40%, 43%, 56%), best under every trigger and for
+every champion type; one state cell in about a hundred favours another response, as chance
+gives. Our deaths are decided before the danger state; details in `docs/RL-PLAN.md`, "Second
+experiment".
