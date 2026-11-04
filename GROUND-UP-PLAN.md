@@ -5887,3 +5887,26 @@ are screening on the composite: br (Bruiser scaling), pro (a fourth Prospector e
 On 00lost_world against Rusty Epee, fc still does almost no camp damage by round 150 (1k, against
 their 5k and 266 gems banked). The ladder failure there is not the local chase loop: the enemy
 comes to us, and we fight rather than farm.
+
+**Item builds on the composite** (gs_mix_camp / b_tbd / next_trial of 172; v155 132 / 124 / 132 = 129.3;
+`mkitems.py`):
+
+    br     Bruiser scaling instead of Power          126 / 127 / 136 = 129.7
+    pro    + a fourth emblem, Prospector              127 / 133 / 138 = 132.7
+    brpro  both                                       129 / 129 / 138 = 132.0
+    cap    + a fourth emblem, Capture                 119 / 127 / 130 = 125.3
+
+**00lost_world on the ladder, event by event** (v155 against Rusty Epee). The enemy clears the
+central clusters from round 27 and banks at the central altar every 3-15 rounds from round 42.
+Our champions stand 10-16 steps away and kill three of theirs in rounds 29-45, but our first clear
+is at round 164, beside our own spawn. strategy::choose_group puts any camp we open before a
+visible enemy ahead of every camp we cannot. op0 (score alone) and op15 (a 15-point penalty instead,
+`mkop.py`) still lose 00lost-world locally to gs_mix_camp (310-1,002, identical); screen queued.
+
+**Lab set 3 (`lab.py --set 3`):** ten other teams ranked 186-208 at 01:55Z (Alpha pekka,
+CompetitiveBasmaga, V4.1 Flash, DIET CODE, Rogue Noogers, decrest, patisserie du pont neuf,
+Quantom, BrendanBurgess, ClosedAI) and maps from another shuffle. v155's base arm ab3_s3:
+**26 of 50**. The lab now finishes 100 games in minutes, so the risk is luck, not time: a candidate
+no better than v155 passes "50 of 100 and margin >= 0" about a quarter of the time. A candidate is
+kept only if set 3 confirms it. `labrun.sh BOT ARM NOTE` runs the whole cycle (upload, wait, pin,
+three sets, margins). pro (v161) is in the lab now.

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Unranked ladder tests: the live bot against a fixed set of real teams.
 
-    lab.py queue ARM [--from BASE] [--teams N] [--set 2]   one five-map group per team
+    lab.py queue ARM [--from BASE] [--teams N] [--set 2|3]   one five-map group per team
     lab.py show ARM [ARM ...]                    results per team, map and arm
 
 Every arm plays the same maps and sides against each team. `--from BASE` also replays
@@ -35,6 +35,21 @@ TEAMS = [
     ("1e25877b-9ea9-4821-bd54-236e44c5e650", "Kaizen"),
     ("7348a083-dc1d-45ec-a355-c4bede12dd6a", "tip"),
 ]
+# Set 3 (added 2026-11-04 01:55Z): ten other teams ranked 186-208 then (ratings 1,734-1,772) and maps
+# from another shuffle, so a candidate that passes sets 1 and 2 can be confirmed on games it was not
+# picked on. Its base arm is v155's ab3_s3.
+TEAMS3 = [
+    ("64ae7e80-d604-4121-a067-210e515e5bb5", "Alpha pekka"),
+    ("ce501991-2191-4063-9cdb-86103b8e9f81", "CompetitiveBasmaga"),
+    ("fd795986-cfd3-4732-9fa9-94caba40067a", "V4.1 Flash"),
+    ("bee75a64-fae5-48aa-8751-73d4e78ebfb5", "DIET CODE"),
+    ("2cb78ebc-e61e-4ee0-9950-b3e3963d9743", "Rogue Noogers"),
+    ("432f7d69-cce1-48c4-a446-2b293aa210b9", "decrest"),
+    ("f752d854-acdd-4417-8c41-bf4b39108db6", "patisserie du pont neuf"),
+    ("33fd952b-b067-40b2-a0d4-ba289bddcb57", "Quantom"),
+    ("4938a543-0798-4879-b8ce-f63f98ca13c3", "BrendanBurgess"),
+    ("b9b2f439-fc05-437f-907e-e8380921f9a4", "ClosedAI"),
+]
 
 
 def cambc(*args):
@@ -51,6 +66,11 @@ def plan(which=1):
     """Five maps per team, sides alternating; fixed by the seed. Set 1 is fifty distinct
     maps; set 2 is the other 36 and fourteen of set 1's, each with the side swapped."""
     maps = sorted(p.stem.replace("-", "_") for p in (WS / "maps").glob("*.map26a"))
+    if which == 3:
+        random.Random(2026_11_04).shuffle(maps)
+        return [dict(team=tid, name=name, maps=maps[5 * i:5 * i + 5],
+                     sides=["a", "b", "a", "b", "a"] if i % 2 == 0 else ["b", "a", "b", "a", "b"])
+                for i, (tid, name) in enumerate(TEAMS3)]
     random.Random(2026_11_03).shuffle(maps)
     out = []
     for i, (tid, name) in enumerate(TEAMS):
