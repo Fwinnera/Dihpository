@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Item builds (ab3-line bot): the field's families instead of ours.
 
-    mkitems.py BOTDIR [SCALE=power|bruiser] [EXTRA=none|prospector|capture|treasure]
+    mkitems.py BOTDIR [SCALE=power|bruiser] [EXTRA=none|prospector|capture|treasure] [FIRST=hunter|prospector|...]
 
 Why (GROUND-UP-PLAN.md, "UK-level teams"): the teams at the UK top-8 line buy Bruiser shards for
 half their stats (QS2isLaw 58%, policy wonk 46%) plus economy emblems (Prospector 10-11%,
@@ -21,6 +21,7 @@ src = Path(sys.argv[1]) / "src"
 opts = dict(a.split("=", 1) for a in sys.argv[2:])
 scale = opts.get("SCALE", "power")
 extra = opts.get("EXTRA", "none")
+first = opts.get("FIRST", "hunter")
 
 
 def patch(name, pairs):
@@ -41,6 +42,10 @@ if extra != "none":
          f"        return {{I::jungle_shard_of_focus, I::durability_shard_of_health, I::{extra}_shard_of_focus, I::power_shard_of_focus}};\n"
          f"    return {{I::hunter_shard_of_strength, I::durability_shard_of_health, I::jungle_shard_of_strength, I::{extra}_shard_of_strength}};"),
     ])
+if first != "hunter":
+    # FIRST replaces the Hunter emblem that opens every non-Willow build.
+    patch("config.h", [("    return {I::hunter_shard_of_strength, I::durability_shard_of_health, I::jungle_shard_of_strength",
+                        f"    return {{I::{first}_shard_of_strength, I::durability_shard_of_health, I::jungle_shard_of_strength")])
 if scale == "bruiser":
     patch("bot.h", [
         ("                    scaling_item = health_gain > damage_gain ? bc::item_type::power_shard_of_health\n"

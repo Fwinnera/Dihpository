@@ -5921,3 +5921,15 @@ had been started since 01:32Z), so a three-set test costs 30 of them. `lab.py qu
 partly queued arm, and `labrun.sh` retries until each arm has its ten groups. v155 was re-selected at
 02:00Z, but its rebuild waited in the platform's queue, so v161 stayed live. proop went up as
 **v162** at 02:12Z and is in the lab next.
+
+**Around proop:** proop25 (late camps cost 25) 127 / 132 / 148 = 135.7; pfop (Prospector first
+instead of Hunter, + op15) 128 / 126 / 134 = 129.3. Against gs_mix_camp proop is 128 (v155 132),
+losses spread thin, but it wins 01corridors, 00lanes and 00quadrants, three maps v155 loses to it
+from both sides. Against b_tbd and next_trial it is +21 games.
+
+**Tavi (`mktavi.py`: Tavi before Ryth in the solo draft).** Both UK-level teams draft Tavi, who buys
+anywhere, and our shop() already buys whenever can_buy allows. Our Ryth is our weakest champion
+on the lab. **tv 134 / 130 / 137 = 133.7** (+4.4, ahead of v155 on all three); **tvop = tv + pro + op15:
+131 / 139 / 142 = 137.3** (+8.0, the best of the night). Smoke as side B on 00lost-world against
+gs_mix_camp: won 1,001-540 (v155 loses it from both sides). proop's lab run was stopped before any
+group started, so the quota goes to tvop; it went up as v163.
