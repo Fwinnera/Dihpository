@@ -5775,3 +5775,11 @@ one out of reach only when the chase pays: a kill with what is ready, a deposit 
 an enemy that can already hit us (fcN drops this one), or local odds of 1.15. Smoke games
 against v155: 00lost_world won 1,013-428 (fcN 1,006-243); 00oasis lost 110-1,030 (fcN 188-1,006).
 Screen running.
+
+**fc screened** (of 172 against v155 / panel, v155 818): fc 77 / 806 (gs_eq 136); fcN 80 / 757.
+Per map (`analysis/rebuild/mapdiff.py s43_fc s31_ab3_submit ...`, 1,204 paired games), fc gains
+where we chased instead of farming: 03fan, 01gold-rush, 03shrines, 00lost-world (8 of 14
+against 4), 01corridors, 00elkring, 01shortcut, 03contours. It loses on fight maps: 03membrane,
+adgato-gemcombat1/2, 03ultrastarvation, 02gift-wrapping, 00the-line. fcG (`mkfc.py GATE=1`: the
+rule only while the objective is a harmless gem cluster) won both smoke games against v155
+(00lost-world 1,018-541, 00oasis 1,006-290); screen running.

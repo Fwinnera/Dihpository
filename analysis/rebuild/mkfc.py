@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Farm, don't chase (ab3-line bot): leave the objective for an enemy only when the chase pays.
 
-    mkfc.py BOTDIR [THREAT=1]
+    mkfc.py BOTDIR [THREAT=1] [GATE=0]
 
 Why (GROUND-UP-PLAN.md, "00lost_world"): on the ladder our team does no camp damage in the
 first 150 rounds of 00lost_world (the winners bank 245 gems by then); profiled locally, every
@@ -14,6 +14,8 @@ With this patch the combat branch still attacks an enemy in reach, but only step
 that is out of reach when the chase pays: it can be killed with what we have ready, it is
 depositing gems, it can already hit us (THREAT=1), or our local odds are 1.15 or better (the
 measure choose_enemy uses). Otherwise the turn falls through to farming. Party maps unchanged.
+GATE=1 applies the rule only while the champion's objective is a harmless gem cluster group
+(gems, no camp strength), as on 00lost_world; elsewhere it chases as before.
 """
 import sys
 from pathlib import Path
@@ -21,6 +23,7 @@ from pathlib import Path
 src = Path(sys.argv[1]) / "src"
 opts = dict(a.split("=", 1) for a in sys.argv[2:])
 threat = int(opts.get("THREAT", 1))
+gate = int(opts.get("GATE", 0))
 
 
 def patch(name, pairs):
@@ -38,7 +41,8 @@ patch("config.h", [("inline constexpr bool DEBUG = false;",
                     "inline constexpr bool DEBUG = false;\n"
                     "// Farm, don't chase (analysis/rebuild/mkfc.py).\n"
                     "inline constexpr bool FC_CHASE = true;\n"
-                    f"inline constexpr bool FC_THREAT = {'true' if threat else 'false'};")])
+                    f"inline constexpr bool FC_THREAT = {'true' if threat else 'false'};\n"
+                    f"inline constexpr bool FC_GATE = {'true' if gate else 'false'};")])
 
 patch("combat.h", [(
     "// Our strength against the enemy champions within `radius` of this champion: the",
@@ -68,6 +72,8 @@ patch("bot.h", [(
     "            if (combat::live(*target) && target->health() > 0) {\n"
     "                moved = nav::move_to(nav::around(target->position(), me.attack_range()));",
     "            if (combat::live(*target) && target->health() > 0 &&\n"
-    "                (!config::FC_CHASE || policy::party() || combat::worth_chase(*target, pursuit, team->allies))) {\n"
+    "                (!config::FC_CHASE || policy::party() ||\n"
+    "                 (config::FC_GATE && !(objective && objective->gems > 0 && objective->incoming <= 0)) ||\n"
+    "                 combat::worth_chase(*target, pursuit, team->allies))) {\n"
     "                moved = nav::move_to(nav::around(target->position(), me.attack_range()));")])
 print("patched", src, opts)

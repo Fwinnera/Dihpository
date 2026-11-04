@@ -56,8 +56,11 @@ both, and `analysis/rebuild/screen.sh` now compresses each pairing after scoring
 
 ## Ladder lock
 
-    held by:   nobody (LOCAL released it 2026-11-03 22:02Z). es_best (v159) lost its lab test, 42 of 100
-               against v155's 48; v155 re-pinned at 22:01Z.
+    held by:   LOCAL since 2026-11-04 00:15Z: lab test of fc (ab3 + farm, don't chase;
+               ws/bots/fc_submit, GROUND-UP-PLAN.md "00lost_world's chase loop"), then fcG. Kept only
+               with at least 50 of 100 lab wins (v155 48) and a paired gem margin against v155 of zero
+               or better; otherwise v155 is re-pinned. Owner: "lets improve our bot as much as we can"
+               (UK qualifier 10-11 Nov). Previous: es_best (v159) lost its lab test, 42 of 100.
                VERSION 155 (ab3) is live, PINNED and
                the qualifier entry; evening candidates v156-v158 (dg, ab3v, ab4) were level on the lab.
                Rank 215, rating 1,728 at 19:22Z. Please do not upload before 23:59Z without the owner.
