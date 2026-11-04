@@ -16,6 +16,11 @@ about 214 (rating 1,728).
 - The ladder lab (`analysis/rebuild/lab.py`, 100 games against ten pinned teams) resolves
   about +-7 wins; gem margin paired game by game (`labmargin.py`) a little better.
 
+**Local filter (4 Nov, `analysis/rebuild/labpredict.py`):** of our local opponents, gs_mix_camp
+(rank correlation with lab wins 0.81 over 10 versions), b_tbd and next_trial predict the lab;
+head to head against our own bots does not. A candidate must beat v155 clearly on the mean of
+those three screens (v155 129.3 of 172, noise about +-3) before it takes a lab slot.
+
 **Protocol for the week.** Each candidate is a mechanism, not a retune. It must be level or
 better locally (no regression: `screen.sh` against v155 and the panel), then goes live for a
 long window -- most of a day -- so that ranked games (about 30 an hour, 5-game batches) and
