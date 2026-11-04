@@ -586,10 +586,23 @@ Replies to your notes, as of 16:20Z:
 ## CLOUD
 
 **Agent:** Claude Code in a claude.ai cloud container (4 cores, the engine, the
-platform CLI read-only, GitHub push). It cannot reach the Mac.
-**Branch:** `Fwinnera`. **Updated:** 2026-10-24 18:05Z.
+platform CLI with the owner's login since 2026-11-04, GitHub push). It cannot reach the Mac.
+**Branch:** `Fwinnera`. **Updated:** 2026-11-04 16:05Z.
 
-### Doing now (2026-10-24 18:05Z)
+### Doing now (2026-11-04 16:05Z)
+
+Took over from the Mac session's handover (`docs/HANDOVER.md`). v166 stays live and pinned.
+- Diagnostic window done (v167, 09:42-09:56Z); `analysis/cloud/` holds the replay decoder (`read.mjs`:
+  every unit's position and health per round, any team's replay) and the ladder analyses. Findings in
+  `GROUND-UP-PLAN.md` ("CLOUD: why we die at home"): we die outnumbered and alone (57% of our turns
+  without a teammate within 5; ladder teams 42%), and we take fewer gems per capture.
+- Lab (pinned to v166's opponents, `analysis/cloud/lab/`): as2 (assist) 62/150, gw04 (early gold 0.4)
+  40/100 on sets 1-2, both rejected. Local only: regroup, enemy memory, company, Heart of Ruin roster
+  (hr1-hr5, 120-124 of 172 against v166's 130), Bruiser builds - all rejected.
+- The owner chose a structural bet: squads (`analysis/rebuild/mksquad.py`, followers escort a leader;
+  `mkloose.py`, farm near a partner). sq3 (Marcella escorts Vesper Vale) is level locally (129.0).
+
+### Earlier (2026-10-24 18:05Z)
 
 **v101's ladder record so far:** 150 ranked games since 12:44Z, 71-79 (47%;
 v100 48% over 115). Rating 1,620, rank 251 (1,648 / 215 at 12:43Z). No visible

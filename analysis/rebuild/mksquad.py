@@ -14,6 +14,8 @@ clears bigger groups faster. Here chosen followers use it with a preferred leade
 
 A follower escorts its preferred leader whenever that leader has a claimed group, otherwise the nearest
 teammate with a claim (as Willow does), and farms alone when nobody has one. Party maps are unchanged.
+A follower stands within its own attack range of the camp (Willow's 3-tile standoff kept melee followers out of
+reach: Marcella's monster damage fell from 17.7k to 5.2k as an escort).
 
     mksquad.py BOTDIR [PAIRS=marcella:vesper_vale,ryth:varg]
 """
@@ -61,5 +63,10 @@ patch("bot.h", [(
     "            const int wanted = config::squad_leader(me.champion_name());\n"
     "            double priority = wanted >= 0 ? (static_cast<int>(ally.champion_name()) == wanted ? 0 : 1)\n"
     "                                          : (ally.champion_name() == bc::champion_type::varg ? 0 : 1);\n",
+)])
+# A melee follower must stand in reach of the camp; Willow's 3-tile standoff is her attack range.
+patch("bot.h", [(
+    "                nav::move_to(nav::around(target.position(), leader.is_visible() ? 3 : 1));\n",
+    "                nav::move_to(nav::around(target.position(), leader.is_visible() ? std::max<int>(1, me.attack_range()) : 1));\n",
 )])
 print("patched", src, P)
