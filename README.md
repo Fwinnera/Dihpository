@@ -56,11 +56,10 @@ both, and `analysis/rebuild/screen.sh` now compresses each pairing after scoring
 
 ## Ladder lock
 
-    held by:   CLOUD since 2026-11-04 23:22Z: owner-approved hypothesis test (not a release candidate) of cf3,
-               full co-farming squads (Marcella and Vendetta with Vesper Vale, Ryth with Varg;
-               analysis/rebuild/mkcofarm.py): does keeping the team together cut our deaths at home on the
-               ladder? Local 115.0. v166 is re-pinned straight after the lab.
-    before:    nobody (CLOUD released it 17:23Z; v166 live and pinned).
+    held by:   nobody (CLOUD released it 2026-11-04 23:47Z). **v166 = pm_best is live and pinned** (re-pinned
+               23:35Z, live again 23:46Z).
+    2026-11-04 lab (owner-approved hypothesis test): v172 = cf3, full co-farming squads, 24 + 16 + 20 = 60 of
+               150 against v166's 73. Deaths by zone: GROUND-UP-PLAN.md, "Big plan".
     2026-11-04 lab: v171 = sq4 (Marcella escorts Vesper Vale in contested ground) sets 1-2 24 + 18 = 42 of 100
                against v166's 47; stopped before set 3 (it could not reach 73): rejected. Local 133.0.
     2026-11-04 lab: v170 = sq3b (v166 + Marcella escorts Vesper Vale, analysis/rebuild/mksquad.py)
