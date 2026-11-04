@@ -5972,3 +5972,115 @@ fight within 6 tiles (v155 4) but need odds of 1.67 beyond (1.15); disengage at 
 hysteresis 0.37; retreat at 16.5% health (30%; carriers 30.5% against 43%); shop at 179 gold every
 111 rounds; fat bag 56; late gold 0.08. Applied as `ws/bots/es_r2m` and screened against the three
 league opponents plus held-out f_cast_n, gs_eq, f_hor_h and v155 head to head.
+
+## Party maps: BossBot's fuel-starved scan and the 00anvil opening (2026-11-04, side session, 01:20-03:00Z)
+
+Workstream 2 of `docs/UK-PLAN.md`. Candidate **`ws/bots/pm_best`** (untagged; `analysis/rebuild/mkparty.py
+BOTDIR altar=80 near=noaltar` on a copy of ab3_submit). The opponents are private copies whose wasm is identical
+to the originals (`ws/bots/pm_o_bk2`, `pm_o_gsmix`, `pm_o_chg`, `pm_o_sh`, `pm_o_btbd`). next_trial plays party
+maps exactly as gs_mix_camp does (the same games), so it adds nothing there. Tools in `analysis/rebuild/`:
+`pmscreen.py` (screens), `pmsum.py` / `pmfacts.py` (gems, deaths, monolith rewards, first bank), `pmladder.py`
+(lab and diag games on party maps), `pmfam.py` (twin families), `pmsame.py` (identical-elsewhere), `pmsmoke.py`,
+`wasmdiff.py` (which compiled functions differ between two builds).
+
+**What v155's ladder games show** (diag and lab):
+- **00anvil.** The two 21-gem clusters (strength 0, respawn 50) are two tiles from the only altar. The
+  opponents first bank at rounds 21-51 and bank 21-81 times a game, rarely touching the monolith; our first bank
+  came at rounds 90-392.
+- **01boss-battle.** The altar's one open tile, (24,20), is a monolith camp's own tile, so nobody can bank until
+  that camp dies. The winner farms three to four times our rate from round 0 with almost no deaths, kills the
+  monolith around round 825 and banks 1,034 gems in 90 rounds.
+- **02guardians.** The altar's two open tiles are the two monoliths' tiles. The winners bank only right after
+  each monolith kill, and they win the fights (in one game they died 5 times and we died 46).
+
+**Two findings about BossBot.**
+- **Its group scan runs out of fuel.** `BossBot::farm` stops scoring groups when fuel runs short. In a debug
+  build (`ws/bots/pm_trunc`), 80% of scans on 01boss-battle side A stop after about 12 of 31 groups; 41% on
+  03showdown, 32-36% on 02guardians, 1-6% on the others. At round 1 on 00anvil the scan stops after the first
+  group in list order, so the party opened on a 4-gem camp by spawn and reached its cluster at round ~65.
+- **Party maps are chaotic.** Any change in fuel use re-rolls their games. Five decision-identical builds of ab3
+  (`twin=K`: a dead loop in BossBot::farm) won 48, 42, 37, 41 and 45 of 70 against the five opponents, and
+  release ab3 is the luckiest of them. A one-time check on the first turn moved 00stampede from 52% to 16% in all
+  five builds of one variant. So one build's screen cannot rank a change. Candidates are compared as families of
+  five builds, paired game cell by game cell (opponent, map, side; `pmfam.py`), and any single build's local
+  score is one draw from its family.
+
+**pm_best = the "nx" family:**
+- BossBot scans groups nearest first, so a scan cut short still picks a near group. This is off on maps with
+  altar clusters.
+- On those maps (00anvil only, of the seven), for the first 80 rounds the clusters are scanned first and count
+  three times.
+- A carrier within two steps of the altar banks whatever it holds. A cluster gives 21 gems; ab3 waited for 22.
+
+Families of five builds against bk2, gs_mix_camp, cHG, sh and b_tbd (350 games a family; difference to ab3's
+family paired by cell, standard error in brackets):
+
+    map              ab3 family   nx family   difference
+    01boss-battle        48%          72%      +24 (10)
+    00anvil              70           72        +2 (15)
+    02guardians          62           92       +30  (7)
+    03showdown           46           58       +12 (12)
+    00stampede           56           52        -4 (18)
+    00contest            66           80       +14 (20)
+    03homonoliths        78           64       -14 (15)
+    all party maps       61           70        +9  (5)
+    gs_mix_camp only     79           93       +14  (8)
+
+**Per opponent over the five builds:** gs_mix_camp 93% (ab3's family 79%), b_tbd 77% (61%), cHG 67% (56%),
+sh 57% (53%), bk2 56% (56%). Against the brief's four, per build of 56: nx 36, 42, 40, 35, 38 (mean 38.2);
+ab3's family 40, 33, 29, 33, 35 (mean 34.0).
+
+**The mechanisms, per game over each family:**
+- 00anvil: median first bank at round 24 (ab3's family 146).
+- 01boss-battle: 946 gems banked (697), 2.1 monolith rewards (1.7).
+- 02guardians: 976 banked (765), deaths to champions 5.3 (10.9), first bank at round 1,052 (1,278).
+- 00contest: deaths to champions 17 (25).
+
+03homonoliths is worse in every nearest-first family (-14 to -16). Exempting it costs a check on the first turn,
+and that check re-rolled 00stampede (family nxh, 16%), so it was not kept.
+
+**pm_best itself** is the family's clean build (no dead loop): 46 of 70 against the five; v155's release build
+gets 48. By opponent, side A then B on each map:
+
+                         boss  anvil  guard  showd  stamp contest homon  total
+    gsmix    pm_best      Wl     WW     WW     WW     WW     WW     WW   13/14
+    gsmix    v155         Wl     WW     WW     WW     WW     WW     WW   13/14
+    btbd     pm_best      ll     WW     WW     Wl     WW     lW     WW   10/14
+    btbd     v155         Wl     WW     lW     Wl     ll     Wl     WW    8/14
+    bk2      pm_best      lW     Wl     WW     Wl     ll     WW     ll    7/14
+    bk2      v155         WW     Wl     lW     Wl     lW     WW     lW    9/14
+    chg      pm_best      lW     Wl     WW     Wl     lW     lW     WW    9/14
+    chg      v155         WW     lW     WW     ll     WW     Wl     WW   10/14
+    sh       pm_best      ll     WW     WW     Wl     ll     WW     ll    7/14
+    sh       v155         lW     Wl     Wl     Wl     lW     WW     lW    8/14
+
+**Identical elsewhere, and smoke.** Every change is inside BossBot, which is only constructed on party maps.
+`wasmdiff.py` finds three changed functions: BossBot::farm, main's BossBot allocation (240 to 304 bytes) and the
+static initializers, which are only renumbered. In play:
+- pm_best's 790 games on the other 79 maps (both sides, five opponents) are identical game for game to ab3's
+  saved games (s31; s39 for bk2). The checker reproduces all 70 of ab3's saved party games first.
+- Its 70 party games reproduce pm_nx_t0's exactly.
+- 860 games: no bot faults. The only ERROR lines are v155's own: "engine error 97: Unit is not in vision",
+  twice in each 01fracture game against b_tbd and bk2, identically in ab3's saved games.
+
+**Rejected on the way:**
+- **gate** (keep farming while the gate monolith lives; bank everything when it dies): 01boss-battle 1 of 8 and
+  02guardians 3 of 8, against ab3's 6 and 6. ab3's local wins there come from carriers waiting at the altar when
+  the monolith dies, which also gathers the four champions a boss attempt needs. Without that, our first
+  monolith kill slipped from about round 800 to 1,686. And a carrier holding 826 gems needs an 83-round channel,
+  which the other monolith (awake) interrupts.
+- **queue alone** (wait behind a teammate on the only free gate tile instead of giving up for 80 rounds):
+  16 of 24, against 17.
+- **anvil hold** (the cluster bonus plus waiting beside respawning clusters): first banks by round 45, but 13-26
+  deaths to champions a game while holding; 4 of 8, against ab3's 5.
+- **a2** (the anvil opening without nearest-first; family mean 30.2 of 70): its per-group bookkeeping cut the
+  fuel-starved opening scans shorter on every other party map (01boss-battle 0-1 of 10 in all five builds).
+  The cheaper version (a3) still costs boss-battle -14 (7).
+- **nearest-first everywhere** (n, 45.2 of 70): 00anvil 2-5 of 10. Only when this champion's scans are cut
+  (nA, 39.4): no gain.
+
+**For the lab.** The gain is on party maps only (11% of ranked games), so pm_best moves the overall win rate by
+about one point, which the lab cannot resolve (about +-7 wins in 100). On the gs_mix_camp / b_tbd / next_trial
+composite its party maps are one draw: 13 / 10 / 13 of 14, against v155's 13 / 8 / 13. Its evidence is the
+family comparison above. A long ranked window could show it on party maps: v155 has won 36% of them since
+15:03Z on 3 Nov.
