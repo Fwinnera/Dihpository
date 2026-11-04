@@ -5850,3 +5850,33 @@ the ladder's lost maps locally. **ES run r2 started 00:45Z** (`ES_LEAGUE=gs_mix_
 es.py run --run r2 --maps 10 --until 07:00`): the same 20-constant tuner, but scored only on the
 three opponents whose verdicts predict the lab. r1 had gained nothing against gs_mix_camp (-5);
 its gains were all against our own lineage.
+
+## Overnight loop toward a UK top 8 (2026-11-04, from 01:30Z)
+
+Owner, 01:25Z: "you will be running over night again loop, and improve i want top 8 for the uk, we
+need to qualify". The site: "Eight teams qualify from the UK and eight from the international
+category"; the UK qualifiers are on 11 November, ladder-seeded. The ladder has no country field,
+but international student teams carry an "International Qualifiers" label (504 of 821). Among the
+315 without it (UK students plus non-students) we are **55th** (1,720, rank 219). 8th is
+QS2isLaw at 2,135 (rank 40); 1st-7th run from 2,483 down to 2,192. That pool includes non-student
+teams, so the UK picture is somewhat better than 55th, but top 8 still means a gap of roughly
+400 rating points.
+
+**Uploads reopened at 01:29Z:** fc went up as **v160**, built, went live and was pinned at
+01:45Z. Lab arms fc and fc_s2 are queued (100 games; v155 48, margin -70).
+
+**Wards stay:** nw (no wards) scores 106 / 110 / 125 = 113.7 on the composite against v155's
+129.3. We place 455 a game against the field's 244, and they pay.
+
+**UK-level teams' style** (30 recent ranked games each; their opponents are rated about 2,100-2,300):
+
+    team          won  kills deaths gold  banked camp dmg champ dmg done/taken rounds  shards
+    QS2isLaw      47%    5     10   5,669  764    95k       29k / 45k          1,053   Bruiser 58%, Prospector 11%, Jungle 9%, Capture 8%
+    policy wonk   60%    8      6   6,169  817    96k       28k / 28k          1,041   Bruiser 46%, Treasure 10%, Prospector 10%; Focus 44%
+    us (lab)      48%    8     15   6,029  686    90k       36k / 43k          1,344   Power 71%, Hunter 11%, Durability 10%, Jungle 8%
+
+Their drafts are built around Prism and Tavi: QS2isLaw plays Prism + Ryth + Tavi + VV + Vendetta;
+policy wonk plays Marcella + Prism + Tavi + Varg + Willow. They fight less, die less, finish
+about 300 rounds sooner, and buy Bruiser plus economy emblems where we buy Power. Item variants
+are screening on the composite: br (Bruiser scaling), pro (a fourth Prospector emblem), brpro
+(both) and cap (a fourth Capture emblem).
