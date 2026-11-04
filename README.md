@@ -56,11 +56,12 @@ both, and `analysis/rebuild/screen.sh` now compresses each pairing after scoring
 
 ## Ladder lock
 
-    held by:   nobody (LOCAL released it 2026-11-04 00:25Z). `cambc submit` returns 409 "Submissions
-               are frozen during tournament seeding" (00:20Z): nothing was uploaded; v155 is live and
-               pinned (rank 215, 1,729). Queued for the lab when uploads reopen: fc (ws/bots/fc_submit,
-               smoke-tested), then fcG; kept only with at least 50 of 100 lab wins (v155 48) and a
-               paired gem margin against v155 of zero or better.
+    held by:   LOCAL, overnight loop from 2026-11-04 01:30Z (owner: "you will be running over night
+               again loop, and improve i want top 8 for the uk"). Uploads are frozen for the
+               International Qualifiers seeding (`cambc submit` 409 since 00:20Z); each iteration
+               retries the upload of the next lab candidate (fc_submit first). A candidate is kept only
+               with at least 50 of 100 lab wins (v155 48) and a paired gem margin against v155 of zero
+               or better; otherwise v155 is re-pinned. v155 is live and pinned (rank 219, 1,720).
                VERSION 155 (ab3) is live, PINNED and
                the qualifier entry; evening candidates v156-v158 (dg, ab3v, ab4) were level on the lab.
                Rank 215, rating 1,728 at 19:22Z. Please do not upload before 23:59Z without the owner.
