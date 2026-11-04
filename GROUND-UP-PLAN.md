@@ -5783,3 +5783,37 @@ against 4), 01corridors, 00elkring, 01shortcut, 03contours. It loses on fight ma
 adgato-gemcombat1/2, 03ultrastarvation, 02gift-wrapping, 00the-line. fcG (`mkfc.py GATE=1`: the
 rule only while the objective is a harmless gem cluster) won both smoke games against v155
 (00lost-world 1,018-541, 00oasis 1,006-290); screen running.
+
+## Uploads frozen; which local opponents predict the lab; chase timeout (2026-11-04, 00:20Z-)
+
+**`cambc submit` returns 409, "Submissions are frozen during tournament seeding"** (00:20Z):
+nothing was uploaded and v155 stays live and pinned (rank 215, 1,729). fc_submit is
+smoke-tested and queued for the lab when uploads reopen.
+
+**Workstream 5 answered with existing data** (`analysis/rebuild/labpredict.py`; every screen log
+against every lab arm, 10-15 versions). Spearman correlation of a version's local win rate with
+its lab result:
+
+    gs_mix_camp       +0.81 with wins over both sets (n 10), +0.41 with set-1 margin (n 12)
+    f_cast_n          +0.68 (n 7)        b_tbd       +0.52 (n 10), +0.59 (n 15)
+    next_trial        +0.49 (n 10)       cHG         +0.38      rl (our lineage)  +0.15
+
+Head to head against our own bots says little, which is why today's local winners failed on the
+ladder. The composite gs_mix_camp + b_tbd + next_trial ranks the lab in nearly the right order
+(rho 0.72; cb is the one miss): ab3v 136 (lab 49), sh 130 (47), ab4 130 (46), ab2 130 (43),
+dg 130 (42), ab3 129 (48), cb 128 (33), tf 125 (41), gp120 121 (42), rl 120 (41). On it, fc scores
+127.7, fcG 125.7, hfR 124, hf 115, against v155's 129.3 (noise about +-3): no candidate of the
+night clears v155. **Rule from here: a candidate goes to the lab only if it beats v155 on this
+composite by a clear margin**, not on head to head.
+
+v155's local losses against these opponents are the ladder's lost maps: from both sides
+against gs_mix_camp on 01hooks, 00lost-world, 01corridors, 03contours, 00lanes and 00quadrants,
+and against next_trial on 00ribs, 00lost-world, 01corridors and 03fan. Against them fc wins
+00ribs (6 of 6 against 2), 00lost-world, 01corridors, 01hooks, 03fan and 03shrines, and loses
+01elk-arena (2 against 6), 00dunes and 00vault, where the chase is the fight.
+
+**ct (`mkct.py`, chase timeout):** every chase starts as before. After 4 turns of moving toward
+enemies without an attack (turns at most 6 rounds apart count as one chase), the champion stops
+stepping toward enemies for 12 rounds. It still attacks anything in reach and otherwise farms.
+ct2 uses 3 turns and 25 rounds. Smoke against gs_mix_camp from side A: ct won 00lost-world
+1,006-660 (v155 loses it from both sides) and lost 01elk-arena 360-648. Screen running.
