@@ -6135,3 +6135,8 @@ scans do not help, so the soft budgets are not binding. The twins' losses more l
 turns crossing the hard 10k floor (aborted plans), which happens in the heaviest turns, often fights.
 Fuel savings would recover at most what the 0.5% of turns now near the limit lose: a small lever,
 not a big one.
+
+**pm_best set 3: 26 of 50, every result identical to v155's** (margins -7, -19, -18 gems a game, all
+from a few party-map games whose results did not change). Over 150 lab games: 73 against 74; the
+single difference is 00stampede in set 2. The platform's build is confirmed identical to v155's
+away from party maps.
