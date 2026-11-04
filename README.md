@@ -56,17 +56,11 @@ both, and `analysis/rebuild/screen.sh` now compresses each pairing after scoring
 
 ## Ladder lock
 
-    held by:   LOCAL, overnight loop from 2026-11-04 01:30Z (owner: "you will be running over night
-               again loop, and improve i want top 8 for the uk"). Uploads are frozen for the
-               International Qualifiers seeding (`cambc submit` 409 since 00:20Z); each iteration
-               retries the upload of the next lab candidate (fc_submit first). A candidate is kept only
-               with at least 50 of 100 lab wins (v155 48) and a paired gem margin against v155 of zero
-               or better; otherwise v155 is re-pinned. Uploads reopened at 01:29Z. v160 = fc was live
-               01:31-01:42Z for its lab test: 25 + 23 = 48 of 100 (v155 48), margin +48 / -33 against
-               v155 -- level, so v155 was re-pinned at 01:42Z. v161 = pro (Prospector) lab 46 of 100:
-               rejected. tvop (v163) 71 of 150, proop (v164) 73 of 150, es_r2m (v165) 76 of 150 against
-               v155's 74: all level. **v166 = pm_best (v155 + party-map fixes, identical elsewhere) goes
-               live as the base from about 05:00Z.** Fallback: v155.
+    held by:   nobody (LOCAL released it 2026-11-04 07:10Z after the overnight loop).
+               **v166 = pm_best (ws/bots/pm_best_submit: v155 + party-map fixes; every non-party game
+               identical to v155's, 149 of 150 lab results the same) is live and pinned.** Overnight lab
+               tests, all level with v155 (74 of 150): fc 48/100, pro 46/100, tvop 71, proop 73, es_r2m 76.
+               Fallback: v155. Decisions waiting for the owner: docs/UK-PLAN.md, "Night of 3-4 November".
                VERSION 155 (ab3) is live, PINNED and
                the qualifier entry; evening candidates v156-v158 (dg, ab3v, ab4) were level on the lab.
                Rank 215, rating 1,728 at 19:22Z. Please do not upload before 23:59Z without the owner.

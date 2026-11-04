@@ -85,9 +85,10 @@ opponents that predict the lab) are below what one lab run can confirm.
   International Qualifiers label.
 
 **Decisions for the owner:**
-1. **es_pm** (the ES mean + party fixes) has the best combined evidence: local composite +8.4,
-   held-out f_hor_h +18 and gs_eq +6, lab +2 of 150. Adopt it for a long ranked window (most of a
-   day, about 700 games), or keep pm_best?
+1. **The tuned settings + party fixes** have the best combined evidence: ES r2 ended +50.5 on its
+   league; held out, es_r2a beats v155 on gs_eq (146 against about 132) and f_hor_h (156 against 135);
+   the gen-64 point was +2 of 150 on the lab. Adopt them (es_r2a + pm_best's party fixes, to be built
+   like es_pm) for a long ranked window (most of a day, about 700 games), or keep pm_best?
 2. **A diagnostic window:** may a profiled build of v155 (prints one line per champion turn, else
    identical) run live for one lab set (50 games, about 5 minutes)? It breaks "only untagged builds
    go live", but our own stdout in the replays would show what our champions do when they die at

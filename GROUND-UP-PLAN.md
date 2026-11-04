@@ -6149,3 +6149,17 @@ BANK_GEMS 26 (26), RETREAT_HEALTH 0.205 (0.167), CARRIER_RETREAT_HEALTH 0.303 (0
 52 (53), RAID_ROUND 997 (1,038), ENGAGE_RANGE 6 (6), ENGAGE_ODDS 1.495 (1.387), GOLD_EARLY 0.789
 (0.873), GOLD_LATE 0.069 (0.089), SHIELD_HP 0.898 (0.917). As es_r2f and es_r2a, screened against the
 league, held-out f_cast_n, gs_eq, f_hor_h and v155.
+
+**ES r2's end points screened** (of 172; v155 in brackets):
+
+    point            gs_mix_camp b_tbd next_trial | f_cast_n gs_eq f_hor_h | h2h v155
+    es_r2f (final)       128      140     144     |   157     142    143   |   89
+    es_r2a (avg)         125      132     147     |   161     146    156   |   89
+    es_r2m (gen 64)      137      138     138     |   161     138    153   |   89    lab 76 of 150
+
+The end points are no better than es_r2m, which was level on the lab. Against gs_mix_camp, the best
+predictor, they are 125-128, against v155's 132. No new lab slot. es_r2a has the strongest held-out
+line, and is the one to pair with the party fixes if the owner chooses a long ranked window for
+the tuned settings.
+
+**Loop stopped at 07:10Z.** pm_best (v166) is live and pinned; the ladder lock is released.
