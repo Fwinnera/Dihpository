@@ -6092,3 +6092,9 @@ as tvop's, and tvop came out level on the lab. es_r2m is in the lab now. Afterwa
 fixes go live, whatever the result: they are identical to v155 elsewhere and +9 (se 5) on party
 maps as families. The twin-family finding (five decision-identical builds of ab3 scored 37-48 of 70
 on party maps) also means v155's release build is a lucky draw on some lab maps.
+
+**Ready to follow es_r2m's lab:** `ws/bots/pm_best_submit` (v155 + party fixes; the only print is
+v155's DEBUG-guarded status line, and DEBUG is false). `ws/bots/es_pm` = es_r2m + pm_best's bot.h +
+its 13 party constants (mkparty.py anchors on JOIN_SLACK = 8, which the ES changed, and es_r2m's
+bot.h is ab3's). Smoke: 00anvil 1,000-108 and 00oasis 1,002-0 against gs_mix_camp, clean. If es_r2m
+passes, es_pm goes live; otherwise pm_best.
