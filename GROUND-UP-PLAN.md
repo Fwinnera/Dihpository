@@ -5933,3 +5933,15 @@ on the lab. **tv 134 / 130 / 137 = 133.7** (+4.4, ahead of v155 on all three); *
 131 / 139 / 142 = 137.3** (+8.0, the best of the night). Smoke as side B on 00lost-world against
 gs_mix_camp: won 1,001-540 (v155 loses it from both sides). proop's lab run was stopped before any
 group started, so the quota goes to tvop; it went up as v163.
+
+**tvop against the held-out panel** (of 172; v155 in brackets): f_cast_n 158 (160), gs_eq 143 (about
+132), sh 105 (86), rl 107 (98), cHG 115 (111), f_hor_h 145 (135); head to head with v155 **98 of 172**.
+Panel total 884 against 818: the first clear local gain against every kind of opponent.
+
+**tvop on the lab (v163, live since about 02:41Z): set 1 29 of 50 (v155 23), set 2 19 of 50
+(v155 25).** Paired margin against v155: +130 on set 1 (z 1.4) and -124 on set 2 (z -1.4).
+v155's 25 on set 2 is the best of the 15 versions tested there (the others average 19.5); the
+engine is deterministic, so any change re-deals v155's fixed draw, and 19 is typical. On set 1,
+29 ties the best ever. By the rule fixed beforehand (50 of 100) tvop is 2 short.
+**Decision fixed before set 3 reports:** keep tvop if set 3 (fresh teams and maps; v155 26 of 50)
+gives at least 28 wins and a paired margin of zero or better; otherwise re-pin v155.
