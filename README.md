@@ -56,8 +56,10 @@ both, and `analysis/rebuild/screen.sh` now compresses each pairing after scoring
 
 ## Ladder lock
 
-    held by:   nobody (CLOUD released it 2026-11-04 17:00Z). **v166 = pm_best is live and pinned** (re-pinned
-               16:47Z, live again by 16:58Z).
+    held by:   CLOUD since 2026-11-04 17:09Z: lab test of sq4 (v166 + Marcella escorts Vesper Vale only when its
+               group is at least 0.4 of the way to their spawn; mksquad.py SQUAD_DEPTH=0.4), sets 1-3 pinned to
+               v166's opponents. Local 128/129/142 (v166 132/126/132). v166 re-pinned after unless sq4 earns a window.
+    before:    nobody (CLOUD released it 17:00Z; v166 live and pinned).
     2026-11-04 lab: v170 = sq3b (v166 + Marcella escorts Vesper Vale, analysis/rebuild/mksquad.py)
                27 + 18 + 22 = 67 of 150 against v166's 73 on the same pinned opponents: rejected. Local 131.3.
     2026-11-04 lab: v169 = gw04 (v166 with gold worth 0.4 of a gem in camp choice before round 500,

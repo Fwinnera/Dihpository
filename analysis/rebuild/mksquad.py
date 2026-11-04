@@ -17,13 +17,16 @@ teammate with a claim (as Willow does), and farms alone when nobody has one. Par
 A follower stands within its own attack range of the camp (Willow's 3-tile standoff kept melee followers out of
 reach: Marcella's monster damage fell from 17.7k to 5.2k as an escort).
 
-    mksquad.py BOTDIR [PAIRS=marcella:vesper_vale,ryth:varg]
+    mksquad.py BOTDIR [PAIRS=marcella:vesper_vale,ryth:varg] [SQUAD_DEPTH=0]
+
+SQUAD_DEPTH > 0: a follower escorts only when the chosen leader's group is at least that far from our spawn
+towards theirs (0 at our spawn, 1 at theirs); nearer home it farms alone.
 """
 import sys
 from pathlib import Path
 
 src = Path(sys.argv[1]) / "src"
-P = dict(PAIRS="marcella:vesper_vale,ryth:varg")
+P = dict(PAIRS="marcella:vesper_vale,ryth:varg", SQUAD_DEPTH="0")
 P.update(dict(a.split("=", 1) for a in sys.argv[2:]))
 pairs = [tuple(x.split(":")) for x in P["PAIRS"].split(",") if x]
 
@@ -69,4 +72,24 @@ patch("bot.h", [(
     "                nav::move_to(nav::around(target.position(), leader.is_visible() ? 3 : 1));\n",
     "                nav::move_to(nav::around(target.position(), leader.is_visible() ? std::max<int>(1, me.attack_range()) : 1));\n",
 )])
+if float(P["SQUAD_DEPTH"]) > 0:
+    patch("bot.h", [(
+        "        const auto& leader = *chosen.ally;\n        const auto picked = chosen.objective;\n",
+        "        const auto& leader = *chosen.ally;\n        const auto picked = chosen.objective;\n"
+        "        if (config::squad_leader(me.champion_name()) >= 0) {\n"
+        "            static std::map<int, double> depth_of;\n"
+        "            auto dt = depth_of.find(picked->handle);\n"
+        "            if (dt == depth_of.end()) {\n"
+        "                static const auto own_tiles = gm::spawn_region(bc::team::ally).positions();\n"
+        "                static const auto their_tiles = gm::spawn_region(bc::team::enemy).positions();\n"
+        "                std::int64_t a = 1000, b = 1000;\n"
+        "                for (const auto& [px, py] : picked->coords) {\n"
+        "                    for (const auto q : own_tiles) a = std::min<std::int64_t>(a, distance(bc::vec2{px, py}, q));\n"
+        "                    for (const auto q : their_tiles) b = std::min<std::int64_t>(b, distance(bc::vec2{px, py}, q));\n"
+        f"                }}\n"
+        "                dt = depth_of.emplace(picked->handle, static_cast<double>(a) / std::max<std::int64_t>(1, a + b)).first;\n"
+        "            }\n"
+        f"            if (dt->second < {P['SQUAD_DEPTH']}) return Bot::farm(me, enemies);\n"
+        "        }\n",
+    )])
 print("patched", src, P)
