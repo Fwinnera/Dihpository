@@ -46,10 +46,9 @@ games run about 170 every 3-4 minutes on 4 cores.
     gw04  early gold worth 0.4 of a gem                   lab 40 of 100    local 133.3 composite (v166 130.0)
     sq3b  Marcella escorts Vesper Vale                    lab 67           local 131.3
     sq4   sq3b in contested ground only                   lab 42 of 100 (v166 47)   local 133.0
-    local only: Heart of Ruin roster (hr1-hr5, 120-124), two-pair squads (118-121), home defence (124),
-    starved-map early raids (str3: +2 of 28 on 01starvation/00great-wall, not taken to the lab).
     local only, all below v166: regroup, enemy memory, company, Heart of Ruin roster (hr1-hr5, 120-124),
-    Bruiser strength builds (126), two-pair squads (118-121), Vendetta escort (119), gold 0.2/0.6.
+    Bruiser strength builds (126), two-pair squads (118-121), Vendetta escort (119), home defence (124),
+    gold 0.2/0.6. Starved-map early raids (str3) +2 of 28 on 01starvation/00great-wall, not taken to the lab.
 
 Lessons: the gs_mix_camp screen predicted the lab for fight changes (as2); local gains of about +3 composite
 did not survive the lab (gw04, sq3b); v166's 73 is typical of its lineage (sets average 26.0 / 21.8 / 25.2).
