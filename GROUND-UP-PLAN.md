@@ -6110,3 +6110,12 @@ the party fixes) for a long ranked window is a question for the owner.
 elsewhere. It also runs the three lab sets: its non-party games should reproduce v155's lab
 results exactly (a check that the platform's build matches ours), and the party-map games add a
 small sample.
+
+**pm_best (v166) live from about 05:05Z; lab sets 1-2: 23 + 24 = 47 of 100.** 99 of its 100 lab
+results are identical to v155's. The only change is 00stampede (a party map), won by v155 and lost
+by pm_best, which is within the families' 00stampede estimate (-4, se 18). This confirms on the
+ladder what the local check showed: the platform's build plays every non-party game exactly as
+v155 does. It also means **lab differences between versions come only from the games their changes
+reach**. A candidate that touches every map re-deals all of v155's fixed draws (the twin-family
+effect), which is why tonight's broad candidates landed level with v155 in both directions, set by
+set. pm_best stays live as the base on the family evidence (+9, se 5, on party maps).
