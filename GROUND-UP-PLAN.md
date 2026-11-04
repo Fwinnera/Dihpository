@@ -6256,3 +6256,31 @@ Vesper Vale; local of 172, v166 132 / 126 / 132 = 130.0):
 On five-champion maps against gs_mix_camp (106 games): v166 76 wins, hr1 73, hr5 68. Heart of Ruin farms 9.3k
 (alone) or 6.1k (escorting) against Ryth's 15.8k: with 30 strength it is a poor solo farmer, and our champions
 farm alone. The top teams use it inside a team that moves together. Next, at the owner's choice: squads.
+
+### Squads (2026-11-04, CLOUD; the owner's choice)
+
+`mksquad.py`: chosen followers play Willow's escort controller with a preferred leader (they join its claimed
+group as supporters, fight its camps and stay beside it; the leader's camp choice counts their damage). Fixed on
+the way: the escort stood 3 tiles from the camp (Willow's range), which kept melee followers out of reach.
+Local, of 172 (v166 132 / 126 / 132 = 130.0):
+
+    sq1   Marcella -> Vesper Vale, Ryth -> Varg                 121 / 116 / 127 = 121.3  (alone 55.5% -> 46.4%)
+    sq2   Marcella + Vendetta -> Vesper Vale, Ryth -> Varg      96 against gs_mix_camp (farming -20%)
+    sq3   Marcella -> Vesper Vale                               132 / 124 / 131 = 129.0
+    sq3b  sq3 + the melee standoff fix                          129 / 131 / 134 = 131.3
+    sq1b  sq1 + the fix                                         117 / 116 / 122 = 118.3
+    sq4   sq3b, escorting only when the leader's group is at
+          least 0.4 of the way to their spawn                   128 / 129 / 142 = 133.0
+    sq5   Vendetta -> Vesper Vale                               124 / 114 / 120 = 119.3
+    ls1   loose pairs (a group more than 6 tiles from the
+          partner costs 15 rounds; mkloose.py)                  133 / 125 / 135 = 131.0  (alone 55.5% -> 54.4%)
+
+Tight squads group our champions as the top teams do (alone 46%) but cost 13-14% of early camp clears (two
+champions share one capture). **sq3b on the lab (v170): 27 + 18 + 22 = 67 of 150 against v166's 73** (60 games
+identical: no Marcella on those maps); paired, our deaths in their half -0.57 a game (se 0.18) and their deaths
+there +0.47, but deaths at home and in the middle unchanged; gem margin -20 (se 35). Rejected. The pair works
+where it attacks, not where we die.
+
+**Lab baseline.** Over the recovered arms, sets 1 / 2 / 3 average 23.5 / 19.9 / 25.2 (sd 3.4 / 2.7 / 1.5); the
+overnight lineage (fc, pro, tvop, proop, es_r2m, pm_best) averages 26.0 / 21.8 / 25.2 = 73, so v166's 73 is
+typical of its family.
