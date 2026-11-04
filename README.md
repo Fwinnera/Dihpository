@@ -56,10 +56,11 @@ both, and `analysis/rebuild/screen.sh` now compresses each pairing after scoring
 
 ## Ladder lock
 
-    held by:   CLOUD since 2026-11-04 10:40Z: lab test of as2 (v166 + teammates help a teammate an enemy has
-               reached, when its side is losing; analysis/rebuild/mkassist.py ASSIST_NEED=1.2 HOLD=0), sets 1-3
-               pinned to v166's opponents (--from pm_best*). v166 is re-pinned afterwards unless as2 earns a window.
-    before:    nobody (CLOUD released it 09:59Z after the diagnostic window; v166 live and pinned).
+    held by:   nobody (CLOUD released it 2026-11-04 11:11Z). **v166 = pm_best is live and pinned** (re-pinned
+               10:58Z, live again 11:09Z).
+    2026-11-04 lab: v168 = as2 (v166 + help a teammate an enemy has reached when its side is losing,
+               analysis/rebuild/mkassist.py) 25 + 18 + 19 = 62 of 150 against v166's 73 on the same pinned
+               opponents (--from pm_best*): rejected. Locally it was 120 of 172 against gs_mix_camp (v166 132).
     2026-11-04 diagnostic window (owner approved, CLOUD with the owner's login): v167 = p_pm (v166 + one PF line
                per champion turn with visible enemies/allies nearby) was live 09:42-09:56Z; lab set 1 (arm
                pfdiag, current opponent versions, no --from) 19 of 50. Replays with our stdout: CLOUD's session.
