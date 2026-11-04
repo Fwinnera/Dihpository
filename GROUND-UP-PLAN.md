@@ -5960,3 +5960,15 @@ Tonight's local gains of 3-6% are below what the lab can see in one run.
 
 **Next: proop alone (v164, uploaded 03:00Z)**, i.e. tvop without Tavi. Neither the Prospector
 emblem with the late-camp penalty together nor op15 alone has been on the lab.
+
+**proop on the lab (v164): 25 + 21 + 27 = 73 of 150** (v155 74). Margins against v155 are +43 (z 0.5),
+-35 (z -0.5) and -17 (z -0.3): level, so rejected; v155 re-selected at 04:21Z. The night's lab
+record: fc 48 of 100, pro 46 of 100, tvop 71 of 150, proop 73 of 150, against v155's 48 and 74.
+None of the local gains (3-8% on the composite) shows on the ladder.
+
+**ES r2 at 04:21Z (generation 64):** the running mean-minus-base fitness is **+30** over 65
+generations (about 2.4 standard errors; recent generations +5% wins). The mean has moved to: always
+fight within 6 tiles (v155 4) but need odds of 1.67 beyond (1.15); disengage at 0.66 (0.5) with
+hysteresis 0.37; retreat at 16.5% health (30%; carriers 30.5% against 43%); shop at 179 gold every
+111 rounds; fat bag 56; late gold 0.08. Applied as `ws/bots/es_r2m` and screened against the three
+league opponents plus held-out f_cast_n, gs_eq, f_hor_h and v155 head to head.
