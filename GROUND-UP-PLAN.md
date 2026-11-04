@@ -6163,3 +6163,72 @@ line, and is the one to pair with the party fixes if the owner chooses a long ra
 the tuned settings.
 
 **Loop stopped at 07:10Z.** pm_best (v166) is live and pinned; the ladder lock is released.
+
+## CLOUD: why we die at home, from our own logs and decoded replays (2026-11-04, from 09:15Z)
+
+New session (claude.ai cloud container) with the owner's login. The owner approved the diagnostic window
+and chose "fights at home" as the focus.
+
+**Diagnostic window.** v167 = p_pm (v166 + one PF line per champion turn, with visible enemies within 5
+and 8, allies within 5, nearest enemy; `ws/bots/p_pm`) was live 09:42-09:56Z; lab set 1 against the
+opponents' versions of 09:47Z (arm `pfdiag`, no `--from`): 19 of 50. v166 re-pinned at 09:48Z and live
+again from 09:56Z.
+
+**Replays decoded.** `analysis/cloud/read.mjs` runs the visualiser's own engine under Node and rebuilds
+every champion's position, health, gold and gems every round from any replay, ours or other teams' (about
+6 s a game). Other teams' ranked replays can be downloaded.
+
+**Where and how we die (50 lab games; ours / theirs a game):** 16.6 / 7.7 deaths. Our half 6.0 / 0.9,
+middle 6.3 / 2.2, their half 3.7 / 3.7. Deaths follow local numbers (victim's allies v enemies within 6 in
+the 10 rounds before): ours in our half are 1v3, 1v2, 0v1, 0v2, 0v3; theirs in our half are 2v1, 2v2, 3v1.
+
+**Spacing.** Share of living champion turns with no teammate within 5: ours 57%, the lab teams' 42%,
+the top UK teams' (QS2isLaw, policy wonk, :3, Claudus Maximus; 34 of their ranked games) 42%. Death within
+10 rounds per 1,000 turns, alone / 1 / 2 / 3+ teammates within 5: ours 38 / 35 / 24 / 16; the lab teams'
+11 / 14 / 18 / 19; the top teams' 13 / 14 / 12 / 6. The top teams die 5.3 times a game (1.9 in their own
+half, mostly in even 2v2 and 1v1 fights).
+
+**Teammates do not come.** In 363 of our deaths (our half and middle) a teammate was within 6 in the 10
+rounds before; its most common activity then was travel 130, combat 101, dead 78, bank 51, disengage 45,
+farm 29, capture 28, retreat 25. In outnumbered deaths a teammate was within 12 tiles 10 rounds before in
+71% (our half) and 58% (middle).
+
+**Combat by local numbers** (PF: allies v enemies within 5; death within 10 turns / an enemy death within
+10 rounds, per 1,000 combat turns): 0v1 (34% of combat turns) 101 / 147; 1v1 (19%) 69 / 263; 2v1 (5%)
+37 / 295; 0v2 (9%) 202 / 204; 1v2 (8%) 130 / 330. Half our fights are solo.
+
+**Farming volume is close; the gems it yields are not (see the gem economy below).** Monster damage 87k against their 95k; our champions have more maximum
+health; they deal 41k champion damage to our 28k and earn 18% more gold (mostly kill gold). The top UK
+teams draft Heart of Ruin in every game (with Marcella, Vesper Vale, Vendetta, Tavi) and buy Bruiser
+emblems (7 stat points for 150 gold; Power 6) and Focus for casters; we buy no Focus.
+
+**Local opponents cannot test this.** Profiled locally against gs_mix_camp, b_tbd and next_trial (516
+games) we die 12.7 times to their 16.5, and they die 7.9 times a game in their own half: locally we win
+the fights the ladder teams win against us.
+
+**Mechanisms tried against this (all patch v166; local = of 172 against gs_mix_camp, v166 132):**
+- assist (`mkassist.py`): a healthy champion with a light bag helps a teammate within 8 that an enemy has
+  reached, when our health x strength there (with it) is at least 0.8 of theirs. as1 (plus "hold": the
+  disengage check counts healthy teammates within 8 at half weight) 116 / 131 / 131 and 83 of 172 head to head;
+  as2 (only when the teammate's side is losing, no hold) 120; as3 118; hold alone 128. It fires (1.2% of
+  turns locally). **as2 on the lab (v168, sets 1-3 pinned to v166's opponents): 25 + 18 + 19 = 62 of 150
+  against 73**; paired with v166, gem margin -87 a game (se 44), our deaths at home +0.56 (se 0.41), their
+  deaths in their half -1.05 (se 0.45): helpers left fights we were winning. Rejected. **The gs_mix_camp
+  screen predicted it**: the local filter holds for fight changes too.
+- regroup (disengage towards the nearest healthy teammate within 12 that no enemy threatens): 121, with
+  assist 120. Rejected.
+- enemy memory (`mkmemory.py`: enemies seen in the last 8 rounds count at 0.7 near where they could be, in
+  choose_enemy, disengage and camp choice): 115. Rejected.
+- company (`mkcompany.py`: a camp in contested ground with no teammate within 6 costs 25 rounds): 127 / 126 /
+  131 = 128.0 (v166 130.0). Not taken further.
+
+**The gem economy (first 600 rounds, a game):** we take 241 gems from camps in 25 captures (9.6 each), the lab
+teams 342 in 26 (13.0), the top UK teams 497 in 34 (14.8); we bank 207 by round 600, they 294 and 412. 38% of
+our captures give no gems (lab teams 25%, top teams 21%). The gap is in the middle of the map (gems from middle
+camps: ours 54, theirs 120, top teams 154) and in rich groups in their own half. Gold-only camps do not buy us
+more gold: excluding kill gold our income is level with the lab teams'. v140 (cHG) had raised gold to the
+value of a gem before round 500, a local gain that never showed on the ladder.
+
+**gw04** (`mkgold.py`: gold worth 0.4 of a gem in camp choice before round 500, else v166): local 137 / 131 /
+132 = 133.3 (v166 130.0); against gs_mix_camp zero-gem captures 34% -> 29%, gems from camps by round 600 +17%,
+games 33 rounds shorter, gold -5%. To the lab as v169.

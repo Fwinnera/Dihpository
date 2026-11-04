@@ -11,7 +11,7 @@ eg = collections.defaultdict(list)
 for m in meta:
     f = Path(sys.argv[2], f"{m['matchId']}.jsonl")
     if not f.exists(): continue
-    me = next(t for t in m["teams"] if t["name"] == US); ours = 0 if me["side"] == "a" else 1
+    focus = m.get("focus", US); me = next(t for t in m["teams"] if t["name"] == focus or t.get("teamId") == focus); ours = 0 if me["side"] == "a" else 1
     st = {}
     for l in f.read_text().splitlines():
         d = json.loads(l); st[d["r"]] = d
