@@ -56,11 +56,11 @@ both, and `analysis/rebuild/screen.sh` now compresses each pairing after scoring
 
 ## Ladder lock
 
-    held by:   LOCAL since 2026-11-04 00:15Z: lab test of fc (ab3 + farm, don't chase;
-               ws/bots/fc_submit, GROUND-UP-PLAN.md "00lost_world's chase loop"), then fcG. Kept only
-               with at least 50 of 100 lab wins (v155 48) and a paired gem margin against v155 of zero
-               or better; otherwise v155 is re-pinned. Owner: "lets improve our bot as much as we can"
-               (UK qualifier 10-11 Nov). Previous: es_best (v159) lost its lab test, 42 of 100.
+    held by:   nobody (LOCAL released it 2026-11-04 00:25Z). `cambc submit` returns 409 "Submissions
+               are frozen during tournament seeding" (00:20Z): nothing was uploaded; v155 is live and
+               pinned (rank 215, 1,729). Queued for the lab when uploads reopen: fc (ws/bots/fc_submit,
+               smoke-tested), then fcG; kept only with at least 50 of 100 lab wins (v155 48) and a
+               paired gem margin against v155 of zero or better.
                VERSION 155 (ab3) is live, PINNED and
                the qualifier entry; evening candidates v156-v158 (dg, ab3v, ab4) were level on the lab.
                Rank 215, rating 1,728 at 19:22Z. Please do not upload before 23:59Z without the owner.
