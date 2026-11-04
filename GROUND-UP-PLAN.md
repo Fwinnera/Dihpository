@@ -6084,3 +6084,11 @@ about one point, which the lab cannot resolve (about +-7 wins in 100). On the gs
 composite its party maps are one draw: 13 / 10 / 13 of 14, against v155's 13 / 8 / 13. Its evidence is the
 family comparison above. A long ranked window could show it on party maps: v155 has won 36% of them since
 15:03Z on 3 Nov.
+
+**es_r2m screened** (the ES r2 mean at generation 64; of 172; v155 in brackets): league gs_mix_camp 137
+(132), b_tbd 138 (124), next_trial 138 (132), composite 137.7; held out f_cast_n 161 (160), gs_eq 138
+(about 132), f_hor_h 153 (135); head to head with v155 89 of 172. Its local evidence is as strong
+as tvop's, and tvop came out level on the lab. es_r2m is in the lab now. Afterwards pm_best's party
+fixes go live, whatever the result: they are identical to v155 elsewhere and +9 (se 5) on party
+maps as families. The twin-family finding (five decision-identical builds of ab3 scored 37-48 of 70
+on party maps) also means v155's release build is a lucky draw on some lab maps.
