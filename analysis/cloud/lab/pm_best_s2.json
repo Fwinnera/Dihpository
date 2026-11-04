@@ -1,0 +1,199 @@
+{
+ "arm": "pm_best_s2",
+ "base": null,
+ "version": 166,
+ "note": "recovered from match history by CLOUD",
+ "queued": "2026-11-04T05:02:28.765Z",
+ "groups": [
+  {
+   "team": "24731510-784f-4176-985e-17c1626934ca",
+   "name": "Rusty Epee",
+   "maps": [
+    "03homonoliths",
+    "00lost_world",
+    "00contest",
+    "00anvil",
+    "00dunes"
+   ],
+   "sides": [
+    "a",
+    "b",
+    "a",
+    "b",
+    "a"
+   ],
+   "group": "1ca5c081-e7ea-4b65-b8c9-53c536c4a5f3"
+  },
+  {
+   "team": "271f8b15-7d97-4a0a-bd32-b634dd006dc0",
+   "name": "Crimson Pathfinders",
+   "maps": [
+    "00swirl",
+    "00great_wall",
+    "00gem_fields",
+    "02geodes",
+    "00rows"
+   ],
+   "sides": [
+    "b",
+    "a",
+    "b",
+    "a",
+    "b"
+   ],
+   "group": "2bd973ba-6cf2-429b-a0b9-4fe499f39cc7"
+  },
+  {
+   "team": "e747283d-a801-4175-8b9d-ee36df006daa",
+   "name": "The something",
+   "maps": [
+    "00oasis",
+    "02cuts",
+    "01starfish",
+    "02guardians",
+    "03contours"
+   ],
+   "sides": [
+    "a",
+    "b",
+    "a",
+    "b",
+    "a"
+   ],
+   "group": "2de7fcb2-31ee-4f35-9fad-21f64767adaf"
+  },
+  {
+   "team": "91b991b0-c974-4ffe-a1f8-4c83c171e9f4",
+   "name": "T\u00fcbingen Quants",
+   "maps": [
+    "01corridors",
+    "03honeycomb",
+    "02treasure_box",
+    "01elk_arena",
+    "adgato_gemcombat1"
+   ],
+   "sides": [
+    "b",
+    "a",
+    "b",
+    "a",
+    "b"
+   ],
+   "group": "31f65183-4884-490b-9cb7-9f819c9c295d"
+  },
+  {
+   "team": "9b0a89b8-f553-4916-8b58-eea33334757c",
+   "name": "neuro",
+   "maps": [
+    "02gift_wrapping",
+    "00packs",
+    "00gemfight",
+    "02uncharted_lands",
+    "03showdown"
+   ],
+   "sides": [
+    "a",
+    "b",
+    "a",
+    "b",
+    "a"
+   ],
+   "group": "d34b6432-667e-4972-b4bc-15414b6ce2c2"
+  },
+  {
+   "team": "abb3b776-7d71-41f6-90c6-885aebdc64b4",
+   "name": "Shinshilachki",
+   "maps": [
+    "00stampede",
+    "03colosseum",
+    "00crater",
+    "00interlock",
+    "03the_front"
+   ],
+   "sides": [
+    "b",
+    "a",
+    "b",
+    "a",
+    "b"
+   ],
+   "group": "6dd7cec7-17c8-4b8d-8b7d-0d823ff056c1"
+  },
+  {
+   "team": "b50b3aa9-a0fb-4388-93d2-3459e1a350a9",
+   "name": "Kingstonks",
+   "maps": [
+    "03twisty",
+    "00quadrants",
+    "adgato_gemcombat3",
+    "00monolith",
+    "00lanes"
+   ],
+   "sides": [
+    "a",
+    "b",
+    "a",
+    "b",
+    "a"
+   ],
+   "group": "06b6075c-a080-4e34-920b-2ba321d5bbd6"
+  },
+  {
+   "team": "409129b9-e6ac-4f80-921c-2ede2ed1cb4f",
+   "name": "Memory?",
+   "maps": [
+    "00fragment",
+    "00road_of_riches",
+    "03ambush_field",
+    "03riverbed",
+    "02arena"
+   ],
+   "sides": [
+    "b",
+    "b",
+    "a",
+    "b",
+    "a"
+   ],
+   "group": "25e0d8c0-5b31-4f12-a2df-d2436ecd04ec"
+  },
+  {
+   "team": "1e25877b-9ea9-4821-bd54-236e44c5e650",
+   "name": "Kaizen",
+   "maps": [
+    "01hooks",
+    "00the_line",
+    "01islands",
+    "00expanse",
+    "02the_pack"
+   ],
+   "sides": [
+    "b",
+    "a",
+    "b",
+    "a",
+    "b"
+   ],
+   "group": "cf5f4e6b-13e5-4533-9d92-028558663b70"
+  },
+  {
+   "team": "7348a083-dc1d-45ec-a355-c4bede12dd6a",
+   "name": "tip",
+   "maps": [
+    "00vault",
+    "01the_farm",
+    "00elkring",
+    "02harvest",
+    "03one_gem"
+   ],
+   "sides": [
+    "a",
+    "b",
+    "a",
+    "b",
+    "a"
+   ],
+   "group": "c2945fbe-0744-4581-907b-36e3a56f0c9a"
+  }
+ ]
+}
