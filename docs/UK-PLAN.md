@@ -89,6 +89,7 @@ opponents that predict the lab) are below what one lab run can confirm.
    league; held out, es_r2a beats v155 on gs_eq (146 against about 132) and f_hor_h (156 against 135);
    the gen-64 point was +2 of 150 on the lab. Adopt them (es_r2a + pm_best's party fixes, to be built
    like es_pm) for a long ranked window (most of a day, about 700 games), or keep pm_best?
+   **Owner, 07:15Z: "Keep pm_best live".** v166 stays live and pinned.
 2. **A diagnostic window:** may a profiled build of v155 (prints one line per champion turn, else
    identical) run live for one lab set (50 games, about 5 minutes)? It breaks "only untagged builds
    go live", but our own stdout in the replays would show what our champions do when they die at
