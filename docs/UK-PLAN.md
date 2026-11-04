@@ -50,3 +50,48 @@ as always; re-pin after every upload.
    monolith raider `bk2_submit`, gem-first `sgA_submit`, aggressive `d1`, Heart of Ruin
    drafts), checked by whether their local verdicts match the lab's on the 17 versions with
    lab results.
+
+## Night of 3-4 November: results, and the decisions waiting for the owner
+
+**Live:** v166 = pm_best (v155 + party-map fixes; every non-party game identical to v155's,
+confirmed on 99 of 100 lab games). Rank 235, rating 1,705 at 05:45Z (1,729 at 00:20Z).
+
+**Lab (150 games: sets 1-3 against 20 pinned teams ranked 176-228; v155 23 + 25 + 26 = 74):**
+
+    fc      farm, don't chase                          25 + 23 (no set 3)   48 of 100
+    pro     Prospector fourth emblem                   24 + 22 (no set 3)   46 of 100
+    tvop    Tavi draft + Prospector + late-camp rule   29 + 19 + 23 = 71
+    proop   Prospector + late-camp rule                25 + 21 + 27 = 73
+    es_r2m  ES tuner's mean (gen 64)                   30 + 22 + 24 = 76
+
+Every candidate is level with v155 within the lab's resolution (about +-12 wins in 150 at two
+standard errors). The local gains behind them (3-8% against gs_mix_camp, b_tbd and next_trial, the
+opponents that predict the lab) are below what one lab run can confirm.
+
+**What the night established:**
+- **The lab is deterministic.** A build's lab games are fixed, and a candidate differs from v155
+  only in the games its code reaches. pm_best reproduced 99 of v155's 100 results; broad changes
+  re-deal all of them.
+- **The bot is fuel-limited.** Fuel-only dead loops cost strength steeply (300 / 1,200 / 4,000
+  additions a turn: -3.6 / -16 / -75 on the composite). Longer soft scan budgets do not help.
+- **Local opponents that predict the lab:** gs_mix_camp (rank correlation 0.81), b_tbd and
+  next_trial. Head to head against our own lineage does not (0.15).
+- **Two map-level failures on the ladder:**
+  - 00lost_world: no camp damage for 150 rounds while the enemy banks the centre.
+  - 01hooks: champions trickle into the centre and spend half the game dead.
+- **We die at home:** in our own half 4 deaths for every kill; in theirs the trade is even. Most
+  deaths happen while retreating.
+- **UK top-8 line:** about 2,135 (QS2isLaw); we are about 55th among teams without the
+  International Qualifiers label.
+
+**Decisions for the owner:**
+1. **es_pm** (the ES mean + party fixes) has the best combined evidence: local composite +8.4,
+   held-out f_hor_h +18 and gs_eq +6, lab +2 of 150. Adopt it for a long ranked window (most of a
+   day, about 700 games), or keep pm_best?
+2. **A diagnostic window:** may a profiled build of v155 (prints one line per champion turn, else
+   identical) run live for one lab set (50 games, about 5 minutes)? It breaks "only untagged builds
+   go live", but our own stdout in the replays would show what our champions do when they die at
+   home, the largest gap to the top-8 teams.
+3. **Leftover folders** to delete (copies of ab3 with spaces in their names from a quoting error;
+   the safety check blocked removing them): `ws/bots/br SCALE=bruiser`, `ws/bots/pro EXTRA=prospector`,
+   `ws/bots/brpro SCALE=bruiser EXTRA=prospector`, `ws/bots/cap EXTRA=capture`.
