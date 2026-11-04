@@ -6312,3 +6312,19 @@ From ranked summaries and decoded replays:
 
 **Camp table for all 86 maps** (`analysis/cloud/camps_all.json`; probe `ws/bots/probe_camps2`): per group the
 gems, gold, respawn, total health and strength, monolith flag, first camp tile and camp count.
+
+### Map fixes tried (2026-11-04 evening, CLOUD)
+
+**Starved maps** (`mkstarve.py`): 01starvation and 00great-wall are the only solo-controller maps whose soloable
+gems (non-monolith groups no stronger than one golem) are under 15% of all gems. On those two maps only
+(7 opponents x 2 sides = 28 games; v166 12/14 and 7/14, margins +209 / +81):
+
+    stp   play them with the party controller         00great-wall 1/14 (-464)    01starvation 8/14 (+214)
+    str3  monolith raids from round 300, not 900      00great-wall 11/14 (+330)   01starvation 10/14 (+128)
+
+str3 is a small gain on about 2% of the pool (worth about +0.1% overall). **Fuel makes "only these maps" hard:**
+one extra executed check per group in choose_group (str2) re-dealt 17 of 20 games on unrelated maps; nesting the
+gate inside the existing monolith test (str3) keeps every map without monoliths identical to v166 (12 of 12
+checked), but monolith maps re-deal once the share is first computed after round 300. A gemcombat-family fix
+(bank every capture on single-altar maps with only harmless camps) has no branch that runs only on those maps,
+so it cannot be added without re-dealing the whole pool. Not taken to the lab; v166 stays.
