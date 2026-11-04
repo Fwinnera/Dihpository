@@ -6098,3 +6098,15 @@ v155's DEBUG-guarded status line, and DEBUG is false). `ws/bots/es_pm` = es_r2m 
 its 13 party constants (mkparty.py anchors on JOIN_SLACK = 8, which the ES changed, and es_r2m's
 bot.h is ab3's). Smoke: 00anvil 1,000-108 and 00oasis 1,002-0 against gs_mix_camp, clean. If es_r2m
 passes, es_pm goes live; otherwise pm_best.
+
+**es_r2m on the lab (v165): set 1 30 of 50 (v155 23), set 2 22 (25), set 3 24 (26): 76 of 150
+against 74.** Margins against v155: +144 (z 2.0), -63 (z -0.7), -56 (z -0.6). It passes the original
+two-set rule (52 of 100, pooled margin +41) but set 3 does not confirm it, so under the written
+protocol it is not kept. It is the best-supported candidate of the night: local composite +8.4,
+held-out f_hor_h +18 and gs_eq +6, and +2 on 150 lab games. Whether to adopt it (as es_pm, with
+the party fixes) for a long ranked window is a question for the owner.
+
+**pm_best went up as v166 (04:50Z)** and goes live as the new base: v155 + party fixes, identical
+elsewhere. It also runs the three lab sets: its non-party games should reproduce v155's lab
+results exactly (a check that the platform's build matches ours), and the party-map games add a
+small sample.
