@@ -48,5 +48,5 @@ for i in $(seq 1 60); do
   sleep 60
 done
 echo "$s"
-python3 -I analysis/rebuild/labmargin.py fetch "$arm" "${arm}_s2" "${arm}_s3" > /dev/null 2>&1
+python3 -I analysis/rebuild/labmargin.py fetch ab3 ab3_s2 ab3_s3 "$arm" "${arm}_s2" "${arm}_s3" > /dev/null 2>&1
 python3 -I analysis/rebuild/labmargin.py ab3 "$arm" ab3_s2 "${arm}_s2" ab3_s3 "${arm}_s3" 2>&1 | tail -3

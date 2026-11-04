@@ -5945,3 +5945,18 @@ engine is deterministic, so any change re-deals v155's fixed draw, and 19 is typ
 29 ties the best ever. By the rule fixed beforehand (50 of 100) tvop is 2 short.
 **Decision fixed before set 3 reports:** keep tvop if set 3 (fresh teams and maps; v155 26 of 50)
 gives at least 28 wins and a paired margin of zero or better; otherwise re-pin v155.
+
+**tvop set 3: 23 of 50** (v155 26), margin -64 (z -0.9). Over 150 lab games tvop scores 71 against
+v155's 74, and its pooled margin is about -19 a game: level or slightly behind. **It fails the rule
+fixed beforehand.** v155 was re-selected, but proop went up straight after (below). The +8 local
+edge (composite 137.3, panel 884 against 818, 98 of 172 head to head) did not carry over. The
+predictors were fitted on versions that differ little from each other, and a draft change moves
+the bot further than they were tested on. tvopR (Ryth fifth, Marcella sixth) scores 137 / 133 / 147
+= 139.0 locally, but after tvop that is not enough reason for a lab slot.
+
+**Lab resolution.** 150 games give a difference between two versions a standard deviation of about
+6 wins, so only a gain of about 8% or more (12 of 150) can be confirmed at two standard errors.
+Tonight's local gains of 3-6% are below what the lab can see in one run.
+
+**Next: proop alone (v164, uploaded 03:00Z)**, i.e. tvop without Tavi. Neither the Prospector
+emblem with the late-camp penalty together nor op15 alone has been on the lab.
