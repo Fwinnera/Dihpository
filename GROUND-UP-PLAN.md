@@ -5880,3 +5880,10 @@ policy wonk plays Marcella + Prism + Tavi + Varg + Willow. They fight less, die 
 about 300 rounds sooner, and buy Bruiser plus economy emblems where we buy Power. Item variants
 are screening on the composite: br (Bruiser scaling), pro (a fourth Prospector emblem), brpro
 (both) and cap (a fourth Capture emblem).
+
+**fc on the lab: 25 + 23 = 48 of 100** (v155 48). The paired margin against v155 is +48 on set 1
+(z 0.7, +2 wins) and -33 on set 2 (z -0.4, -2 wins): level. v160 was live 01:31-01:42Z (not from
+01:45Z as first written); **v155 was re-pinned at 01:42Z** under the rule fixed beforehand (50 wins).
+On 00lost_world against Rusty Epee, fc still does almost no camp damage by round 150 (1k, against
+their 5k and 266 gems banked). The ladder failure there is not the local chase loop: the enemy
+comes to us, and we fight rather than farm.
