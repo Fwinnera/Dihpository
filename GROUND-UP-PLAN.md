@@ -6129,3 +6129,9 @@ reach 95k), but its searches have soft budgets: choose_group stops its detailed 
 below 38k remaining, choose_cooperative below 32k, BossBot below 28k, and the crystal and ward
 checks need 16k and 8k. **fb** lets the two camp scans run to 20k and 18k remaining. If it gains,
 fuel-efficient code is a lever by itself: the same rules, decided with more of the budget.
+
+**fb level:** 125 / 127 / 137 = 129.7 (389 wins against 388; 64 of 516 games identical). Longer camp
+scans do not help, so the soft budgets are not binding. The twins' losses more likely come from more
+turns crossing the hard 10k floor (aborted plans), which happens in the heaviest turns, often fights.
+Fuel savings would recover at most what the 0.5% of turns now near the limit lose: a small lever,
+not a big one.
