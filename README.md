@@ -56,10 +56,11 @@ both, and `analysis/rebuild/screen.sh` now compresses each pairing after scoring
 
 ## Ladder lock
 
-    held by:   CLOUD since 2026-11-04 11:24Z: lab test of gw04 (v166 with gold worth 0.4 of a gem in camp choice
-               before round 500 instead of 1.0; analysis/rebuild/mkgold.py), sets 1-3 pinned to v166's opponents.
-               Local 137/131/132 (v166 132/126/132). v166 is re-pinned afterwards unless gw04 earns a window.
-    before:    nobody (CLOUD released it 11:11Z; v166 live and pinned).
+    held by:   nobody (CLOUD released it 2026-11-04 11:43Z). **v166 = pm_best is live and pinned** (re-pinned
+               11:36Z, live again 11:42Z).
+    2026-11-04 lab: v169 = gw04 (v166 with gold worth 0.4 of a gem in camp choice before round 500,
+               analysis/rebuild/mkgold.py) sets 1-2 23 + 17 = 40 of 100 against v166's 23 + 24 = 47; stopped
+               before set 3 (it could not reach 73): rejected. Locally it was 137/131/132 (v166 132/126/132).
     2026-11-04 lab: v168 = as2 (v166 + help a teammate an enemy has reached when its side is losing,
                analysis/rebuild/mkassist.py) 25 + 18 + 19 = 62 of 150 against v166's 73 on the same pinned
                opponents (--from pm_best*): rejected. Locally it was 120 of 172 against gs_mix_camp (v166 132).
