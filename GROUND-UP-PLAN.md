@@ -6119,3 +6119,13 @@ v155 does. It also means **lab differences between versions come only from the g
 reach**. A candidate that touches every map re-deals all of v155's fixed draws (the twin-family
 effect), which is why tonight's broad candidates landed level with v155 in both directions, set by
 set. pm_best stays live as the base on the family evidence (+9, se 5, on party maps).
+
+**Twins are not neutral: the bot is fuel-limited.** `mktwin.py BOTDIR K` adds a dead loop of K
+volatile additions at the start of every turn, with no rule changed. Composite (v155 129.3):
+tw1 (K 300) 123 / 123 / 131 = 125.7; tw2 (1,200) 113 / 115 / 112 = 113.3; tw3 (4,000) 55 / 51 / 58 = 54.7.
+Identical games: 13, 7 and 8 of 516. A few percent of fuel moves every game and costs strength
+monotonically. v155 uses a median of about 20k fuel a champion-turn (p90 40k, p99 92k; 0.5% of turns
+reach 95k), but its searches have soft budgets: choose_group stops its detailed (best-first) scan
+below 38k remaining, choose_cooperative below 32k, BossBot below 28k, and the crystal and ward
+checks need 16k and 8k. **fb** lets the two camp scans run to 20k and 18k remaining. If it gains,
+fuel-efficient code is a lever by itself: the same rules, decided with more of the budget.
