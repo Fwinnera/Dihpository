@@ -88,14 +88,21 @@ def plan(which=1):
 def queue(arm, base=None, n=len(TEAMS), which=1):
     LAB.mkdir(parents=True, exist_ok=True)
     f = LAB / f"{arm}.json"
-    if f.exists():
-        sys.exit(f"{f} exists")
     rows = plan(which)[:n]
     if base:
         prev = {r["team"]: r for r in json.loads((LAB / f"{base}.json").read_text())["groups"]}
     live = cambc("submissions", "list", "--json")["active"]
-    out = dict(arm=arm, base=base, version=live["version"], note=live.get("note"), queued=time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()), groups=[])
+    if f.exists():
+        # Resume an arm cut short (e.g. by the 50-groups-an-hour quota), for the same live version.
+        out = json.loads(f.read_text())
+        if out["version"] != live["version"]:
+            sys.exit(f"{f} exists for version {out['version']}, live is {live['version']}")
+    else:
+        out = dict(arm=arm, base=base, version=live["version"], note=live.get("note"), queued=time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()), groups=[])
+    done = {g["team"] for g in out["groups"]}
     for r in rows:
+        if r["team"] in done:
+            continue
         args = ["match-groups", "create", r["team"], "--maps", ",".join(r["maps"]), "--sides", ",".join(r["sides"]), "--json"]
         if base:
             args += ["--source-group", prev[r["team"]]["group"]]

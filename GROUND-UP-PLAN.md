@@ -5910,3 +5910,14 @@ Quantom, BrendanBurgess, ClosedAI) and maps from another shuffle. v155's base ar
 no better than v155 passes "50 of 100 and margin >= 0" about a quarter of the time. A candidate is
 kept only if set 3 confirms it. `labrun.sh BOT ARM NOTE` runs the whole cycle (upload, wait, pin,
 three sets, margins). pro (v161) is in the lab now.
+
+**op screened:** op0 127 / 126 / 131 = 128.0, **op15 130 / 130 / 137 = 132.3**. **proop** (pro + op15)
+**128 / 133 / 144 = 135.0** (+5.7, the night's first local result past the +4 bar).
+
+**pro on the lab (v161): 24 + 22 = 46 of 100** (v155 48). Paired margin against v155: +5 on set 1
+(z 0.1, +1 win) and -31 on set 2 (z -0.6, -3 wins). Rejected. Its set 3 was refused: "Your team can
+start 50 unranked matches an hour" (HTTP 429). That means 50 *groups* an hour (fc 20, ab3_s3 10, pro 20
+had been started since 01:32Z), so a three-set test costs 30 of them. `lab.py queue` now resumes a
+partly queued arm, and `labrun.sh` retries until each arm has its ten groups. v155 was re-selected at
+02:00Z, but its rebuild waited in the platform's queue, so v161 stayed live. proop went up as
+**v162** at 02:12Z and is in the lab next.

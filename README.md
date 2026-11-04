@@ -63,7 +63,9 @@ both, and `analysis/rebuild/screen.sh` now compresses each pairing after scoring
                with at least 50 of 100 lab wins (v155 48) and a paired gem margin against v155 of zero
                or better; otherwise v155 is re-pinned. Uploads reopened at 01:29Z. v160 = fc was live
                01:31-01:42Z for its lab test: 25 + 23 = 48 of 100 (v155 48), margin +48 / -33 against
-               v155 -- level, so **v155 is live and pinned again since 01:42Z**.
+               v155 -- level, so v155 was re-pinned at 01:42Z. v161 = pro (Prospector) lab 46 of 100:
+               rejected. **v162 = proop (pro + softened late-camp rule) uploaded 02:12Z for its lab test**;
+               v155 goes back if it loses (while builds queue, v161 may still be live).
                VERSION 155 (ab3) is live, PINNED and
                the qualifier entry; evening candidates v156-v158 (dg, ab3v, ab4) were level on the lab.
                Rank 215, rating 1,728 at 19:22Z. Please do not upload before 23:59Z without the owner.
