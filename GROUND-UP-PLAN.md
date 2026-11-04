@@ -6232,3 +6232,27 @@ value of a gem before round 500, a local gain that never showed on the ladder.
 **gw04** (`mkgold.py`: gold worth 0.4 of a gem in camp choice before round 500, else v166): local 137 / 131 /
 132 = 133.3 (v166 130.0); against gs_mix_camp zero-gem captures 34% -> 29%, gems from camps by round 600 +17%,
 games 33 rounds shorter, gold -5%. To the lab as v169.
+
+### The bigger bet, first part: Heart of Ruin played as the top teams do (2026-11-04, CLOUD) -- rejected locally
+
+The owner chose a structural change over more small ones. Decoded top-team replays: their Heart of Ruin keeps
+a teammate within 4 tiles (median; Vesper Vale 27%, Vendetta 24%, Marcella 22%), dashes 8 times per 100
+living rounds and shields 16.5k a game; it farms 22k monster damage, deals 4.7k to champions, dies 1.4 times.
+Top teams farm 25.8 monster damage per living champion-round against our 18.1; our Vesper Vale already
+matches theirs (27.8k monster damage, 3.2 kills), our melee champions die three times as often (Vendetta 4.6
+a game on the ladder, theirs 1.1).
+
+`mkhor.py` (draft slot, an offensive dash in combat::fight scored by damage plus stun for every unit within the
+landing radius, travel no longer spends such a dash, Focus/Bruiser build, shield first under attack, escort of
+Vesper Vale; local of 172, v166 132 / 126 / 132 = 130.0):
+
+    hr1  Heart of Ruin for Ryth, dash + build                  123 / 118 / 129 = 123.3
+         by roster size: 3 champions 74 = 74 (no change), 4 champions 71 against 87, 5 champions 225 against 229
+    hr2  Heart of Ruin for Varg                                117 / 127 / 117 = 120.3
+    hr5  for Ryth on five-champion rosters only, shield first,
+         escort of Vesper Vale                                 122 / 121 / 130 = 124.3
+    st1  Bruiser strength shards as the late-game item        126 / 120 / 132 = 126.0
+
+On five-champion maps against gs_mix_camp (106 games): v166 76 wins, hr1 73, hr5 68. Heart of Ruin farms 9.3k
+(alone) or 6.1k (escorting) against Ryth's 15.8k: with 30 strength it is a poor solo farmer, and our champions
+farm alone. The top teams use it inside a team that moves together. Next, at the owner's choice: squads.
