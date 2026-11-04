@@ -56,10 +56,11 @@ both, and `analysis/rebuild/screen.sh` now compresses each pairing after scoring
 
 ## Ladder lock
 
-    held by:   CLOUD (claude.ai cloud session, the owner's own login) since 2026-11-04 09:45Z, for the
-               diagnostic window the owner approved: p_pm (v166 + one PF line per champion turn) goes
-               live for one lab set (set 1, 50 games), then v166 is re-pinned. Do not upload meanwhile.
-    before:    nobody (LOCAL released it 2026-11-04 07:10Z after the overnight loop).
+    held by:   nobody (CLOUD released it 2026-11-04 09:59Z). **v166 = pm_best is live and pinned again**
+               (re-pinned 09:48Z, live from 09:56Z after its rebuild).
+    2026-11-04 diagnostic window (owner approved, CLOUD with the owner's login): v167 = p_pm (v166 + one PF line
+               per champion turn with visible enemies/allies nearby) was live 09:42-09:56Z; lab set 1 (arm
+               pfdiag, current opponent versions, no --from) 19 of 50. Replays with our stdout: CLOUD's session.
                **v166 = pm_best (ws/bots/pm_best_submit: v155 + party-map fixes; every non-party game
                identical to v155's, 149 of 150 lab results the same) is live and pinned.** Overnight lab
                tests, all level with v155 (74 of 150): fc 48/100, pro 46/100, tvop 71, proop 73, es_r2m 76.
