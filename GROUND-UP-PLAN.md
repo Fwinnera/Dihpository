@@ -6284,3 +6284,8 @@ where it attacks, not where we die.
 **Lab baseline.** Over the recovered arms, sets 1 / 2 / 3 average 23.5 / 19.9 / 25.2 (sd 3.4 / 2.7 / 1.5); the
 overnight lineage (fc, pro, tvop, proop, es_r2m, pm_best) averages 26.0 / 21.8 / 25.2 = 73, so v166's 73 is
 typical of its family.
+
+**sq4 on the lab (v171): sets 1-2 24 + 18 = 42 of 100 against v166's 23 + 24 = 47**; stopped before set 3 (the
+quota was spent and it could not reach 73). Rejected. **Home defence** (`mkdefend.py`: converge on enemies inside
+our half when our nearby health x strength is 1.2 times theirs) 124 against gs_mix_camp: rejected. Squads are
+closed: the grouping they buy does not stop the deaths at home, and it costs farming.
