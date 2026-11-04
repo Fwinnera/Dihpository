@@ -6140,3 +6140,12 @@ not a big one.
 from a few party-map games whose results did not change). Over 150 lab games: 73 against 74; the
 single difference is 00stampede in set 2. The platform's build is confirmed identical to v155's
 away from party maps.
+
+**ES r2 finished at 07:00Z: 118 generations, running mean-minus-base +50.5** on the league (each
+generation 60 games against gs_mix_camp, b_tbd and next_trial). Final mean (and second-half average):
+BANK_GEMS 26 (26), RETREAT_HEALTH 0.205 (0.167), CARRIER_RETREAT_HEALTH 0.303 (0.302), HEAL_RECALL
+0.619 (0.626), SHOP_GOLD 168 (172), SHOP_INTERVAL 86 (100), DISENGAGE_RATIO 0.522 (0.619), HYSTERESIS
+0.359 (0.354), JOIN_ALPHA 0.522 (0.51), DMG_COST 60 (59), JOIN_SLACK 16 (15), ROLE_NEAR 4 (4), FAT_BAG
+52 (53), RAID_ROUND 997 (1,038), ENGAGE_RANGE 6 (6), ENGAGE_ODDS 1.495 (1.387), GOLD_EARLY 0.789
+(0.873), GOLD_LATE 0.069 (0.089), SHIELD_HP 0.898 (0.917). As es_r2f and es_r2a, screened against the
+league, held-out f_cast_n, gs_eq, f_hor_h and v155.
