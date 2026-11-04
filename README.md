@@ -61,7 +61,9 @@ both, and `analysis/rebuild/screen.sh` now compresses each pairing after scoring
                International Qualifiers seeding (`cambc submit` 409 since 00:20Z); each iteration
                retries the upload of the next lab candidate (fc_submit first). A candidate is kept only
                with at least 50 of 100 lab wins (v155 48) and a paired gem margin against v155 of zero
-               or better; otherwise v155 is re-pinned. v155 is live and pinned (rank 219, 1,720).
+               or better; otherwise v155 is re-pinned. Uploads reopened at 01:29Z: **v160 = fc
+               (ws/bots/fc_submit) is live and pinned since 01:45Z for its lab test** (arms fc, fc_s2);
+               v155 (ab3) goes back if it loses. v155 was rank 219, 1,720.
                VERSION 155 (ab3) is live, PINNED and
                the qualifier entry; evening candidates v156-v158 (dg, ab3v, ab4) were level on the lab.
                Rank 215, rating 1,728 at 19:22Z. Please do not upload before 23:59Z without the owner.
