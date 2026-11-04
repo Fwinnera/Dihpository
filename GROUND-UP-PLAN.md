@@ -6289,3 +6289,26 @@ typical of its family.
 quota was spent and it could not reach 73). Rejected. **Home defence** (`mkdefend.py`: converge on enemies inside
 our half when our nearby health x strength is 1.2 times theirs) 124 against gs_mix_camp: rejected. Squads are
 closed: the grouping they buy does not stop the deaths at home, and it costs farming.
+
+## CLOUD: where the map losses are (2026-11-04, evening; the owner chose map fixes with v166 kept safe)
+
+**Ranked, v155/v166 era (830 games since 3 Nov 15:00Z, 50% won), worst maps:** 00anvil 0/12, adgato_gemcombat4
+0/9, 00dunes 1/11, 01starvation 1/11, 03contours 2/15, 03membrane 1/7, 00pilgrimage 2/10, 01fracture 2/10,
+00swirl 2/9, 00galaxy 3/12. Against an even split, the bottom eleven maps cost about 44 games (5.3%). Lab maps
+lost by every version (each against one team): 00breadcrumbs, 01fracture, 02tangle, 03contours, 02cuts,
+02guardians, 00swirl, 00dunes (0 of 18-29), 00ambush, 01big_world, 00quadrants (1).
+
+From ranked summaries and decoded replays:
+- **adgato_gemcombat4** (one central altar, eight harmless 21-42 gem clusters): 598-1,027, deaths 16.2-3.1 in
+  652 rounds; we lose 178 carried gems a game to deaths (11 a death), spread around the altar and the routes to
+  it; both teams spend about a fifth of their time near the altar. The fight gap again, not a map rule.
+- **00anvil** (party; everything at the single altar: a 200-gem monolith beside it and two 21-gem clusters):
+  306-993, monster damage 41k-79k; 0/6 in the v166 era as before. The other party maps are fine since v166
+  (02guardians 3/4, 03showdown 2/2, 03homonoliths 5/5, 00monolith 4/4).
+- **03contours** (90x90, four altars, spawns in opposite corners): 623-973 with few deaths (6.2-2.7); they make
+  37 captures a game in their own half to our 26 and take more of the big middle groups. Profiled locally there:
+  travel 43% of turns, farming 14%, 4.3 shop recalls a champion-game (about 190 rounds each with the walk
+  back). Pricing trips home by the walk back was already tested (`tf2`, 872 against 906) and lost.
+
+**Camp table for all 86 maps** (`analysis/cloud/camps_all.json`; probe `ws/bots/probe_camps2`): per group the
+gems, gold, respawn, total health and strength, monolith flag, first camp tile and camp count.
