@@ -220,3 +220,14 @@ the deaths are decided before the danger state, by where and with whom a champio
 With the first experiment (predicting danger does not make withdrawing safer) this closes the
 moment-of-danger response as a lever. What is left for fights is upstream: positioning, group
 size when a fight starts, and which camps are farmed with enemies near.
+
+## Level 1, second run (2026-11-04, from 00:45Z): the league that predicts the lab
+
+`analysis/rebuild/labpredict.py` found that a version's local results against gs_mix_camp
+(rank correlation 0.81 with lab wins over 10 versions), b_tbd and next_trial predict the ladder
+lab, while results against our own lineage do not (rl 0.15). r1's es_best gained nothing against
+gs_mix_camp (-5 a game); its whole gain was against our own bots, and it lost on the lab. r2 is
+the same tuner with `ES_LEAGUE=gs_mix_camp,b_tbd,next_trial` (an env override added to `es.py`),
+10 maps an opponent a generation from both sides (60 games a candidate), 16 candidates, until
+07:00Z. Validation before any lab slot: the mean's full sweep against the three opponents
+(516 games), plus held-out f_cast_n, gs_eq and f_hor_h.

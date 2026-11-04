@@ -80,6 +80,10 @@ BASE = "es_base"
 BASE_TAG = "es_league_base"
 LEAGUE = ["cHG_submit", "rl_submit", "sh_submit", "gs_mix_camp", "gs_eq", "b_tbd", "next_trial",
           "f_hor_h", "f_tavi_n", "dH_submit", "sgA_submit", "d1"]
+# ES_LEAGUE=a,b,c replaces the league for every command (run r2 uses the opponents whose local
+# verdicts predict the ladder lab: analysis/rebuild/labpredict.py). They must be in the base sweep.
+if os.environ.get("ES_LEAGUE"):
+    LEAGUE = [o for o in os.environ["ES_LEAGUE"].split(",") if o]
 WIN_BONUS = 200.0
 
 # (name, ab3's value, low, high, integer)

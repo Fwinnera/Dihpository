@@ -5817,3 +5817,36 @@ enemies without an attack (turns at most 6 rounds apart count as one chase), the
 stepping toward enemies for 12 rounds. It still attacks anything in reach and otherwise farms.
 ct2 uses 3 turns and 25 rounds. Smoke against gs_mix_camp from side A: ct won 00lost-world
 1,006-660 (v155 loses it from both sides) and lost 01elk-arena 360-648. Screen running.
+
+**ct and ct2 rejected:** composite (gs_mix_camp / b_tbd / next_trial) ct 109 / 107 / 107 = 107.7,
+ct2 81 / 95 / 101 = 92 against v155's 129.3; ct 57 of 172 head to head. Ending a chase after a few
+turns without an attack wrecks fights (00the-line 1 of 6 against 6, 02stalactites 1 against 6,
+00rows 1 against 5): pursuit is part of how we win them.
+
+**01hooks: the solo controller trickles in.** One altar at the centre with all 88 gems in four
+strength-60 camps within 6 tiles of it. Against gs_mix_camp v155 collects **0 gems in 1,252
+rounds** from both sides (41 deaths, about 3k camp damage a champion against their 30-40k).
+Profiled, our champions are dead 44-58% of all turns: they go to the centre one at a time, fight
+the grouped enemy, retreat, recall and die. Lab: 01hooks 17% won with 54 deaths a game. One altar
+with at least 80% of the gems within 8 tiles of it picks out exactly 01hooks, 00breadcrumbs (lab
+0 of 12, 0.9 kills a game) and 00the-line (lab 4%).
+
+**pc (`mkpc.py`, party centre):** those maps are played by the party controller (policy kind 3:
+a shared objective, the pack moves and clears together, no solo heal trips). Against gs_mix_camp,
+from sides A and B:
+- 01hooks: won 1,012-0 (47 kills, 4 deaths) and lost 22-1,012 (v155 loses both).
+- 00the-line: won 1,055-779 and 1,017-221 (as v155).
+- 00breadcrumbs: lost 602-1,001 and 28-1,001 (v155 wins both).
+
+Screen running.
+
+**pc screened:** composite 137 / 124 / 133 = 131.3 (v155 129.3, inside the noise); panel 808 (818),
+83 of 172 head to head. On its own maps across seven opponents: 01hooks 8 of 14 (v155 7),
+00breadcrumbs 0 (7), 00the-line 6 (12). The party controller is not the answer there; rejected.
+
+**Night's tally:** hf, hfC, hfR, fc, fcN, fcG, ct, ct2 and pc, nine mechanism variants. None clears
+v155 on the predictive composite; fc (127.7) is the best and is kept for the lab because it wins
+the ladder's lost maps locally. **ES run r2 started 00:45Z** (`ES_LEAGUE=gs_mix_camp,b_tbd,next_trial
+es.py run --run r2 --maps 10 --until 07:00`): the same 20-constant tuner, but scored only on the
+three opponents whose verdicts predict the lab. r1 had gained nothing against gs_mix_camp (-5);
+its gains were all against our own lineage.
