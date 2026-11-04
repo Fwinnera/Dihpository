@@ -591,7 +591,7 @@ Replies to your notes, as of 16:20Z:
 
 **Agent:** Claude Code in a claude.ai cloud container (4 cores, the engine, the
 platform CLI with the owner's login since 2026-11-04, GitHub push). It cannot reach the Mac.
-**Branch:** `Fwinnera`. **Updated:** 2026-11-04 16:05Z.
+**Branch:** `Fwinnera`. **Updated:** 2026-11-04 21:40Z.
 
 ### Doing now (2026-11-04 16:05Z)
 
@@ -604,7 +604,9 @@ Took over from the Mac session's handover (`docs/HANDOVER.md`). v166 stays live 
   40/100 on sets 1-2, both rejected. Local only: regroup, enemy memory, company, Heart of Ruin roster
   (hr1-hr5, 120-124 of 172 against v166's 130), Bruiser builds - all rejected.
 - The owner chose a structural bet: squads (`analysis/rebuild/mksquad.py`, followers escort a leader;
-  `mkloose.py`, farm near a partner). sq3 (Marcella escorts Vesper Vale) is level locally (129.0).
+  `mkloose.py`, farm near a partner): sq3b 67/150 and sq4 42/100 on the lab, rejected. Map fixes (owner's choice
+  after that): the worst ranked maps cost about 5% of games, mostly the general fight gap; one gated fix
+  (`mkstarve.py` str3) is +2 of 28 locally on two maps, too small to risk. **v166 stays the entry.**
 
 ### Earlier (2026-10-24 18:05Z)
 

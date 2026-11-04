@@ -45,9 +45,21 @@ games run about 170 every 3-4 minutes on 4 cores.
     as2   assist a teammate an enemy reached              lab 62           local 120 vs gs_mix_camp (v166 132)
     gw04  early gold worth 0.4 of a gem                   lab 40 of 100    local 133.3 composite (v166 130.0)
     sq3b  Marcella escorts Vesper Vale                    lab 67           local 131.3
-    sq4   sq3b in contested ground only                   (see GROUND-UP-PLAN.md)   local 133.0
+    sq4   sq3b in contested ground only                   lab 42 of 100 (v166 47)   local 133.0
+    local only: Heart of Ruin roster (hr1-hr5, 120-124), two-pair squads (118-121), home defence (124),
+    starved-map early raids (str3: +2 of 28 on 01starvation/00great-wall, not taken to the lab).
     local only, all below v166: regroup, enemy memory, company, Heart of Ruin roster (hr1-hr5, 120-124),
     Bruiser strength builds (126), two-pair squads (118-121), Vendetta escort (119), gold 0.2/0.6.
 
 Lessons: the gs_mix_camp screen predicted the lab for fight changes (as2); local gains of about +3 composite
 did not survive the lab (gw04, sq3b); v166's 73 is typical of its lineage (sets average 26.0 / 21.8 / 25.2).
+
+## Map losses (ranked, 830 games of v155/v166)
+
+Worst: 00anvil 0/12, adgato_gemcombat4 0/9, 00dunes 1/11, 01starvation 1/11, 03contours 2/15. The bottom eleven
+cost about 5% of games, mostly through the general fight gap (gemcombat4, dunes, oasis) or the party fight at
+00anvil's altar. `analysis/cloud/camps_all.json` is the camp table for all 86 maps.
+
+**Gating a change to some maps is fragile:** fuel is counted per executed instruction and the bot's anytime
+searches cut on remaining fuel, so one extra check executed on every map re-deals the whole pool. Put a map
+fix inside a branch that already runs only on those maps (BossBot, the monolith test) to keep the rest identical.
