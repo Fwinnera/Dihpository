@@ -56,8 +56,9 @@ both, and `analysis/rebuild/screen.sh` now compresses each pairing after scoring
 
 ## Ladder lock
 
-    held by:   nobody (CLOUD released it 2026-11-05 01:19Z). **v166 = pm_best is live and pinned** (re-pinned
-               01:08Z, live again 01:18Z).
+    held by:   CLOUD since 2026-11-05 01:31Z: promoting v173 = hb3 to live (paired lab against v166 on the
+               same 150 games: our deaths 14.82 -> 12.25 a game, se 0.67; gem margin +97 a game, se 48; wins
+               73 -> 77). Fallback: v166.
     2026-11-05 lab: v173 = hb3 (v166 + no recall under fire + fight back when cut off,
                analysis/rebuild/mkambush.py MODE=recall FIGHTBACK=1) 28 + 24 + 25 = 77 of 150 against v166's
                23 + 24 + 26 = 73 on the same pinned opponents: the best lab result so far, inside the +-12
