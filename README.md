@@ -56,8 +56,11 @@ both, and `analysis/rebuild/screen.sh` now compresses each pairing after scoring
 
 ## Ladder lock
 
-    held by:   nobody (CLOUD released it 2026-11-05 23:12Z). **v173 = hb3 is live and pinned** (owner-approved
-               promotion, live 23:11Z; ws/bots/hb3_submit). Fallback: v166 (`cambc submissions activate 166`).
+    held by:   CLOUD since 2026-11-05 23:58Z: v166 baseline on engine 3.0.0 (lab sets 1-3 against the same
+               pinned opponents). hb3's lab (77) ran on engine 3.0.0 but v166's arms (73) on 2.0.0: the platform
+               upgraded the engine around midnight 4-5 Nov (and the map pool to 128 maps). v173 re-pinned after.
+    (before)   v173 = hb3 live and pinned (owner-approved promotion, live 23:11Z; ws/bots/hb3_submit). Fallback:
+               v166 (`cambc submissions activate 166`).
                Paired lab against v166 on the same 150 games: our deaths 14.82 -> 12.25 a game (se 0.67), gem
                margin +97 a game (se 48), wins 73 -> 77. New lab candidates pair against v166's arms (pm_best*).
     2026-11-05 lab: v173 = hb3 (v166 + no recall under fire + fight back when cut off,
