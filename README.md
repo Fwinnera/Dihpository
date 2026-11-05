@@ -56,8 +56,9 @@ both, and `analysis/rebuild/screen.sh` now compresses each pairing after scoring
 
 ## Ladder lock
 
-    held by:   nobody (CLOUD released it 2026-11-04 23:47Z). **v166 = pm_best is live and pinned** (re-pinned
-               23:35Z, live again 23:46Z).
+    held by:   CLOUD since 2026-11-05 01:05Z: lab test of hb3 = v166 + no recall under fire + fight back when
+               cut off (analysis/rebuild/mkambush.py MODE=recall FIGHTBACK=1; ws/bots/hb3_submit). Local
+               136/131/142 = 136.3 (v166 130.0). v166 is re-pinned when the lab finishes.
     2026-11-04 lab (owner-approved hypothesis test): v172 = cf3, full co-farming squads, 24 + 16 + 20 = 60 of
                150 against v166's 73. Deaths by zone: GROUND-UP-PLAN.md, "Big plan".
     2026-11-04 lab: v171 = sq4 (Marcella escorts Vesper Vale in contested ground) sets 1-2 24 + 18 = 42 of 100
