@@ -56,10 +56,11 @@ both, and `analysis/rebuild/screen.sh` now compresses each pairing after scoring
 
 ## Ladder lock
 
-    held by:   CLOUD since 2026-11-06 01:14Z (continued): calibration lab of rd166 = v166 with a few
-               instructions of fuel burnt a turn (re-deals the games, plays identically). On engine 3.0.0 three
-               different candidates scored 75-77 against v166's 86; rd166 shows whether 86 was a lucky draw.
-               v166 re-pinned after.
+    held by:   nobody (CLOUD released it 2026-11-06 02:32Z). **v166 = pm_best is live and pinned** (re-pinned
+               02:26Z, live 02:31Z).
+    2026-11-06 calibration: v176 = rd166 (v166 + a few instructions of fuel burnt a turn: re-dealt games,
+               identical play) 30 + 29 + 25 = 84 of 150 against v166's 86. v166's 3.0.0 baseline is not a lucky
+               draw; hb3 (77), fu1 (75) and hr6 (77) are really about 8-10 wins worse on the ladder.
     2026-11-06 lab: v175 = hr6 (v166 + Heart of Ruin in Ryth's slot, mkhor.py SLOT=ryth5 DASH=1 BUILD=1
                SHIELD=1 + 3.0.0 dash-landing guard), engine 3.0.0: 32 + 22 + 23 = 77 of 150 (v166 86). Local
                194/184/197 of 256 (v166 184/186/192).
