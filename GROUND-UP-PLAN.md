@@ -6427,3 +6427,11 @@ raids (MODE=raid, round 300) 5/6 and starvation 5/6, against mg4's 6/6 and 4/6. 
 losses: we deposit 350 of 510 (68%), they 933 of 1,019 (92%), and we die 19.2 times to their 6.3. Losses are
 lost maps (half the collection, three times the deaths), not a banking leak. Top UK teams (2.0.0 era) kept 77%
 of collected gems and died 5.2 times a game.
+
+**Roster, 6 Nov 18:00Z:** tv1 (mg4 with Tavi, ranged and shopping in the field, in Ryth's draft slot; our Ryth
+collected 93 gems a game on the 3.0.0 lab against 158-331 for our other picks): lab 32 + 24 + 22 = 78, the
+same as mg4; not kept. Ranked solo win rate by roster size: 3 champions 63%, 4 55%, 5 48%.
+
+**Feature bisection on 03contours, 02treasure-box, 04canyons, 00galaxy** (v166 loses these even to our
+older bots locally; ranked 9 of 48): mg4 7/24, BREACH off 7, SCARCE_GEMS off 6, reward roles off 10, JOIN off
+8. No single feature explains it. mg4's 768 local games on all 128 maps print nothing (no errors, no crashes).
