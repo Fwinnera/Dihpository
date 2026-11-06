@@ -6328,3 +6328,46 @@ gate inside the existing monolith test (str3) keeps every map without monoliths 
 checked), but monolith maps re-deal once the share is first computed after round 300. A gemcombat-family fix
 (bank every capture on single-altar maps with only harmless camps) has no branch that runs only on those maps,
 so it cannot be added without re-dealing the whole pool. Not taken to the lab; v166 stays.
+
+## CLOUD, 5-6 Nov: execution bugs, fuel, and the engine 3.0.0 confound
+
+**Replay action streams.** The visualiser's engine also exposes every consumed input with its actor and a
+code (`analysis/cloud/actions.mjs`, 3.0.0 replays: `actions3.mjs`): 4 move, 5 attack (target tile), 6 cast,
+8 end of turn, 11 recall for us, 26 a turn cut off by the fuel limit. With states (`read2.mjs` / `read3.mjs`)
+this gives what each champion did each turn, for us and for any other team's replays.
+
+**The profiled build lied about fights.** p_pm's per-turn PF line cost so much fuel that 2.5% of its turns
+were cut off (v166 0.5-0.8%, ladder teams 0.25%). Its duel numbers (24% of isolated duels won) were mostly
+that: real v166 wins 38-50% of duels (42-50% at similar health), about even.
+
+**Hidden attackers.** Bush tiles (`analysis/cloud/bushes.json`, 84 of 86 old maps) hide champions. Damage
+interrupts a recall, and v166 restarted the recall every turn while an unseen enemy kept shooting: 7.7
+restarts a game, a champion standing still until it died. hb3 (`analysis/rebuild/mkambush.py MODE=recall
+FIGHTBACK=1`: no recall in the round after losing health; a withdrawal with no step hits back) removed the
+restarts (0.09 a game) and cut our deaths 13.49 -> 12.25 a game on the same engine-3.0.0 pairings, but won
+77 of 150 against v166's 86 there (se 6.5) and the gem margin did not move. Not kept.
+
+**Engine 3.0.0 (around midnight 4-5 Nov).** cambc 5.0.0, 128 maps (42 new), nerfs to Vesper Vale (str 45 ->
+35), Vendetta (hp 900, str 65), Marcella (str 40+3.5, focus growth 10), Heart of Ruin (focus 80+9), Prism
+focus 90. v166's lab sets on 3.0.0: 35 + 27 + 24 = 86 of 150 (on 2.0.0: 73). Every lab baseline before
+5 Nov is 2.0.0; new candidates pair against arms `e3v166*`. hb3 had been promoted on a 2.0.0-vs-3.0.0
+comparison and was reverted. Local tests now run on the new engine: `analysis/cloud/e3` (bench5.py,
+screen5.sh, h2h5.py on /home/user/ws5): v166 184/186/192 of 256, hb3 191/194/201.
+
+**Post-patch drafts of the top ten (30 ranked games each on 3.0.0):** Heart of Ruin in nearly every game
+(not Pantheon), Vendetta and Marcella in most, Vesper Vale in many, Cassi and Issac for two of the top
+three. We draft Varg, Vendetta, Vesper Vale, Ryth, Marcella: three of the five were nerfed.
+
+**Fuel.** Fuel is about one unit per WebAssembly instruction; C++ gets 100,000 a turn. A local
+diagnostic (ws/bots/p_idle, p_fuel: fuel checkpoints printed only on bail-outs) found ~124 turns a game
+ending in a low-fuel bail-out before any action, ~80 of them after strategy::choose_group (ranking pass
+23,000, distance field 11,000, exact scoring until 38,000 remain, then the move runs out). mkfuel.py (no
+std::pow when nobody has joined a group, one map lookup, scoring stops at 55,000) cut them to ~101.
+fu1 = hb3 + mkfuel, fu2 = v166 + mkfuel.
+
+**04sanctum** (new) is a labyrinth of ring walls; v166 collects 4 gems in 2,000 rounds there (0 of 12 local
+games): all five champions pick a 4-gem group nine tiles away through a wall and pace the corridors. Walking-
+distance ranking (mkrank.py) did not fix it; the rings may need teleport crystals. 00galaxy: 0 of 12, a
+fighting map (we collect half their gems and die twice as often).
+
+**Ladder 6 Nov 00:30Z:** rank 228, rating 1,724 (UK top-8 target about 2,160).
