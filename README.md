@@ -56,8 +56,11 @@ both, and `analysis/rebuild/screen.sh` now compresses each pairing after scoring
 
 ## Ladder lock
 
-    held by:   nobody (CLOUD released it 2026-11-06 00:20Z). **v166 = pm_best is live and pinned** (pinned
-               23:51Z 5 Nov for the baseline below and kept: v173 was NOT re-pinned).
+    held by:   CLOUD since 2026-11-06 00:40Z: lab test of fu1 = hb3 + mkfuel.py (cheaper camp-group
+               re-planning) on engine 3.0.0, paired against e3v166 (86). Local, new engine, of 256 per opponent:
+               fu1 202/196/200, hb3 191/194/201, v166 184/186/192, fu2 (v166 + mkfuel) 184/189/187. v166 is
+               re-pinned when the lab finishes.
+    (before)   v166 = pm_best live and pinned (pinned 23:51Z 5 Nov for the baseline below; v173 not re-pinned).
     2026-11-06 ENGINE 3.0.0: the platform moved from engine 2.0.0 to 3.0.0 around midnight 4-5 Nov (cambc
                5.0.0, 128 maps; nerfs: Vesper Vale str 45->35, Vendetta hp 1000->900 str 70->65, Marcella
                str 45+4.5->40+3.5 focus growth 14->10, Heart of Ruin focus 100+10->80+9; Prism focus 80->90).
