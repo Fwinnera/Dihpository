@@ -2,7 +2,7 @@
 
 ## Update 6 Nov 05:15Z (engine 3.0.0)
 
-- **Live: v166, pinned.** Recommended next: **v180 = mg4** (`ws/bots/mg4_submit`; `cambc submissions activate
+- **Live: v180 = mg4, pinned (promoted 6 Nov 17:21Z, owner-approved).** (`ws/bots/mg4_submit`; was recommended as `cambc submissions activate
   180`) = v166 + three map fixes, awaiting the owner. Fallback stays v166.
 - **The platform moved to engine 3.0.0** around midnight 4-5 Nov (cambc 5.0.0, 128 maps, balance changes). Lab
   baselines before 5 Nov are engine 2.0.0 and not comparable. New candidates pair against arms `e3v166*`
