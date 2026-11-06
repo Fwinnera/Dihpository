@@ -6405,3 +6405,25 @@ v166 + mkmany.py + mkloop.py LOOP_MIN_GROUPS=55: 04sanctum 1,021-77 and 1,012-0,
 twice, local screen 192/185/193 = 190.0 (v166 187.3). On every other map it plays as v166 (re-dealt by the
 gate checks; mg1's lab, the same kind of re-deal, scored 80 against v166's 86 and 84). On the ladder these
 two maps were 16 of our 800 games since the patch, all lost. Candidate for promotion: ws/bots/mg3_submit.
+
+## CLOUD, 6 Nov evening: mg4 live; ladder map mining, round 2
+
+**v180 = mg4 promoted (owner-approved, live 17:21Z).** Ranked games since the patch (1,275 to 17:20Z): 50.7%;
+party mode 45/116 (39%), solo 602/1,159 (52%; 3-a-side 63%, 4 55%, 5 48%).
+
+**Worst maps with 8+ games** (before mg4): 04sanctum 0/17, 00great_wall 0/11, 04gem_caverns 0/10,
+adgato_gemcombat4 1/19, 03contours 1/10, 04spiral_moat 2/18, 02geodes 2/13, 02treasure_box 2/13,
+01starvation 2/11, 04comb 2/11, 00crater 2/11. mg4 covers 04sanctum, 04gem_caverns, 04spiral_moat, 04comb.
+Locally (against our own older bots) v166 wins most of the others 5-6 of 6: those are stronger-opponent
+losses, not bugs. Exceptions: 00galaxy 0/6 locally (dies 21.8 to 8.0: a centre brawl over the 35-gem group
+between both altars; ladder 2/8) and 03contours/02treasure-box/04canyons about 2-3 of 6.
+
+**00great_wall (0/11):** neither side takes the monoliths; we out-farm them early, collect 708 and deposit 356,
+dying 14 times to their 4: carriers die on the way to the central altars and the killers take the gems.
+Starved-map variants on mg4 (local, 6 games a map): party mode (mkstarve MODE=party) 0/6 on great-wall; early
+raids (MODE=raid, round 300) 5/6 and starvation 5/6, against mg4's 6/6 and 4/6. Not taken further.
+
+**Gem flow, 150 random ranked games:** wins: we deposit 964 of 1,047 collected (92%), they 556 of 707;
+losses: we deposit 350 of 510 (68%), they 933 of 1,019 (92%), and we die 19.2 times to their 6.3. Losses are
+lost maps (half the collection, three times the deaths), not a banking leak. Top UK teams (2.0.0 era) kept 77%
+of collected gems and died 5.2 times a game.
