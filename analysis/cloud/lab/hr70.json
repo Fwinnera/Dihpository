@@ -1,0 +1,199 @@
+{
+ "arm": "hr70",
+ "base": "pm_best",
+ "version": 177,
+ "note": "hr70: v166 with heal-recall at 70% (was 60%)",
+ "queued": "2026-11-06T02:41:56Z",
+ "groups": [
+  {
+   "team": "24731510-784f-4176-985e-17c1626934ca",
+   "name": "Rusty Epee",
+   "maps": [
+    "00road_of_riches",
+    "03ambush_field",
+    "03riverbed",
+    "02arena",
+    "01hooks"
+   ],
+   "sides": [
+    "a",
+    "b",
+    "a",
+    "b",
+    "a"
+   ],
+   "group": "01a1aebb-f7df-7f59-a027-7a4992368f5b"
+  },
+  {
+   "team": "271f8b15-7d97-4a0a-bd32-b634dd006dc0",
+   "name": "Crimson Pathfinders",
+   "maps": [
+    "00the_line",
+    "01islands",
+    "00expanse",
+    "02the_pack",
+    "00vault"
+   ],
+   "sides": [
+    "b",
+    "a",
+    "b",
+    "a",
+    "b"
+   ],
+   "group": "01a1aebc-0214-7647-844b-b83fc82360ad"
+  },
+  {
+   "team": "e747283d-a801-4175-8b9d-ee36df006daa",
+   "name": "The something",
+   "maps": [
+    "01the_farm",
+    "00elkring",
+    "02harvest",
+    "03one_gem",
+    "adgato_gemcombat5"
+   ],
+   "sides": [
+    "a",
+    "b",
+    "a",
+    "b",
+    "a"
+   ],
+   "group": "01a1aebc-0c9d-734e-af0e-c6393b67eccc"
+  },
+  {
+   "team": "91b991b0-c974-4ffe-a1f8-4c83c171e9f4",
+   "name": "T\u00fcbingen Quants",
+   "maps": [
+    "03ultrastarvation",
+    "01concentrated_wealth",
+    "00collision",
+    "01big_world",
+    "02crossing"
+   ],
+   "sides": [
+    "b",
+    "a",
+    "b",
+    "a",
+    "b"
+   ],
+   "group": "01a1aebc-1722-724e-bdd8-eb705a8069f2"
+  },
+  {
+   "team": "9b0a89b8-f553-4916-8b58-eea33334757c",
+   "name": "neuro",
+   "maps": [
+    "02tangle",
+    "01fracture",
+    "00reverse_spiral",
+    "01broken_curve",
+    "adgato_gemcombat2"
+   ],
+   "sides": [
+    "a",
+    "b",
+    "a",
+    "b",
+    "a"
+   ],
+   "group": "01a1aebc-21f8-7016-8dd8-d5c675b1da9e"
+  },
+  {
+   "team": "abb3b776-7d71-41f6-90c6-885aebdc64b4",
+   "name": "Shinshilachki",
+   "maps": [
+    "00ambush",
+    "02the_pond",
+    "01starvation",
+    "01shortcut",
+    "03reef"
+   ],
+   "sides": [
+    "b",
+    "a",
+    "b",
+    "a",
+    "b"
+   ],
+   "group": "01a1aebc-2c33-7951-8357-208fc26d3359"
+  },
+  {
+   "team": "b50b3aa9-a0fb-4388-93d2-3459e1a350a9",
+   "name": "Kingstonks",
+   "maps": [
+    "03fan",
+    "00ribs",
+    "01yellow_brick_road",
+    "02stalactites",
+    "03shrines"
+   ],
+   "sides": [
+    "a",
+    "b",
+    "a",
+    "b",
+    "a"
+   ],
+   "group": "01a1aebc-3634-7e03-814d-df2f4c342202"
+  },
+  {
+   "team": "409129b9-e6ac-4f80-921c-2ede2ed1cb4f",
+   "name": "Memory?",
+   "maps": [
+    "01gold_rush",
+    "00happy_halloween",
+    "adgato_gemcombat4",
+    "01boss_battle",
+    "00galaxy"
+   ],
+   "sides": [
+    "b",
+    "a",
+    "b",
+    "a",
+    "b"
+   ],
+   "group": "01a1aebc-4059-717a-bc3d-afd73fb8c6ce"
+  },
+  {
+   "team": "1e25877b-9ea9-4821-bd54-236e44c5e650",
+   "name": "Kaizen",
+   "maps": [
+    "00eight",
+    "00split",
+    "00corners",
+    "00breadcrumbs",
+    "00pilgrimage"
+   ],
+   "sides": [
+    "a",
+    "b",
+    "a",
+    "b",
+    "a"
+   ],
+   "group": "01a1aebc-4a62-717c-b278-65c42c24cb10"
+  },
+  {
+   "team": "7348a083-dc1d-45ec-a355-c4bede12dd6a",
+   "name": "tip",
+   "maps": [
+    "00quarry",
+    "02famine",
+    "03membrane",
+    "00rushbait_v2",
+    "02fields"
+   ],
+   "sides": [
+    "b",
+    "a",
+    "b",
+    "a",
+    "b"
+   ],
+   "group": "01a1aebc-545f-78cc-ba07-e24b68c042cb"
+  }
+ ]
+}

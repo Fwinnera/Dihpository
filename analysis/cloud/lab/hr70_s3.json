@@ -1,0 +1,199 @@
+{
+ "arm": "hr70_s3",
+ "base": "pm_best_s3",
+ "version": 177,
+ "note": "hr70: v166 with heal-recall at 70% (was 60%)",
+ "queued": "2026-11-06T02:53:18Z",
+ "groups": [
+  {
+   "team": "64ae7e80-d604-4121-a067-210e515e5bb5",
+   "name": "Alpha pekka",
+   "maps": [
+    "00galaxy",
+    "03honeycomb",
+    "00lost_world",
+    "adgato_gemcombat2",
+    "00contest"
+   ],
+   "sides": [
+    "a",
+    "b",
+    "a",
+    "b",
+    "a"
+   ],
+   "group": "01a1aec6-62e5-73e8-aae4-301e4e80ff39"
+  },
+  {
+   "team": "ce501991-2191-4063-9cdb-86103b8e9f81",
+   "name": "CompetitiveBasmaga",
+   "maps": [
+    "00lanes",
+    "00expanse",
+    "00pilgrimage",
+    "01corridors",
+    "adgato_gemcombat3"
+   ],
+   "sides": [
+    "b",
+    "a",
+    "b",
+    "a",
+    "b"
+   ],
+   "group": "01a1aec6-6d37-7983-acc4-77212e882b76"
+  },
+  {
+   "team": "fd795986-cfd3-4732-9fa9-94caba40067a",
+   "name": "V4.1 Flash",
+   "maps": [
+    "03colosseum",
+    "00corners",
+    "02treasure_box",
+    "00eight",
+    "00great_wall"
+   ],
+   "sides": [
+    "a",
+    "b",
+    "a",
+    "b",
+    "a"
+   ],
+   "group": "01a1aec6-7742-79c5-9ba7-64c0f533684f"
+  },
+  {
+   "team": "bee75a64-fae5-48aa-8751-73d4e78ebfb5",
+   "name": "DIET CODE",
+   "maps": [
+    "00anvil",
+    "01islands",
+    "01hooks",
+    "01concentrated_wealth",
+    "03the_front"
+   ],
+   "sides": [
+    "b",
+    "a",
+    "b",
+    "a",
+    "b"
+   ],
+   "group": "01a1aec6-812c-7be5-b5e2-987b3a1a61d6"
+  },
+  {
+   "team": "2cb78ebc-e61e-4ee0-9950-b3e3963d9743",
+   "name": "Rogue Noogers",
+   "maps": [
+    "00interlock",
+    "01fracture",
+    "02cuts",
+    "02uncharted_lands",
+    "03one_gem"
+   ],
+   "sides": [
+    "a",
+    "b",
+    "a",
+    "b",
+    "a"
+   ],
+   "group": "01a1aec6-8bcf-7855-9d0d-17cc7396a978"
+  },
+  {
+   "team": "432f7d69-cce1-48c4-a446-2b293aa210b9",
+   "name": "decrest",
+   "maps": [
+    "00happy_halloween",
+    "00quarry",
+    "00oasis",
+    "01shortcut",
+    "02the_pack"
+   ],
+   "sides": [
+    "b",
+    "a",
+    "b",
+    "a",
+    "b"
+   ],
+   "group": "01a1aec6-95ef-7c49-9e1e-fb08f83541db"
+  },
+  {
+   "team": "f752d854-acdd-4417-8c41-bf4b39108db6",
+   "name": "patisserie du pont neuf",
+   "maps": [
+    "00crater",
+    "adgato_gemcombat1",
+    "02arena",
+    "03contours",
+    "00packs"
+   ],
+   "sides": [
+    "a",
+    "b",
+    "a",
+    "b",
+    "a"
+   ],
+   "group": "01a1aec6-a08c-77d0-a850-5746c4213dd7"
+  },
+  {
+   "team": "33fd952b-b067-40b2-a0d4-ba289bddcb57",
+   "name": "Quantom",
+   "maps": [
+    "03homonoliths",
+    "03showdown",
+    "02famine",
+    "02fields",
+    "03membrane"
+   ],
+   "sides": [
+    "b",
+    "a",
+    "b",
+    "a",
+    "b"
+   ],
+   "group": "01a1aec6-aa92-7f91-916f-4b1de73d8d18"
+  },
+  {
+   "team": "4938a543-0798-4879-b8ce-f63f98ca13c3",
+   "name": "BrendanBurgess",
+   "maps": [
+    "01yellow_brick_road",
+    "03twisty",
+    "03ambush_field",
+    "01broken_curve",
+    "03reef"
+   ],
+   "sides": [
+    "a",
+    "b",
+    "a",
+    "b",
+    "a"
+   ],
+   "group": "01a1aec6-b451-747c-809b-74fac527c0e6"
+  },
+  {
+   "team": "b9b2f439-fc05-437f-907e-e8380921f9a4",
+   "name": "ClosedAI",
+   "maps": [
+    "00gem_fields",
+    "adgato_gemcombat4",
+    "00fragment",
+    "02harvest",
+    "00road_of_riches"
+   ],
+   "sides": [
+    "b",
+    "a",
+    "b",
+    "a",
+    "b"
+   ],
+   "group": "01a1aec6-be41-7b1d-bf44-fbd00b91e157"
+  }
+ ]
+}

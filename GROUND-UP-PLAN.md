@@ -6371,3 +6371,25 @@ distance ranking (mkrank.py) did not fix it; the rings may need teleport crystal
 fighting map (we collect half their gems and die twice as often).
 
 **Ladder 6 Nov 00:30Z:** rank 228, rating 1,724 (UK top-8 target about 2,160).
+
+## CLOUD, 6 Nov night: v166 holds on engine 3.0.0; lab calibration; two map bugs
+
+**Lab, engine 3.0.0, same 150 pinned games (sets 1-3):** v166 86; rd166 (v166 re-dealt: a few instructions
+of fuel burnt a turn, identical play) 84; hb3 77; fu1 (hb3 + mkfuel) 75; hr6 (Heart of Ruin in Ryth's slot,
+with a guard for dash landings engine 3.0.0 refuses) 77; hr70 (heal-recall at 70%) 76. The re-deal changed 30
+results and moved 2 wins, so single runs are steadier than feared; every change tried loses 9-11 of the games
+it changes on balance. hb3 and fu1 collect 2-3% fewer gems and gold than v166 (846/844 vs 861 a game): the
+ladder punishes small economic losses (games average a 37-gem margin). Local screens (against our own older
+bots) ranked every one of these above v166: they do not predict the ladder.
+
+**Our ranked games since the patch (800, about a day):** 50.9% wins; new maps 52.9%, old maps 49.8%. Near-sure
+losses: 04sanctum 0/12, 00great_wall 0/9, 04spiral_moat 1/11, 04comb 1/9, adgato_gemcombat4 1/12. Locally we
+win all of those but two, which are bugs in our whole lineage:
+
+- 04gem-caverns (114 single-camp groups, 7 gems, harmless): every turn starts with 40,000-66,000 fuel and
+  choose_group's ranking pass spends it before choosing, so the bot never acts (0-0 games). mkmany.py ranks
+  only the 32 nearest groups on maps with more than 64 (only this map has): 1,001 gems against 0 locally.
+  Elsewhere it is v166 re-dealt by one comparison a call (189 vs 185 of 256 against gs_mix_camp).
+- 04sanctum (ring maze, 60 groups): v166 sends all five champions to a 4-gem group 103 steps away (9 by
+  straight line) while rich harmless groups sit 47 steps away by the altar; choose_group ranks by
+  straight-line distance and its fuel-limited exact pass never reaches the centre. Not fixed yet.
