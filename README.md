@@ -56,9 +56,12 @@ both, and `analysis/rebuild/screen.sh` now compresses each pairing after scoring
 
 ## Ladder lock
 
-    held by:   CLOUD since 2026-11-06 02:41Z (continued): safety lab of mg1 = v166 + mkmany.py (04gem-
-               caverns fix; the lab maps do not include it, so this measures only the re-deal elsewhere).
-               v166 re-pinned after; promoting mg1 is for the owner to decide.
+    held by:   nobody (CLOUD released it 2026-11-06 04:12Z). **v166 = pm_best is live and pinned** (re-pinned
+               04:07Z, live 04:11Z).
+    2026-11-06 lab: v179 = mg1 (v166 + mkmany.py: on maps with more than 64 camp groups rank only the 32
+               nearest; only 04gem-caverns qualifies, where v166 scores 0 gems every game and mg1 1,001 locally)
+               32 + 26 + 22 = 80 of 150. On the lab maps mg1 plays exactly as v166, so this is a third v166
+               sample: 86, 84, 80 (mean 83, spread about 3). Candidate for promotion: owner to decide.
     2026-11-06 lab: v177 = hr70 (HEAL_RECALL 0.70) 31 + 23 + 22 = 76; v178 = rs4 (recall with visible enemies
                beyond 4 tiles) 30 + 24 + 27 = 81; v166 86, re-deal 84: both rejected.
     (before)   v166 = pm_best live and pinned (re-pinned 02:26Z, live 02:31Z).
