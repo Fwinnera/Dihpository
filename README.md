@@ -56,12 +56,11 @@ both, and `analysis/rebuild/screen.sh` now compresses each pairing after scoring
 
 ## Ladder lock
 
-    held by:   CLOUD since 2026-11-06 17:45Z: lab test of tv1 = mg4 with Tavi in Ryth's draft slot (solo maps
-               with 4+ champions). Ranked solo win rate falls as Ryth and Marcella join (3 champions 63%, 4 55%,
-               5 48%); our Ryth collected 93 gems a game on the 3.0.0 lab (others 158-331). mg4 re-pinned after.
-    (before)   v180 = mg4 live and pinned (owner-approved promotion, live 17:21Z; ws/bots/mg4_submit = v166 +
-               mkmany.py + mkloop.py LOOP_MIN_GROUPS=55 + mkparty2.py). Fallback: v166. Lab candidates pair
-               against v166's engine-3.0.0 arms e3v166* (86; v166-behaviour re-deals 84, 80, mg4 78).
+    held by:   nobody (CLOUD released it 2026-11-06 18:02Z). **v180 = mg4 is live and pinned** (owner-approved
+               promotion 17:21Z; re-pinned 17:57Z, live 18:01Z; ws/bots/mg4_submit). Fallback: v166. Lab
+               candidates pair against e3v166* (86; v166-behaviour re-deals 84, 80; mg4 78).
+    2026-11-06 lab: v181 = tv1 (mg4 + Tavi in Ryth's draft slot) 32 + 24 + 22 = 78 of 150: no gain, not kept.
+               Local 195/192/200 of 256 (mg4 191/189/192).
     2026-11-06 lab: v180 = mg4 (v166 + mkmany.py, mkloop.py LOOP_MIN_GROUPS=55, mkparty2.py; ws/bots/
                mg4_submit) 29 + 27 + 22 = 78 of 150. On the six lab games on kind-2 maps 3/6 (every v166 run
                2/6); on the other 144, where it plays exactly as v166, 75 (v166-behaviour runs 84, 82, 78:
