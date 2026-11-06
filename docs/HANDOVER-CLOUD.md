@@ -1,5 +1,24 @@
 # Handover: CLOUD session of 4 Nov 2026 (Milk and Potatoes, Battlecode 2026a)
 
+## Update 6 Nov 05:15Z (engine 3.0.0)
+
+- **Live: v166, pinned.** Recommended next: **v180 = mg4** (`ws/bots/mg4_submit`; `cambc submissions activate
+  180`) = v166 + three map fixes, awaiting the owner. Fallback stays v166.
+- **The platform moved to engine 3.0.0** around midnight 4-5 Nov (cambc 5.0.0, 128 maps, balance changes). Lab
+  baselines before 5 Nov are engine 2.0.0 and not comparable. New candidates pair against arms `e3v166*`
+  (`--from pm_best*` pins the same opponents and maps): v166 86, re-deals of v166 84 (rd166), 80 (mg1).
+- **Local bench on the new engine:** `/home/user/ws5` (made with `cambc init` from cambc 5.0.0 in
+  `/home/user/.venv-cambc5`), scripts in `analysis/cloud/e3` (bench5.py, screen5.sh, h2h5.py). Local screens
+  against our own older bots ranked every engine-3.0.0 candidate above v166 that the lab then put below it: use
+  them to catch breakage, not to choose.
+- **Replay decoders for 3.0.0:** `analysis/cloud/actions3.mjs`, `read3.mjs` (the v3_0_0 visualiser wasm from
+  the cambc 5.0.0 assets); `decode_act3.sh`, `decode_dir3.sh`.
+- **Rejected on the 3.0.0 lab:** hb3 77, fu1 75, hr6 (Heart of Ruin) 77, hr70 76, rs4 81.
+- **Map fixes (mg4):** mkmany.py (04gem-caverns: the ranking pass over 114 groups never finished, 0 gems a game),
+  mkloop.py LOOP_MIN_GROUPS=55 (04sanctum: champions looped around a ring corridor all game), mkparty2.py
+  (single-altar monolith maps play solo unless the altar is gated or monoliths hold 80% of the gems: party
+  mode won 16 of 57 ranked games on those maps). Our ranked games since the patch: 50.9% of 800.
+
 Read `docs/HANDOVER.md` (the Mac session's brief) first; this adds what the cloud session did on 4 November.
 
 ## State
