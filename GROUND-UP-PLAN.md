@@ -6393,3 +6393,15 @@ win all of those but two, which are bugs in our whole lineage:
 - 04sanctum (ring maze, 60 groups): v166 sends all five champions to a 4-gem group 103 steps away (9 by
   straight line) while rich harmless groups sit 47 steps away by the altar; choose_group ranks by
   straight-line distance and its fuel-limited exact pass never reaches the centre. Not fixed yet.
+
+**04sanctum, solved (6 Nov 04:30Z).** The champions were not stuck by fuel: they walked a closed loop
+around the ring corridor by our spawn, heading for a group 103 steps away (gold counts like gems before
+round 500, and the outer groups carry gold) through corridor tiles held by camps that block the route when
+seen and look free when not. progress.blocked() never fired because the position changed every turn.
+mkloop.py gives up an objective after 30 rounds of travel without getting closer (straight-line), as
+progress.blocked() would. Everywhere (lp1) it rescued the mazes but cost elsewhere (local 184.3 vs 187.3);
+gated to maps with at least 55 groups (04sanctum 60, 04gem-rush 58, 04gem-caverns 114) it is mg3 =
+v166 + mkmany.py + mkloop.py LOOP_MIN_GROUPS=55: 04sanctum 1,021-77 and 1,012-0, 04gem-caverns 756-0
+twice, local screen 192/185/193 = 190.0 (v166 187.3). On every other map it plays as v166 (re-dealt by the
+gate checks; mg1's lab, the same kind of re-deal, scored 80 against v166's 86 and 84). On the ladder these
+two maps were 16 of our 800 games since the patch, all lost. Candidate for promotion: ws/bots/mg3_submit.
