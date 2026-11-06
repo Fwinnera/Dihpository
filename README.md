@@ -56,8 +56,8 @@ both, and `analysis/rebuild/screen.sh` now compresses each pairing after scoring
 
 ## Ladder lock
 
-    held by:   nobody (CLOUD released it 2026-11-06 05:12Z). **v166 = pm_best is live and pinned** (re-pinned
-               05:07Z, live 05:11Z).
+    held by:   CLOUD since 2026-11-06 17:12Z: promoting v180 = mg4 to live (owner-approved). Fallback: v166.
+    (before)   v166 = pm_best live and pinned (re-pinned 05:07Z, live 05:11Z).
     2026-11-06 lab: v180 = mg4 (v166 + mkmany.py, mkloop.py LOOP_MIN_GROUPS=55, mkparty2.py; ws/bots/
                mg4_submit) 29 + 27 + 22 = 78 of 150. On the six lab games on kind-2 maps 3/6 (every v166 run
                2/6); on the other 144, where it plays exactly as v166, 75 (v166-behaviour runs 84, 82, 78:
