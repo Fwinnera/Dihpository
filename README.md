@@ -56,8 +56,11 @@ both, and `analysis/rebuild/screen.sh` now compresses each pairing after scoring
 
 ## Ladder lock
 
-    held by:   nobody (CLOUD released it 2026-11-06 04:12Z). **v166 = pm_best is live and pinned** (re-pinned
-               04:07Z, live 04:11Z).
+    held by:   CLOUD since 2026-11-06 04:55Z: safety lab of mg4 = v166 + map fixes (mkmany.py: 04gem-caverns;
+               mkloop.py LOOP_MIN_GROUPS=55: 04sanctum; mkparty2.py: kind-2 maps solo unless the altar is gated
+               or monoliths hold 80% of the gems). Ranked since the patch: party mode 27/73, solo 380/727; these
+               maps 2/16 (bugs) and 9/38 (kind 2 switched to solo). v166 re-pinned after; owner decides.
+    (before)   v166 = pm_best live and pinned (re-pinned 04:07Z, live 04:11Z).
     2026-11-06 lab: v179 = mg1 (v166 + mkmany.py: on maps with more than 64 camp groups rank only the 32
                nearest; only 04gem-caverns qualifies, where v166 scores 0 gems every game and mg1 1,001 locally)
                32 + 26 + 22 = 80 of 150. On the lab maps mg1 plays exactly as v166, so this is a third v166
