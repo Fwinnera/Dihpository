@@ -56,8 +56,11 @@ both, and `analysis/rebuild/screen.sh` now compresses each pairing after scoring
 
 ## Ladder lock
 
-    held by:   nobody (CLOUD released it 2026-11-06 02:32Z). **v166 = pm_best is live and pinned** (re-pinned
-               02:26Z, live 02:31Z).
+    held by:   CLOUD since 2026-11-06 02:41Z: lab tests of recall variants of v166 on engine 3.0.0, one at
+               a time: hr70 (HEAL_RECALL 0.60 -> 0.70), then rs4 (recall allowed with visible enemies beyond 4
+               tiles; v166: none within 6). hb3, which recalled less, lost 2-3% of collection and 9 wins.
+               v166 re-pinned after each.
+    (before)   v166 = pm_best live and pinned (re-pinned 02:26Z, live 02:31Z).
     2026-11-06 calibration: v176 = rd166 (v166 + a few instructions of fuel burnt a turn: re-dealt games,
                identical play) 30 + 29 + 25 = 84 of 150 against v166's 86. v166's 3.0.0 baseline is not a lucky
                draw; hb3 (77), fu1 (75) and hr6 (77) are really about 8-10 wins worse on the ladder.
