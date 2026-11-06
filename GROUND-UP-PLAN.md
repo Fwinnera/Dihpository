@@ -6435,3 +6435,8 @@ same as mg4; not kept. Ranked solo win rate by roster size: 3 champions 63%, 4 5
 **Feature bisection on 03contours, 02treasure-box, 04canyons, 00galaxy** (v166 loses these even to our
 older bots locally; ranked 9 of 48): mg4 7/24, BREACH off 7, SCARCE_GEMS off 6, reward roles off 10, JOIN off
 8. No single feature explains it. mg4's 768 local games on all 128 maps print nothing (no errors, no crashes).
+
+**mg4 on the ladder, first check (6 Nov 18:10-21:00Z, 90 ranked games):** 45/90 = 50.0% (before 50.7% of
+1,275: within noise). Party mode 5/6, solo 40/84. The fixed maps came up twice: 04comb 1/1 and 04two_kingdoms
+0/1, both drafted solo (Varg, Vendetta, Vesper Vale, Ryth[, Marcella]) as intended; none yet on 04sanctum,
+04gem_caverns, 04spiral_moat, 03showdown or 00anvil. Nothing broken; v180 stays live.
