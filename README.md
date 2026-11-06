@@ -56,11 +56,14 @@ both, and `analysis/rebuild/screen.sh` now compresses each pairing after scoring
 
 ## Ladder lock
 
-    held by:   CLOUD since 2026-11-06 04:55Z: safety lab of mg4 = v166 + map fixes (mkmany.py: 04gem-caverns;
-               mkloop.py LOOP_MIN_GROUPS=55: 04sanctum; mkparty2.py: kind-2 maps solo unless the altar is gated
-               or monoliths hold 80% of the gems). Ranked since the patch: party mode 27/73, solo 380/727; these
-               maps 2/16 (bugs) and 9/38 (kind 2 switched to solo). v166 re-pinned after; owner decides.
-    (before)   v166 = pm_best live and pinned (re-pinned 04:07Z, live 04:11Z).
+    held by:   nobody (CLOUD released it 2026-11-06 05:12Z). **v166 = pm_best is live and pinned** (re-pinned
+               05:07Z, live 05:11Z).
+    2026-11-06 lab: v180 = mg4 (v166 + mkmany.py, mkloop.py LOOP_MIN_GROUPS=55, mkparty2.py; ws/bots/
+               mg4_submit) 29 + 27 + 22 = 78 of 150. On the six lab games on kind-2 maps 3/6 (every v166 run
+               2/6); on the other 144, where it plays exactly as v166, 75 (v166-behaviour runs 84, 82, 78:
+               re-deal noise). The lab maps exclude 04sanctum and 04gem-caverns. Ranked since the patch: those
+               two maps 0/16; the kind-2 maps mg4 switches to solo 9/38 in party mode; solo maps 52%.
+               RECOMMENDED for promotion (owner to decide): `cambc submissions activate 180`.
     2026-11-06 lab: v179 = mg1 (v166 + mkmany.py: on maps with more than 64 camp groups rank only the 32
                nearest; only 04gem-caverns qualifies, where v166 scores 0 gems every game and mg1 1,001 locally)
                32 + 26 + 22 = 80 of 150. On the lab maps mg1 plays exactly as v166, so this is a third v166
