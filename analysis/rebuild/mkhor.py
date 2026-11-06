@@ -189,3 +189,18 @@ if P["ESCORT"] == "1":
         "                                                                                                                                : 1;\n",
     )])
 print("escort", P["ESCORT"])
+
+# Engine 3.0.0 (2026-11-06): the engine refuses some dash landing tiles the masks allow ("Forbidden landing
+# tile"); the uncaught error cost the whole turn (about 900 error lines a game). Catch it at the call site.
+patch("combat.h", [(
+    "            else if (choice.aim == 1) acted = ability.use(choice.tile);\n",
+    "            else if (choice.aim == 1) {\n"
+    "                // Engine 3.0.0 refuses some landing tiles the masks allow; a refused dash must not cost the turn.\n"
+    "                try {\n"
+    "                    acted = ability.use(choice.tile);\n"
+    "                } catch (const std::exception&) {\n"
+    "                    acted = false;\n"
+    "                }\n"
+    "            }\n",
+)])
+print("dash landing guarded")

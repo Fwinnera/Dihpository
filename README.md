@@ -56,8 +56,11 @@ both, and `analysis/rebuild/screen.sh` now compresses each pairing after scoring
 
 ## Ladder lock
 
-    held by:   nobody (CLOUD released it 2026-11-06 01:02Z). **v166 = pm_best is live and pinned** (re-pinned
-               00:56Z, live 01:01Z).
+    held by:   CLOUD since 2026-11-06 01:14Z: lab test of hr6 = v166 + Heart of Ruin in Ryth's slot
+               (analysis/rebuild/mkhor.py SLOT=ryth5 DASH=1 BUILD=1 SHIELD=1, with the engine-3.0.0 guard on
+               refused dash landings), paired against e3v166 (86): post-patch, nearly every top-ten team drafts
+               Heart of Ruin. Local (new engine, of 256): 194/184/... (v166 184/186/192). v166 re-pinned after.
+    (before)   v166 = pm_best live and pinned (re-pinned 00:56Z, live 01:01Z).
     2026-11-06 lab: v174 = fu1 (hb3 + mkfuel.py, cheaper camp-group re-planning), engine 3.0.0: 30 + 20 + 25 =
                75 of 150 against v166's 86 on the same pairings: rejected. Second hb3-based candidate about 10
                below v166 on the lab while ahead locally (new engine, of 256: fu1 202/196/200, hb3 191/194/201,
