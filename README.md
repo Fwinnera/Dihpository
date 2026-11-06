@@ -56,13 +56,17 @@ both, and `analysis/rebuild/screen.sh` now compresses each pairing after scoring
 
 ## Ladder lock
 
-    held by:   CLOUD since 2026-11-05 23:58Z: v166 baseline on engine 3.0.0 (lab sets 1-3 against the same
-               pinned opponents). hb3's lab (77) ran on engine 3.0.0 but v166's arms (73) on 2.0.0: the platform
-               upgraded the engine around midnight 4-5 Nov (and the map pool to 128 maps). v173 re-pinned after.
-    (before)   v173 = hb3 live and pinned (owner-approved promotion, live 23:11Z; ws/bots/hb3_submit). Fallback:
-               v166 (`cambc submissions activate 166`).
-               Paired lab against v166 on the same 150 games: our deaths 14.82 -> 12.25 a game (se 0.67), gem
-               margin +97 a game (se 48), wins 73 -> 77. New lab candidates pair against v166's arms (pm_best*).
+    held by:   nobody (CLOUD released it 2026-11-06 00:20Z). **v166 = pm_best is live and pinned** (pinned
+               23:51Z 5 Nov for the baseline below and kept: v173 was NOT re-pinned).
+    2026-11-06 ENGINE 3.0.0: the platform moved from engine 2.0.0 to 3.0.0 around midnight 4-5 Nov (cambc
+               5.0.0, 128 maps; nerfs: Vesper Vale str 45->35, Vendetta hp 1000->900 str 70->65, Marcella
+               str 45+4.5->40+3.5 focus growth 14->10, Heart of Ruin focus 100+10->80+9; Prism focus 80->90).
+               All lab baselines before 5 Nov are engine 2.0.0 and NOT comparable with new runs.
+    2026-11-06 lab: v166 on engine 3.0.0 (arms e3v166*, same pinned opponents): 35 + 27 + 24 = 86 of 150.
+               hb3 (v173, engine 3.0.0) 77 of 150 on the same pairings: wins -9 (se 6.5), margin -4 (se 49),
+               our deaths 13.49 -> 12.25 (se 0.74). hb3's earlier "deaths -2.57, margin +97" compared engines.
+               v173 was promoted on that confounded comparison (owner-approved 23:11Z) and reverted to v166
+               at 23:51Z. New candidates pair against e3v166* (86), not pm_best* (73, engine 2.0.0).
     2026-11-05 lab: v173 = hb3 (v166 + no recall under fire + fight back when cut off,
                analysis/rebuild/mkambush.py MODE=recall FIGHTBACK=1) 28 + 24 + 25 = 77 of 150 against v166's
                23 + 24 + 26 = 73 on the same pinned opponents: the best lab result so far, inside the +-12
