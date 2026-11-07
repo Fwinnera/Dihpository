@@ -6465,3 +6465,11 @@ older bots locally; ranked 9 of 48): mg4 7/24, BREACH off 7, SCARCE_GEMS off 6, 
 dying 0-8. In the 150-game sample, losses are lost map control: we do 64k monster damage to their 107k and
 earn 4,032 gold to their 6,982 (kills account for 460 and 1,729 of it); wins are the mirror image (122k to
 88k). No map bug left among them; the remaining gap is fights and map control.
+
+**mg4 after a day (6 Nov 18:10Z - 7 Nov 18:20Z, 720 ranked games):** 361/720 = 50.1% (ranked matchmaking pulls
+the rate towards 50%); rating 1,766, rank 206 (6 Nov 00:30Z: 1,724, rank 228). The maps mg4 changed: 20/46
+(43%) against 7/69 (10%): 04gem_caverns 5/10 (0/10), 04spiral_moat 4/8 (2/18), 04comb 2/7 (2/11),
+04two_kingdoms 3/7 (0/4), 03showdown 3/4 (2/7), 04sanctum 2/5 (0/17), 00anvil 1/5 (1/2). Party mode 22/40.
+00anvil is a three-a-side deathmatch whichever mode wins (losses 29-31 deaths to 6-15; the win 1 to 31), the
+two NotSoLonely losses are one replayed pairing, and 5 games do not meet the 6-game bar: mg6 (anvil back to
+party, PARTY_MONO 0.75) not built; v180 stays.
