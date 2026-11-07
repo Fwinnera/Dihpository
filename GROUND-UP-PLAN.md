@@ -6440,3 +6440,19 @@ older bots locally; ranked 9 of 48): mg4 7/24, BREACH off 7, SCARCE_GEMS off 6, 
 1,275: within noise). Party mode 5/6, solo 40/84. The fixed maps came up twice: 04comb 1/1 and 04two_kingdoms
 0/1, both drafted solo (Varg, Vendetta, Vesper Vale, Ryth[, Marcella]) as intended; none yet on 04sanctum,
 04gem_caverns, 04spiral_moat, 03showdown or 00anvil. Nothing broken; v180 stays live.
+
+**mg4 on the ladder, morning check (6 Nov 18:10Z - 7 Nov 08:10Z, 415 ranked games):** 209/415 = 50.4% (before
+50.7%). The maps mg4 changed: 11/26 (42%) against 7/69 (10%) before: 04gem_caverns 3/5 (0/10), 04spiral_moat
+2/4 (2/18), 04comb 2/3 (2/11), 04two_kingdoms 2/5 (0/4), 03showdown 2/3 (2/7); but 04sanctum 0/2 (0/17) and
+00anvil 0/4 (1/2). They are about 6% of games, so the overall rate cannot show the gain yet. Party mode now
+14/22 (only kind 3 and gated or monolith-heavy kind 2 maps).
+
+- 00anvil solo: 0/4 with 29-31 deaths a game against 6-15, a third of their collection. Before mg4 party mode
+  went 1/2 on the ladder; on the lab mg4's solo anvil won both games every v166 run split 1/2. Watching it:
+  PARTY_MONO 0.75 would return anvil (0.775) to party mode and leave the other switched maps solo.
+- 04sanctum against real teams (decoded loss, 667 rounds): both sides farm mostly the outer groups; from about
+  round 200 two of theirs stand on the only altar (centre) with empty bags while the others bring 20-30 gems
+  each. Ours carry 8-18 gems and stay near our spawn: our banking will not walk into an enemy-held altar, so we
+  deposit nothing. The loop fix (mkloop.py) only cured the corridor loop. Not fixed: contesting a held altar is
+  a real behaviour change our local opponents cannot test (they do not camp altars). Gems-first early weighting
+  on dense maps (mg5) and the party controller there (sx1) were both worse locally.
