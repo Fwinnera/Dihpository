@@ -6456,3 +6456,12 @@ older bots locally; ranked 9 of 48): mg4 7/24, BREACH off 7, SCARCE_GEMS off 6, 
   deposit nothing. The loop fix (mkloop.py) only cured the corridor loop. Not fixed: contesting a held altar is
   a real behaviour change our local opponents cannot test (they do not camp altars). Gems-first early weighting
   on dense maps (mg5) and the party controller there (sx1) were both worse locally.
+
+**Map mining, 7 Nov morning (1,710 ranked games, maps mg4 did not change):** below 25% with 8+ games:
+01big_world 0/9, adgato_gemcombat4 1/21, 00great_wall 1/17, 03contours 1/11, 00packs 1/8, adgato_gemcombat1
+2/15, 01starvation 2/14, 02treasure_box 2/14, 02gift_wrapping 2/12, 04fault_lines 3/15, 01fracture 3/14,
+00crater 4/18, 01boss_battle 3/13, 01islands 4/17, 04mesas 4/17. We win most of them locally. 01big_world and
+00packs: opponents earn 2-3 times our gold (7,000-10,500 against 2,000-4,900) and kill us 9-24 times while
+dying 0-8. In the 150-game sample, losses are lost map control: we do 64k monster damage to their 107k and
+earn 4,032 gold to their 6,982 (kills account for 460 and 1,729 of it); wins are the mirror image (122k to
+88k). No map bug left among them; the remaining gap is fights and map control.
