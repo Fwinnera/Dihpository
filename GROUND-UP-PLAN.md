@@ -6473,3 +6473,16 @@ the rate towards 50%); rating 1,766, rank 206 (6 Nov 00:30Z: 1,724, rank 228). T
 00anvil is a three-a-side deathmatch whichever mode wins (losses 29-31 deaths to 6-15; the win 1 to 31), the
 two NotSoLonely losses are one replayed pairing, and 5 games do not meet the 6-game bar: mg6 (anvil back to
 party, PARTY_MONO 0.75) not built; v180 stays.
+
+## CLOUD, 9 Nov 17:45Z: pre-deadline check (read-only; nothing changed on the platform)
+
+- **Platform:** mode "follow newest ready version", **Live: v183** (uploaded 9 Nov 16:03Z by the team account,
+  no note; active since 17:41Z). v182 was uploaded 8 Nov 14:01Z (no note). Neither source is in the repo,
+  and the README lock block still says v180 is pinned. v180 = mg4 is no longer live.
+- **Ladder:** rating 1,745, rank 230 of 828 (7 Nov 18:20Z: 1,766, rank 206).
+- **Ranked results by the version live at the time:** v180 (7 Nov 18:20Z - 8 Nov 14:01Z) 192/370 = 51.9%,
+  drafting Varg, Vendetta, Vesper Vale, Ryth, Marcella; v182 (8 Nov 14:01Z - 9 Nov 16:03Z) 393/780 = 50.4%,
+  drafting Tavi in Ryth's slot (the lab's tv1 change: 78 of 150, level with mg4's 78); v183 so far 20/50
+  (mostly v182's games; too early).
+- docs/IMPROVE-PROMPT.md's endgame rule: pin the final entry by about 10 Nov 18:00Z and record it here and in
+  the README.
