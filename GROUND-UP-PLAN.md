@@ -6556,3 +6556,17 @@ helpers walk on; elk first). Rule: a pack arm is promoted on 84 or more of 150 (
 sets); 73-83 is kept as the base for the next variant only if it is the best pack arm so far; 72 or lower
 means the variant is rejected. Whatever is promoted also plays one set against teams ranked about 80-150
 before the final pin. If no pack arm reaches 84, v183 is re-pinned.
+
+**Pack hypothesis corrected (12:35Z).** `pk0` (BossBot on ordinary maps with 4+ bodies) lost its local head to
+head against v183 12 of 40 after 20 maps (gem margin -293, deaths 19.0 against 13.5; stopped): it walks the
+whole team into three-elk herds at base stats, splits every reward four ways and falls apart at the first
+retreat. Not sent to the lab. And the premise was wrong: counting champions that actually attack the same camp
+group in the same round (`/home/user/tools/coattack.py`, rounds 1-400), our split is the top-80 sample's:
+alone 49% (theirs 48-49%), two 29% (26-28%), three 16% (13-17%), four or more 6% (10%). What differs is volume:
+camp-attack turns a game 252 for us, 344 for the teams that beat us, 420-482 in the top-80 sample; of living
+turns we spend 57% only moving (47-50%) and 17% hitting camps (23-26%), and we are dead 16% of the time (5-10%).
+The traced top-80 Vesper Vale farms alone down to 22% health before recalling; ours recalls at 60%.
+
+**Heal-recall arms (rule as for every candidate: +12 over 72 promotes; written before the results).** The 6 Nov
+lab already had one point on this slope: hr70 (0.70) 76 against v166's 86. `h45` = v183 with HEAL_RECALL 0.45;
+`h35` = 0.35. If h45 is at or above 72 the next arm is h35; if it is below 66, the next arm is 0.52 instead.
