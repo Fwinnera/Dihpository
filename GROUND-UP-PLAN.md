@@ -6608,3 +6608,17 @@ with a Focus build 56, margin -99: not sent to the lab.
 margin +47 (se 42), deaths -0.6 (se 0.6), five-body games 40 -> 48 of 96, four-body 18 -> 14 of 29. Not promoted
 alone; its direction (react earlier) is what pc1 does with a ratio. The platform took 13 minutes for this arm
 (the 150 games sat queued for about eight): midday load. `pc1` went up at 13:01Z as v188.
+
+**`pc1` result (v188, 13:01-13:18Z): 21 + 26 + 29 = 76 of 150** (v183 72): +4, inside the resolution. Paired:
+our deaths 13.5 -> 12.0 (-1.6, se 0.7), champion damage taken -5.1k (se 1.9k), their deaths unchanged, monster
+damage -0.6k (se 2.6k), gold -190 (se 280), margin +18 (se 48); by bodies 3: 14 -> 15, 4: 18 -> 19, 5: 40 -> 42.
+The rule does what it was written for (fewer deaths, farming kept) and the win count moves by four.
+Before death, on the lab our victims spend 23% of their last eight turns with no action but the end of turn
+(theirs 10%; fuel cuts are 1%): stuns from Ryth, Heart of Ruin, Marcella and Ren, which the lab teams draft.
+Locally (pf183) 59% of the turns before a death are spent in retreat or disengage and 8% are fuel cuts.
+
+**`c1` (written 13:24Z before its result; rule: 84 or more of 150 promotes):** v183 + ia's items (Jungle:Str >
+Durability:Health > Monster:Str > Skirmish:Str; Vesper Vale Treasure > Jungle > Durability > Skirmish) + pc1.
+Each part alone was +1 and +4 with paired signs in its favour (damage taken -4.3k and -5.1k). If c1 lands
+between 73 and 83 it is not promoted on the lab alone; the decision then rests on the stronger-opponent set
+(set 4, ten teams ranked 85-148, paired with v183 on the same pinned versions) and on the paired statistics.
