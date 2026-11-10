@@ -6570,3 +6570,21 @@ The traced top-80 Vesper Vale farms alone down to 22% health before recalling; o
 **Heal-recall arms (rule as for every candidate: +12 over 72 promotes; written before the results).** The 6 Nov
 lab already had one point on this slope: hr70 (0.70) 76 against v166's 86. `h45` = v183 with HEAL_RECALL 0.45;
 `h35` = 0.35. If h45 is at or above 72 the next arm is h35; if it is below 66, the next arm is 0.52 instead.
+
+**`h45` result (v186, 12:29-12:38Z): 20 + 25 + 26 = 71 of 150** (v183 72): level; paired gem margin -6 (se 48),
+monster damage -2.4k (se 2.4k), deaths +0.4 (se 0.7). The heal-recall threshold is flat between 0.45 and 0.60 on
+the lab; h35 not queued. Paired, `ia` against v183: margin +50 a game (se 33), champion damage taken -4.3k
+(se 1.6k), monster damage +3.6k (se 2.2k), wins 72 -> 73 (`/home/user/tools/pair.py`).
+
+**Profile of v183 (pf183, 42 local games against v183, rounds 1-400, share of champion-turns):** travel 29%, farm
+22%, dead 13%, combat 10%, capture 7%, bank 5%, retreat 3%, recall channel 3%, fuel-cut turns 2.5%, disengage
+2%. Trips home in the first 400 rounds, a game: 10.5 low-health retreats, 4.0 heal recalls, 3.9 shop recalls.
+Every champion's rounds 1-3 are fuel cuts. **Lab baseline by champion (per 1,000 rounds, wins / losses):**
+Vesper Vale 338 / 186 gems collected, Marcella 216 / 124, Varg 202 / 108, Vendetta 170 / 109, **Tavi 83 / 54**;
+deaths: us 2,030 (1,821 to champions), them 1,456. By bodies: 3 14/25, 4 18/29, 5 40/95.
+
+**Single-constant arms queued 12:48Z (same rule: +12 over 72 promotes; 73-83 may be stacked into one combined
+candidate, which then needs its own arm; written before the results).** The predecessors could tune these
+only against our own bots; the lab now takes ten minutes an arm. `dr7` = v183 with DISENGAGE_RADIUS 7 (react
+to enemy groups two tiles earlier; 1,821 of our 2,030 lab deaths are to champions, mostly outnumbered);
+`bk16` = BANK_GEMS 16 (in losses we deposit 68% of what we collect); `dq70` = DISENGAGE_RATIO 0.70.
