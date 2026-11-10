@@ -6519,3 +6519,40 @@ against our own bots where we win the fights, and nobody in the top-80 sample bu
   Jungle:Str > Durability:Health > Skirmish:Str), then the Power rule as before.
 - `ib` = v183 with Monster:Str > Durability:Health > Jungle:Str > Skirmish:Str (Vesper Vale Treasure:Str >
   Monster:Str > Durability:Health > Skirmish:Str).
+
+**`ia` result (v185, 07:54-08:09Z): 21 + 28 + 24 = 73 of 150** against v183's 72: level, not promoted on the lab
+(rule: +12). Ranked by live version (795 ranked games fetched, `/home/user/tools/ranked.py`): v182 100/195 =
+51.3%; v183 199/390 = 51.0% (131/265 before v184, 68/125 after); v184 (teammate's, 02:25-03:52Z) 20/45 = 44.4%;
+v185 = ia (08:02-12:11Z) 63/120 = 52.5%. Rating 12:20Z: 1,779, rank 212 (07:38Z: 1,753, rank 230). The session's
+worker process was restarted between 08:09Z and 12:20Z; v185 stayed live and pinned through that gap. `ib` was
+built but not queued (an item order moves the lab by about a win).
+
+**Replay study (12:20Z; 26 ranked games of teams ranked 30-80 since 9 Nov 08:00Z, 20 of our v183 losses; decoded
+with read3.mjs/actions3.mjs; tools in /home/user/tools: early.py, company.py, actbudget.py, trace.py).**
+
+- *Economy, rounds 1-400, a team-game:* teams ranked 30-80 (and their opponents) earn 2,464-2,651 gold, collect
+  353-386 gems and do 43-46k monster damage; in our losses we earn 1,222, collect 182 and do 22k (the teams that
+  beat us: 1,513, 337, 27k). At round 100 our gold is level with the teams that beat us (302 against 280) and
+  our gems already behind (34 against 53). First purchase: round 52-54 for the top-80 sample, 66 for the teams
+  that beat us, 100 for us.
+- *Time, rounds 1-400:* share of living turns spent hitting a camp: top-80 sample 23-26%, the teams that beat
+  us 21%, us 17%; dead 5-10%, 5%, 16%. Camp damage a game: 29-32k, 23.5k, 18.5k.
+- *Openings:* in 22 of 24 top-80 team-games the whole team (4-6 bodies) hits the same first camp, usually an
+  elk group, between rounds 3 and 16; ours open two or three to a cluster or an elk.
+- *One game traced (MFF1, rank 34, 04dunes):* six bodies kill an elk group in 12 rounds, losing a quarter of
+  one champion's health between them; Vesper Vale alone stands on the reward (172 gold, 29 gems, her +33%
+  gold applies), recalls and shops at round 35, the other five walk on to the next elk at once; Marcella takes
+  the next reward, carries the gems and tributes them (2 gold a gem). A four-body pack then rotates the same
+  elk and wolf groups as they respawn while Vesper Vale and Marcella farm, shop and bank alone.
+- *Cassi & Issac, same sample, per 1,000 rounds:* 3.8 deaths each, 74 + 103 gems collected, 10k + 11k monster
+  damage; Tavi 307 gems and 55k (2 games), Varg 248 and 39k, Marcella 321, Vesper Vale 261, Vendetta 223.
+  At ranks 30-80 the duo is the weakest pick on the board. Not drafted today (no arm spent on it).
+- *Items:* the top-80 sample opens Prospector, Treasure, Jungle, Capture or Monster; nobody buys Hunter.
+
+**Structural bet: a pack controller on ordinary maps (keep rule written 12:27Z, before any result).**
+`pk0` = v183 playing ordinary maps (policy kind 0) with four or more bodies with the party controller
+(BossBot: one shared objective, no heal-recall at 60%), same draft. Variants follow (collector goes alone,
+helpers walk on; elk first). Rule: a pack arm is promoted on 84 or more of 150 (12 over v183's 72 on the same
+sets); 73-83 is kept as the base for the next variant only if it is the best pack arm so far; 72 or lower
+means the variant is rejected. Whatever is promoted also plays one set against teams ranked about 80-150
+before the final pin. If no pack arm reaches 84, v183 is re-pinned.
