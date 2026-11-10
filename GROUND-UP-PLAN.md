@@ -6505,3 +6505,17 @@ deadline 2026-11-10T23:59Z, takes the live version. The container runs cambc 5.0
   sets (first v183). Between 0 and +11: not promoted on the lab alone. Below the best arm: rejected. A candidate
   that passes also plays one set against teams ranked about 80-150 before the final pin, and the final choice is
   pinned by about 18:00Z.
+
+**v183 baseline (07:43-07:48Z):** 28 + 25 + 19 = **72 of 150** (above the 66 line, so v183 stays pinned; rule
+followed). The arms' maps differ from the 6 Nov arms: lab.py's plan shuffles the workspace's map list, which is
+now 128 maps (it was 86), so today's arms pair with each other and not with e3v166/mg4/tv1 by map; the pinned
+opponent versions (`--source-group` of pm_best*) are the same. The platform played the 150 games in about four
+minutes and the quota is 100 groups an hour, so three arms an hour fit. Local head to head (256 games, both
+sides, 128 maps): v183 141, mg4 115, gem margin +70 (se 34), no errors.
+
+**Item arms queued 08:0xZ (general rule above applies; first emblem is the lever, local panels chose Hunter
+against our own bots where we win the fights, and nobody in the top-80 sample buys it):**
+- `ia` = v183 with Jungle:Str > Durability:Health > Monster:Str > Skirmish:Str (Vesper Vale Treasure:Str >
+  Jungle:Str > Durability:Health > Skirmish:Str), then the Power rule as before.
+- `ib` = v183 with Monster:Str > Durability:Health > Jungle:Str > Skirmish:Str (Vesper Vale Treasure:Str >
+  Monster:Str > Durability:Health > Skirmish:Str).
