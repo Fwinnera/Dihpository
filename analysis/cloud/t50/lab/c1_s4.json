@@ -1,0 +1,199 @@
+{
+ "arm": "c1_s4",
+ "base": null,
+ "version": 189,
+ "note": "c1: v183 + Jungle-first items (ia) + leave before contact when outnumbered (pc1)",
+ "queued": "2026-11-10T21:41:03Z",
+ "groups": [
+  {
+   "team": "19a21cd3-4d97-4bbb-adb6-242bf2d676ff",
+   "name": "Hidden Altar Keepers",
+   "maps": [
+    "01broken_curve",
+    "00corners",
+    "04gem_rush",
+    "adgato_gemcombat5",
+    "01yellow_brick_road"
+   ],
+   "sides": [
+    "a",
+    "b",
+    "a",
+    "b",
+    "a"
+   ],
+   "group": "01a1c768-4ec2-7ddb-9107-e2369ef79cc8"
+  },
+  {
+   "team": "2d18e39c-62f8-4822-b113-04d34bee8b06",
+   "name": "\u5929\u5929\u5f00\u5fc3 :(",
+   "maps": [
+    "04plaza",
+    "04gap",
+    "04standing_stones",
+    "02uncharted_lands",
+    "01hooks"
+   ],
+   "sides": [
+    "b",
+    "a",
+    "b",
+    "a",
+    "b"
+   ],
+   "group": "01a1c768-58b3-7c27-8990-7963c0bf9572"
+  },
+  {
+   "team": "4d0fe2ae-015f-4365-9705-463ff71e4291",
+   "name": "Sneaky Bush Campers",
+   "maps": [
+    "adgato_gemcombat4",
+    "03ambush_field",
+    "01big_world",
+    "04bridges",
+    "02guardians"
+   ],
+   "sides": [
+    "a",
+    "b",
+    "a",
+    "b",
+    "a"
+   ],
+   "group": "01a1c768-624a-7659-a12b-45e85d1228d1"
+  },
+  {
+   "team": "c5fe98e9-c795-4c67-a36b-2c66bac443e8",
+   "name": "German Empire Destroyers",
+   "maps": [
+    "00dunes",
+    "01fracture",
+    "04fault_lines",
+    "02geodes",
+    "00breadcrumbs"
+   ],
+   "sides": [
+    "b",
+    "a",
+    "b",
+    "a",
+    "b"
+   ],
+   "group": "01a1c768-6bd9-7caa-a0b4-74e901d4c774"
+  },
+  {
+   "team": "d61e374a-4f07-4bca-a3a8-fe7b77089dbd",
+   "name": "Stranger Danger",
+   "maps": [
+    "04hourglass",
+    "00quarry",
+    "00oasis",
+    "00gemfight",
+    "00vault"
+   ],
+   "sides": [
+    "a",
+    "b",
+    "a",
+    "b",
+    "a"
+   ],
+   "group": "01a1c768-7587-7937-ac8b-2fcb337c4c9a"
+  },
+  {
+   "team": "2dba5fac-6e54-493c-8f0e-d7a32d898d9a",
+   "name": "umamusume",
+   "maps": [
+    "03the_front",
+    "01starvation",
+    "03shrines",
+    "04dunes",
+    "03one_gem"
+   ],
+   "sides": [
+    "b",
+    "a",
+    "b",
+    "a",
+    "b"
+   ],
+   "group": "01a1c768-7f17-79c6-97b5-b9594ccd7b34"
+  },
+  {
+   "team": "67f45d6d-9cd8-403d-ade2-14aad9202201",
+   "name": "Still Testing",
+   "maps": [
+    "00stampede",
+    "04keyhole",
+    "04canyons",
+    "03twisty",
+    "02cuts"
+   ],
+   "sides": [
+    "a",
+    "b",
+    "a",
+    "b",
+    "a"
+   ],
+   "group": "01a1c768-889a-74d5-bb99-5942423b967b"
+  },
+  {
+   "team": "4620d7df-a9ac-4747-aa77-dce12395dc0c",
+   "name": "DLLM",
+   "maps": [
+    "02crossing",
+    "04mesas",
+    "00ambush",
+    "02the_pack",
+    "01shortcut"
+   ],
+   "sides": [
+    "b",
+    "a",
+    "b",
+    "a",
+    "b"
+   ],
+   "group": "01a1c768-923f-7a81-917b-16bb15bb138a"
+  },
+  {
+   "team": "6e28fccc-1bdd-4f49-9491-411a9b7d3f23",
+   "name": "arasaka",
+   "maps": [
+    "01gold_rush",
+    "03colosseum",
+    "00quadrants",
+    "04sanctum",
+    "04terraces"
+   ],
+   "sides": [
+    "a",
+    "b",
+    "a",
+    "b",
+    "a"
+   ],
+   "group": "01a1c768-9bd7-7c05-9548-c2cf49f50f3d"
+  },
+  {
+   "team": "043b2233-65b2-420c-b636-96744a71ce79",
+   "name": "Team 1",
+   "maps": [
+    "00great_wall",
+    "00galaxy",
+    "04gem_caverns",
+    "04bowls",
+    "04restricted_area"
+   ],
+   "sides": [
+    "b",
+    "a",
+    "b",
+    "a",
+    "b"
+   ],
+   "group": "01a1c768-a574-7b7f-a6ab-1e3c5af677ca"
+  }
+ ]
+}

@@ -6641,3 +6641,38 @@ standard errors of a paired 50-game difference); the paired statistics already f
 damage taken -3.3 se). Time guard: v183 is activated only if that can start before 22:00Z; if v183 is not
 live by 22:20Z the comparison is abandoned and v189 re-selected; v189 must be selected again by 22:50Z
 whatever has finished. No new uploads today.
+
+**Set 4, stronger opponents (ten teams ranked 85-148 on 10 Nov, 50 games, the same pinned versions for both
+arms):** `c1_s4` (v189, 21:41-21:45Z) **10 of 50**; `v183_s4` (v183 re-activated 21:46Z, live 21:52Z, games
+21:53-21:54Z) **9 of 50**. v183 does not beat c1 by 6, so by the rule written at 21:42Z **c1 is the final
+entry**. v189 was re-selected at 21:55Z and is live and pinned again since 22:01Z (`Mode: pinned version`,
+`Live: 189  Selected: 189`; the UK Qualifiers entry shows version 189; deadline 23:59Z). v183 was live for
+nine minutes. No upload after 13:24Z.
+
+**The day in one table (lab = 150 games on sets 1-3, v183 72):**
+
+    arm    version  what                                                        lab    paired with v183
+    v183   183      the live bot of the morning (baseline)                      72
+    ia     185      Jungle > Durability > Monster > Skirmish items              73     margin +50 (se 33), dmg taken -4.3k
+    h45    186      heal-recall at 45% health                                   71     margin -6 (se 48)
+    dr7    187      disengage radius 7                                          76     deaths -0.6 (se 0.6)
+    pc1    188      leave before contact when outnumbered (0.75 within 7)       76     deaths -1.6 (se 0.7), dmg taken -5.1k
+    c1     189      ia + pc1                                                    80     deaths -1.9 (se 0.7), dmg taken -6.8k (se 2.1k)
+    set 4 (ranks 85-148, 50 games): c1 10, v183 9.
+    not sent to the lab: pk0 (party controller on ordinary maps; 12 of 40 locally), Prism and Stellar rosters
+    (54 and 56 of 128 locally), sq1 (square-law ratio; 59 of 128 locally), Cassi & Issac (weakest pick of the
+    top-80 sample). Built, never queued: ib, h35, bk16, dq70, pc2, pc3, r_ren, r_ryth.
+
+c1 is kept on: the best lab count of the day (+8, short of the +12 line), paired deaths and damage taken well
+outside their noise with farming kept, 120/230 ranked games over eight hours (v183 185/365), and no loss
+against stronger teams. It is a small gain, about one win in twenty on the lab; it is not the drastic one the
+owner asked for. Ladder: 07:38Z rating 1,753, rank 230, UK 49; 21:35Z 1,786, rank 205, UK 44. Rank 50 was
+2,184 at 21:35Z.
+
+**Leads left for whoever continues (none tested):** (1) the pre-contact rule still leaves 4.1 alone-against-
+two-or-more deaths a game on set 1 (5.8 before): enemies seen late, stuns from range 4 (PRE_CONTACT 3), the
+linear ratio; pc2 (ratio 1.0), pc3 (radius 8) and dq70 are built. (2) Our victims lose a quarter of their last
+turns to stuns: the lab teams draft Ryth, Heart of Ruin, Marcella and Ren; we draft one stunner in five.
+(3) Tavi collects 54-83 gems per 1,000 rounds on the lab against 108-338 for our other picks, yet four-body
+games (with Tavi) are our best: the fourth and fifth champions travel most (33-37% of turns). (4) Fuel cuts
+are 4-5% of retreat and disengage turns and every champion's rounds 1-3. (5) c1 + dr7 was never combined.

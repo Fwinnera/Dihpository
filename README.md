@@ -56,11 +56,23 @@ both, and `analysis/rebuild/screen.sh` now compresses each pairing after scoring
 
 ## Ladder lock
 
-    held by:   **CLOUD since 2026-11-10 07:45Z** (top-50 push, docs/TOP50-PUSH.md): lab arms through the day,
-               one live candidate at a time; the best proven version is re-pinned between arms. Do not
-               upload or activate while this is held (teammates on the website included: tell the owner).
-               State found at 07:41Z: **mode pinned, Live: v183**; a v184 (no note, uploaded on the website
-               10 Nov 02:24Z by the teammate account) was made inactive at 03:51Z; its source is not in the repo.
+    held by:   nobody (CLOUD released it 2026-11-10 22:05Z). **Live and pinned for the lock (10 Nov 23:59 GMT):
+               v189 = c1** (`ws/bots/c1_submit`) = v183 + Jungle:Str > Durability:Health > Monster:Str >
+               Skirmish:Str items (Vesper Vale Treasure > Jungle > Durability > Skirmish) + "leave before
+               contact when outnumbered" (PRE_RATIO 0.75 within 7 tiles while no enemy is within 3).
+               `Mode: pinned version`, `Live: 189  Selected: 189` confirmed 22:01Z; the UK Qualifiers entry
+               shows version 189. Fallback: v183. Do not upload before the lock without the owner.
+    2026-11-10 lab (128-map plan, sets 1-3 `--from pm_best*`, 150 games; arms in analysis/cloud/t50/lab):
+               v183 28 + 25 + 19 = 72 (today's baseline); v185 = ia (items) 73; v186 = h45 (heal-recall 45%)
+               71; v187 = dr7 (disengage radius 7) 76; v188 = pc1 (pre-contact rule) 76; **v189 = c1 = ia +
+               pc1 80** (paired: deaths 13.6 -> 11.7, champion damage taken -6.8k, wins 70 -> 78 of 148).
+               Set 4 (ten teams ranked 85-148, 50 games, same pinned versions): c1 10, v183 9.
+               Ranked: v183 185/365 = 50.7%, v189 120/230 = 52.2% (13:38-21:35Z). Ladder 21:35Z: rating
+               1,786, rank 205, UK 44 (07:38Z: 1,753, rank 230, UK 49). Record: GROUND-UP-PLAN.md, "CLOUD,
+               10 Nov: the top-50 push".
+    (before)   CLOUD held the lock 2026-11-10 07:45Z-22:05Z. Found at 07:41Z: mode pinned, Live v183; a v184
+               (no note, uploaded on the website 10 Nov 02:24Z by the teammate account) inactive since 03:51Z,
+               source not in the repo (ranked 20/45 while it was live).
     (before)   nobody. Live since 9 Nov: v183, uploaded on the website by a teammate (follow-newest then).
                v183 = v180 + Tavi for Ryth + threat_dps + Vesper Vale's Treasure/Hunter/Power build
                (ws/bots/v183_submit, rebuilt byte for byte by analysis/rebuild/mkv183.py).
