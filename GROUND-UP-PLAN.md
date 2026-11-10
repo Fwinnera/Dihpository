@@ -6588,3 +6588,18 @@ candidate, which then needs its own arm; written before the results).** The pred
 only against our own bots; the lab now takes ten minutes an arm. `dr7` = v183 with DISENGAGE_RADIUS 7 (react
 to enemy groups two tiles earlier; 1,821 of our 2,030 lab deaths are to champions, mostly outnumbered);
 `bk16` = BANK_GEMS 16 (in losses we deposit 68% of what we collect); `dq70` = DISENGAGE_RATIO 0.70.
+
+**How we die on the lab (47 decoded games of the v183 baseline, `/home/user/tools/deaths.py`):** 14.5 deaths a
+game against 8.9. Ours: no ally within 5 at death 59% (theirs 42%); outnumbered by two or more 51% (19%);
+local numbers a round before: 0v2 21%, 0v1 15%, 0v3 14%, 1v2 9%, 1v3 7%, 0v4 5% (theirs: 0v1 20%, 1v1 13%,
+1v2 10%, 0v2 10%); mean health ten rounds before 73%; 41% die within two tiles of where they stood ten rounds
+earlier, 24% while moving home; 8.0 gems carried a death. One champion against two is a health-times-damage
+ratio of exactly 0.50 at equal stats, which `ratio < DISENGAGE_RATIO` (0.50) does not leave, and choose_enemy
+accepts any enemy within four tiles: the lone champion fights two until it is hurt, then runs and dies.
+
+**`pc1` (rule as for every candidate; written 12:58Z before its result):** v183 + decide before contact: while
+no enemy is within 3 tiles, leave when our health x damage within 7 tiles is below 0.75 of theirs (in contact
+the old rule, 0.50 within 5, stands). Local, 128 games against v183: 60 wins, margin -13 (se 52), deaths 11.3
+against 13.2, gold 6,669 against 6,301, no errors. Queue order changed to pc1, dq70, bk16 after dr7.
+Roster screens (local, 128 games against v183, Tavi's slot): Prism with a Focus build 54, margin -81; Stellar
+with a Focus build 56, margin -99: not sent to the lab.
