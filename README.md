@@ -56,7 +56,11 @@ both, and `analysis/rebuild/screen.sh` now compresses each pairing after scoring
 
 ## Ladder lock
 
-    held by:   nobody (CLOUD released it 2026-11-06 18:02Z). **v180 = mg4 is live and pinned** (owner-approved
+    held by:   nobody. **Live since 9 Nov: v183, uploaded on the website by a teammate; the team is in
+               follow-newest mode** (any upload goes live). v183 = v180 + Tavi for Ryth + threat_dps +
+               Vesper Vale's Treasure/Hunter/Power build (ws/bots/v183_submit, rebuilt byte for byte by
+               analysis/rebuild/mkv183.py). Not lab-tested. Plan for 10 Nov: docs/TOP50-PUSH.md.
+    (before)   nobody (CLOUD released it 2026-11-06 18:02Z). **v180 = mg4 is live and pinned** (owner-approved
                promotion 17:21Z; re-pinned 17:57Z, live 18:01Z; ws/bots/mg4_submit). Fallback: v166. Lab
                candidates pair against e3v166* (86; v166-behaviour re-deals 84, 80; mg4 78).
     2026-11-06 lab: v181 = tv1 (mg4 + Tavi in Ryth's draft slot) 32 + 24 + 22 = 78 of 150: no gain, not kept.
