@@ -6603,3 +6603,8 @@ the old rule, 0.50 within 5, stands). Local, 128 games against v183: 60 wins, ma
 against 13.2, gold 6,669 against 6,301, no errors. Queue order changed to pc1, dq70, bk16 after dr7.
 Roster screens (local, 128 games against v183, Tavi's slot): Prism with a Focus build 54, margin -81; Stellar
 with a Focus build 56, margin -99: not sent to the lab.
+
+**`dr7` result (v187, 12:47-13:00Z): 24 + 28 + 24 = 76 of 150** (v183 72): +4, inside the resolution; paired
+margin +47 (se 42), deaths -0.6 (se 0.6), five-body games 40 -> 48 of 96, four-body 18 -> 14 of 29. Not promoted
+alone; its direction (react earlier) is what pc1 does with a ratio. The platform took 13 minutes for this arm
+(the 150 games sat queued for about eight): midday load. `pc1` went up at 13:01Z as v188.
