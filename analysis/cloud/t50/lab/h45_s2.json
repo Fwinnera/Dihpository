@@ -1,0 +1,199 @@
+{
+ "arm": "h45_s2",
+ "base": "pm_best_s2",
+ "version": 186,
+ "note": "h45: v183 with heal-recall at 45% health (was 60%)",
+ "queued": "2026-11-10T12:34:10Z",
+ "groups": [
+  {
+   "team": "24731510-784f-4176-985e-17c1626934ca",
+   "name": "Rusty Epee",
+   "maps": [
+    "01broken_curve",
+    "02famine",
+    "03reef",
+    "01hooks",
+    "04passageway"
+   ],
+   "sides": [
+    "a",
+    "b",
+    "a",
+    "b",
+    "a"
+   ],
+   "group": "01a1c573-aabb-7ceb-ad4c-7c249692e60e"
+  },
+  {
+   "team": "271f8b15-7d97-4a0a-bd32-b634dd006dc0",
+   "name": "Crimson Pathfinders",
+   "maps": [
+    "03shrines",
+    "01islands",
+    "04two_kingdoms",
+    "04terraces",
+    "03fan"
+   ],
+   "sides": [
+    "b",
+    "a",
+    "b",
+    "a",
+    "b"
+   ],
+   "group": "01a1c574-0aba-752b-825a-f14c0ea26e6e"
+  },
+  {
+   "team": "e747283d-a801-4175-8b9d-ee36df006daa",
+   "name": "The something",
+   "maps": [
+    "00eight",
+    "02crossing",
+    "02cuts",
+    "03one_gem",
+    "00oasis"
+   ],
+   "sides": [
+    "a",
+    "b",
+    "a",
+    "b",
+    "a"
+   ],
+   "group": "01a1c574-3e54-7265-8e4f-9daecffb9795"
+  },
+  {
+   "team": "91b991b0-c974-4ffe-a1f8-4c83c171e9f4",
+   "name": "T\u00fcbingen Quants",
+   "maps": [
+    "02the_pond",
+    "00breadcrumbs",
+    "04bullseye",
+    "04bridges",
+    "02fields"
+   ],
+   "sides": [
+    "b",
+    "a",
+    "b",
+    "a",
+    "b"
+   ],
+   "group": "01a1c574-4769-7bc1-8560-c2924a7cde84"
+  },
+  {
+   "team": "9b0a89b8-f553-4916-8b58-eea33334757c",
+   "name": "neuro",
+   "maps": [
+    "04fault_lines",
+    "04orchard",
+    "00gem_fields",
+    "04atoll",
+    "00swirl"
+   ],
+   "sides": [
+    "a",
+    "b",
+    "a",
+    "b",
+    "a"
+   ],
+   "group": "01a1c574-5eff-7c04-a48f-20c8a28da9ad"
+  },
+  {
+   "team": "abb3b776-7d71-41f6-90c6-885aebdc64b4",
+   "name": "Shinshilachki",
+   "maps": [
+    "01big_world",
+    "03riverbed",
+    "00quarry",
+    "00happy_halloween",
+    "02the_pack"
+   ],
+   "sides": [
+    "b",
+    "a",
+    "b",
+    "a",
+    "b"
+   ],
+   "group": "01a1c574-9451-7a3e-92ab-e2026c3b7118"
+  },
+  {
+   "team": "b50b3aa9-a0fb-4388-93d2-3459e1a350a9",
+   "name": "Kingstonks",
+   "maps": [
+    "00expanse",
+    "00corners",
+    "01shortcut",
+    "01yellow_brick_road",
+    "04plaza"
+   ],
+   "sides": [
+    "a",
+    "b",
+    "a",
+    "b",
+    "a"
+   ],
+   "group": "01a1c574-aa8c-7cf1-b3b0-eabcbdd96681"
+  },
+  {
+   "team": "409129b9-e6ac-4f80-921c-2ede2ed1cb4f",
+   "name": "Memory?",
+   "maps": [
+    "00rows",
+    "02tangle",
+    "03ambush_field",
+    "00ribs",
+    "01concentrated_wealth"
+   ],
+   "sides": [
+    "b",
+    "a",
+    "b",
+    "a",
+    "b"
+   ],
+   "group": "01a1c574-b469-74f7-b1f1-9e10ab2cb1ae"
+  },
+  {
+   "team": "1e25877b-9ea9-4821-bd54-236e44c5e650",
+   "name": "Kaizen",
+   "maps": [
+    "00elkring",
+    "00collision",
+    "00great_wall",
+    "04sunburst",
+    "00split"
+   ],
+   "sides": [
+    "a",
+    "b",
+    "a",
+    "b",
+    "a"
+   ],
+   "group": "01a1c574-caca-72ee-89bf-6fb0ea44692f"
+  },
+  {
+   "team": "7348a083-dc1d-45ec-a355-c4bede12dd6a",
+   "name": "tip",
+   "maps": [
+    "00reverse_spiral",
+    "04hollows",
+    "01gold_rush",
+    "04standing_stones",
+    "02guardians"
+   ],
+   "sides": [
+    "b",
+    "a",
+    "b",
+    "a",
+    "b"
+   ],
+   "group": "01a1c575-2b39-75f5-9779-7d2a5fd608cd"
+  }
+ ]
+}
