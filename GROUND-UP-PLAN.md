@@ -6622,3 +6622,22 @@ Durability:Health > Monster:Str > Skirmish:Str; Vesper Vale Treasure > Jungle > 
 Each part alone was +1 and +4 with paired signs in its favour (damage taken -4.3k and -5.1k). If c1 lands
 between 73 and 83 it is not promoted on the lab alone; the decision then rests on the stronger-opponent set
 (set 4, ten teams ranked 85-148, paired with v183 on the same pinned versions) and on the paired statistics.
+
+**`c1` result (v189, 13:24-13:38Z): 26 + 28 + 26 = 80 of 150** (v183 72): +8, the best arm of the day, short of the
++12 line. Paired with v183 (148 games): wins 70 -> 78 (24 flipped to wins, 16 to losses), our deaths 13.6 -> 11.7
+(-1.9, se 0.7), champion damage taken -6.8k (se 2.1k), monster damage +2.4k (se 2.5k), gold -259 (se 213),
+margin +29 (se 44); five-body games 39 -> 47 of 95, three- and four-body unchanged (14, 17).
+
+**The session was paused from 13:24Z to 21:35Z (the owner's usage limit); v189 = c1 stayed live and pinned.**
+Ranked by live version (800 games fetched 21:36Z): v183 185/365 = 50.7%; v185 = ia 66/125 = 52.8%; the 12:30-
+13:38Z window of rotating arms 13/35; **v189 = c1 120/230 = 52.2%** (three bodies 19/32, four 27/48, five 74/150).
+Ladder 21:35Z: rating 1,786, rank 205 of 830, UK 44 (07:38Z: 1,753, rank 230, UK 49).
+
+**Final decision rule (written 21:42Z, 2 h 17 min before the lock, before set 4):** c1 is in the 73-83 band, so
+by the rule above it is decided on the stronger-opponent set and the paired statistics. Set 4 (ten teams ranked
+85-148, 50 games): c1 first on their live bots (`c1_s4`), then v183 on the same pinned versions (`v183_s4
+--from c1_s4`). c1 stays the final entry unless v183 beats it on set 4 by 6 wins or more of 50 (about 1.5
+standard errors of a paired 50-game difference); the paired statistics already favour c1 (deaths -2.9 se,
+damage taken -3.3 se). Time guard: v183 is activated only if that can start before 22:00Z; if v183 is not
+live by 22:20Z the comparison is abandoned and v189 re-selected; v189 must be selected again by 22:50Z
+whatever has finished. No new uploads today.
