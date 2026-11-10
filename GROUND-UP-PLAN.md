@@ -6486,3 +6486,22 @@ party, PARTY_MONO 0.75) not built; v180 stays.
   (mostly v182's games; too early).
 - docs/IMPROVE-PROMPT.md's endgame rule: pin the final entry by about 10 Nov 18:00Z and record it here and in
   the README.
+
+## CLOUD, 10 Nov: the top-50 push (docs/TOP50-PUSH.md), from 07:34Z
+
+**State at 07:41Z.** Ladder: rank 230 of 830, rating 1,753 (UK 49 of 193); rank 50 is 2,173, rank 100 2,003,
+rank 150 1,890, rank 200 1,797. Platform: mode pinned, Live v183; a v184 (no note) was uploaded on the website at
+02:24Z by the teammate account and made inactive at 03:51Z (source not in the repo). Tournament "UK Qualifiers",
+deadline 2026-11-10T23:59Z, takes the live version. The container runs cambc 5.0.1 (published 9 Nov 05:50Z; the
+6 Nov lab baselines e3v166 86, mg4 78, tv1 78 were played on cambc 5.0.0), workspace /home/user/ws5, 128 maps.
+`cambc match-groups quota` now reports limit 100, used 0.
+
+**Keep rules, written before the results (lab = three pinned sets, 150 games, `--from pm_best*`):**
+
+- *v183 baseline (arm `v183`).* The engine build changed on 9 Nov, so v183's score is today's baseline for every
+  candidate. If v183 scores 66 or lower (12 or more below mg4's 78 of 6 Nov), queue v180 on the same sets today
+  and pin whichever is higher; otherwise v183 stays pinned.
+- *Every candidate today.* Promote on a lab win of 12 or more of 150 over the best arm of today on the same
+  sets (first v183). Between 0 and +11: not promoted on the lab alone. Below the best arm: rejected. A candidate
+  that passes also plays one set against teams ranked about 80-150 before the final pin, and the final choice is
+  pinned by about 18:00Z.
