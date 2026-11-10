@@ -6676,3 +6676,8 @@ turns to stuns: the lab teams draft Ryth, Heart of Ruin, Marcella and Ren; we dr
 (3) Tavi collects 54-83 gems per 1,000 rounds on the lab against 108-338 for our other picks, yet four-body
 games (with Tavi) are our best: the fourth and fifth champions travel most (33-37% of turns). (4) Fuel cuts
 are 4-5% of retreat and disengage turns and every champion's rounds 1-3. (5) c1 + dr7 was never combined.
+
+**Last reading before handing back (22:02Z):** `Live: 189  Selected: 189`, pinned; rating 1,777, rank 214, UK 47
+(two series lost and one won since 21:35Z, part of them while v183 was live for the set-4 pairing). The repo's
+`ws/bots/c1_submit/src` is byte for byte the uploaded source (DEBUG false). The lock is released; nothing else
+is queued or running.
