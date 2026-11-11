@@ -6771,3 +6771,18 @@ prior lead list named mkopen; not previously labbed on c1. DEBUG=false. Smoke: b
 (150 games). Baseline c1 = 80 of 150. Promote / pin if **≥ 92 of 150** **or** 81–91 with paired gem margin
 clearly positive (margin > 1.5×se). ≤80: reject, re-pin v189. Do not leave a losing candidate live.
 
+**Result:** **78 of 150** (23 + 27 + 28; arms `ws/bench/lab/c1open*.json`, paired `--from c1*`). Baseline c1 =
+80. **Rejected** under the keep rule (≤80). Re-pinning v189 = c1. Opening-camp bias alone does not beat c1
+on this lab.
+
+## LOCAL, 2026-11-11: c1pro = c1 + Prospector-first items
+
+**Candidate:** `ws/bots/c1pro_submit` = `c1_submit` (v189) with Jungle:Str swapped for Prospector:Str
+(Vesper Vale Treasure > Prospector > Durability > Skirmish). Evidence: top-80 open Prospector/Treasure/
+Capture/Monster; ia already dropped Hunter; Monster-first (c1ib) failed; Prospector untried on c1.
+DEBUG=false. Smoke: both sides release on 00anvil, exit 0, 0 crashes (cambc 5.0.1).
+
+**Keep rule (written before the result):** platform lab sets 1–3 paired `--from c1` / `c1_s2` / `c1_s3`
+(150 games). Baseline c1 = 80 of 150. Promote / pin if **≥ 92 of 150** **or** 81–91 with paired gem margin
+clearly positive (margin > 1.5×se). ≤80: reject, re-pin v189. Do not leave a losing candidate live.
+
