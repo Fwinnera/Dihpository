@@ -6824,4 +6824,4 @@ Evidence: top-80 open Prospector/Treasure/Capture/Monster; Prospector-first (c1p
 **Keep rule (written before the result):** platform lab sets 1–3 paired `--from c1` / `c1_s2` / `c1_s3`
 (150 games). Baseline c1 = 80 of 150. Promote / pin if **≥ 92 of 150** **or** 81–91 with paired gem margin
 clearly positive (margin > 1.5×se). ≤80: reject, re-pin v189. Do not leave a losing candidate live.
-
+**Status:** smoke-tested; ladder lock briefly held then released. Platform `cambc submit` blocked in this agent by auto-review until a fresh login approval completes. Bot at `ws/bots/c1cap_submit`. Do not leave Live off v189.
