@@ -6734,3 +6734,19 @@ DEBUG=false. Smoke: both sides release on 00anvil, exit 0, 0 crashes (cambc 5.0.
 ≥1.0 (se ≤ 0.7) and gem margin not clearly negative. ≤80: reject, re-pin best (v189 unless a later arm won).
 Do not leave a losing candidate live.
 
+**Result:** **76 of 150** (26 + 25 + 25; arms `ws/bench/lab/c1ib*.json`, paired `--from c1*`). Baseline c1 =
+80. **Rejected** under the keep rule (≤80). Re-pinning v189 = c1. Monster-first on top of ia does not help
+on this lab.
+
+## LOCAL, 2026-11-11: c1pc2 = c1 + PRE_RATIO 1.0
+
+**Candidate:** `ws/bots/c1pc2_submit` = `c1_submit` (v189) with `PRE_RATIO` 0.75 → 1.0 (pc1's pre-contact
+leave when outnumbered becomes leave unless locally equal-or-better). Keeps ia items. Evidence: leads left
+listed pc2 (ratio 1.0); pc1 alone cut deaths −1.6 and damage taken −5.1k. DEBUG=false. Smoke: both sides
+release on 00anvil, exit 0, 0 crashes (cambc 5.0.1).
+
+**Keep rule (written before the result):** platform lab sets 1–3 paired `--from c1` / `c1_s2` / `c1_s3`
+(150 games). Baseline c1 = 80 of 150. Promote / pin if **≥ 92 of 150** **or** 81–91 with paired deaths down
+≥1.0 (se ≤ 0.7) and gem margin not clearly negative. ≤80: reject, re-pin v189.
+Do not leave a losing candidate live.
+
