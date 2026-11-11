@@ -6718,3 +6718,19 @@ as never combined. Stacks only arms with favorable paired signs. DEBUG=false. Sm
 81–91 with paired deaths down ≥1.0 (se ≤ 0.7) and gem margin not clearly negative. ≤80: reject, re-pin v189.
 Do not leave a losing candidate live.
 
+**Result:** **73 of 150** (25 + 25 + 23; arms `ws/bench/lab/c1dr7*.json`, paired `--from c1*`). Baseline c1 =
+80 (26+28+26). **Rejected** under the keep rule (≤80). Re-pinning v189 = c1. Stacking dr7 onto c1 does not
+carry; leave v189 live. Next: Monster-first items on c1 (`c1ib`).
+
+## LOCAL, 2026-11-11: c1ib = c1 + Monster-first items
+
+**Candidate:** `ws/bots/c1ib_submit` = `c1_submit` (v189) with item open Jungle↔Monster swapped: Monster:Str >
+Durability:Health > Jungle:Str > Skirmish:Str (Vesper Vale Treasure > Monster > Durability > Skirmish). Keeps
+pc1. Evidence: top-80 sample opens Monster; ib was built on v183 and never labbed; ia already dropped Hunter.
+DEBUG=false. Smoke: both sides release on 00anvil, exit 0, 0 crashes (cambc 5.0.1).
+
+**Keep rule (written before the result):** platform lab sets 1–3 paired `--from c1` / `c1_s2` / `c1_s3`
+(150 games). Baseline c1 = 80 of 150. Promote / pin if **≥ 92 of 150** **or** 81–91 with paired deaths down
+≥1.0 (se ≤ 0.7) and gem margin not clearly negative. ≤80: reject, re-pin best (v189 unless a later arm won).
+Do not leave a losing candidate live.
+

@@ -56,7 +56,7 @@ both, and `analysis/rebuild/screen.sh` now compresses each pairing after scoring
 
 ## Ladder lock
 
-    held by:   LOCAL (Mac, 2026-11-11) testing c1dr7 = c1 + DISENGAGE_RADIUS 7. Will re-pin v189 = c1 on reject.
+    held by:   LOCAL (Mac, 2026-11-11) testing c1ib = c1 + Monster-first items. c1dr7 rejected 73/150; v189 re-pin.
                Prior lock entry: nobody (CLOUD released it 2026-11-10 22:05Z). **Live and pinned for the UK lock (10 Nov 23:59 GMT):
                v189 = c1** (`ws/bots/c1_submit`) = v183 + Jungle:Str > Durability:Health > Monster:Str >
                Skirmish:Str items (Vesper Vale Treasure > Jungle > Durability > Skirmish) + "leave before
