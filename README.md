@@ -57,7 +57,6 @@ both, and `analysis/rebuild/screen.sh` now compresses each pairing after scoring
 ## Ladder lock
 
     held by:   nobody. Live and pinned: v189 = c1. LOCAL 11 Nov rejected c1dr7 73, c1ib 76, c1pc2 65, c1open 78, c1pro 78, c1dq70 74, c1cap 80 (all of 150 vs c1 80).
-               Ready next: c1cap (`ws/bots/c1cap_submit`, Capture-first) smoke-tested; keep rule written; not yet labbed (platform submit blocked pending login approval).
                Prior: nobody (LOCAL released after three rejects: c1dr7 73, c1ib 76, c1pc2 65 of 150 vs c1 80). **Live and pinned: v189 = c1**.
                Prior lock entry: nobody (CLOUD released it 2026-11-10 22:05Z). **Live and pinned for the UK lock (10 Nov 23:59 GMT):
                v189 = c1** (`ws/bots/c1_submit`) = v183 + Jungle:Str > Durability:Health > Monster:Str >
