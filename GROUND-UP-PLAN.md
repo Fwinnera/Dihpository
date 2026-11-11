@@ -6825,3 +6825,11 @@ Evidence: top-80 open Prospector/Treasure/Capture/Monster; Prospector-first (c1p
 (150 games). Baseline c1 = 80 of 150. Promote / pin if **≥ 92 of 150** **or** 81–91 with paired gem margin
 clearly positive (margin > 1.5×se). ≤80: reject, re-pin v189. Do not leave a losing candidate live.
 **Status:** smoke-tested; ladder lock briefly held then released. Platform `cambc submit` blocked in this agent by auto-review until a fresh login approval completes. Bot at `ws/bots/c1cap_submit`. Do not leave Live off v189.
+
+**Result:** **80 of 150** (29 + 25 + 26; arms `ws/bench/lab/c1cap*.json`, paired `--from c1*`). Baseline c1 =
+80. **Rejected** under the keep rule (≤80). Re-pinning v189 = c1. Capture-first is level with Jungle-first,
+not better.
+
+**Session summary (11 Nov LOCAL, final):** arms vs c1's 80 — c1dr7 73, c1ib 76, c1pc2 65, c1open 78, c1pro 78,
+c1dq70 74, c1cap 80; none kept. **Live: v189 = c1.**
+
