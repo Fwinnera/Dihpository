@@ -6802,3 +6802,12 @@ release on 00anvil, exit 0, 0 crashes.
 ≥1.0 (se ≤ 0.7) and gem margin not clearly negative. ≤80: reject, re-pin v189. Do not leave a losing
 candidate live.
 
+**Result:** **74 of 150** (22 + 26 + 26; arms `ws/bench/lab/c1dq70*.json`, paired `--from c1*`). Baseline c1 =
+80. **Rejected** under the keep rule (≤80). Re-pinning v189 = c1. Raising contact DISENGAGE_RATIO to 0.70
+on top of pc1 over-disengages.
+
+**Session summary (11 Nov LOCAL, continued):** arms vs c1's 80 — c1dr7 73, c1ib 76, c1pc2 65, c1open 78,
+c1pro 78, c1dq70 74; all rejected. **Live restored to v189 = c1.** Constant-level item/disengage/open knobs
+are not clearing the lab bar; next bets need structural evidence (Capture on collectors, ward/shared memory,
+or fight-when-locked), not another ratio.
+
