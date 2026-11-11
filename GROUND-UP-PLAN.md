@@ -6702,3 +6702,19 @@ ladder; leave v183 live). ≤128: rejected. Platform lab (≥84/150 over v183's 
 promote bar if login becomes available before the 23:59Z lock.
 
 **Result:** **108 of 256** (maps both-sides-won 22, split 64, both-lost 42); gem margin −76 (se 34), deaths 13.0 vs 12.7, gold 5,798 vs 6,811, crashes 0. **Rejected** under the keep rule (≥150 and positive margin). No upload of c1mg6; leave the then-live / later-pinned best alone (CLOUD pinned v189 = c1). 00anvil still lost both sides (−806/−737) under party mode — mg6 alone does not fix it locally. Bench kept at `ws/bench/h2h_c1mg6_vs_v183/`.
+
+## LOCAL, 2026-11-11: login restored; c1dr7 = c1 + DISENGAGE_RADIUS 7
+
+**Login:** fresh `cambc login` (cambc 5.0.1) approved; `Mode: pinned version`, `Live: 189  Selected: 189`
+confirmed. Branch `Fwinnera` up to date.
+
+**Candidate:** `ws/bots/c1dr7_submit` = `c1_submit` (v189) with `DISENGAGE_RADIUS` 5 → 7. Evidence: dr7 alone
+was 76/150 vs v183's 72 with paired deaths −0.6; c1 already carries ia + pc1 and scored 80; c1+dr7 was listed
+as never combined. Stacks only arms with favorable paired signs. DEBUG=false. Smoke: both sides release on
+00anvil exit 0, 0 crashes, no ERROR lines (cambc 5.0.1).
+
+**Keep rule (written before the result):** platform lab sets 1–3 paired `--from c1` / `c1_s2` / `c1_s3`
+(150 games). Baseline c1 = 80 of 150. Promote / pin if **≥ 92 of 150** (same +12 bar used for the day) **or**
+81–91 with paired deaths down ≥1.0 (se ≤ 0.7) and gem margin not clearly negative. ≤80: reject, re-pin v189.
+Do not leave a losing candidate live.
+

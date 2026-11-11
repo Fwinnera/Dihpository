@@ -56,7 +56,8 @@ both, and `analysis/rebuild/screen.sh` now compresses each pairing after scoring
 
 ## Ladder lock
 
-    held by:   nobody (CLOUD released it 2026-11-10 22:05Z). **Live and pinned for the lock (10 Nov 23:59 GMT):
+    held by:   LOCAL (Mac, 2026-11-11) testing c1dr7 = c1 + DISENGAGE_RADIUS 7. Will re-pin v189 = c1 on reject.
+               Prior lock entry: nobody (CLOUD released it 2026-11-10 22:05Z). **Live and pinned for the UK lock (10 Nov 23:59 GMT):
                v189 = c1** (`ws/bots/c1_submit`) = v183 + Jungle:Str > Durability:Health > Monster:Str >
                Skirmish:Str items (Vesper Vale Treasure > Jungle > Durability > Skirmish) + "leave before
                contact when outnumbered" (PRE_RATIO 0.75 within 7 tiles while no enemy is within 3).
