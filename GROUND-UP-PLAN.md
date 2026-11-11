@@ -6786,3 +6786,19 @@ DEBUG=false. Smoke: both sides release on 00anvil, exit 0, 0 crashes (cambc 5.0.
 (150 games). Baseline c1 = 80 of 150. Promote / pin if **≥ 92 of 150** **or** 81–91 with paired gem margin
 clearly positive (margin > 1.5×se). ≤80: reject, re-pin v189. Do not leave a losing candidate live.
 
+**Result:** **78 of 150** (25 + 29 + 24; arms `ws/bench/lab/c1pro*.json`, paired `--from c1*`). Baseline c1 =
+80. **Rejected** under the keep rule (≤80). Re-pinning v189 = c1. Prospector-first does not beat Jungle-first
+on this lab.
+
+## LOCAL, 2026-11-11: c1dq70 = c1 + DISENGAGE_RATIO 0.70
+
+**Candidate:** `ws/bots/c1dq70_submit` = `c1_submit` (v189) with contact `DISENGAGE_RATIO` 0.50 → 0.70,
+keeping pc1's PRE_* (0.75 within 7 before contact). Evidence: dq70 was built earlier but never labbed on
+c1; 40% of lab deaths are alone vs 2–4 and 1v2 is exactly ratio 0.50. DEBUG=false. Smoke: both sides
+release on 00anvil, exit 0, 0 crashes.
+
+**Keep rule (written before the result):** platform lab sets 1–3 paired `--from c1` / `c1_s2` / `c1_s3`
+(150 games). Baseline c1 = 80 of 150. Promote / pin if **≥ 92 of 150** **or** 81–91 with paired deaths down
+≥1.0 (se ≤ 0.7) and gem margin not clearly negative. ≤80: reject, re-pin v189. Do not leave a losing
+candidate live.
+
