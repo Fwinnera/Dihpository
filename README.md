@@ -56,7 +56,8 @@ both, and `analysis/rebuild/screen.sh` now compresses each pairing after scoring
 
 ## Ladder lock
 
-    held by:   nobody (LOCAL released 2026-11-11 after three rejects: c1dr7 73, c1ib 76, c1pc2 65 of 150 vs c1 80). **Live and pinned: v189 = c1**.
+    held by:   LOCAL (Mac, 2026-11-11) testing c1open = c1 + mkopen opening bias. Will re-pin v189 = c1 on reject.
+               Prior: nobody (LOCAL released after three rejects: c1dr7 73, c1ib 76, c1pc2 65 of 150 vs c1 80). **Live and pinned: v189 = c1**.
                Prior lock entry: nobody (CLOUD released it 2026-11-10 22:05Z). **Live and pinned for the UK lock (10 Nov 23:59 GMT):
                v189 = c1** (`ws/bots/c1_submit`) = v183 + Jungle:Str > Durability:Health > Monster:Str >
                Skirmish:Str items (Vesper Vale Treasure > Jungle > Durability > Skirmish) + "leave before

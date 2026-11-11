@@ -6757,3 +6757,17 @@ Do not leave a losing candidate live.
 Live restored to **v189 = c1**. Next untried levers: `mkopen` opening-camp bias, Prospector/Capture opens,
 pc3 (PRE_RADIUS 8), dq70 on contact ratio (without dropping pc1), gated map fixes.
 
+
+
+## LOCAL, 2026-11-11: c1open = c1 + mkopen opening-camp bias
+
+**Candidate:** `ws/bots/c1open_submit` = `c1_submit` (v189) + `analysis/rebuild/mkopen.py` defaults
+(OPEN_ROUNDS=100, OPEN_RADIUS=18, OPEN_COST=2): before round 100, groups farther than 18 steps from our
+spawn cost extra bias so near camps clear first. Evidence: top-80 openings hit the same first camp early;
+prior lead list named mkopen; not previously labbed on c1. DEBUG=false. Smoke: both sides release on
+00anvil, exit 0, 0 crashes (cambc 5.0.1).
+
+**Keep rule (written before the result):** platform lab sets 1–3 paired `--from c1` / `c1_s2` / `c1_s3`
+(150 games). Baseline c1 = 80 of 150. Promote / pin if **≥ 92 of 150** **or** 81–91 with paired gem margin
+clearly positive (margin > 1.5×se). ≤80: reject, re-pin v189. Do not leave a losing candidate live.
+
