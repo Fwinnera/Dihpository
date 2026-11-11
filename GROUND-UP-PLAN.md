@@ -6681,3 +6681,24 @@ are 4-5% of retreat and disengage turns and every champion's rounds 1-3. (5) c1 
 (two series lost and one won since 21:35Z, part of them while v183 was live for the set-4 pairing). The repo's
 `ws/bots/c1_submit/src` is byte for byte the uploaded source (DEBUG false). The lock is released; nothing else
 is queued or running.
+
+## LOCAL, 2026-11-10 19:23Z: c1mg6 vs v183 (platform lab blocked — no login; cambc 5.0.1 installed locally)
+
+**Candidate:** `ws/bots/c1mg6_submit` = `c1_submit` (v183 + ia items + pc1 pre-contact disengage) + mg6
+(`PARTY_MONO` 0.8 → 0.75 so 00anvil's ~0.775 mono share returns to party). Diffs vs v183: `config.h`
+(items + PRE_*), `bot.h` (pc1), `policy.h` (mg6). DEBUG=false. Smoke: both sides build and run release on
+00anvil under cambc 5.0.1 / sdk 5.0.1.
+
+**Why not the 3-set lab:** `cambc login` is required for match-groups / submit; this Mac session is signed
+out. At write time CLOUD still held the lock and c1's lab result was not yet in the repo; local paired
+H2H was the only comparison available here. CLOUD later finished: c1 = v189 lab 80/150, set 4
+10 vs v183's 9, pinned for the 23:59Z lock.
+
+**Keep rule (written before the result):** play all 128 maps, both sides, `--release` (256 games) of
+`c1mg6_submit` as team A/B against `v183_submit`. Promote / upload only if **wins ≥ 150 of 256**
+(clear majority beyond the ~141/256 noise band seen for v183 vs mg4 today) **and** gem margin mean
+is positive with SE < margin. Between 129 and 149: not uploaded (local self-play mispredicts the
+ladder; leave v183 live). ≤128: rejected. Platform lab (≥84/150 over v183's 72) remains the real
+promote bar if login becomes available before the 23:59Z lock.
+
+**Result:** **108 of 256** (maps both-sides-won 22, split 64, both-lost 42); gem margin −76 (se 34), deaths 13.0 vs 12.7, gold 5,798 vs 6,811, crashes 0. **Rejected** under the keep rule (≥150 and positive margin). No upload of c1mg6; leave the then-live / later-pinned best alone (CLOUD pinned v189 = c1). 00anvil still lost both sides (−806/−737) under party mode — mg6 alone does not fix it locally. Bench kept at `ws/bench/h2h_c1mg6_vs_v183/`.
