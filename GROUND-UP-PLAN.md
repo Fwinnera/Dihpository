@@ -6811,3 +6811,17 @@ c1pro 78, c1dq70 74; all rejected. **Live restored to v189 = c1.** Constant-leve
 are not clearing the lab bar; next bets need structural evidence (Capture on collectors, ward/shared memory,
 or fight-when-locked), not another ratio.
 
+
+
+## LOCAL, 2026-11-11: c1cap = c1 + Capture-first items
+
+**Candidate:** `ws/bots/c1cap_submit` = `c1_submit` (v189) with Jungle:Str swapped for Capture:Str
+(Vesper Vale Treasure > Capture > Durability > Skirmish; others Capture > Durability > Monster > Skirmish).
+Evidence: top-80 open Prospector/Treasure/Capture/Monster; Prospector-first (c1pro) and Monster-first
+(c1ib) already failed on this lab; Capture untried on c1. DEBUG=false. Smoke: both sides release on
+00anvil, exit 0, 0 crashes (cambc 5.0.1).
+
+**Keep rule (written before the result):** platform lab sets 1–3 paired `--from c1` / `c1_s2` / `c1_s3`
+(150 games). Baseline c1 = 80 of 150. Promote / pin if **≥ 92 of 150** **or** 81–91 with paired gem margin
+clearly positive (margin > 1.5×se). ≤80: reject, re-pin v189. Do not leave a losing candidate live.
+
