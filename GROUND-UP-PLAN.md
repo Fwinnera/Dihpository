@@ -6750,3 +6750,10 @@ release on 00anvil, exit 0, 0 crashes (cambc 5.0.1).
 ≥1.0 (se ≤ 0.7) and gem margin not clearly negative. ≤80: reject, re-pin v189.
 Do not leave a losing candidate live.
 
+**Result:** **65 of 150** (18 + 26 + 21; arms `ws/bench/lab/c1pc2*.json`, paired `--from c1*`). Baseline c1 =
+80. **Rejected** under the keep rule (≤80). Re-pinning v189 = c1. Raising PRE_RATIO to 1.0 over-disengages.
+
+**Session summary (11 Nov LOCAL):** three lab arms vs c1's 80 — c1dr7 73, c1ib 76, c1pc2 65; all rejected.
+Live restored to **v189 = c1**. Next untried levers: `mkopen` opening-camp bias, Prospector/Capture opens,
+pc3 (PRE_RADIUS 8), dq70 on contact ratio (without dropping pc1), gated map fixes.
+
